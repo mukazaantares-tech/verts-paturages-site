@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Département de Fiançailles & Mariage</title>
+  <meta name="description" content="Département de Fiançailles & Mariage - accompagnement biblique et soutien pour les couples. Contactez-nous pour un rendez-vous avec le pasteur.">
+  <link rel="icon" href="Verts-Paturages.png" type="image/png">
+  <link rel="apple-touch-icon" href="Verts-Paturages.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="antialiased bg-white text-gray-800">
+  <a href="#main-content" class="sr-only focus:not-sr-only">Aller au contenu</a>
+  <header>
+    <nav role="navigation" aria-label="Navigation principale" class="navbar bg-green-700 text-white p-4 flex justify-between items-center">
+      <h1 class="logo text-xl font-bold">Verts-Pâturages</h1>
+      <ul class="nav-links flex gap-6">
+        <li><a href="Accueil.html" class="hover:text-green-300">Accueil</a></li>
+        <li><a href="Serviteurs.html" class="hover:text-green-300">Serviteurs</a></li>
+        <li><a href="Departements.html" class="hover:text-green-300">Départements</a></li>
+        <li><a href="Fiancailles.html" class="hover:text-green-300" aria-current="page">Fiançailles</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content" class="p-6">
+    <section class="bg-green-100 p-6 rounded-lg shadow-md text-center mb-10">
+      <h2 class="text-3xl font-bold text-green-700 mb-4">Bienvenue au Département de Fiançailles & Mariage</h2>
+      <p class="text-gray-700 text-lg">Nous accompagnons les couples durant la période des fiançailles et préparons les mariages selon les principes bibliques. Remplissez le formulaire pour demander un rendez‑vous avec le pasteur.</p>
+    </section>
+
+    <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
+      <div class="flex flex-col md:flex-row items-center gap-6">
+        <img src="personne.jpg" alt="Pasteur assistant" class="w-40 h-40 rounded-full object-cover shadow-md border-4 border-green-600"/>
+        <div>
+          <h3 class="text-xl font-semibold text-gray-800">Pasteur assistant</h3>
+          <p class="mt-2 text-gray-600">Le pasteur accompagne les couples en préparation au mariage et veille à l'accompagnement spirituel selon l'Évangile.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Attributions -->
+    <section class="max-w-4xl mx-auto bg-green-50 rounded-lg shadow-md p-6 mb-10">
+      <h3 class="text-xl font-bold text-green-700 mb-4">Attributions du département de fiançailles</h3>
+      <ul class="list-disc list-inside text-gray-700">
+        <li>Accompagner les couples durant la période des fiançailles</li>
+        <li>Préparer les mariages selon les principes bibliques</li>
+        <li>Organiser des enseignements et des ateliers pour les futurs mariés</li>
+        <li>Collaborer avec le bureau pastoral pour assurer un suivi spirituel des couples</li>
+      </ul>
+     </section>
+
+     <!-- Formulaire d'enregistrement -->
+     <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
+      <h3 class="text-xl font-bold text-green-700 mb-4 text-center">Enregistrement des couples</h3>
+      <!-- Le formulaire est détaillé dans le code de EVANGELISATION.HTML -->
+     </section>
+
+    <section class="max-w-4xl mx-auto bg-green-50 rounded-lg shadow-md p-6 mb-10">
+      <h3 class="text-xl font-bold text-green-700 mb-4">Équipe de direction</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white p-4 rounded-lg shadow">
+          <h4 class="font-semibold text-gray-800">Secrétaire</h4>
+          <p class="text-gray-600">Nom du secrétaire</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow">
+          <h4 class="font-semibold text-gray-800">Discipliniaire</h4>
+          <p class="text-gray-600">Nom du discipliniaire</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow">
+          <h4 class="font-semibold text-gray-800">Trésorier</h4>
+          <p class="text-gray-600">Nom du trésorier</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
+      <h3 class="text-xl font-bold text-green-700 mb-4 text-center">Enregistrement des couples</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <form class="bg-green-50 p-4 rounded-lg shadow" id="fianceForm">
+          <h4 class="font-semibold text-gray-800 mb-4">Informations du fiancé</h4>
+          <div class="mb-4">
+            <label for="fianceName" class="block text-gray-700">Nom</label>
+            <input type="text" id="fianceName" name="fianceName" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+          </div>
+          <div class="mb-4">
+            <label for="fiancePostnm" class="block text-gray-700">Postnom</label>
+            <input type="text" id="fiancePostnm" name="fiancePostnm" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+          </div>
+          <div class="mb-4">
+            <label for="fianceFirstName" class="block text-gray-700">Prénom</label>
+            <input type="text" id="fianceFirstName" name="fianceFirstName" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+          </div>
+          <div class="mb-4">
+            <label for="fianceBirthDate" class="block text-gray-700">Date de naissance</label>
+            <input type="date" id="fianceBirthDate" name="fianceBirthDate" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+          </div>
+          <div class="mb-4">
+            <label for="fianceEmail" class="block text-gray-700">Email</label>
+            <input type="email" id="fianceEmail" name="fianceEmail" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+          </div>
+          <div class="mb-4">
+            <label for="fiancePhone" class="block text-gray-700">Numéro de téléphone</label>
+            <input type="tel" id="fiancePhone" name="fiancePhone" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+          </div>
+        </form>
+
+        <form class="bg-green-50 p-4 rounded-lg shadow" id="fianceeForm">
+          <h4 class="font-semibold text-gray-800 mb-4">Informations de la fiancée</h4>
+          <div class="mb-4">
+            <label for="fianceeName" class="block text-gray-700">Nom</label>
+            <input type="text" id="fianceeName" name="fianceeName" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+          </div>
+          <div class="mb-4">
+            <label for="fianceePostnm" class="block text-gray-700">Postnom</label>
+            <input type="text" id="fianceePostnm" name="fianceePostnm" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+          </div>
+          <div class="mb-4">
+            <label for="fianceeFirstName" class="block text-gray-700">Prénom</label>
+            <input type="text" id="fianceeFirstName" name="fianceeFirstName" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+          </div>
+          <div class="mb-4">
+            <label for="fianceeBirthDate" class="block text-gray-700">Date de naissance</label>
+            <input type="date" id="fianceeBirthDate" name="fianceeBirthDate" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+          </div>
+          <div class="mb-4">
+            <label for="fianceeEmail" class="block text-gray-700">Email</label>
+            <input type="email" id="fianceeEmail" name="fianceeEmail" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+          </div>
+          <div class="mb-4">
+            <label for="fianceePhone" class="block text-gray-700">Numéro de téléphone</label>
+            <input type="tel" id="fianceePhone" name="fianceePhone" class="w-full p-2 border border-gray-300 rounded mt-1" required>
+          </div>
+        </form>
+      </div>
+
+      <div class="text-center mt-6">
+        <button type="button" id="submitCouple" class="bg-green-700 text-white px-6 py-2 rounded hover:bg-green-600">Demander un rendez‑vous</button>
+      </div>
+    </section>
+
+    <!-- Modal de confirmation -->
+    <div id="confirmModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+      <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg mx-4">
+        <h4 class="text-lg font-bold text-green-700 mb-4">Confirmer l'enregistrement</h4>
+        <div id="confirmContent" class="text-gray-700 mb-4">Vérifiez vos informations avant de confirmer.</div>
+        <div class="flex justify-end gap-3">
+          <button id="cancelConfirm" class="px-4 py-2 rounded border">Annuler</button>
+          <button id="okConfirm" class="px-4 py-2 rounded bg-green-700 text-white">Confirmer</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="bg-green-700 text-white p-4 text-center">
+      <p>&copy; 2026 Verts-Pâturages. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const submitBtn = document.getElementById('submitCouple');
+    const confirmModal = document.getElementById('confirmModal');
+    const confirmContent = document.getElementById('confirmContent');
+    const cancelBtn = document.getElementById('cancelConfirm');
+    const okBtn = document.getElementById('okConfirm');
+
+    let currentData = null;
+
+    function getFormData() {
+        const fiance = Object.fromEntries(
+            new FormData(document.getElementById('fianceForm')).entries()
+        );
+
+        const fiancee = Object.fromEntries(
+            new FormData(document.getElementById('fianceeForm')).entries()
+        );
+
+        return { fiance, fiancee };
+    }
+
+    submitBtn.addEventListener("click", () => {
+
+        const form1 = document.getElementById('fianceForm');
+        const form2 = document.getElementById('fianceeForm');
+
+        if (!form1.reportValidity()) return;
+        if (!form2.reportValidity()) return;
+
+        currentData = getFormData();
+
+        confirmContent.innerHTML = `
+            <strong>Fiancé :</strong> ${currentData.fiance.fianceName} ${currentData.fiance.fiancePostnm}<br>
+            Téléphone : ${currentData.fiance.fiancePhone}<br><br>
+
+            <strong>Fiancée :</strong> ${currentData.fiancee.fianceeName} ${currentData.fiancee.fianceePostnm}<br>
+            Téléphone : ${currentData.fiancee.fianceePhone}
+        `;
+
+        confirmModal.classList.remove("hidden");
+        confirmModal.classList.add("flex");
+    });
+
+    cancelBtn.addEventListener("click", () => {
+        confirmModal.classList.add("hidden");
+        confirmModal.classList.remove("flex");
+    });
+
+    okBtn.addEventListener("click", () => {
+        const couples = JSON.parse(localStorage.getItem("vp_couples")) || [];
+
+        const newCouple = {
+            id: Date.now(),
+            homme: currentData.fiance,
+            femme: currentData.fiancee,
+            statut: "fiancailles",
+            dateDemande: new Date().toISOString(),
+            enseignements: [],
+            notes: ""
+        };
+
+        couples.push(newCouple);
+        localStorage.setItem("vp_couples", JSON.stringify(couples));
+
+        alert("Demande envoyée au Bureau Pastoral.");
+        confirmModal.classList.add("hidden");
+        confirmModal.classList.remove("flex");
+        document.getElementById('fianceForm').reset();
+        document.getElementById('fianceeForm').reset();
+    });
+
+});
+</script>
+</body>
+</html>

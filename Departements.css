@@ -1,0 +1,244 @@
+/* =================================
+   VARIABLES
+================================= */
+:root {
+  --primary: #1b5e20;
+  --primary-light: #2e7d32;
+  --accent: #10b981;
+  --soft-bg: #f4f7f6;
+  --card-bg: #ffffff;
+  --text-dark: #1f2937;
+  --text-soft: #6b7280;
+  --radius: 18px;
+  --transition: 0.3s ease;
+}
+
+/* =================================
+   BASE
+================================= */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Open Sans', sans-serif;
+  background: var(--soft-bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* =================================
+   NAVBAR MODERNE
+================================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #c8e6c9;
+  left: 0;
+  bottom: -4px;
+  transition: var(--transition);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.burger {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+/* =================================
+   SECTIONS
+================================= */
+.serviteurs,
+.departements {
+  max-width: 1100px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+
+.departements h2 {
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  position: relative;
+}
+
+.departements h2::after {
+  content: "";
+  width: 80px;
+  height: 4px;
+  background: var(--accent);
+  display: block;
+  margin: 12px auto 0;
+  border-radius: 10px;
+}
+
+/* =================================
+   CARTES DÉPARTEMENT
+================================= */
+.relative.bg-white {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+  padding: 2rem;
+  height: 100%;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.relative.bg-white::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  background: rgba(16,185,129,0.05);
+  border-radius: 50%;
+  top: -60px;
+  right: -60px;
+}
+
+.relative.bg-white:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.1);
+}
+
+.relative.bg-white h3 {
+  color: var(--primary);
+  margin-top: 1rem;
+}
+
+.relative.bg-white p {
+  color: var(--text-soft);
+  margin-top: 0.8rem;
+}
+
+/* Hover Overlay (group effect) */
+.relative.group .absolute {
+  transition: opacity var(--transition);
+}
+
+.relative.group:hover .absolute {
+  opacity: 1;
+}
+
+/* =================================
+   BOUTONS
+================================= */
+button,
+.btn {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+button:hover,
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+
+/* =================================
+   FOOTER
+================================= */
+footer {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  margin: 3rem 1.5rem 0;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* =================================
+   RESPONSIVE
+================================= */
+@media (max-width: 768px) {
+
+  .burger {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    right: 0;
+    top: 70px;
+    background: var(--primary);
+    flex-direction: column;
+    width: 220px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .nav-links.open {
+    max-height: 300px;
+  }
+
+  .nav-links li {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .serviteurs,
+  .departements {
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+
+  footer {
+    margin: 2rem 1rem 0;
+  }
+
+  .member-profile {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .member-profile img {
+    margin-bottom: 1rem;
+  }
+}

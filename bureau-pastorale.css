@@ -1,0 +1,307 @@
+/* =========================================
+   VARIABLES GLOBALES
+========================================= */
+:root {
+  --primary: #1b5e20;
+  --primary-light: #2e7d32;
+  --accent: #10b981;
+  --bg-main: #f4f7f6;
+  --sidebar-bg: #111827;
+  --sidebar-hover: #1f2937;
+  --card-bg: #ffffff;
+  --text-dark: #1f2937;
+  --text-soft: #6b7280;
+  --danger: #dc2626;
+  --radius: 14px;
+  --transition: 0.3s ease;
+  --shadow-soft: 0 10px 25px rgba(0,0,0,0.05);
+  --shadow-strong: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: var(--bg-main);
+  color: var(--text-dark);
+}
+
+/* =========================================
+   TOPBAR
+========================================= */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.logo-area h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+.admin-area {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logout-btn {
+  background: white;
+  color: var(--primary);
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================
+   LAYOUT
+========================================= */
+.layout {
+  display: flex;
+  min-height: calc(100vh - 70px);
+}
+
+/* =========================================
+   SIDEBAR
+========================================= */
+.sidebar {
+  width: 260px;
+  background: var(--sidebar-bg);
+  color: white;
+  padding-top: 2rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 500;
+}
+
+.sidebar li:hover {
+  background: var(--sidebar-hover);
+}
+
+.sidebar li.active {
+  background: var(--primary);
+  border-left: 4px solid var(--accent);
+}
+
+/* =========================================
+   CONTENT
+========================================= */
+.content {
+  flex: 1;
+  padding: 2rem;
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+/* =========================================
+   TITRES
+========================================= */
+.section h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  border-left: 5px solid var(--primary);
+  padding-left: 10px;
+}
+
+/* =========================================
+   CARDS STATS
+========================================= */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-strong);
+}
+
+.stat-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-soft);
+}
+
+.stat-card p {
+  font-size: 2rem;
+  margin: 0.5rem 0 0;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+/* =========================================
+   FORMULAIRES
+========================================= */
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  margin-bottom: 1rem;
+  transition: var(--transition);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(46,125,50,0.2);
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+button,
+.btn {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  border: none;
+  color: white;
+  padding: 0.6rem 1.4rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+button:hover,
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+.danger-btn {
+  background: var(--danger);
+}
+
+.danger-btn:hover {
+  background: #b91c1c;
+}
+
+/* =========================================
+   TABLES
+========================================= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+th,
+td {
+  padding: 0.9rem;
+  text-align: left;
+}
+
+th {
+  background: var(--primary);
+  color: white;
+}
+
+tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+/* =========================================
+   SETTINGS CARDS
+========================================= */
+.settings-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.settings-card h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.danger-zone {
+  border-left: 5px solid var(--danger);
+}
+
+/* =========================================
+   MAP
+========================================= */
+#mapAdmin {
+  height: 300px;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow-soft);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media (max-width: 992px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .sidebar ul {
+    display: flex;
+  }
+
+  .sidebar li {
+    white-space: nowrap;
+  }
+}

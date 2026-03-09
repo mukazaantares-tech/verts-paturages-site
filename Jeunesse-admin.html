@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administration Jeunesse</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="jeunesse-admin.css">
+</head>
+<body class="bg-gray-100">
+
+    <header class="flex items-center justify-between bg-white shadow px-8 py-4 border-b">
+
+    <!-- Logo / Nom -->
+    <div class="flex items-center gap-4">
+        <div class="w-10 h-10 bg-purple-700 rounded-full flex items-center justify-center text-white font-bold">
+            J
+        </div>
+        <div>
+            <h1 class="text-xl font-bold text-purple-700">JAEL Admin</h1>
+            <p class="text-sm text-gray-500">Administration Jeunesse</p>
+        </div>
+    </div>
+
+    <!-- Infos utilisateur -->
+    <div class="flex items-center gap-6">
+
+        <div class="text-right">
+            <p id="youthAdminName" class="font-semibold text-gray-800"></p>
+            <p id="youthAdminRole" class="text-sm text-purple-600"></p>
+        </div>
+
+        <button id="logoutYouth"
+        class="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800 transition">
+            Déconnexion
+        </button>
+
+    </div>
+
+</header>
+
+<div class="flex min-h-screen">
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-purple-800 text-white p-6">
+        <h2 class="text-2xl font-bold mb-6">JAEL Admin</h2>
+        <ul class="space-y-3 sidebar">
+            <li data-section="dashboard" class="active cursor-pointer">📊 Dashboard</li>
+            <li data-section="content" class="cursor-pointer">📝 Contenu</li>
+            <li data-section="activities" class="cursor-pointer">🎉 Activités</li>
+            <li data-section="adhesions" class="cursor-pointer">👥 Adhésions</li>
+            <li data-section="admins" class="cursor-pointer">👑 Administrateurs</li>
+        </ul>
+    </aside>
+    <!-- MAIN -->
+   <main class="flex-1 p-8 space-y-10">
+
+    <!-- ================= DASHBOARD ================= -->
+    <section id="dashboard" class="section active">
+        <h2 class="text-2xl font-bold mb-6">Tableau de Bord</h2>
+
+        <div class="grid grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded shadow text-center">
+                <h3 class="text-xl font-bold text-purple-700" id="statMembers">0</h3>
+                <p>Total Membres</p>
+            </div>
+
+            <div class="bg-white p-6 rounded shadow text-center">
+                <h3 class="text-xl font-bold text-orange-600" id="statPending">0</h3>
+                <p>Demandes en attente</p>
+            </div>
+
+            <div class="bg-white p-6 rounded shadow text-center">
+                <h3 class="text-xl font-bold text-pink-600" id="statActivities">0</h3>
+                <p>Activités</p>
+            </div>
+
+            <div class="bg-white p-6 rounded shadow text-center">
+                <h3 class="text-xl font-bold text-indigo-600" id="statAdmins">0</h3>
+                <p>Admins Jeunesse</p>
+            </div>
+            <div class="bg-white p-6 rounded shadow text-center">
+                <h3 class="text-xl font-bold text-red-600" id="statCommentsPending">0</h3>
+                <p>Commentaires en attente</p>
+            </div>
+        </div>
+
+        <canvas id="youthChart" class="mb-6"></canvas>
+
+        <button id="exportYouthMembers"
+        class="bg-purple-700 text-white px-4 py-2 rounded">
+            Exporter Membres CSV
+        </button>
+    </section>
+
+    <!-- ================= CONTENU ================= -->
+    <section id="content" class="section hidden">
+        <h2 class="text-2xl font-bold mb-6">Gestion Contenu</h2>
+
+        <textarea id="contentTitle"
+        class="w-full p-3 border rounded mb-4"
+        placeholder="Titre Jeunesse"></textarea>
+
+        <textarea id="contentSlogan"
+        class="w-full p-3 border rounded mb-4"
+        placeholder="Slogan"></textarea>
+
+        <button id="saveContent"
+        class="bg-purple-700 text-white px-6 py-2 rounded">
+            Enregistrer
+        </button>
+    </section>
+
+    <!-- ================= ACTIVITÉS ================= -->
+    <section id="activities" class="section hidden">
+        <h2 class="text-2xl font-bold mb-6">Gestion Activités</h2>
+
+        <div class="flex gap-2 mb-4">
+            <input id="activityTitle"
+            class="flex-1 p-2 border rounded"
+            placeholder="Titre activité">
+
+            <input id="activityDesc"
+            class="flex-1 p-2 border rounded"
+            placeholder="Description">
+
+            <button id="addActivity"
+            class="bg-pink-600 text-white px-4 rounded">
+                Ajouter
+            </button>
+        </div>
+
+        <div id="activityList"></div>
+    </section>
+
+    <!-- ================= DEMANDES ================= -->
+    <section id="adhesions" class="section hidden">
+        <h2 class="text-2xl font-bold mb-6">Demandes d'Adhésion</h2>
+
+        <select id="filterSexe" class="mb-4 p-2 border rounded">
+            <option value="all">Tous</option>
+            <option value="Homme">Hommes</option>
+            <option value="Femme">Femmes</option>
+        </select>
+
+        <div id="adhesionList"></div>
+    </section>
+
+    <!-- ================= MEMBRES VALIDÉS ================= -->
+    <section id="members" class="section hidden">
+        <h2 class="text-2xl font-bold mb-6">Membres Validés</h2>
+        <div id="memberList"></div>
+    </section>
+
+    <!-- ================= GROUPES ================= -->
+    <section id="groups" class="section hidden">
+        <h2 class="text-2xl font-bold mb-6">Gestion Groupes</h2>
+
+        <div class="flex gap-2 mb-4">
+            <input id="newGroupName"
+            class="flex-1 p-2 border rounded"
+            placeholder="Nom du groupe">
+
+            <button id="addGroupBtn"
+            class="bg-purple-600 text-white px-4 rounded">
+                Créer Groupe
+            </button>
+        </div>
+
+        <div id="groupList"></div>
+    </section>
+
+    <!-- ================= COMMENTAIRES ================= -->
+    <section id="comments" class="section hidden">
+        <h2 class="text-2xl font-bold mb-6">Modération Commentaires</h2>
+        <div id="adminCommentList"></div>
+    </section>
+
+    <!-- ================= ADMINS ================= -->
+    <section id="admins" class="section hidden">
+        <h2 class="text-2xl font-bold mb-6">Administrateurs Jeunesse</h2>
+
+        <div class="flex gap-2 mb-4">
+            <input id="newAdminEmail"
+            class="flex-1 p-2 border rounded"
+            placeholder="Email">
+
+            <select id="newAdminRole"
+            class="p-2 border rounded">
+                <option value="youth-admin">Admin Jeune</option>
+                <option value="youth-super-admin">Haut-Admin Jeune</option>
+            </select>
+
+            <button id="addYouthAdmin"
+            class="bg-indigo-600 text-white px-4 rounded">
+                Ajouter
+            </button>
+        </div>
+
+        <div id="adminList"></div>
+    </section>
+
+</main>z
+
+</div>
+
+<script src="js/services/data.service.js"></script>
+<script src="js/services/auth.service.js"></script>
+<script src="js/modules/youth/youth.dashboard.module.js"></script>
+<script src="js/modules/youth/youth.activities.module.js"></script>
+<script src="js/modules/youth/youth.adhesions.module.js"></script>
+<script src="js/modules/youth/youth.admins.module.js"></script>
+<script src="js/modules/youth/youth.comments.admin.module.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

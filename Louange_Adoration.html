@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Louange et Adoration - Verts-Pâturages</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="Louange_Adoration.css"/>
+  <link rel="icon" href="Verts-Paturages.png" type="image/png">
+  <link rel="apple-touch-icon" href="Verts-Paturages.png">
+</head>
+<body class="bg-gray-100"
+      data-departement="Louange et adoration" data-sous="Generale">
+      
+
+  <!-- Navigation -->
+  <header class="bg-green-700 text-white p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">Verts-Pâturage</h1>
+    <ul class="flex gap-6">
+      <li><a href="Accueil.html" target="_blank" class="hover:text-green-300">Accueil</a></li>
+      <li><a href="serviteurs.html" target="_blank" class="hover:text-green-300">Serviteurs</a></li>
+      <li><a href="departements.html" target="_blank" class="hover:text-green-300">Départements</a></li>
+      <li><a href="jeunesse.html" target="_blank" class="hover:text-green-300">Jeunesse</a></li>
+      <li><a href="localisation.html" target="_blank" class="hover:text-green-300">Localisation</a></li>
+    </ul>
+  </header>
+
+  <!-- Présentation du président -->
+  <main class="p-6">
+    <section class="relative max-w-4xl mx-auto bg-gradient-to-r from-green-50 to-green-100 rounded-lg shadow-md p-6 mb-10">
+      <h2 class="text-center text-green-700 font-semibold">
+        Departement de Louange et Adoration
+      </h2>
+
+      <h3 id="presidentNameDisplay"
+          class="text-xl font-bold text-green-700"></h3>
+
+      <div class="flex flex-col md:flex-row items-center gap-6">
+
+        <img id="presidentPhotoDisplay"
+            class="w-32 h-32 rounded-full object-cover shadow-md border-4 border-green-600 mx-auto mb-4" />
+
+        <div>
+          <p id="presidentDescDisplay"
+            class="mt-2 text-gray-600"></p>
+
+          <blockquote class="mt-4 italic text-green-700 border-l-4 border-green-600 pl-4">
+            “Que tout ce qui respire loue l’Éternel” (Psaume 150:6)
+          </blockquote>
+
+        </div>
+      </div>
+    </section>
+
+  <!-- Attributions -->
+    <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
+      <h3 class="text-xl font-bold text-green-700 mb-4">Atribution du departement de louange & Adoration</h3>
+      <ul class="list-disc list-inside text-gray-700">
+        <li>Travailler sous la supervision du pasteur pour des orientations</li>
+        <li>Organiser les activites du departements</li>
+        <li>Organiser les formations pour ses membres</li>
+        <li>Concourir a la tenue des cultes</li>
+        <li>Rapporter les besoins et defis au pasteur</li>
+      </ul>
+    </section>
+
+    <!-- Sous-groupes de Louange -->
+    <section class="mt-10">
+      <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+        
+        <!-- Grande Chorale -->
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-gradient-to-r from-green-400 to-green-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-200"></div>
+          <div class="relative bg-white p-6 rounded-lg shadow-lg h-full">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-500 text-white">
+              <i class="fas fa-users text-xl"></i>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-medium text-gray-900">La Grande Chorale</h3>
+              <p class="mt-2 text-base text-gray-500">
+                Ensemble principal de chant qui anime les cultes dominicaux et les grandes célébrations.
+              </p>
+              <a href="grande-chorale.html"><button class="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Accéder</button></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Canon Vocal -->
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-gradient-to-r from-green-400 to-green-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-200"></div>
+          <div class="relative bg-white p-6 rounded-lg shadow-lg h-full">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-500 text-white">
+              <i class="fas fa-music text-xl"></i>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-medium text-gray-900">Le Canon Vocal</h3>
+              <p class="mt-2 text-base text-gray-500">
+                Groupe vocal spécialisé dans les harmonies et les chants spirituels contemporains.
+              </p>
+              <a href="canon-vocale.html"><button class="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Accéder</button></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mamans Hassafa -->
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-gradient-to-r from-green-400 to-green-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-200"></div>
+          <div class="relative bg-white p-6 rounded-lg shadow-lg h-full">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-500 text-white">
+              <i class="fas fa-female text-xl"></i>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-medium text-gray-900">Asafa</h3>
+              <p class="mt-2 text-base text-gray-500">
+                Groupe de femmes chantant avec ferveur et sagesse, porteurs de louange intergénérationnelle.
+              </p>
+              <a href="Asafa.html"><button class="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Accéder</button></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Glorel -->
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-gradient-to-r from-green-400 to-green-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-200"></div>
+          <div class="relative bg-white p-6 rounded-lg shadow-lg h-full">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-500 text-white">
+              <i class="fas fa-music text-xl"></i>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-medium text-gray-900">GLOREL</h3>
+              <p class="mt-2 text-base text-gray-500">
+                Ajoute une forme nouvelle de louange à l'Éternel.
+              </p>
+              <a href="Glorel.html"><button class="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Accéder</button></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-green-700 text-white text-center p-4 mt-10">
+    <p> 2026 Verts-Pâturage | Tous droits réservés</p>
+  </footer>
+ <script src="core.js"></script>
+<script src="Louange_Adoration.js"></script>
+</body>
+</body>
+</html>

@@ -1,0 +1,159 @@
+/* Style général */
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.nav-links a:hover {
+  color: #c8e6c9;
+}
+
+/* Sections */
+section {
+  margin-bottom: 2rem;
+}
+
+/* Carte des responsables */
+section .bg-white {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+section .bg-white:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Bouton d’adhésion */
+button {
+  font-weight: 600;
+  cursor: pointer;
+}
+button:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+/* Footer */
+footer {
+  background-color: #2e7d32;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+}
+/* Couleurs personnalisées */
+.bg-primary {
+  background-color: #2e7d32;
+}
+.text-primary {
+  color: #2e7d32;
+}
+.bg-secondary {
+  background-color: #c8e6c9;
+}
+.text-secondary {
+  color: #c8e6c9;
+}
+.bg-accent {
+  background-color: #81c784;
+}
+.text-accent {
+  color: #81c784;
+}
+.bg-light {
+  background-color: #f5f5f5;
+}
+.text-light {
+  color: #f5f5f5;
+}
+.bg-dark {
+  background-color: #333;
+}
+.text-dark {
+  color: #333;
+}
+/* Effets supplémentaires */
+.card {
+  border-radius: 8px;
+  overflow: hidden;
+}
+.card img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+.card img:hover {
+  transform: scale(1.1);
+}
+.card-body {
+  padding: 1rem;
+}
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.card-text {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.button-primary {
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+}
+
+/* Petite amélioration : logo et focus accessibles */
+.logo {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.nav-links a:focus {
+  outline: 3px solid rgba(46,125,50,0.2);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Fallback image styles au cas où Tailwind n'est pas chargé */
+.president-img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+

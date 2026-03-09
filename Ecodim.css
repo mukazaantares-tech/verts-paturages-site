@@ -1,0 +1,72 @@
+/* Styles pour le département Ecodim - palette Orange vif / Jaune clair */
+
+/* Styles globaux */
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.nav-links a:hover {
+  color: #FFEB3B; /* jaune clair */
+}
+
+/* Section principale */
+section {
+  margin-bottom: 2rem;
+}
+
+/* Cards */
+.p-6 {
+  padding: 1.5rem;
+}
+
+/* Boutons */
+button {
+  font-weight: 600;
+  cursor: pointer;
+  background-color: #ad6a51; /* orange vif */
+  color: #ffffff;
+  border: 2px solid #FFEB3B; /* jaune clair */
+  padding: 0.6rem 1rem;
+}
+button:hover {
+  transform: scale(1.03);
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  background-color: #FFEB3B; /* jaune clair */
+  color: #FF6B35; /* orange vif */
+}
+
+/* Footer */
+footer {
+  background-color: #FF6B35; /* orange vif */
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

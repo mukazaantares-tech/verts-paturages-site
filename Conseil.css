@@ -1,0 +1,139 @@
+/* ===============================
+   CONSEIL COMMUNAUTAIRE
+   Thème : Vert & Blanc Professionnel
+================================= */
+
+.conseil-communautaire {
+    background-color: #f4f9f4;
+    padding: 60px 20px;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* HEADER */
+
+.conseil-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+}
+
+.conseil-title {
+    font-size: 36px;
+    color: #1b5e20;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.conseil-title::after {
+    content: "";
+    width: 80px;
+    height: 4px;
+    background-color: #2e7d32;
+    display: block;
+    margin: 15px auto 0 auto;
+    border-radius: 2px;
+}
+
+.conseil-description {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.7;
+}
+
+/* GRID MEMBRES */
+
+.conseil-members {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* CARTE MEMBRE */
+
+.conseil-card {
+    background-color: #ffffff;
+    border-radius: 60px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    padding: 35px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 10px solid #e0e0e0;
+}
+
+.conseil-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* PHOTO */
+
+.conseil-photo {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #2e7d32;
+    margin-bottom: 15px;
+}
+
+/* NOM */
+
+.conseil-name {
+    font-size: 20px;
+    color: #1b5e20;
+    margin-bottom: 10px;
+}
+
+/* BADGES */
+
+.status-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Président */
+.status-president {
+    background-color: #1b5e20;
+    color: #ffffff;
+}
+
+/* Membre */
+.status-member {
+    background-color: #a5d6a7;
+    color: #1b5e20;
+}
+
+/* DESCRIPTION */
+
+.conseil-role {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* ADRESSE */
+
+.conseil-address {
+    font-size: 13px;
+    color: #2e7d32;
+    font-weight: 500;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+    .conseil-title {
+        font-size: 28px;
+    }
+
+    .conseil-description {
+        font-size: 14px;
+    }
+}

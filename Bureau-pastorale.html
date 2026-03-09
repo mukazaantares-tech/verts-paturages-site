@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Bureau Pastoral | Verts-Pâturages</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="bureau-pastorale.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+  <link rel="icon" href="Verts-Paturages.png" type="image/png">
+  <link rel="apple-touch-icon" href="Verts-Paturages.png">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+</head>
+<body>
+
+  <!-- ===== TOPBAR ===== -->
+  <header class="topbar">
+    <div class="logo-area">
+      <h1>Bureau Pastoral</h1>
+      <span class="subtitle">Église Verts-Pâturages</span>
+    </div>
+
+    <div class="admin-area">
+      <span class="admin-role">Haut-Administrateur</span>
+      <span class="admin-name">Nom & Fonction</span>
+      <button class="logout-btn">Déconnexion</button>
+    </div>
+  </header>
+
+  <!-- ===== STRUCTURE PRINCIPALE ===== -->
+  <div class="layout">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar">
+      <nav>
+        <ul>
+          <li data-section="dashboard" class="active">Tableau de Bord</li>
+          <li data-section="pasteur">Programme Pastorale</li>
+          <li data-section="instructions">Instructions Officielles</li>
+          <li data-section="membres">Gestion des Membres</li>
+          <li data-section="adhesions">Demandes d’Adhésion</li>
+          <li data-section="couples">Couples</li>
+          <li data-section="departements">Départements</li>
+          <li data-section="adminCreation">Administrateurs</li>
+          <li data-section="rapports">Rapports & Statistiques</li>
+          <li data-section="parametres">Paramètres</li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- ===== CONTENU DYNAMIQUE ===== -->
+    <main class="content">
+
+      <!-- DASHBOARD -->
+      <section id="dashboard" class="section active">
+        <h2>Tableau de Bord</h2>
+        <div class="stats-container">
+          <div class="stat-card"><h3>Membres</h3><p id="statMembres">0</p></div>
+          <div class="stat-card"><h3>Adhésions</h3><p id="statAdhesions">0</p></div>
+          <div class="stat-card"><h3>Départements</h3><p id="statDepartements">0</p></div>
+          <div class="stat-card"><h3>Instructions Actives</h3><p id="statInstructions">0</p></div>
+          <div class="stat-card"><h3>Administrateurs</h3><p id="statAdmins">0</p></div>
+        </div>
+        <section class="bg-white p-6 rounded shadow mb-8">
+          <h2 class="text-xl font-bold text-green-700 mb-4">
+              Gestion des 7 Versets de la Semaine
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-4 mb-4">
+              <input id="verseReferenceInput"
+                  class="p-2 border rounded"
+                  placeholder="Référence (Jean 3:16)">
+
+              <textarea id="verseTextInput"
+                  class="p-2 border rounded"
+                  placeholder="Texte du verset"></textarea>
+          </div>
+
+          <button id="addVerseBtn"
+              class="bg-green-600 text-white px-4 py-2 rounded">
+              Ajouter Verset
+          </button>
+
+          <div id="verseList" class="mt-6"></div>
+          </section>
+          <section class="bg-white p-6 rounded shadow mt-8">
+              <h2 class="text-xl font-bold text-green-700 mb-4">
+                  Classement des Versets les plus aimés
+              </h2>
+
+              <div id="topVerses"></div>
+          </section>
+          <section class="bg-white p-6 rounded shadow mt-8">
+              <h2 class="text-xl font-bold text-green-700 mb-4">
+                  Statistiques des Likes
+              </h2>
+
+              <canvas id="verseLikesChart"></canvas>
+          </section>
+      </section>
+
+      <!-- PROGRAMME PASTORALE -->
+      <section id="pasteur" class="section">
+        <h2>Programme Annuel du Pasteur</h2>
+        <form id="addProgrammeForm">
+          <input type="text" name="titre" placeholder="Titre de l'activité" required>
+          <textarea name="description" placeholder="Description"></textarea>
+          <input type="date" name="date" required>
+          <button type="submit">Ajouter</button>
+        </form>
+        <h4>Programme annuel</h4>
+        <table id="programmeTable">
+          <thead><tr><th>Titre</th><th>Description</th><th>Date</th><th>Actions</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div id="alertsContainer" class="alerts"></div>
+      </section>
+
+      <!-- INSTRUCTIONS -->
+      <section id="instructions" class="section">
+        <h2>Instructions Officielles</h2>
+        <div class="instruction-form">
+          <input type="text" id="instructionTitle" placeholder="Titre de l'instruction">
+          <textarea id="instructionContent" placeholder="Contenu de l’instruction"></textarea>
+          <button id="publishInstruction">Publier</button>
+        </div>
+        <div id="instructionList" class="instruction-list"></div>
+      </section>
+
+      <!-- MEMBRES -->
+      <section id="membres" class="section">
+        <h2>Gestion des Membres</h2>
+
+        <div class="membre-controls">
+          <input type="text" id="searchMembre" placeholder="Rechercher un membre...">
+          
+          <select id="filterStatut">
+            <option value="all">Tous les statuts</option>
+            <option value="actif">Actif</option>
+            <option value="inactif">Inactif</option>
+            <option value="discipline">Discipline</option>
+          </select>
+
+          <span id="membreCount"></span>
+        </div>
+
+        <div id="membreTable"></div>
+      </section>
+
+
+      <!-- ADHESIONS -->
+      <section id="adhesions" class="section">
+        <h2>Demandes d’Adhésion</h2>
+        <div id="adhesionTable"></div>
+      </section>
+
+      <section id="couples" class="section">
+        <h2>Gestion des Couples (Fiançailles & Mariages)</h2>
+        <div id="couplesContainer"></div>
+      </section>
+
+
+      <!-- DEPARTEMENTS -->
+      <section id="departements" class="section">
+        <h2>Gestion des Départements</h2>
+
+          <div class="departement-controls">
+            <select id="membreSelect"></select>
+
+            <select id="departementSelect">
+              <option value="">Choisir département</option>
+              <option value="Louange">Louange & Adoration</option>
+              <option value="Intercession">Intercession</option>
+              <option value="Protocole">Protocole</option>
+              <option value="Media">Média</option>
+              <option value="Technique">Technique</option>
+              <option value="Ecodim">Ecodim</option>
+              <option value="Evangelisation">Evangelisation</option>
+              <option value="Soeurs">Sœurs & Mamans</option>
+              <option value="Fiancailles">Fiançailles & Mariage</option>
+            </select>
+
+            <button id="assignDepartement">Affecter</button>
+          </div>
+
+          <div id="departementList"></div>
+
+          <div id="departementRequestsContainer"></div>
+
+      </section>
+
+      <!-- ===== GESTION DES ADMINISTRATEURS ===== -->
+<section id="adminCreation" class="section">
+  <h2>Créer un nouvel Administrateur</h2>
+
+  <form id="addAdminForm" class="admin-form">
+    <div class="form-group">
+      <label for="name">Nom complet</label>
+      <input type="text" id="name" name="name" placeholder="Nom et prénom" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="exemple@domain.com" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+    </div>
+
+    <div class="form-group">
+      <label for="role">Rôle</label>
+      <select id="role" name="role" required>
+        <option value="">-- Sélectionner --</option>
+        <option value="super-admin">Haut-Administrateur</option>
+        <option value="admin">Administrateur</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn">Ajouter l’Administrateur</button>
+  </form>
+
+  <div id="adminList" class="admin-list mt-4">
+    <!-- Liste des admins ajoutés -->
+  </div>
+</section>
+
+
+      <!-- RAPPORTS -->
+      <section id="rapports" class="section">
+        <h2>Rapports & Statistiques</h2>
+
+        <div id="statsContainer" class="stats-grid"></div>
+
+        <div class="chart-container">
+            <canvas id="deptChart"></canvas>
+        </div>
+
+        <div class="export-section">
+            <h3>Exportation des données</h3>
+            <button id="exportDeptMembers">Exporter Membres Départements</button>
+            <button id="exportDeptRequests">Exporter Demandes Départements</button>
+            <button id="exportChurchMembers">Exporter Membres Église</button>
+            <button id="exportCouples">Exporter Couples</button>
+        </div>
+      </section>
+
+      <<!-- PARAMÈTRES -->
+          <section id="parametres" class="section">
+
+            <h2>Paramètres Généraux</h2>
+
+            <!-- INFOS GÉNÉRALES -->
+            <div class="settings-card">
+              <h3>Informations Générales</h3>
+
+              <label>Nom de l'Église</label>
+              <input type="text" id="churchName">
+
+              <label>Adresse</label>
+              <input type="text" id="churchAddress">
+
+              <label>Email officiel</label>
+              <input type="email" id="churchEmail">
+
+              <button id="saveGeneral">Enregistrer</button>
+            </div>
+
+            <!-- ADMINISTRATEURS -->
+            <div class="settings-card">
+              <h3>Gestion des Administrateurs</h3>
+
+              <label>Nom</label>
+              <input type="text" id="adminNameInput">
+
+              <label>Rôle</label>
+              <select id="adminRoleInput">
+                <option value="super-admin">Haut-Administrateur</option>
+                <option value="admin">Administrateur Moyen</option>
+              </select>
+
+              <button id="addAdmin">Ajouter</button>
+              <div id="adminList"></div>
+            </div>
+
+            <!-- DEPARTEMENTS -->
+            <div class="settings-card">
+              <h3>Gestion dynamique des départements</h3>
+
+              <input type="text" id="deptName" placeholder="Nom du département">
+              <input type="text" id="presidentName" placeholder="Nom du président">
+              <input type="file" id="presidentPhotoFile" accept="image/*">
+              <textarea id="presidentDesc" placeholder="Description"></textarea>
+
+              <button id="saveDeptBtn">Enregistrer Département</button>
+              <div id="departementMediaList"></div>
+            </div>
+
+            <!-- LOCALISATIONS -->
+            <div class="settings-card">
+            <h3>Gestion des Localisations</h3>
+
+            <div id="mapAdmin"></div>
+
+            <input type="text" id="locName" placeholder="Nom de l’assemblée">
+            <select id="locType">
+              <option value="mere">Assemblée Mère</option>
+              <option value="extension">Extension</option>
+            </select>
+            <button id="saveLocation">Enregistrer</button>
+          </div>
+
+            <!-- APPARENCE -->
+            <div class="settings-card">
+              <h3>Apparence</h3>
+
+              <label>Couleur Principale</label>
+              <input type="color" id="primaryColor" value="#1E7F4F">
+
+              <button id="saveTheme">Appliquer</button>
+            </div>
+
+            <!-- ZONE DANGEREUSE -->
+            <div class="settings-card danger-zone">
+              <h3>Zone Sensible</h3>
+              <button id="resetSystem" class="danger-btn">
+                Réinitialiser le Système
+              </button>
+            </div>
+
+          </section>
+
+  </div>
+</main>
+<script src="js/services/data.service.js"></script>
+<script src="js/services/auth.service.js"></script>
+<script src="js/modules/admin/dashboard.module.js"></script>
+<script src="js/modules/admin/verses.module.js"></script>
+<script src="js/modules/admin/localisation.module.js"></script>
+<script src="js/modules/admin/export.module.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+/* =================================
+   VARIABLES GLOBALES
+================================= */
+:root {
+  --primary: #1b5e20;
+  --primary-light: #2e7d32;
+  --accent: #10b981;
+  --soft-bg: #f4f7f6;
+  --card-bg: #ffffff;
+  --text-dark: #1f2937;
+  --text-soft: #6b7280;
+  --radius: 18px;
+  --transition: 0.3s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Open Sans', sans-serif;
+  background: var(--soft-bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* =================================
+   NAVBAR
+================================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+#exit {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+#exit:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #c8e6c9;
+  left: 0;
+  bottom: -4px;
+  transition: var(--transition);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.burger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: white;
+  cursor: pointer;
+}
+
+/* =================================
+   HERO SECTION
+================================= */
+.hero {
+  background: linear-gradient(135deg, #2e7d32, #10b981);
+  padding: 5rem 2rem;
+  text-align: center;
+  color: white;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+.hero-content h2 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+}
+
+/* =================================
+   VERSÉT DU JOUR
+================================= */
+#verset-du-jour {
+  max-width: 800px;
+  margin: 4rem auto;
+  text-align: center;
+}
+
+#verset-content {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+  transition: var(--transition);
+}
+
+#verset-content:hover {
+  transform: translateY(-5px);
+}
+
+#verseText {
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--text-dark);
+}
+
+#verseReference {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+/* LIKE BUTTON */
+#likeVerseBtn {
+  border-radius: 50px;
+  transition: var(--transition);
+}
+
+#likeVerseBtn:hover {
+  transform: scale(1.05);
+}
+
+/* =================================
+   ANNONCE
+================================= */
+.photo-submission {
+  max-width: 800px;
+  margin: 3rem auto;
+}
+
+.photo-submission > div {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: var(--radius);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+}
+
+/* =================================
+   MODALS
+================================= */
+.modal-card {
+  border-radius: var(--radius);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =================================
+   FOOTER
+================================= */
+footer {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  padding: 2rem;
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.footer-links a {
+  color: white;
+  margin: 0 0.7rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+/* =================================
+   RESPONSIVE
+================================= */
+@media (max-width: 900px) {
+  .hero-content h2 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .burger {
+    display: block;
+  }
+
+  .nav-links {
+    position: absolute;
+    right: 0;
+    top: 70px;
+    background: var(--primary);
+    flex-direction: column;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.4s ease;
+  }
+
+  .nav-links.open {
+    max-height: 300px;
+  }
+
+  .nav-links li {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 3.5rem 1.5rem;
+  }
+
+  .hero-content h2 {
+    font-size: 1.7rem;
+  }
+}

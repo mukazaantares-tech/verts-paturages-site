@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departement des Sœurs et mamans</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="canon-vocale.css">
+    <link rel="icon" href="Verts-Paturages.png" type="image/png">
+  <link rel="apple-touch-icon" href="Verts-Paturages.png">
+</head>
+<body data-departement="Sœurs et mamans" data-sous="Generale">
+    <header class="navbar bg-green-700 text-white p-4 flex justify-between items-center">
+    <h1 class="logo text-xl font-bold">Verts-Pâturages</h1>
+    <ul class="nav-links flex gap-6">
+      <li><a href="Accueil.html"  class="hover:text-green-300">Accueil</a></li>
+      <li><a href="Serviteurs.html">Serviteurs</a></li>
+      <li><a href="Departements.html" class="hover:text-green-300">Départements</a></li>
+      <li><a href="Soeur.html" class="hover:text-green-300" aria-current="page">Sœurs et mamans</a></li>
+
+    </ul>
+  </header>
+  <main class="p-6">
+    <!-- Titre -->
+    <section class="relative max-w-4xl mx-auto bg-gradient-to-r from-green-50 to-green-100 rounded-lg shadow-md p-6 mb-10">
+
+  <h2 class="text-center text-green-700 font-semibold">
+    Département de <span id="deptTitleDisplay"></span>
+  </h2>
+
+  <h3 id="presidentNameDisplay"
+      class="text-xl font-bold text-green-700 text-center mt-2">
+  </h3>
+
+  <div class="flex flex-col md:flex-row items-center gap-6 mt-6">
+
+    <img id="presidentPhotoDisplay"
+         class="w-32 h-32 rounded-full object-cover shadow-md border-4 border-green-600 mx-auto mb-4" />
+
+    <div>
+      <p id="presidentDescDisplay"
+         class="mt-2 text-gray-600"></p>
+    </div>
+
+  </div>
+</section>
+
+    <!-- Équipe de direction -->
+    <section class="max-w-4xl mx-auto bg-green-50 rounded-lg shadow-md p-6 mb-10">
+      <h3 class="text-xl font-bold text-green-700 mb-4">Équipe de direction</h3>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white p-4 rounded-lg shadow">
+          <h4 class="font-semibold text-gray-800">Secrétaire</h4>
+          <p class="text-gray-600">Nom du secrétaire</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow">
+          <h4 class="font-semibold text-gray-800">Disciplinaire</h4>
+          <p class="text-gray-600">Nom du disciplinaire</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow">
+          <h4 class="font-semibold text-gray-800">Trésorier</h4>
+          <p class="text-gray-600">Nom du trésorier</p>
+        </div>
+      </div>
+    </section>
+    <!-- Attributions -->
+    <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
+      <h3 class="text-xl font-bold text-green-700 mb-4">Attributions du département Sœurs et mamans</h3>
+      <ul class="list-disc list-inside text-gray-700">
+        <li>Organiser les réunions hebdomadaires</li>
+        <li>Assurer la discipline et le bon fonctionnement des activités</li>
+        <li>Gérer les finances du département</li>
+        <li>Encourager les membres à participer activement aux cultes et aux événements de l'église</li>
+      </ul>
+    </section>
+
+    <!-- Activités -->
+    <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
+      <h3 class="text-xl font-bold text-green-700 mb-4">Activités principales</h3>
+      <ul class="list-disc list-inside text-gray-700">
+        <li>Rendez-vous hebdomadaires</li>
+        <li>Participation aux cultes dominicaux</li>
+        <li>Participation aux grandes célébrations</li>
+      </ul>
+    </section>
+    <!-- video exemplaire d'un cantique du sous-departement des Canon-Vocale -->
+     <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
+      <h3 class="text-xl font-bold text-green-700 mb-4"></h3>
+      <div class="flex justify-center">
+        <video src="message_des_mamans.mp4" controls class="w-full h-64 rounded-lg shadow-md">bon visionnage</video>
+      </div>
+     </section>
+
+    <!-- Condition + Bouton d’adhésion -->
+    <section class="max-w-4xl mx-auto bg-green-50 rounded-lg shadow-md p-6 mb-10 text-center">
+      <p class="text-gray-700 mb-4">
+        <strong>Condition :</strong> Pour adhérer à un département de l’église, il faut être né de nouveau et avoir accepté Jésus-Christ comme Seigneur et Sauveur.
+      </p>
+      <button class="adhesionBtn px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition" data-departement="Sœurs et mamans">
+        Demande d'adhésion
+      </button>
+    </section>
+
+    <!-- Modal Formulaire d'adhésion -->
+    <div id="adhesionModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-4 max-h-screen overflow-y-auto">
+        <h3 class="text-xl font-bold text-green-700 mb-4">Formulaire d'adhésion au département</h3>
+        <form id="adhesionForm">
+          <div class="mb-4">
+            <label for="adhesion-name" class="block text-gray-700 mb-2">Nom:</label>
+            <input type="text" id="adhesion-name" name="name" class="w-full p-2 border border-gray-300 rounded" required />
+          </div>
+          <div class="mb-4">
+            <label for="adhesion-postnm" class="block text-gray-700 mb-2">Postnom:</label>
+            <input type="text" id="adhesion-postnm" name="postnm" class="w-full p-2 border border-gray-300 rounded" required />
+          </div>
+          <div class="mb-4">
+            <label for="adhesion-prennm" class="block text-gray-700 mb-2">Prénom:</label>
+            <input type="text" id="adhesion-prennm" name="prennm" class="w-full p-2 border border-gray-300 rounded" required />
+          </div>
+          <div class="mb-4">
+            <label for="adhesion-email" class="block text-gray-700 mb-2">Email :</label>
+            <input type="email" id="adhesion-email" name="email" class="w-full p-2 border border-gray-300 rounded" required />
+            </div>
+          <div class="mb-4">
+            <label for="adhesion-sexe" class="block text-gray-700 mb-2">Sexe :</label>
+            <select id="adhesion-sexe" name="sexe" class="w-full p-2 border border-gray-300 rounded" required>
+              <option value="">-- Sélectionner --</option>
+              <option value="Homme">jeune fille</option>
+              <option value="Femme">Femme</option>
+              <option value="mere">maman</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label for="adhesion-phone" class="block text-gray-700 mb-2">Numéro de téléphone :</label>
+            <input type="tel" id="adhesion-phone" name="phone" class="w-full p-2 border border-gray-300 rounded" required />
+          </div>
+          <div class="mb-4">
+            <label for="adhesion-address" class="block text-gray-700 mb-2">Adresse physique :</label>
+            <input type="text" id="adhesion-address" name="address" class="w-full p-2 border border-gray-300 rounded" required />
+          </div>
+          <div class="flex justify-between gap-4">
+            <button type="submit" class="flex-1 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+              Soumettre
+            </button>
+            <button type="button" id="closeAdhesionModal" class="flex-1 px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 transition">
+              Fermer
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+  <footer class="bg-green-700 text-white text-center p-4 mt-10">
+    <p>&copy; 2026 Verts-Pâturage | Tous droits réservés</p>
+  </footer>
+  <script src="core.js"></script>
+  <script src="departementpublic.js"></script>
+</body>
+</html>

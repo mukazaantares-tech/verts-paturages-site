@@ -1,0 +1,241 @@
+/* =================================
+   VARIABLES JEUNESSE
+================================= */
+:root {
+  --youth-purple: #7e57c2;
+  --youth-pink: #ec407a;
+  --youth-orange: #fb8c00;
+  --youth-green: #2e7d32;
+  --soft-bg: #f8f7fc;
+  --card-bg: #ffffff;
+  --text-dark: #1f2937;
+  --text-soft: #6b7280;
+  --radius: 18px;
+  --transition: 0.3s ease;
+}
+
+/* =================================
+   BASE
+================================= */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', 'Open Sans', sans-serif;
+  background: var(--soft-bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* =================================
+   HERO JEUNESSE (Plus impactant)
+================================= */
+.hero {
+  background: linear-gradient(
+    135deg,
+    var(--youth-purple),
+    var(--youth-pink),
+    var(--youth-orange)
+  );
+  background-size: 300% 300%;
+  animation: gradientMove 10s ease infinite;
+  padding: 5rem 2rem;
+  text-align: center;
+  color: white;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.hero h1,
+.hero h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.95;
+}
+
+/* =================================
+   CARDS MODERNES
+================================= */
+section .bg-white {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+section .bg-white::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  background: rgba(126,87,194,0.06);
+  border-radius: 50%;
+  top: -60px;
+  right: -60px;
+}
+
+section .bg-white:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.1);
+}
+
+/* =================================
+   TIMELINE MODERNE
+================================= */
+.timeline {
+  border-left: 3px solid var(--youth-purple);
+  padding-left: 1.5rem;
+}
+
+.timeline .event {
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+}
+
+.timeline .event::before {
+  content: "";
+  position: absolute;
+  left: -1.65rem;
+  top: 5px;
+  width: 14px;
+  height: 14px;
+  background: var(--youth-pink);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(236,64,122,0.2);
+}
+
+/* =================================
+   BOUTONS
+================================= */
+#adhesionBtn,
+.youthadminbtn,
+section button {
+  background: linear-gradient(
+    135deg,
+    var(--youth-purple),
+    var(--youth-pink)
+  );
+  color: white;
+  padding: 0.8rem 1.6rem;
+  border-radius: 50px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+#adhesionBtn:hover,
+.youthadminbtn:hover,
+section button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+#adhesionBtn:active,
+section button:active {
+  transform: scale(0.95);
+}
+
+/* =================================
+   TITRES & TEXTES
+================================= */
+section h2 {
+  font-size: 1.9rem;
+  margin-bottom: 1.5rem;
+  color: var(--youth-purple);
+  position: relative;
+}
+
+section h2::after {
+  content: "";
+  width: 70px;
+  height: 4px;
+  background: var(--youth-pink);
+  display: block;
+  margin-top: 8px;
+  border-radius: 6px;
+}
+
+h3 {
+  color: var(--youth-purple);
+  margin-top: 1rem;
+}
+
+p {
+  color: var(--text-soft);
+}
+
+ul {
+  padding-left: 1.5rem;
+}
+
+ul li {
+  margin-bottom: 0.6rem;
+}
+
+/* =================================
+   LIENS
+================================= */
+a {
+  color: var(--youth-purple);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  color: var(--youth-pink);
+}
+
+/* =================================
+   FOOTER HARMONISÉ
+================================= */
+footer {
+  background: linear-gradient(
+    135deg,
+    var(--youth-purple),
+    var(--youth-green)
+  );
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  margin-top: 4rem;
+}
+
+/* =================================
+   RESPONSIVE
+================================= */
+@media (max-width: 768px) {
+  .hero {
+    padding: 3.5rem 1.5rem;
+  }
+
+  .hero h1,
+  .hero h2 {
+    font-size: 1.8rem;
+  }
+
+  .timeline {
+    padding-left: 1rem;
+  }
+
+  .timeline .event::before {
+    left: -1.3rem;
+  }
+}

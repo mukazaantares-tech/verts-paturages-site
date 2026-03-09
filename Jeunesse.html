@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verts-Pâturages - Jeunesse</title>
+  <link rel="stylesheet" href="Jeunesse.css">
+  <!-- Tailwind + FontAwesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" href="Verts-Paturages.png" type="image/png">
+  <link rel="apple-touch-icon" href="Verts-Paturages.png">
+</head>
+<body>
+    <header>
+    <nav class="navbar bg-green-700 text-white p-4 flex justify-between items-center">
+      <h1 lass="logo text-xl font-bold">Verts-Pâturages</h1>
+      <ul class="nav-links flex gap-6">
+        <li><a href="Accueil.html" target="_blank" class="hover:text-green-300">Accueil</a></li>
+        <li><a href="serviteurs.html" target="_blank" class="hover:text-green-300">Serviteurs</a></li>
+        <li><a href="departements.html" target="_blank" class="hover:text-green-300">Départements</a></li>
+        <li><a href="jeunesse.html" target="_blank" class="hover:text-green-300">Jeunesse</a></li>
+        <li><a href="localisation.html" target="_blank" class="hover:text-green-300">Localisation</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="p-0">
+  <!-- Hero section -->
+  <section class="hero bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white text-center py-20">
+    <h1 id="youthTitle" class="text-5xl font-extrabold mb-4"></h1>
+    <p id="youthSlogan" class="text-lg mb-6"></p>
+    <a href="ActivitesJ.html"><button class="px-6 py-3 bg-white text-purple-700 font-bold rounded-lg hover:bg-gray-200 transition">
+      Découvrir nos activités
+    </button></a>
+  </section>
+
+  <!-- Attributions -->
+    <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
+      <h3 class="text-xl font-bold text-green-700 mb-4">Atribution de la Jeunesse</h3>
+      <ul id="youthAttributions" class="list-disc list-inside text-gray-700"></ul>
+    </section>
+
+  <!-- Président + Vice-présidents -->
+  <section class="max-w-6xl mx-auto grid md:grid-cols-4 gap-6 p-10">
+    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
+      <img id="youthPresidentPhoto" class="w-32 h-32 rounded-full mx-auto mb-4"/>
+      <h3 class="text-xl font-semibold text-purple-700">Président</h3>
+      <p id="youthPresidentName" class="text-gray-600"></p>
+    </div>
+    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
+      <h3 class="text-lg font-semibold text-pink-600">Vice-président vie spirituelle et Administration</h3>
+      <p class="text-gray-600">Nom</p>
+    </div>
+    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
+      <h3 class="text-lg font-semibold text-pink-600">Vice-président evangelisation</h3>
+      <p class="text-gray-600">Nom</p>
+    </div>
+    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
+      <h3 class="text-lg font-semibold text-pink-600">Vice-président corps de serviteur</h3>
+      <p class="text-gray-600">Nom</p>
+    </div>
+  </section>
+
+  <!-- Secrétaire + Trésorier -->
+  <section class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 p-10">
+    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
+      <h3 class="text-lg font-semibold text-orange-600">Secrétaire</h3>
+      <p class="text-gray-600">Nom</p>
+    </div>
+    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
+      <h3 class="text-lg font-semibold text-orange-600">Trésorier</h3>
+      <p class="text-gray-600">Nom</p>
+    </div>
+  </section>
+
+  <!-- Mini-départements -->
+  <section class="bg-gray-100 py-10">
+    <h2 class="text-2xl font-bold text-center text-purple-700 mb-8">Nos Groupes Internes</h2>
+    <div id="youthGroups" class="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto"></div>
+  </section>
+
+  <!-- Timeline activités -->
+  <section class="bg-gray-50 py-10">
+    <h2 class="text-2xl font-bold text-center text-purple-700 mb-8">Nos Activités</h2>
+    <div id="youthActivities" class="timeline max-w-4xl mx-auto"></div>
+  </section>
+
+  <!-- Condition + Adhésion -->
+  <section class="text-center py-10">
+    <p class="text-gray-700 mb-4">
+      <strong>Condition :</strong> Pour adhérer à la Jeunesse, il faut être né de nouveau et avoir accepté Jésus-Christ comme Seigneur et Sauveur.
+    </p>
+    <button id="adhesionBtn" class="px-6 py-3 bg-purple-700 text-white rounded-lg hover:bg-purple-800 transition">
+      Demande d’adhésion
+    </button>
+    <button id="youthAdminBtn" class="px-6 py-3 bg-purple-700 text-white rounded-lg hover:bg-purple-800 transition">
+    Espace Admin Jeunesse
+  </button>
+  </section>
+
+
+    <!-- Modal Formulaire d'adhésion -->
+    <div id="adhesionModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+      <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-4 max-h-screen overflow-y-auto">
+        <h3 class="text-xl font-bold text-purple-700 mb-4">Formulaire d'adhésion au département</h3>
+        <form id="adhesionForm">
+          <div class="mb-4">
+            <label for="adhesionNom" class="block text-gray-700 mb-2">Nom complet :</label>
+            <input type="text" id="adhesionNom" name="nom" class="w-full p-2 border border-gray-300 rounded" required />
+          </div>
+          <div class="mb-4">
+            <label for="adhesionEmail" class="block text-gray-700 mb-2">Email :</label>
+            <input type="email" id="adhesionEmail" name="email" class="w-full p-2 border border-gray-300 rounded" required />
+          </div>
+          <div class="mb-4">
+            <label for="adhesionSexe" class="block text-gray-700 mb-2">Sexe :</label>
+            <select id="adhesionSexe" name="sexe" class="w-full p-2 border border-gray-300 rounded" required>
+              <option value="">-- Sélectionner --</option>
+              <option value="Homme">Homme</option>
+              <option value="Femme">Femme</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label for="adhesionPhone" class="block text-gray-700 mb-2">Numéro de téléphone :</label>
+            <input type="tel" id="adhesionPhone" name="phone" class="w-full p-2 border border-gray-300 rounded" required />
+          </div>
+          <div class="mb-4">
+            <label for="adhesionMotivation" class="block text-gray-700 mb-2">Motivation :</label>
+            <textarea id="adhesionMotivation" name="motivation" rows="4" class="w-full p-2 border border-gray-300 rounded" required></textarea>
+          </div>
+          <div class="flex justify-between gap-4">
+            <button type="submit" class="flex-1 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
+              Soumettre
+            </button>
+            <button type="button" id="closeAdhesionModal" class="flex-1 px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 transition">
+              Fermer
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>  
+</main>
+  <footer class="bg-green-700 text-white text-center p-4">
+    &copy; 2024 Verts-Pâturages. Tous droits réservés.
+  </footer>
+  <!-- Modal Login Jeunesse -->
+<div id="youthLoginModal"
+class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+
+  <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+
+    <h2 class="text-xl font-bold text-purple-700 mb-4">
+      Connexion Admin Jeunesse
+    </h2>
+
+    <form id="youthLoginForm">
+      <input type="email"
+             id="youthEmail"
+             placeholder="Email"
+             class="w-full mb-3 p-2 border rounded"
+             required>
+
+      <input type="password"
+             id="youthPassword"
+             placeholder="Mot de passe"
+             class="w-full mb-4 p-2 border rounded"
+             required>
+
+      <button type="submit"
+              class="w-full bg-purple-700 text-white py-2 rounded">
+        Se connecter
+      </button>
+    </form>
+
+  </div>
+</div>
+  <script src="core.js"></script>
+  <script src="auth.js"></script>
+  <script src="jeunesse.js"></script>
+  <script src="js/services/data.service.js"></script>
+</body>
+</html>

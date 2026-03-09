@@ -1,0 +1,14 @@
+.y-section { display: none; }
+.y-section.active { display: block; }
+
+.y-tab {
+  padding: 8px 14px;
+  background: #ede9fe;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.y-tab.active {
+  background: #7e22ce;
+  color: white;
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verts-Pâturages - Intercession</title>
+  <link rel="stylesheet" href="Intercession.css">
+  <!-- Tailwind + FontAwesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" href="Verts-Paturages.png" type="image/png">
+  <link rel="apple-touch-icon" href="Verts-Paturages.png">
+</head>
+<body data-departement="Intercession" data-sous="Generale">
+  <header class="navbar bg-green-700 text-white p-4 flex justify-between items-center">
+    <h1 class="logo text-xl font-bold">Verts-Pâturage</h1>
+    <ul class="nav-links flex gap-6">
+      <li><a href="Accueil.html" class="hover:text-green-300">Accueil</a></li>
+      <li><a href="Serviteurs.html" class="hover:text-green-300">Serviteurs</a></li>
+      <li><a href="Departements.html" class="hover:text-green-300">Départements</a></li>
+      <li><a href="Intercession.html" class="hover:text-green-300">Intercession</a></li>
+    </ul>
+  </header>
+
+  <main class="p-6">
+    <section class="relative max-w-4xl mx-auto bg-gradient-to-r from-green-50 to-green-100 rounded-lg shadow-md p-6 mb-10">
+  <h2 class="text-center text-green-700 font-semibold">
+    Département de <span id="deptTitleDisplay"></span>
+  </h2>
+  <h3 id="presidentNameDisplay"
+      class="text-xl font-bold text-green-700 text-center mt-2">
+  </h3>
+  <div class="flex flex-col md:flex-row items-center gap-6 mt-6">
+    <img id="presidentPhotoDisplay"
+         class="w-32 h-32 rounded-full object-cover shadow-md border-4 border-green-600 mx-auto mb-4" />
+    <div>
+      <p id="presidentDescDisplay"
+         class="mt-2 text-gray-600"></p>
+    </div>
+    <!-- Citation inspirante -->
+    <blockquote class="mt-4 italic pl-4 text-gray-700 border-l-4 border-green-600">"Veillez et priez en tout temps"(LUC 21:36)</blockquote>
+  </div>
+</section>
+
+    <section class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 mb-10">
+      <div class="p-6 rounded-lg shadow-md" style="background-color: #fffaf0; border: 2px solid #a57f01;">
+        <h3 class="text-lg font-semibold" style="color: #ffcb11;">Responsable du Département</h3>
+        <p style="color: #333;">Nom du responsable</p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-md" style="background-color: #fffaf0; border: 2px solid #D4AF37;">
+        <h3 class="text-lg font-semibold" style="color: #D4AF37;">Secrétaire</h3>
+        <p style="color: #333;">Nom du secrétaire</p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-md" style="background-color: #fffaf0; border: 2px solid #D4AF37;">
+        <h3 class="text-lg font-semibold" style="color: #D4AF37;">Responsable de la prière</h3>
+        <p style="color: #333;">Nom du responsable</p>
+      </div>
+
+      <div class="p-6 rounded-lg shadow-md" style="background-color: #fffaf0; border: 2px solid #D4AF37;">
+        <h3 class="text-lg font-semibold" style="color: #D4AF37;">Coordinateur</h3>
+        <p style="color: #333;">Nom du coordinateur</p>
+      </div>
+    </section>
+
+    <!-- Attributions -->
+    <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
+      <h3 class="text-xl font-bold text-green-700 mb-4">Attributions du département d'intercession</h3>
+      <ul class="list-disc list-inside text-gray-700">
+        <li>Organiser les activites pour soutenir l'eglises spirituellements</li>
+        <li>Collaborer avec les bureau du pasteurs pour des orientations</li>
+        <li>Organiser des formations des membres du dit departements</li>
+        <li>Collaborer avec l'administration pour l'harmonisation des activites dans le temple</li>
+        <li>Rapporter au pasteurs les besoins et defis.</li>        
+      </ul>
+    </section>
+
+    <section class="max-w-4xl mx-auto rounded-lg shadow-md p-6 mb-10 text-center" style="background-color: #fffaf0;">
+      <h3 class="text-xl font-bold mb-4" style="color: #D4AF37;">Conditions d'Adhésion</h3>
+      <p class="mb-6" style="color: #333;">Pour rejoindre le département d'intercession, il faut être engagé dans la prière et disponible pour les réunions et veillées.</p>
+      <button class="adhesionBtn px-6 py-3 text-white rounded-lg transition" data-departement="Intercession" style="background-color: #D4AF37; border: 2px solid #E6E6FA;" onmouseover="this.style.backgroundColor='#E6E6FA'; this.style.color='#D4AF37';" onmouseout="this.style.backgroundColor='#D4AF37'; this.style.color='white';">
+        <i class="fas fa-user-plus mr-2"></i> Demande d'adhésion
+      </button>
+
+      <!-- Modal Formulaire d'adhésion -->
+      <div id="adhesionModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-4 max-h-screen overflow-y-auto">
+          <h3 class="text-xl font-bold text-green-700 mb-4">Formulaire d'adhésion au département</h3>
+          <form id="adhesionForm">
+            <div class="mb-4">
+              <label for="adhesion-name" class="block text-gray-700 mb-2">Nom complet :</label>
+              <input type="text" id="adhesion-name" name="name" class="w-full p-2 border border-gray-300 rounded" required />
+            </div>
+            <div class="mb-4">
+              <label for="adhesion-email" class="block text-gray-700 mb-2">Email :</label>
+              <input type="email" id="adhesion-email" name="email" class="w-full p-2 border border-gray-300 rounded" required />
+            </div>
+            <div class="mb-4">
+              <label for="adhesion-sexe" class="block text-gray-700 mb-2">Sexe :</label>
+              <select id="adhesion-sexe" name="sexe" class="w-full p-2 border border-gray-300 rounded" required>
+                <option value="">-- Sélectionner --</option>
+                <option value="Homme">Homme</option>
+                <option value="Femme">Femme</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label for="adhesion-phone" class="block text-gray-700 mb-2">Numéro de téléphone :</label>
+              <input type="tel" id="adhesion-phone" name="phone" class="w-full p-2 border border-gray-300 rounded" required />
+            </div>
+            <div class="mb-4">
+              <label for="adhesion-motivation" class="block text-gray-700 mb-2">Motivation :</label>
+              <textarea id="adhesion-motivation" name="motivation" rows="4" class="w-full p-2 border border-gray-300 rounded" required></textarea>
+            </div>
+            <div class="flex justify-between gap-4">
+              <button type="submit" class="flex-1 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                Soumettre
+              </button>
+              <button type="button" id="closeAdhesionModal" class="flex-1 px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 transition">
+                Fermer
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background-color:#D4AF37; color:white; text-align:center; padding:1rem; margin-top:2rem;">
+    <p>&copy; 2026 Verts-Pâturage. Tous droits réservés.</p>
+  </footer>
+  <script src="core.js"></script>
+  <script src="departementpublic.js"></script>
+</body>
+</html>

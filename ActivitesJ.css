@@ -1,0 +1,194 @@
+/* ===============================
+   VARIABLES JEUNESSE
+================================= */
+:root {
+  --youth-purple: #7e57c2;
+  --youth-pink: #ec407a;
+  --youth-orange: #fb8c00;
+  --youth-green: #2e7d32;
+  --soft-bg: #f9fafb;
+  --card-radius: 20px;
+  --transition: 0.3s ease;
+}
+
+/* ===============================
+   HERO
+================================= */
+section.bg-gradient-to-r {
+  background-size: 300% 300%;
+  animation: heroMove 10s ease infinite alternate;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+@keyframes heroMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* ===============================
+   ACTIVITÉS PRINCIPALES CARDS
+================================= */
+#youthMainActivities > div {
+  background: white;
+  border-radius: var(--card-radius);
+  padding: 2rem;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+#youthMainActivities > div::before {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  background: rgba(126,87,194,0.05);
+  border-radius: 50%;
+  top: -60px;
+  right: -60px;
+}
+
+#youthMainActivities > div:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+}
+
+/* ===============================
+   ACTIVITÉS HEBDOMADAIRES
+================================= */
+#youthWeeklyActivities > div {
+  background: white;
+  padding: 1.5rem;
+  border-radius: var(--card-radius);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  border-left: 5px solid var(--youth-purple);
+  transition: var(--transition);
+}
+
+#youthWeeklyActivities > div:hover {
+  transform: translateX(5px);
+}
+
+/* ===============================
+   ÉVÉNEMENTS SPÉCIAUX
+================================= */
+#youthSpecialEvents > div {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--card-radius);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+  transition: var(--transition);
+}
+
+#youthSpecialEvents > div:hover {
+  transform: scale(1.02);
+}
+
+/* ===============================
+   PROGRAMME SPÉCIAL (ZONE VIDEO)
+================================= */
+.border-dashed {
+  border-radius: var(--card-radius);
+  background: linear-gradient(135deg, #faf5ff, #fdf2f8);
+}
+
+.program-thumb {
+  transition: var(--transition);
+  border-radius: 12px;
+}
+
+.program-thumb:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* ===============================
+   SECTION COMMENTAIRES
+================================= */
+#commentSection {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: var(--card-radius);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+#commentAuthor,
+#newComment {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  transition: var(--transition);
+}
+
+#commentAuthor:focus,
+#newComment:focus {
+  outline: none;
+  border-color: var(--youth-purple);
+  box-shadow: 0 0 0 3px rgba(126,87,194,0.2);
+}
+
+#submitComment {
+  background: linear-gradient(
+    135deg,
+    var(--youth-purple),
+    var(--youth-pink)
+  );
+  border-radius: 50px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+#submitComment:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* Commentaires affichés */
+#publicComments > div {
+  background: #f9fafb;
+  padding: 1rem;
+  border-radius: 12px;
+  border-left: 4px solid var(--youth-pink);
+}
+
+/* ===============================
+   CTA FINAL
+================================= */
+section.bg-purple-700 {
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+}
+
+section.bg-purple-700 a {
+  border-radius: 50px;
+  transition: var(--transition);
+}
+
+section.bg-purple-700 a:hover {
+  transform: scale(1.05);
+}
+
+/* ===============================
+   FOOTER
+================================= */
+footer {
+  background: linear-gradient(
+    135deg,
+    var(--youth-purple),
+    var(--youth-green)
+  );
+  font-weight: 500;
+}
+
+/* ===============================
+   RESPONSIVE
+================================= */
+@media (max-width: 768px) {
+  #youthMainActivities,
+  #youthSpecialEvents {
+    grid-template-columns: 1fr !important;
+  }
+}
