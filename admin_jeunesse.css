@@ -1,0 +1,119 @@
+body{
+font-family:Arial,Helvetica,sans-serif;
+margin:0;
+background:#f4f6f9;
+}
+
+.admin-layout{
+display:flex;
+height:100vh;
+}
+
+.sidebar{
+width:240px;
+background:#4c1d95;
+color:white;
+padding:20px;
+}
+
+.logo{
+font-size:20px;
+margin-bottom:30px;
+}
+
+.sidebar ul{
+list-style:none;
+padding:0;
+}
+
+.sidebar li{
+padding:12px;
+margin-bottom:10px;
+cursor:pointer;
+border-radius:6px;
+}
+
+.sidebar li:hover{
+background:#6d28d9;
+}
+
+.sidebar li.active{
+background:#7e22ce;
+}
+
+.main-content{
+flex:1;
+padding:40px;
+overflow:auto;
+}
+
+.section{
+display:none;
+}
+
+.section.active{
+display:block;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+margin-bottom:40px;
+}
+
+.stat-card{
+background:white;
+padding:25px;
+border-radius:8px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+text-align:center;
+}
+
+.stat-card h2{
+font-size:28px;
+color:#7e22ce;
+}
+
+.chart-container{
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+
+.form-row{
+display:flex;
+gap:10px;
+margin-bottom:20px;
+}
+
+input,select{
+padding:10px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+button{
+background:#7e22ce;
+color:white;
+border:none;
+padding:10px 16px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#6d28d9;
+}
+
+#adhesionList div,
+#activityList div,
+#commentsList div,
+#adminList div{
+background:white;
+padding:15px;
+border-radius:8px;
+margin-bottom:10px;
+box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}

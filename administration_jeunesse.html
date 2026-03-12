@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administration Jeunesse</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" href="Verts-Paturages.png" type="image/png">
+<link rel="apple-touch-icon" href="Verts-Paturages.png">
+<link rel="stylesheet" href="admin_jeunesse.css">
+</head>
+<body>
+
+<div class="admin-layout">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar" >
+    <h2 class="logo">JAEL Admin</h2>
+    <ul>
+    <li data-section="dashboard" class="active">
+    📊 Tableau de bord
+    </li>
+    <li data-section="adhesions">
+    🧾 Demandes d'adhésion
+    </li>
+    <li data-section="activities">
+    🔥 Activités
+    </li>
+    <li data-section="comments">
+    💬 Commentaires
+    </li>
+    <li data-section="admins">
+    👑 Administrateurs
+    </li>
+    </ul>
+
+</aside>
+
+<!-- CONTENU -->
+
+<main class="main-content">
+<!-- DASHBOARD -->
+<section id="dashboard" class="section active">
+<h1>Tableau de bord</h1>
+<div class="stats-grid">
+<div class="stat-card">
+<h2 id="statMembers">0</h2>
+<p>Membres</p>
+</div>
+<div class="stat-card">
+<h2 id="statPending">0</h2>
+<p>Demandes en attente</p>
+</div>
+<div class="stat-card">
+<h2 id="statActivities">0</h2>
+<p>Activités</p>
+</div>
+</div>
+<div class="chart-container">
+<canvas id="youthChart"></canvas>
+</div>
+</section>
+<!-- ADHESIONS -->
+<section id="adhesions" class="section">
+<h1>Demandes d'adhésion</h1>
+<div id="adhesionList"></div>
+</section>
+<!-- ACTIVITES -->
+<section id="activities" class="section">
+<h1>Gestion des activités</h1>
+<div class="form-row">
+<input
+type="text"
+id="activityTitle"
+placeholder="Titre activité"
+/>
+<input
+type="text"
+id="activityDesc"
+placeholder="Description"
+/>
+<button id="addActivity">
+Ajouter
+</button>
+</div>
+<div id="activityList"></div>
+</section>
+<!-- COMMENTAIRES -->
+<section id="comments" class="section">
+<h1>Commentaires</h1>
+<div id="commentsList"></div>
+</section>
+<!-- ADMINS -->
+<section id="admins" class="section">
+<h1>Administrateurs Jeunesse</h1>
+<div class="form-row">
+<input
+type="email"
+id="newAdminEmail"
+placeholder="Email admin"
+/>
+<select id="newAdminRole">
+<option value="youth-admin">
+Admin Jeunesse
+</option>
+<option value="youth-super-admin">
+Haut Admin Jeunesse
+</option>
+</select>
+<button id="addYouthAdmin">
+Ajouter
+</button>
+</div>
+<div id="adminList"></div>
+</section>
+</main>
+</div>
+<!-- LIBRAIRIE SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<!-- SERVICES -->
+<script src="js/services/data.service.js"></script>
+<script src="js/services/supabase.service.js"></script>
+<script src="js/services/auth.service.js"></script>
+
+<!-- MODULES -->
+<script src="js/modules/youth/youth.dashboard.module.js"></script>
+<script src="js/modules/youth/youth.adhesions.module.js"></script>
+<script src="js/modules/youth/youth.activities.module.js"></script>
+<script src="js/modules/youth/youth.comments.public.module.js"></script>
+
+<!-- APP PRINCIPAL -->
+<script src="js/App.js"></script>
+
+</body>
+</html>

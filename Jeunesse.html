@@ -90,55 +90,126 @@
     <p class="text-gray-700 mb-4">
       <strong>Condition :</strong> Pour adhérer à la Jeunesse, il faut être né de nouveau et avoir accepté Jésus-Christ comme Seigneur et Sauveur.
     </p>
-    <button id="adhesionBtn" class="px-6 py-3 bg-purple-700 text-white rounded-lg hover:bg-purple-800 transition">
-      Demande d’adhésion
+    <button id="adhesionBtn"
+      class="px-6 py-3 bg-purple-700 text-white rounded-lg hover:bg-purple-800">Demande d’adhésion
     </button>
-    <button id="youthAdminBtn" class="px-6 py-3 bg-purple-700 text-white rounded-lg hover:bg-purple-800 transition">
-    Espace Admin Jeunesse
-  </button>
+    <button id="adminAccessBtn" class="ml-4" >
+      <a href="administration_jeunesse.html" target="_blank" >
+        Espace Admin
+      </a>
+    </button>
   </section>
 
 
-    <!-- Modal Formulaire d'adhésion -->
-    <div id="adhesionModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-      <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-4 max-h-screen overflow-y-auto">
-        <h3 class="text-xl font-bold text-purple-700 mb-4">Formulaire d'adhésion au département</h3>
-        <form id="adhesionForm">
-          <div class="mb-4">
-            <label for="adhesionNom" class="block text-gray-700 mb-2">Nom complet :</label>
-            <input type="text" id="adhesionNom" name="nom" class="w-full p-2 border border-gray-300 rounded" required />
-          </div>
-          <div class="mb-4">
-            <label for="adhesionEmail" class="block text-gray-700 mb-2">Email :</label>
-            <input type="email" id="adhesionEmail" name="email" class="w-full p-2 border border-gray-300 rounded" required />
-          </div>
-          <div class="mb-4">
-            <label for="adhesionSexe" class="block text-gray-700 mb-2">Sexe :</label>
-            <select id="adhesionSexe" name="sexe" class="w-full p-2 border border-gray-300 rounded" required>
-              <option value="">-- Sélectionner --</option>
-              <option value="Homme">Homme</option>
-              <option value="Femme">Femme</option>
-            </select>
-          </div>
-          <div class="mb-4">
-            <label for="adhesionPhone" class="block text-gray-700 mb-2">Numéro de téléphone :</label>
-            <input type="tel" id="adhesionPhone" name="phone" class="w-full p-2 border border-gray-300 rounded" required />
-          </div>
-          <div class="mb-4">
-            <label for="adhesionMotivation" class="block text-gray-700 mb-2">Motivation :</label>
-            <textarea id="adhesionMotivation" name="motivation" rows="4" class="w-full p-2 border border-gray-300 rounded" required></textarea>
-          </div>
-          <div class="flex justify-between gap-4">
-            <button type="submit" class="flex-1 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
-              Soumettre
-            </button>
-            <button type="button" id="closeAdhesionModal" class="flex-1 px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 transition">
-              Fermer
-            </button>
-          </div>
-        </form>
+   <!-- Modal Formulaire d'adhésion -->
+<div id="adhesionModal"
+class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+
+  <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-4 max-h-screen overflow-y-auto">
+
+    <h3 class="text-xl font-bold text-purple-700 mb-6">
+      Formulaire d'adhésion à la Jeunesse
+    </h3>
+
+    <form id="adhesionForm">
+
+      <!-- NOM -->
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">
+          Nom complet
+        </label>
+
+        <input
+          type="text"
+          id="adhesionNom"
+          class="w-full p-2 border border-gray-300 rounded"
+          placeholder="Votre nom"
+          required>
       </div>
-    </div>  
+
+      <!-- EMAIL -->
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="adhesionEmail"
+          class="w-full p-2 border border-gray-300 rounded"
+          placeholder="exemple@email.com"
+          required>
+      </div>
+
+      <!-- SEXE -->
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">
+          Sexe
+        </label>
+
+        <select
+          id="adhesionSexe"
+          class="w-full p-2 border border-gray-300 rounded"
+          required>
+
+          <option value="">-- Sélectionner --</option>
+          <option value="Homme">Homme</option>
+          <option value="Femme">Femme</option>
+
+        </select>
+      </div>
+
+      <!-- TELEPHONE -->
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">
+          Numéro de téléphone
+        </label>
+
+        <input
+          type="tel"
+          id="adhesionTelephone"
+          class="w-full p-2 border border-gray-300 rounded"
+          placeholder="+243..."
+          required>
+      </div>
+
+      <!-- MOTIVATION -->
+      <div class="mb-6">
+        <label class="block text-gray-700 mb-2">
+          Motivation
+        </label>
+
+        <textarea
+          id="adhesionMotivation"
+          rows="4"
+          class="w-full p-2 border border-gray-300 rounded"
+          placeholder="Pourquoi veux-tu rejoindre la jeunesse ?"
+          required></textarea>
+      </div>
+
+      <!-- BOUTONS -->
+      <div class="flex gap-4">
+
+        <button
+          type="submit"
+          class="flex-1 bg-purple-700 text-white py-2 rounded hover:bg-purple-800 transition">
+          Soumettre
+        </button>
+
+        <button
+          type="button"
+          id="closeAdhesionModal"
+          class="flex-1 bg-gray-400 text-white py-2 rounded hover:bg-gray-500 transition">
+          Fermer
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
 </main>
   <footer class="bg-green-700 text-white text-center p-4">
     &copy; 2024 Verts-Pâturages. Tous droits réservés.
@@ -174,9 +245,21 @@ class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-cen
 
   </div>
 </div>
-  <script src="core.js"></script>
-  <script src="auth.js"></script>
-  <script src="jeunesse.js"></script>
-  <script src="js/services/data.service.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<!-- SERVICES -->
+<script src="js/services/supabase.service.js"></script>
+<script src="js/services/data.service.js"></script>
+<script src="js/services/auth.service.js"></script>
+
+<!-- MODULE PUBLIC JEUNESSE -->
+<script src="js/modules/public/youth.public.module.js"></script>
+
+<!-- COMMENTAIRES PUBLIC -->
+<script src="js/modules/youth/youth.comments.public.module.js"></script>
+
+<!-- APP PRINCIPALE -->
+<script src="js/App.js"></script>
 </body>
 </html>
