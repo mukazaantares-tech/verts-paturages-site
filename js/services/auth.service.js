@@ -100,7 +100,7 @@ const AuthService = {
 
         DataService.remove("vp_current_user");
 
-        window.location.href = "Accueil.html";
+        window.location.href = "index.html";
 
     },
 
@@ -161,7 +161,7 @@ const AuthService = {
 
             console.warn("Utilisateur non connecté");
 
-            window.location.href = "Accueil.html";
+            window.location.href = "index.html";
 
             return;
 
@@ -171,7 +171,7 @@ const AuthService = {
 
             console.warn("Accès refusé pour role :", user.role);
 
-            window.location.href = "Accueil.html";
+            window.location.href = "index.html";
 
         }
 

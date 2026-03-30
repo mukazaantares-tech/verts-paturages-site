@@ -3,7 +3,7 @@
 Petit site statique multi-pages en **français**. Chaque page est un fichier HTML autonome à la racine — il n'y a pas de build, pas de package manager, et pas de moteur de templates.
 
 ## Fichiers clés
-- Accueil.html  ← Accueil page (paired: `Accueil.css`, `Accueil.js`)
+- index.html  ← Accueil page (paired: `Accueil.css`, `Accueil.js`)
 - Serviteurs.html  ← `Serviteurs.css`, `Serviteurs.js`
 - Departements.html  ← `Departements.css`, `Departements.js`
 - Jeunesse.html
@@ -40,7 +40,7 @@ if (burger && nav) burger.addEventListener('click', () => nav.classList.toggle('
 ## Tests & vérification
 - Test manuel local (Windows):
   ```powershell
-  start Accueil.html
+  start index.html
   ```
 - Pour tout renommage, faire un `grep`/recherche sur le repo pour remplacer toutes les occurrences du nom de fichier (liens relatifs). Utilisez la recherche globale dans l'éditeur.
 - Vérifiez les images après changement de nom/chemin et testez sur un hôte case‑sensitive si possible (Linux ci‑de‑préférence).
