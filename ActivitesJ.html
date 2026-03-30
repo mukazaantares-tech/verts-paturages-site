@@ -9,14 +9,21 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" href="Verts-Paturages.png" type="image/png">
   <link rel="stylesheet" href="ActivitesJ.css">
+  <link rel="stylesheet" href="darkmode.global.css">
 </head>
-<body class="bg-gray-50">
+<body class="dark-enabled bg-gray-50">
 
 <!-- NAVBAR -->
 <header>
   <nav class="bg-green-700 text-white p-4 flex justify-between items-center">
     <h1 class="text-xl font-bold">Verts-Pâturages – JAEL</h1>
-    <a href="jeunesse.html" class="hover:text-green-300">⬅ Retour</a>
+    <!-- bouton dark mode -->
+    <button id="themeToggle" class="theme-toggle">
+      🌙
+    </button>
+    <ul>
+      <li><a href="Jeunesse.html" class="hover:text-green-300">⬅ Retour</a></li>
+    </ul>
   </nav>
 </header>
 <main>
@@ -206,8 +213,23 @@ class="grid md:grid-cols-2 gap-8"></div>
 <footer class="bg-green-700 text-white text-center p-4">
   &copy; 2024 Verts-Pâturages – JAEL
 </footer>
-<script src="core.js"></script>
-<script src="auth.js"></script>
-<script src="ActivitesJ.js"></script>
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<!-- SERVICES -->
+<script src="js/services/supabase.service.js"></script>
+<script src="js/services/data.service.js"></script>
+<script src="js/services/auth.service.js"></script>
+<script src="js/modules/public/global.responsive.js"></script>
+<script src="js/modules/global/theme.module.js"></script>
+<!-- MODULES JEUNESSE -->
+<script src="js/modules/youth/youth.activites.module.js"></script>
+<script src="js/modules/youth/youth.comments.public.module.js"></script>
+<script src="js/modules/youth/youth.adhesions.module.js"></script>
+<script src="js/modules/public/youth.public.module.js"></script>
+
+<!-- APP PRINCIPALE -->
+<script src="js/core/App.js"></script>
+
 </body>
 </html>

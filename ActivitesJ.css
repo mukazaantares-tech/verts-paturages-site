@@ -1,194 +1,436 @@
-/* ===============================
-   VARIABLES JEUNESSE
+/* =================================
+BASE
 ================================= */
-:root {
-  --youth-purple: #7e57c2;
-  --youth-pink: #ec407a;
-  --youth-orange: #fb8c00;
-  --youth-green: #2e7d32;
-  --soft-bg: #f9fafb;
-  --card-radius: 20px;
-  --transition: 0.3s ease;
+
+body{
+
+ margin:0;
+
+ font-family:'Segoe UI','Open Sans',sans-serif;
+
+ color:var(--text-dark);
+
 }
 
-/* ===============================
-   HERO
+
+/* =================================
+SECTION ACTIVITES
 ================================= */
-section.bg-gradient-to-r {
-  background-size: 300% 300%;
-  animation: heroMove 10s ease infinite alternate;
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+
+.activities-container{
+
+ max-width:1100px;
+
+ margin:60px auto;
+
+ padding:0 20px;
+
 }
 
-@keyframes heroMove {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+
+.activities-container h2{
+
+ color:#7e57c2;
+
+ margin-bottom:30px;
+
 }
 
-/* ===============================
-   ACTIVITÉS PRINCIPALES CARDS
+
+/* =================================
+CARTE ACTIVITE
 ================================= */
-#youthMainActivities > div {
-  background: white;
-  border-radius: var(--card-radius);
-  padding: 2rem;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
+
+.activity-card{
+
+ background:white;
+
+ padding:20px;
+
+ border-radius:18px;
+
+ box-shadow:0 10px 30px rgba(0,0,0,0.05);
+
+ transition:0.3s;
+
 }
 
-#youthMainActivities > div::before {
-  content: "";
-  position: absolute;
-  width: 160px;
-  height: 160px;
-  background: rgba(126,87,194,0.05);
-  border-radius: 50%;
-  top: -60px;
-  right: -60px;
+
+.activity-card:hover{
+
+ transform:translateY(-6px);
+
 }
 
-#youthMainActivities > div:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+
+/* IMAGE */
+
+.activity-card img{
+
+ width:100%;
+
+ height:240px;
+
+ object-fit:cover;
+
+ border-radius:14px;
+
+ margin-bottom:15px;
+
 }
 
-/* ===============================
-   ACTIVITÉS HEBDOMADAIRES
+
+/* VIDEO */
+
+.activity-card video{
+
+ width:100%;
+
+ border-radius:14px;
+
+}
+
+
+/* =================================
+BOUTONS
 ================================= */
-#youthWeeklyActivities > div {
-  background: white;
-  padding: 1.5rem;
-  border-radius: var(--card-radius);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-  border-left: 5px solid var(--youth-purple);
-  transition: var(--transition);
+
+button{
+
+ background:
+ linear-gradient(
+ 135deg,
+ #7e57c2,
+ #ec407a
+ );
+
+ color:white;
+
+ border:none;
+
+ padding:10px 18px;
+
+ border-radius:10px;
+
+ cursor:pointer;
+
+ transition:0.3s;
+
 }
 
-#youthWeeklyActivities > div:hover {
-  transform: translateX(5px);
+
+button:hover{
+
+ transform:translateY(-3px);
+
 }
 
-/* ===============================
-   ÉVÉNEMENTS SPÉCIAUX
+
+/* =================================
+RESPONSIVE
 ================================= */
-#youthSpecialEvents > div {
-  background: white;
-  padding: 2rem;
-  border-radius: var(--card-radius);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-  transition: var(--transition);
+
+@media(max-width:768px){
+
+ .activity-card img{
+
+  height:180px;
+
+ }
+
+    .activities-container h2{
+    
+    font-size:1.5rem;
+    
+    }
+}
+/* =================================
+RESPONSIVE TABLET
+================================ */
+
+@media(max-width:900px){
+
+.hero-content h2{
+
+ font-size:2rem;
+
 }
 
-#youthSpecialEvents > div:hover {
-  transform: scale(1.02);
 }
 
-/* ===============================
-   PROGRAMME SPÉCIAL (ZONE VIDEO)
-================================= */
-.border-dashed {
-  border-radius: var(--card-radius);
-  background: linear-gradient(135deg, #faf5ff, #fdf2f8);
+
+/* =================================
+RESPONSIVE TELEPHONE
+================================ */
+
+@media(max-width:768px){
+
+/* bouton burger visible */
+
+.burger{
+
+ display:block;
+
+ font-size:1.7rem;
+
 }
 
-.program-thumb {
-  transition: var(--transition);
-  border-radius: 12px;
+
+/* menu mobile plein écran */
+
+.nav-links{
+
+ position:fixed;
+
+ inset:0;
+
+ height:100vh;
+
+ background:
+ linear-gradient(
+ 160deg,
+ #14532d,
+ #166534,
+ #15803d
+ );
+
+ display:flex;
+
+ flex-direction:column;
+
+ align-items:center;
+
+ justify-content:flex-start;
+
+ padding:90px 20px 40px;
+
+ gap:12px;
+
+ transform:translateY(-100%);
+
+ opacity:0;
+
+ transition:.4s ease;
+
+ overflow-y:auto;
+
+ -webkit-overflow-scrolling:touch;
+
+ z-index:999;
+
 }
 
-.program-thumb:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+
+/* menu visible */
+
+.nav-links.open{
+
+ transform:translateY(0);
+
+ opacity:1;
+
 }
 
-/* ===============================
-   SECTION COMMENTAIRES
-================================= */
-#commentSection {
-  background: #ffffff;
-  padding: 1.5rem;
-  border-radius: var(--card-radius);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+
+/* items menu */
+
+.nav-links li{
+
+ width:100%;
+
+ max-width:260px;
+
+ text-align:center;
+
 }
 
-#commentAuthor,
-#newComment {
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  transition: var(--transition);
+
+/* boutons menu */
+
+.nav-links a{
+
+ display:block;
+
+ width:100%;
+
+ padding:11px;
+
+ border-radius:12px;
+
+ background:rgba(255,255,255,.05);
+
+ border:1px solid rgba(255,255,255,.08);
+
+ font-size:.98rem;
+
+ font-weight:600;
+
 }
 
-#commentAuthor:focus,
-#newComment:focus {
-  outline: none;
-  border-color: var(--youth-purple);
-  box-shadow: 0 0 0 3px rgba(126,87,194,0.2);
+
+/* hover */
+
+.nav-links a:hover{
+
+ background:rgba(255,255,255,.12);
+
 }
 
-#submitComment {
-  background: linear-gradient(
-    135deg,
-    var(--youth-purple),
-    var(--youth-pink)
-  );
-  border-radius: 50px;
-  font-weight: 600;
-  transition: var(--transition);
+
+/* HERO plus compact */
+
+.hero{
+
+ padding:2.6rem 1.2rem;
+
+ border-bottom-left-radius:28px;
+
+ border-bottom-right-radius:28px;
+
 }
 
-#submitComment:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+
+/* titre hero */
+
+.hero-content h2{
+
+ font-size:1.75rem;
+
 }
 
-/* Commentaires affichés */
-#publicComments > div {
-  background: #f9fafb;
-  padding: 1rem;
-  border-radius: 12px;
-  border-left: 4px solid var(--youth-pink);
+
+/* texte hero */
+
+.hero-content p{
+
+ font-size:.95rem;
+
 }
 
-/* ===============================
-   CTA FINAL
-================================= */
-section.bg-purple-700 {
-  border-top-left-radius: 40px;
-  border-top-right-radius: 40px;
-  box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+
+/* section vision */
+
+.visionnaire-section{
+
+ margin:45px auto;
+
+ padding:0 16px;
+
 }
 
-section.bg-purple-700 a {
-  border-radius: 50px;
-  transition: var(--transition);
+
+/* carte vision */
+
+.visionnaire-container{
+
+ padding:28px 20px;
+
+ border-radius:16px;
+
 }
 
-section.bg-purple-700 a:hover {
-  transform: scale(1.05);
+
+/* titre vision */
+
+.visionnaire-container h2{
+
+ font-size:1.6rem;
+
 }
 
-/* ===============================
-   FOOTER
-================================= */
-footer {
-  background: linear-gradient(
-    135deg,
-    var(--youth-purple),
-    var(--youth-green)
-  );
-  font-weight: 500;
+
+/* texte vision */
+
+.visionnaire-container p{
+
+ font-size:.95rem;
+
 }
 
-/* ===============================
-   RESPONSIVE
-================================= */
-@media (max-width: 768px) {
-  #youthMainActivities,
-  #youthSpecialEvents {
-    grid-template-columns: 1fr !important;
-  }
+
+/* verset */
+
+#verset-du-jour{
+
+ margin:2.2rem auto;
+
+ padding:0 15px;
+
+}
+
+
+/* carte */
+
+.card,
+#verset-content{
+
+ padding:1.4rem;
+
+ border-radius:16px;
+
+}
+
+
+/* footer */
+
+footer{
+
+ padding:1.6rem;
+
+ margin-top:3rem;
+
+}
+
+}
+
+
+/* =================================
+PETITS TELEPHONES
+================================ */
+
+@media(max-width:420px){
+
+.hero-content h2{
+
+ font-size:1.5rem;
+
+}
+
+
+.visionnaire-container{
+
+ padding:22px 16px;
+
+}
+
+
+.visionnaire-container h2{
+
+ font-size:1.45rem;
+
+}
+
+
+.visionnaire-container p{
+
+ font-size:.92rem;
+
+}
+
+
+.nav-links{
+
+ padding-top:85px;
+
+}
+
+
+.nav-links a{
+
+ font-size:.92rem;
+
+ padding:10px;
+
+}
+
 }

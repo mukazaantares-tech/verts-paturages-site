@@ -1,78 +1,109 @@
 const YouthCommentsAdmin = {
 
-    init() {
-        this.render();
+    async init() {
+        await this.render();
     },
 
-    render() {
+    async render() {
 
         const container =
-            document.getElementById("adminCommentList");
+            document.getElementById("commentsAdminList");
 
         if (!container) return;
 
-        const comments =
-            DataService.get("vp_youth_comments") || [];
+        const { data: comments, error } =
+            await supabaseClient
+                .from("youth_comments")
+                .select("*")
+                .eq("approved", false)
+                .order("created_at", { ascending: false });
+
+        if (error) {
+            console.error(error);
+            return;
+        }
 
         container.innerHTML = "";
 
-        comments
-            .filter(c => c.statut === "en_attente")
-            .forEach(c => {
+        if (!comments.length) {
 
-                const div =
-                    document.createElement("div");
+            container.innerHTML =
+                "<p class='text-gray-500'>Aucun commentaire en attente</p>";
 
-                div.className =
-                    "bg-white p-4 rounded shadow mb-3";
+            return;
+        }
 
-                div.innerHTML = `
-                    <strong>${c.auteur}</strong>
-                    <p>${c.message}</p>
+        comments.forEach(c => {
 
-                    <button onclick="YouthCommentsAdmin.approve(${c.id})"
-                        class="bg-green-600 text-white px-3 py-1 rounded mr-2">
+            const div =
+                document.createElement("div");
+
+            div.className =
+                "bg-white p-4 rounded shadow mb-3";
+
+            div.innerHTML = `
+                <strong>${c.author}</strong>
+                <p class="mb-2">${c.message}</p>
+
+                <div class="flex gap-2">
+
+                    <button
+                        onclick="YouthCommentsAdmin.approve(${c.id})"
+                        class="bg-green-600 text-white px-3 py-1 rounded">
                         Valider
                     </button>
 
-                    <button onclick="YouthCommentsAdmin.delete(${c.id})"
+                    <button
+                        onclick="YouthCommentsAdmin.delete(${c.id})"
                         class="bg-red-600 text-white px-3 py-1 rounded">
                         Supprimer
                     </button>
-                `;
 
-                container.appendChild(div);
-            });
+                </div>
+            `;
+
+            container.appendChild(div);
+
+        });
+
     },
 
-    approve(id) {
+    async approve(id) {
 
-        const comments =
-            DataService.get("vp_youth_comments") || [];
+        const { error } =
+            await supabaseClient
+                .from("youth_comments")
+                .update({ approved: true })
+                .eq("id", id);
 
-        const comment =
-            comments.find(c => c.id === id);
+        if (error) {
+            console.error(error);
+            return;
+        }
 
-        if (!comment) return;
+        alert("Commentaire validé");
 
-        comment.statut = "approuve";
-
-        DataService.set("vp_youth_comments", comments);
-
-        this.render();
+        await this.render();
     },
 
-    delete(id) {
+    async delete(id) {
 
-        let comments =
-            DataService.get("vp_youth_comments") || [];
+        if (!confirm("Supprimer ce commentaire ?")) return;
 
-        comments =
-            comments.filter(c => c.id !== id);
+        const { error } =
+            await supabaseClient
+                .from("youth_comments")
+                .delete()
+                .eq("id", id);
 
-        DataService.set("vp_youth_comments", comments);
+        if (error) {
+            console.error(error);
+            return;
+        }
 
-        this.render();
+        alert("Commentaire supprimé");
+
+        await this.render();
     }
 
 };

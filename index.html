@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verts-Pâturages - Accueil</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="Accueil.css">
+  <link rel="icon" href="Verts-Paturages.png" type="image/png">
+  <link rel="apple-touch-icon" href="Verts-Paturages.png">
+</head>
+<body>
+  <!-- Navigation -->
+  <!-- Navigation -->
+<header>
+  <nav class="navbar">
+    <h1 class="logo">Verts-Pâturages</h1>
+    <!-- bouton mobile -->
+    <button class="burger" id="burger">
+      ☰
+    </button>
+    <!-- bouton dark mode -->
+    <button id="themeToggle" class="theme-toggle">
+      🌙
+    </button>
+    <ul id="navLinks" class="nav-links">
+      <li><a href="Accueil.html" target="_blank">Accueil</a></li>
+      <li><a href="Serviteurs.html" target="_blank">Serviteurs</a></li>
+      <li><a href="evenemet.html" target="_blank">Evenements</a></li>
+      <li><a href="Departements.html" target="_blank">Départements</a></li>
+      <li><a href="Jeunesse.html" target="_blank">Jeunesse</a></li>
+      <li><a href="localisation.html" target="_blank">Localisation</a></li>
+    </ul>
+  </nav>
+</header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <h2 id="hero-title" class="fade-in">Bienvenue à Verts-Pâturages</h2>
+        <p class="fade-in">Un lieu de foi, de connaissance et de prière.</p>
+        <button id="joinBtn" class="px-6 py-3 bg-green-700 text-white rounded-lg hover:bg-red-800 transition">
+            Rejoignez-nous
+        </button>
+       <button id="adminBtn"class="px-6 py-3 bg-green-600 text-white rounded-lg">
+          Espace Administrateur
+      </button>
+      <button id="youthLoginBtn" class="px-6 py-3 bg-green-600 text-white rounded-lg" >
+        Administrateur jeunesse
+    </button>
+      </div>
+    </section>
+
+<!-- Modal Formulaire -->
+<div id="joinModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+  <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-4">
+    <h2 class="text-2xl font-bold text-green-700 mb-6 text-center">Formulaire d’enregistrement</h2>
+    <form id="joinForm" data-table="church_members" data-source="Accueil">
+      <div class="mb-4">
+        <label class="block text-gray-700">Nom</label>
+        <input type="text" name="nom" class="w-full border rounded px-3 py-2" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Postnom</label>
+        <input type="text" name="postnom" class="w-full border rounded px-3 py-2" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Prénom</label>
+        <input type="text" name="prenom" class="w-full border rounded px-3 py-2" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Sexe</label>
+        <select name="sexe" class="w-full border rounded px-3 py-2" required>
+          <option value="">-- Sélectionner --</option>
+          <option value="Homme">Homme</option>
+          <option value="Femme">Femme</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Adresse physique</label>
+        <input type="text" name="adresse_physique" class="w-full border rounded px-3 py-2" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Email</label>
+        <input type="email" name="email" class="w-full border rounded px-3 py-2" required>
+      </div>
+       <div class="mb-4">
+        <label class="block text-gray-700">Numéro</label>
+        <input type="tel" name="numero" class="w-full border rounded px-3 py-2" required>
+      </div>
+      <div class="mb-4">
+        <label class="block text-gray-700">Témoignage</label>
+        <textarea name="temoignage" class="w-full border rounded px-3 py-2" rows="3" required></textarea>
+      </div>
+      <div class="flex justify-between">
+        <button type="submit" class="px-6 py-2 bg-green-700 text-white rounded hover:bg-green-800">Envoyer</button>
+        <button type="button" id="closeModal" class="px-6 py-2 bg-gray-400 text-white rounded hover:bg-gray-500">Fermer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+    <!-- Verset du jour -->
+<section class="py-16 bg-gradient-to-br from-green-50 to-green-100">
+
+  <div class="max-w-3xl mx-auto px-4">
+
+    <div id="versePublic"
+         class="p-8 rounded-2xl shadow-xl border border-green-200 bg-white text-center transition-all duration-500 hover:shadow-2xl">
+      <h3 class="text-sm font-semibold text-green-700 uppercase tracking-widest mb-6">
+        ✨ Verset du jour
+      </h3>
+      <div class="relative">
+        <p id="verseText"
+           class="text-2xl italic text-gray-800 leading-relaxed mb-6">
+           Chargement...
+        </p>
+        <p id="verseReference"
+           class="text-green-700 font-semibold text-lg">
+        </p>
+      </div>
+      <!-- LIKE -->
+      <div class="mt-8 flex items-center justify-center gap-4">
+        <button id="likeVerseBtn"
+          class="px-6 py-3 bg-green-600 text-white rounded-full hover:bg-green-700 transition flex items-center gap-2 shadow-md hover:scale-105">
+          ❤️ <span>Aimer</span>
+        </button>
+        <span id="verseLikeCount"
+              class="text-green-800 font-bold text-lg">
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Visionnaire-->
+<section class="visionnaire-section">
+    <div class="visionnaire-container">
+      <h2>Visionnaire</h2>
+      <p>
+      L’auteur de la vision est le Seigneur Jésus-Christ Lui-même.
+      </p>
+      <p>
+      Le porteur de la vision est le Révérend Pasteur KADIMA TSHIBENJI EMMANUEL.
+      C’est le jour de Pâques de l’année 2016 que le Seigneur lui ordonna de
+      commencer Son œuvre, après lui avoir parlé pendant près de deux décennies auparavant.
+      </p>
+      <p>
+      Il est théologien et Docteur en psychologie.
+      Par ailleurs, il est marié et père de six enfants.
+      </p>
+    </div>
+</section>
+
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 Verts-Pâturages | Tous droits réservés</p>
+      <nav class="footer-links" aria-label="Liens sociaux">
+        <a href="#" aria-label="Facebook">Facebook</a>
+        <a href="#" aria-label="YouTube">YouTube</a>
+        <a href="#" aria-label="Instagram">Instagram</a>
+      </nav>
+    </div>
+  </footer>
+  <!-- adminlogin form-->
+   <!-- =============================
+   MODAL CONNEXION ADMIN
+============================= -->
+<div id="adminModal"
+class="fixed inset-0 bg-black bg-opacity-50 hidden
+flex items-center justify-center z-50">
+  <div class="bg-white rounded-xl shadow-xl p-8 w-full max-w-md">
+    <h2 class="text-2xl font-bold text-green-700 mb-6 text-center"> Connexion Administrateur</h2>
+    <form id="adminLoginForm" class="space-y-4">
+      <!-- EMAIL -->
+      <div>
+        <label class="block text-gray-700 mb-1">Email</label>
+        <input type="email"
+          id="adminEmail"
+          placeholder="ex: admin@verts.com"
+          required class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-600"> </div>
+      <!-- PASSWORD -->
+      <div>
+        <label class="block text-gray-700 mb-1">
+          Mot de passe
+        </label>
+        <input
+          type="password"
+          id="adminPassword"
+          placeholder="Mot de passe"
+          required
+          class="w-full border rounded-lg px-3 py-2
+          focus:outline-none focus:ring-2 focus:ring-green-600">
+      </div>
+      <!-- MESSAGE ERREUR -->
+      <p id="adminError"
+      class="text-red-600 text-sm hidden">
+        Email ou mot de passe incorrect
+      </p>
+      <!-- BOUTONS -->
+      <div class="flex justify-between gap-3">
+        <button
+          type="submit"
+          class="px-6 py-2 bg-green-700 text-white
+          rounded-lg hover:bg-green-800 transition w-full">
+          Se connecter
+        </button>
+        <button
+          type="button"
+          id="closeAdminModal"
+          class="px-6 py-2 bg-gray-400 text-white
+          rounded-lg hover:bg-gray-500 transition">
+          Fermer
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="youthLoginModal"class="modal hidden">
+<div class="modal-card">
+<h3>Connexion Jeunesse</h3>
+<input id="youthEmail"type="email"placeholder="Email">
+<input id="youthPassword"type="password"placeholder="Mot de passe">
+<button id="submitYouthLogin">Connexion</button>
+<p id="youthLoginError"class="error-msg"></p>
+<button id="closeYouthModal">Fermer</button>
+</div>
+</div>
+
+
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<!-- SERVICES -->
+<script src="js/services/supabase.service.js"></script>
+<script src="js/services/data.service.js"></script>
+<script src="js/services/auth.service.js"></script>
+
+<!-- MODULES PUBLIC -->
+<script src="js/modules/public/form.manager.js"></script>
+<script src="js/modules/public/departements.public.module.js"></script>
+<script src="js/modules/public/accueil.module.js"></script>
+<script src="js/modules/public/verses.public.js"></script>
+<script src="js/modules/Admin/login.admins.js"></script>
+<script src="js/modules/public/accueil.responsive.js"></script>
+
+<!-- MODULES ADMIN -->
+<script src="js/modules/admin/members.module.js"></script>
+<script src="js/modules/admin/admins.module.js"></script>
+<script src="js/modules/admin/reports.module.js"></script>
+<script src="js/modules/admin/settings.module.js"></script>
+
+<!-- theme globale-->
+ <script src="js/modules/global/theme.module.js"></script>
+<!-- APP PRINCIPALE -->
+<script src="js/core/App.js"></script>
+
+</body>
+</html>

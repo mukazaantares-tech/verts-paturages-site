@@ -7,10 +7,14 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="stylesheet" href="jeunesse-admin.css">
+<link rel="stylesheet" href="global.responsive.css">
+<link rel="stylesheet" href="darkmode.global.css">
+<link rel="icon" href="Verts-Paturages.png" type="image/png">
+<link rel="apple-touch-icon" href="Verts-Paturages.png">
 </head>
-<body class="bg-gray-100">
+<body  class="dark-enabled bg-gray-100">
 
-    <header class="flex items-center justify-between bg-white shadow px-8 py-4 border-b">
+    <header class=" navbar flex items-center justify-between bg-white shadow px-8 py-4 border-b">
 
     <!-- Logo / Nom -->
     <div class="flex items-center gap-4">
@@ -44,11 +48,16 @@
     <!-- SIDEBAR -->
     <aside class="w-64 bg-purple-800 text-white p-6">
         <h2 class="text-2xl font-bold mb-6">JAEL Admin</h2>
-        <ul class="space-y-3 sidebar">
+            <!-- bouton dark mode -->
+        <button id="themeToggle" class="theme-toggle">
+            🌙
+        </button>
+         <ul class="space-y-3 sidebar">
             <li data-section="dashboard" class="active cursor-pointer">📊 Dashboard</li>
             <li data-section="content" class="cursor-pointer">📝 Contenu</li>
             <li data-section="activities" class="cursor-pointer">🎉 Activités</li>
             <li data-section="adhesions" class="cursor-pointer">👥 Adhésions</li>
+            <li data-section="comments" class="cursor-pointer">💬 Commentaires</li>
             <li data-section="admins" class="cursor-pointer">👑 Administrateurs</li>
         </ul>
     </aside>
@@ -204,14 +213,40 @@
 
 </div>
 
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<!-- SERVICES -->
+<script src="js/services/supabase.service.js"></script>
+<!-- SERVICES -->
 <script src="js/services/data.service.js"></script>
 <script src="js/services/auth.service.js"></script>
+
+<!-- MODULES JEUNESSE ADMIN -->
 <script src="js/modules/youth/youth.dashboard.module.js"></script>
-<script src="js/modules/youth/youth.activities.module.js"></script>
+
+<script src="js/modules/youth/youth.activites.module.js"></script>
+
 <script src="js/modules/youth/youth.adhesions.module.js"></script>
+
 <script src="js/modules/youth/youth.admins.module.js"></script>
+
 <script src="js/modules/youth/youth.comments.admin.module.js"></script>
-<script src="js/app.js"></script>
+
+<script src="js/modules/youth/youth.comments.public.module.js"></script>
+
+<!-- MODULES PUBLIC -->
+<script src="js/modules/public/youth.public.module.js"></script>
+
+<script src="js/modules/public/youth.activites.public.module.js"></script>
+
+<script src="js/modules/public/departements.public.module.js"></script>
+
+<!-- RESPONSIVE -->
+<script src="js/modules/public/global.responsive.js"></script>
+
+<!-- APP -->
+<script src="js/core/App.js"></script>
 
 </body>
 </html>

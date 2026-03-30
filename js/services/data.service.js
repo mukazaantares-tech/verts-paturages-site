@@ -1,72 +1,162 @@
 // ===============================
-// DATASERVICE - COUCHE ABSTRACTION
+// DATASERVICE - GESTION DONNEES
 // ===============================
 
 const DataService = {
 
-    // MÉTHODES GÉNÉRIQUES
+    /* ===============================
+       LIRE DONNEES
+    =============================== */
+
     get(key) {
-        return JSON.parse(localStorage.getItem(key));
+
+        try {
+
+            const data = localStorage.getItem(key);
+
+            if (!data) return null;
+
+            return JSON.parse(data);
+
+        } catch (error) {
+
+            console.error("Erreur DataService.get :", error);
+
+            return null;
+
+        }
+
     },
+
+    /* ===============================
+       ENREGISTRER DONNEES
+    =============================== */
 
     set(key, value) {
-        localStorage.setItem(key, JSON.stringify(value));
+
+        try {
+
+            const json = JSON.stringify(value);
+
+            localStorage.setItem(key, json);
+
+        } catch (error) {
+
+            console.error("Erreur DataService.set :", error);
+
+        }
+
     },
+
+    /* ===============================
+       SUPPRIMER
+    =============================== */
 
     remove(key) {
-        localStorage.removeItem(key);
+
+        try {
+
+            localStorage.removeItem(key);
+
+        } catch (error) {
+
+            console.error("Erreur DataService.remove :", error);
+
+        }
+
     },
 
-    // ===============================
-    // JEUNESSE
-    // ===============================
+    /* ===============================
+       AJOUTER DANS UN TABLEAU
+    =============================== */
 
-    getYouthMembers() {
-        return this.get("vp_youth_members") || [];
+    push(key, value) {
+
+        try {
+
+            const list = this.get(key) || [];
+
+            list.push(value);
+
+            this.set(key, list);
+
+        } catch (error) {
+
+            console.error("Erreur DataService.push :", error);
+
+        }
+
     },
 
-    saveYouthMembers(data) {
-        this.set("vp_youth_members", data);
+    /* ===============================
+       METTRE A JOUR
+    =============================== */
+
+    update(key, id, newData) {
+
+        try {
+
+            const list = this.get(key) || [];
+
+            const index = list.findIndex(i => i.id === id);
+
+            if (index === -1) return;
+
+            list[index] = {
+                ...list[index],
+                ...newData
+            };
+
+            this.set(key, list);
+
+        } catch (error) {
+
+            console.error("Erreur DataService.update :", error);
+
+        }
+
     },
 
-    getYouthComments() {
-        return this.get("vp_youth_comments") || [];
+    /* ===============================
+       SUPPRIMER PAR ID
+    =============================== */
+
+    delete(key, id) {
+
+        try {
+
+            const list = this.get(key) || [];
+
+            const filtered = list.filter(i => i.id !== id);
+
+            this.set(key, filtered);
+
+        } catch (error) {
+
+            console.error("Erreur DataService.delete :", error);
+
+        }
+
     },
 
-    saveYouthComments(data) {
-        this.set("vp_youth_comments", data);
-    },
+    /* ===============================
+       RESET SYSTEME
+    =============================== */
 
-    // ===============================
-    // VERSETS
-    // ===============================
+    reset() {
 
-    getWeeklyVerses() {
-        return this.get("vp_weekly_verses") || [];
-    },
+        try {
 
-    saveWeeklyVerses(data) {
-        this.set("vp_weekly_verses", data);
-    },
+            localStorage.clear();
 
-    getVerseLikes() {
-        return this.get("vp_verse_likes") || [];
-    },
+            console.warn("Système réinitialisé");
 
-    saveVerseLikes(data) {
-        this.set("vp_verse_likes", data);
-    },
+        } catch (error) {
 
-    // ===============================
-    // DÉPARTEMENTS
-    // ===============================
+            console.error("Erreur DataService.reset :", error);
 
-    getDepartements() {
-        return this.get("vp_departements_media") || [];
-    },
+        }
 
-    saveDepartements(data) {
-        this.set("vp_departements_media", data);
     }
 
 };

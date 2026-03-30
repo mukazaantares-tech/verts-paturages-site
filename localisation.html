@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Localisation - Verts-Pâturages</title>
-  <link rel="stylesheet" href="localisation.css"/>
+  <link rel="stylesheet" href="localisation.css">
+  <link rel="stylesheet" href="global.responsive.css">
+  <link rel="stylesheet" href="darkmode.global.css">
   <link rel="icon" href="Verts-Paturages.png" type="image/png">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
@@ -13,17 +15,25 @@
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 </head>
-<body>
+<body class="dark-enabled">
 
   <!-- NAVIGATION -->
   <header class="navbar">
     <h1 class="logo">Verts-Pâturages</h1>
-    <ul class="nav-links">
-      <li><a href="Accueil.html">Accueil</a></li>
-      <li><a href="Serviteurs.html">Serviteurs</a></li>
-      <li><a href="Departements.html">Départements</a></li>
-      <li><a href="Jeunesse.html">Jeunesse</a></li>
-      <li><a href="localisation.html">Localisation</a></li>
+    <!-- bouton mobile -->
+        <button class="burger" id="burger">
+          ☰
+        </button>
+            <!-- bouton dark mode -->
+        <button id="themeToggle" class="theme-toggle">
+            🌙
+        </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="Accueil.html" target="_blank">Accueil</a></li>
+      <li><a href="Serviteurs.html" target="_blank">Serviteurs</a></li>
+      <li><a href="Departements.html" target="_blank">Départements</a></li>
+      <li><a href="Jeunesse.html" target="_blank">Jeunesse</a></li>
+      <li><a href="localisation.html" target="_blank">Localisation</a></li>
     </ul>
   </header>
 
@@ -31,7 +41,7 @@
   <section class="hero-localisation">
     <div class="hero-overlay">
       <h2>Bienvenue à Verts-Pâturages</h2>
-      <p>Un lieu de foi, de croissance et de transformation.</p>
+      <p>Un lieu de foi, de croissance, de transformation et de mission.</p>
     </div>
   </section>
 
@@ -40,28 +50,30 @@
     <div class="container">
       <h2>Qui sommes-nous ?</h2>
       <p>
-        Verts-Pâturages est une église dynamique située à Lubumbashi,
-        en République Démocratique du Congo. Nous sommes une communauté
-        engagée à proclamer l’Évangile, à accompagner les familles,
-        à former les jeunes et à développer les dons spirituels de chacun.
-      </p>
+        La communauté VERTS PÂTURAGES, dénommée officiellement MINISTÈRE DU PLEIN ÉVANGILE VERTS PÂTURAGES (MPEVP en sigle), est une Église formée de plusieurs assemblées regroupant les enfants de Dieu, c’est-à-dire les hommes et les femmes de toute race, de toute langue et de tous les pays, à qui l’Évangile du Seigneur est présenté et qui y ont cru pour devenir ses disciples, lui appartenir et le servir.
+    </p>
+    </div>
+    <!-- image de l'église -->
+    <div class="church-image-container">
+      <img src="/image/verts paturages localisation.jpg" alt="Église Verts-Pâturages" class="church-image">
     </div>
   </section>
 
   <!-- NOTRE VISION -->
   <section class="vision-section">
     <div class="container">
-      <h2>Notre Vision</h2>
+      <h2>Vision de la Communauté</h2>
       <p>
-        Notre vision est de bâtir une église forte, unie et remplie du Saint-Esprit,
-        capable d’impacter la société par l’amour, la discipline spirituelle,
-        l’excellence et l’engagement communautaire.
-      </p>
+        Nous sommes une Église biblique et missionnaire qui s'occupe de chercher et de rassembler les brebis du Seigneur pour les nourrir de la Parole de Dieu, en leur communiquant toutes les dimensions de la foi ; d'une part, et d'autre part, d'exécuter la mission conformément à l'Ordre suprême, selon une politique d'implantation progressive des assemblées.
+     </p>
+      <h2>Missions</h2>
       <ul>
-        <li>Former des disciples matures et responsables</li>
-        <li>Encourager la jeunesse à servir Dieu avec passion</li>
-        <li>Développer des départements structurés et efficaces</li>
-        <li>Étendre l'œuvre de Dieu à travers des extensions</li>
+        <li>-Évangéliser</li>
+        <li>- Encadrer</li>
+        <li>-Équiper</li>
+        <li>-Enseigner </li>
+        <li>-Former</li>
+        <li>-Implanter</li>
       </ul>
     </div>
   </section>
@@ -71,11 +83,20 @@
     <div class="container">
       <h2>Nous localiser</h2>
 
-      <div class="map-controls">
-        <input type="text" id="searchLocation" placeholder="Rechercher une assemblée">
-        <button id="searchBtn">Rechercher</button>
-        <button id="locateMe">Me localiser</button>
-      </div>
+    <div class="map-controls">
+      <select id="locationSelect">
+      <option value="">
+      Choisir une assemblée
+      </option>
+      </select>
+      <button id="routeBtn">
+      Voir itinéraire
+      </button>
+  
+      <button id="locateMe">
+      Me localiser
+      </button>
+  </div>
 
       <div id="mapPublic"></div>
     </div>
@@ -85,98 +106,228 @@
   <footer>
     <p>&copy; 2026 Verts-Pâturages | Tous droits réservés</p>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="js/services/supabase.service.js"></script>
+  <script src="js/modules/public/global.responsive.js"></script>
+  <script src="js/modules/global/theme.module.js"></script>
+    <script src="js/core/App.js"></script>
   <script>
-document.addEventListener("DOMContentLoaded", () => {
-
-    // 📍 Lubumbashi par défaut
-    const map = L.map('mapPublic').setView([-11.6647, 27.4794], 13);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap'
-    }).addTo(map);
-
-    const locations = Core.get("vp_locations") || [];
-
-    let markers = [];
-
-    // 🔥 Ajouter tous les marqueurs
-    locations.forEach(loc => {
-
-        const marker = L.marker([loc.latitude, loc.longitude])
-            .addTo(map)
-            .bindPopup(`<b>${loc.nom}</b><br>${loc.type}`);
-
-        markers.push(marker);
+    document.addEventListener("DOMContentLoaded", () =>{
+      if(typeof GlobalResponsive !== "undefined"){
+        GlobalResponsive.init();
+      }
     });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
 
-    // 🔥 Auto zoom sur tous les points
-    if (locations.length > 0) {
-        const group = L.featureGroup(markers);
-        map.fitBounds(group.getBounds().pad(0.3));
-    }
+ const map =
+  L.map("mapPublic")
+  .setView([-11.6647, 27.4794], 13);
 
-    let routingControl = null;
 
-    document.getElementById("searchBtn").addEventListener("click", () => {
+ L.tileLayer(
+  "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+  {
+   attribution:"© OpenStreetMap"
+  }
+ ).addTo(map);
 
-        const search = document
-            .getElementById("searchLocation")
-            .value.toLowerCase();
 
-        const found = locations.find(l =>
-            l.nom.toLowerCase().includes(search)
-        );
+ /* charger assemblées */
 
-        if (!found) {
-            alert("Assemblée non trouvée");
-            return;
-        }
+ const { data: locations }
+ = await supabaseClient
+   .from("locations")
+   .select("*");
 
-        map.setView([found.latitude, found.longitude], 15);
 
-        // 🔥 Supprimer ancien itinéraire
-        if (routingControl) {
-            map.removeControl(routingControl);
-        }
+ let routingControl = null;
 
-        // 🔥 Obtenir position utilisateur
-        navigator.geolocation.getCurrentPosition(position => {
+ let markers = [];
 
-            const userLat = position.coords.latitude;
-            const userLng = position.coords.longitude;
 
-            routingControl = L.Routing.control({
-                waypoints: [
-                    L.latLng(userLat, userLng),
-                    L.latLng(found.latitude, found.longitude)
-                ],
-                routeWhileDragging: false
-            }).addTo(map);
+ const select =
+  document.getElementById("locationSelect");
 
-        }, () => {
-            alert("Impossible d'obtenir votre position.");
-        });
 
-    });
-    document.getElementById("locateMe")
-    ?.addEventListener("click", () => {
+ /* ajouter options liste */
 
-    navigator.geolocation.getCurrentPosition(pos => {
-        map.setView(
-            [pos.coords.latitude, pos.coords.longitude],
-            15
-        );
+ locations.forEach(loc => {
 
-        L.marker([
-            pos.coords.latitude,
-            pos.coords.longitude
-        ]).addTo(map)
-         .bindPopup("Vous êtes ici")
-         .openPopup();
-    });
+  const option =
+   document.createElement("option");
+
+  option.value = loc.id;
+
+  option.textContent =
+   loc.name + " (" + loc.type + ")";
+
+  select.appendChild(option);
+
+
+  /* marker */
+
+  const marker =
+   L.marker([loc.lat, loc.lng])
+   .addTo(map)
+   .bindPopup(
+    "<b>" + loc.name + "</b>"
+   );
+
+  markers.push({
+   data: loc,
+   marker
+  });
+
+ });
+
+
+ /* zoom auto */
+
+ if(markers.length){
+
+  const group =
+   L.featureGroup(
+    markers.map(m => m.marker)
+   );
+
+  map.fitBounds(
+   group.getBounds().pad(0.2)
+  );
+
+ }
+
+
+ /* itinéraire */
+
+ document
+ .getElementById("routeBtn")
+ .addEventListener("click", () => {
+
+  const selectedId =
+   select.value;
+
+
+  if(!selectedId){
+
+   alert(
+    "Choisir une assemblée"
+   );
+
+   return;
+
+  }
+
+
+  const location =
+   markers.find(m =>
+    m.data.id == selectedId
+   );
+
+
+  if(!location) return;
+
+
+  navigator.geolocation
+  .getCurrentPosition(pos => {
+
+   const userLat =
+    pos.coords.latitude;
+
+   const userLng =
+    pos.coords.longitude;
+
+
+   /* supprimer ancien itinéraire */
+
+   if(routingControl){
+
+    map.removeControl(
+     routingControl
+    );
+
+   }
+
+
+   routingControl =
+    L.Routing.control({
+
+     waypoints:[
+
+      L.latLng(userLat,userLng),
+
+      L.latLng(
+       location.data.lat,
+       location.data.lng
+      )
+
+     ],
+
+     routeWhileDragging:false,
+
+     show:false
+
+    })
+    .addTo(map);
+
+
+   map.setView(
+    [
+     location.data.lat,
+     location.data.lng
+    ],
+    15
+   );
+
+
+  });
+
+ });
+
+
+ /* localisation simple */
+
+ document
+ .getElementById("locateMe")
+ .addEventListener("click", () => {
+
+  navigator.geolocation
+  .getCurrentPosition(pos => {
+
+   map.setView(
+    [
+     pos.coords.latitude,
+     pos.coords.longitude
+    ],
+    15
+   );
+
+
+   L.marker([
+    pos.coords.latitude,
+    pos.coords.longitude
+   ])
+   .addTo(map)
+   .bindPopup("Vous êtes ici")
+   .openPopup();
+
+  });
+
+ });
+
+
+ /* responsive fix */
+
+ setTimeout(() => {
+
+  map.invalidateSize();
+
+ }, 500);
+
+
 });
-
-});
-</script>
+  </script>
+  <script src="js/core/App.js"></script>
 </body>
 </html>

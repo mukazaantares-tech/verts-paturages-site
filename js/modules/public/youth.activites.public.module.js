@@ -1,36 +1,54 @@
 const YouthActivitiesPublic = {
 
-    init() {
-        this.render();
+    async init() {
+        await this.render();
     },
 
-    render() {
+    async render() {
 
         const container =
             document.getElementById("youthActivities");
 
         if (!container) return;
 
-        const data =
-            DataService.get("vp_jeunesse_activities") || [];
+        const { data: activities } =
+            await supabaseClient
+                .from("youth_activities")
+                .select("*")
+                .order("created_at", { ascending:false });
 
         container.innerHTML = "";
 
-        data.forEach(act => {
+        activities.forEach(a => {
 
-            const div =
-                document.createElement("div");
+            const div = document.createElement("div");
 
             div.className =
-                "bg-white p-6 rounded shadow";
+                "event mb-6 border-l-4 border-purple-600 pl-4";
 
             div.innerHTML = `
-                <h3>${act.titre}</h3>
-                <p>${act.description}</p>
+                <h3 class="font-semibold">${a.titre}</h3>
+                <p>${a.description}</p>
+
+                ${
+                    a.video_url
+                    ? `
+                    <video
+                    controls
+                    class="w-full mt-3 rounded">
+
+                    <source src="${a.video_url}" type="video/mp4">
+
+                    </video>
+                    `
+                    : ""
+            }
             `;
 
             container.appendChild(div);
+
         });
+
     }
 
 };

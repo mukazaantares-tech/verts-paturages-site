@@ -6,6 +6,7 @@ const DepartementsModule = {
 
     init() {
         this.initSaveButton();
+        this.initAdhesionModal()
     },
 
     initSaveButton() {
@@ -64,6 +65,35 @@ const DepartementsModule = {
 
         });
     },
+    
+initAdhesionModal(){
+
+const modal =
+document.getElementById("adhesionModal")
+
+const openBtns =
+document.querySelectorAll(".openAdhesion")
+
+const closeBtn =
+document.getElementById("closeAdhesionModal")
+
+openBtns.forEach(btn => {
+
+btn.addEventListener("click", () => {
+
+modal.classList.remove("hidden")
+
+})
+
+})
+
+closeBtn?.addEventListener("click", () => {
+
+modal.classList.add("hidden")
+
+})
+
+},
 
     saveDepartment(name, presidentName, presidentDesc, photo) {
 

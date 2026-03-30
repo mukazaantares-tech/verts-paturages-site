@@ -1,26 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Verts-Pâturages - Jeunesse</title>
   <link rel="stylesheet" href="Jeunesse.css">
+  <link rel="stylesheet" href="global.responsive.css">
+  <link rel="stylesheet" href="darkmode.global.css">
   <!-- Tailwind + FontAwesome -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" href="Verts-Paturages.png" type="image/png">
   <link rel="apple-touch-icon" href="Verts-Paturages.png">
 </head>
-<body>
+<body class="dark-enabled">
     <header>
     <nav class="navbar bg-green-700 text-white p-4 flex justify-between items-center">
-      <h1 lass="logo text-xl font-bold">Verts-Pâturages</h1>
-      <ul class="nav-links flex gap-6">
+      <h1 class="logo text-xl font-bold">Verts-Pâturages</h1>
+        <!-- bouton mobile -->
+            <button class="burger" id="burger">
+              ☰
+            </button>
+                <!-- bouton dark mode -->
+            <button id="themeToggle" class="theme-toggle">
+                🌙
+            </button>
+      <ul class="nav-links flex gap-6" id="navlinks">
         <li><a href="Accueil.html" target="_blank" class="hover:text-green-300">Accueil</a></li>
-        <li><a href="serviteurs.html" target="_blank" class="hover:text-green-300">Serviteurs</a></li>
-        <li><a href="departements.html" target="_blank" class="hover:text-green-300">Départements</a></li>
-        <li><a href="jeunesse.html" target="_blank" class="hover:text-green-300">Jeunesse</a></li>
-        <li><a href="localisation.html" target="_blank" class="hover:text-green-300">Localisation</a></li>
+        <li><a href="Serviteurs.html" target="_blank" class="hover:text-green-300">Serviteurs</a></li>
+        <li><a href="Departements.html" target="_blank" class="hover:text-green-300">Départements</a></li>
+        <li><a href="Jeunesse.html" target="_blank" class="hover:text-green-300">Jeunesse</a></li>
+        <li><a href="Localisation.html" target="_blank" class="hover:text-green-300">Localisation</a></li>
       </ul>
     </nav>
   </header>
@@ -36,18 +46,24 @@
 
   <!-- Attributions -->
     <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
-      <h3 class="text-xl font-bold text-green-700 mb-4">Atribution de la Jeunesse</h3>
-      <ul id="youthAttributions" class="list-disc list-inside text-gray-700"></ul>
+      <h3 class="text-xl font-bold text-green-700 mb-4">Attributions du departement de la Jeunesse</h3>
+      <ul class="list-disc list-inside text-gray-700">
+        <li>Travailler sous la supervision du Pasteur pour des orientations</li>
+        <li>Organiser des activites pour l'epanouissement des jeunes du departement</li>
+        <li>Sensibilisation, Mobilisation des Jeunes</li>
+        <li>Rapporter au pasteur</li>
+      </ul>
     </section>
 
   <!-- Président + Vice-présidents -->
   <section class="max-w-6xl mx-auto grid md:grid-cols-4 gap-6 p-10">
     <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
-      <img id="youthPresidentPhoto" class="w-32 h-32 rounded-full mx-auto mb-4"/>
-      <h3 class="text-xl font-semibold text-purple-700">Président</h3>
+      <img src="/image/tonton yann.jpg">
+      <h3 class="text-xl font-semibold text-green-700">Président</h3>
       <p id="youthPresidentName" class="text-gray-600"></p>
     </div>
     <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
+      <img src="/image/personne.jpg" alt="Photo de Ruphin" class="w-32 h-32 rounded-full mx-auto mb-4"/>
       <h3 class="text-lg font-semibold text-pink-600">Vice-président vie spirituelle et Administration</h3>
       <p class="text-gray-600">Nom</p>
     </div>
@@ -90,93 +106,160 @@
     <p class="text-gray-700 mb-4">
       <strong>Condition :</strong> Pour adhérer à la Jeunesse, il faut être né de nouveau et avoir accepté Jésus-Christ comme Seigneur et Sauveur.
     </p>
-    <button id="adhesionBtn" class="px-6 py-3 bg-purple-700 text-white rounded-lg hover:bg-purple-800 transition">
-      Demande d’adhésion
+    <button id="adhesionBtn"
+      class="px-6 py-3 bg-purple-700 text-white rounded-lg hover:bg-purple-800">Demande d’adhésion
     </button>
-    <button id="youthAdminBtn" class="px-6 py-3 bg-purple-700 text-white rounded-lg hover:bg-purple-800 transition">
-    Espace Admin Jeunesse
-  </button>
   </section>
 
 
-    <!-- Modal Formulaire d'adhésion -->
-    <div id="adhesionModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-      <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-4 max-h-screen overflow-y-auto">
-        <h3 class="text-xl font-bold text-purple-700 mb-4">Formulaire d'adhésion au département</h3>
-        <form id="adhesionForm">
-          <div class="mb-4">
-            <label for="adhesionNom" class="block text-gray-700 mb-2">Nom complet :</label>
-            <input type="text" id="adhesionNom" name="nom" class="w-full p-2 border border-gray-300 rounded" required />
-          </div>
-          <div class="mb-4">
-            <label for="adhesionEmail" class="block text-gray-700 mb-2">Email :</label>
-            <input type="email" id="adhesionEmail" name="email" class="w-full p-2 border border-gray-300 rounded" required />
-          </div>
-          <div class="mb-4">
-            <label for="adhesionSexe" class="block text-gray-700 mb-2">Sexe :</label>
-            <select id="adhesionSexe" name="sexe" class="w-full p-2 border border-gray-300 rounded" required>
-              <option value="">-- Sélectionner --</option>
-              <option value="Homme">Homme</option>
-              <option value="Femme">Femme</option>
-            </select>
-          </div>
-          <div class="mb-4">
-            <label for="adhesionPhone" class="block text-gray-700 mb-2">Numéro de téléphone :</label>
-            <input type="tel" id="adhesionPhone" name="phone" class="w-full p-2 border border-gray-300 rounded" required />
-          </div>
-          <div class="mb-4">
-            <label for="adhesionMotivation" class="block text-gray-700 mb-2">Motivation :</label>
-            <textarea id="adhesionMotivation" name="motivation" rows="4" class="w-full p-2 border border-gray-300 rounded" required></textarea>
-          </div>
-          <div class="flex justify-between gap-4">
-            <button type="submit" class="flex-1 px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition">
-              Soumettre
-            </button>
-            <button type="button" id="closeAdhesionModal" class="flex-1 px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 transition">
-              Fermer
-            </button>
-          </div>
-        </form>
+   <!-- Modal Formulaire d'adhésion -->
+<div id="adhesionModal"
+class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+
+  <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-4 max-h-screen overflow-y-auto">
+
+    <h3 class="text-xl font-bold text-purple-700 mb-6">
+      Formulaire d'adhésion à la Jeunesse
+    </h3>
+
+    <form id="adhesionForm" data-table="adhesions_requests" data-source="Jeunesse">
+
+      <!-- NOM -->
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">
+          Nom complet
+        </label>
+
+        <input
+          type="text"
+          id="adhesionNom"
+          class="w-full p-2 border border-gray-300 rounded"
+          placeholder="Votre nom"
+          required>
       </div>
-    </div>  
+
+      <!-- EMAIL -->
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">
+          Email
+        </label>
+
+        <input
+          type="email"
+          id="adhesionEmail"
+          class="w-full p-2 border border-gray-300 rounded"
+          placeholder="exemple@email.com"
+          required>
+      </div>
+
+      <!-- SEXE -->
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">
+          Sexe
+        </label>
+
+        <select
+          id="adhesionSexe"
+          class="w-full p-2 border border-gray-300 rounded"
+          required>
+
+          <option value="">-- Sélectionner --</option>
+          <option value="Homme">Homme</option>
+          <option value="Femme">Femme</option>
+
+        </select>
+      </div>
+
+      <!-- TELEPHONE -->
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">
+          Numéro de téléphone
+        </label>
+
+        <input
+          type="tel"
+          id="adhesionTelephone"
+          class="w-full p-2 border border-gray-300 rounded"
+          placeholder="+243..."
+          required>
+      </div>
+
+      <!-- MOTIVATION -->
+      <div class="mb-6">
+        <label class="block text-gray-700 mb-2">
+          Motivation
+        </label>
+
+        <textarea
+          id="adhesionMotivation"
+          rows="4"
+          class="w-full p-2 border border-gray-300 rounded"
+          placeholder="Pourquoi veux-tu rejoindre la jeunesse ?"
+          required></textarea>
+      </div>
+
+      <!-- BOUTONS -->
+      <div class="flex gap-4">
+
+        <button
+          type="submit"
+          class="flex-1 bg-purple-700 text-white py-2 rounded hover:bg-purple-800 transition">
+          Soumettre
+        </button>
+
+        <button
+          type="button"
+          id="closeAdhesionModal"
+          class="flex-1 bg-gray-400 text-white py-2 rounded hover:bg-gray-500 transition">
+          Fermer
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
 </main>
   <footer class="bg-green-700 text-white text-center p-4">
     &copy; 2024 Verts-Pâturages. Tous droits réservés.
   </footer>
   <!-- Modal Login Jeunesse -->
-<div id="youthLoginModal"
-class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
 
-  <div class="bg-white p-6 rounded-lg shadow-lg w-96">
 
-    <h2 class="text-xl font-bold text-purple-700 mb-4">
-      Connexion Admin Jeunesse
-    </h2>
 
-    <form id="youthLoginForm">
-      <input type="email"
-             id="youthEmail"
-             placeholder="Email"
-             class="w-full mb-3 p-2 border rounded"
-             required>
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-      <input type="password"
-             id="youthPassword"
-             placeholder="Mot de passe"
-             class="w-full mb-4 p-2 border rounded"
-             required>
 
-      <button type="submit"
-              class="w-full bg-purple-700 text-white py-2 rounded">
-        Se connecter
-      </button>
-    </form>
+<!-- SERVICES -->
+<script src="js/services/supabase.service.js"></script>
+<script src="js/services/data.service.js"></script>
+<script src="js/services/auth.service.js"></script>
 
-  </div>
-</div>
-  <script src="core.js"></script>
-  <script src="auth.js"></script>
-  <script src="jeunesse.js"></script>
-  <script src="js/services/data.service.js"></script>
+<!-- MODULES PUBLIC -->
+<script src="js/modules/public/form.manager.js"></script>
+<script src="js/modules/public/departements.public.module.js"></script>
+<script src="js/modules/public/accueil.module.js"></script>
+<script src="js/modules/public/global.responsive.js"></script>
+
+
+<!-- MODULES JEUNESSE -->
+<script src="js/modules/youth/youth.dashboard.module.js"></script>
+<script src="js/modules/youth/youth.activites.module.js"></script>
+<script src="js/modules/youth/youth.adhesions.module.js"></script>
+<script src="js/modules/public/youth.public.module.js"></script>
+
+<!-- MODULES ADMIN -->
+<script src="js/modules/admin/members.module.js"></script>
+<script src="js/modules/admin/couples.module.js"></script>
+<script src="js/modules/admin/admins.module.js"></script>
+<script src="js/modules/admin/reports.module.js"></script>
+<script src="js/modules/admin/settings.module.js"></script>
+
+<!-- APP PRINCIPALE -->
+<script src="js/core/App.js"></script>
+
 </body>
 </html>

@@ -1,0 +1,217 @@
+/* ======================================================
+   ADMINS MODULE
+   gestion complete des administrateurs
+====================================================== */
+
+const AdminsModule = {
+
+    async init() {
+
+        console.log("AdminsModule chargé");
+
+        this.bindForm();
+
+        await this.loadAdmins();
+
+    },
+
+    /* ======================================================
+       CREATION ADMIN (AUTH + DATABASE)
+    ====================================================== */
+
+    async createAdmin({ name, email, password, role }) {
+
+        try {
+
+            if (!email || !password || !role)
+                throw new Error("Champs requis manquants");
+
+            console.log("Création admin...");
+
+            /* 1️⃣ création utilisateur Supabase Auth */
+
+            const {
+                data: authData,
+                error: authError
+            } = await supabaseClient.auth.signUp({
+
+                email: email,
+                password: password
+
+            });
+
+            if (authError)
+                throw authError;
+
+
+            /* 2️⃣ insertion dans table admins */
+
+            const {
+                error: dbError
+            } = await supabaseClient
+                .from("admins")
+                .insert({
+
+                    name: name,
+                    email: email,
+                    role: role
+
+                });
+
+            if (dbError)
+                throw dbError;
+
+
+            alert("Administrateur créé");
+
+            await this.loadAdmins();
+
+            return true;
+
+        }
+
+        catch (err) {
+
+            console.error(
+                "Erreur création admin :",
+                err.message
+            );
+
+            alert(err.message);
+
+            return false;
+
+        }
+
+    },
+
+    /* ======================================================
+       LECTURE ADMINS
+    ====================================================== */
+
+    async loadAdmins() {
+
+        try {
+
+            const {
+                data,
+                error
+            } = await supabaseClient
+                .from("admins")
+                .select("*")
+                .order("created_at", {
+                    ascending: false
+                });
+
+            if (error)
+                throw error;
+
+            this.renderAdmins(data);
+
+        }
+
+        catch (err) {
+
+            console.error(
+                "Erreur chargement admins",
+                err
+            );
+
+        }
+
+    },
+
+    /* ======================================================
+       AFFICHAGE LISTE ADMINS
+    ====================================================== */
+
+    renderAdmins(admins = []) {
+
+        const container =
+            document.getElementById("adminList");
+        if (!container) return;
+        container.innerHTML = "";
+        admins.forEach(admin => {
+            const div =
+                document.createElement("div");
+            div.className =
+                "admin-item";
+            div.innerHTML = `
+                <div class="admin-card">
+                    <strong>
+                        ${admin.name || "Sans nom"}
+                    </strong>
+                    <p>
+                        ${admin.email}
+                    </p>
+                    <span class="role-badge">
+                        ${admin.role}
+                    </span>
+                    <button
+                        class="delete-admin"
+                        data-id="${admin.id}"
+                    >
+                        Supprimer
+                    </button>
+                </div>
+            `;
+            container.appendChild(div);
+        });
+        this.bindDelete();
+    },
+    /* ======================================================
+       SUPPRESSION ADMIN
+    ====================================================== */
+
+    bindDelete() {
+        document
+        .querySelectorAll(".delete-admin")
+        .forEach(btn => {
+            btn.onclick = async () => {
+                const id =
+                    btn.dataset.id;
+                if (!confirm("Supprimer cet admin ?"))
+                    return;
+                await supabaseClient
+                    .from("admins")
+                    .delete()
+                    .eq("id", id);
+                this.loadAdmins();
+            };
+        });
+    },
+    /* ======================================================
+       FORMULAIRE
+    ====================================================== */
+
+    bindForm() {
+
+        const form =
+            document.getElementById(
+                "addAdminForm"
+            );
+        if (!form) return;
+        form.addEventListener(
+            "submit",
+            async e => {
+                e.preventDefault();
+                const name =
+                    document.getElementById("name").value;
+                const email =
+                    document.getElementById("email").value;
+                const password =
+                    document.getElementById("password").value;
+                const role =
+                    document.getElementById("role").value;
+                await this.createAdmin({
+                    name,
+                    email,
+                    password,
+                    role
+                });
+                form.reset();
+            }
+        );
+    }
+};
+window.AdminsModule = AdminsModule;

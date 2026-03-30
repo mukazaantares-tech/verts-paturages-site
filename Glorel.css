@@ -1,164 +1,427 @@
+/* =================================
+BASE
+================================= */
+
 body{
-    background-color: #f0fdf4;
+    background: linear-gradient(180deg,#f0fdf4,#ecfdf5);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
+    color:#374151;
 }
-.logo {
+body.menu-open{
+    overflow:hidden;
+}
+
+/* logo */
+
+.logo{
     font-family: 'Georgia', serif;
-    font-size: 1.5rem;
-    color: #065f46;
-}   
-.navbar {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-.nav-links a {
-    font-weight: 600;
-}
-.nav-links a:hover {
-    color: #34d399;
-}
-section {
-    background-color: #f7f7f7;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-    margin-bottom: 2.5rem;
-}
-h2 {
-    color: #047857;
-}
-h3 {
-    color: #065f46;
-}
-p {
-    color: #4b5563;
-}
-.member-profile img {
-    border-radius: 0.5rem;
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-}
-.member-profile {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-.member-profile div {
-    flex: 1;
-}
-.member-profile h3 {
-    margin: 0;
-}
-.member-profile p {
-    margin-top: 0.5rem;
-}
-.member-profile img {
-    border: 2px solid #10b981;
-}
-.member-profile p {
-    line-height: 1.6;
-}
-.member-profile img {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-.member-profile {
-    background-color: #ffffff;
-    padding: 1rem;
-    border-radius: 0.5rem;
+    font-size:1.6rem;
+    color:#065f46;
+    letter-spacing:.5px;
 }
 
+/* =================================
+NAVBAR
+================================= */
 
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .member-profile {
-        flex-direction: column;
-        text-align: center;
-    }
-    .member-profile img {
-        margin-bottom: 1rem;
-    }
-}
-@media (max-width: 480px) {
-    .navbar {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .nav-links {
-        flex-direction: column;
-        gap: 1rem;
-        margin-top: 1rem;
-    }
-}
-.burger {
-    display: none;
-    cursor: pointer;
-}
-@media (max-width: 768px) {
-    .burger {
-        display: block;
-    }
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-    }
-    .nav-links.nav-active {
-        display: flex;
-    }
-}
-.burger div {
-    width: 25px;
-    height: 3px;
-    background-color: #fff;
-    margin: 5px;
-    transition: all 0.3s ease;
-}
-.burger.toggle .line1 {
-    transform: rotate(-45deg) translate(-5px, 6px);
-}
-.burger.toggle .line2 {
-    opacity: 0;
-}
-.burger.toggle .line3 {
-    transform: rotate(45deg) translate(-5px, -6px);
-}
-.nav-links a {
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-}
-.nav-links a:hover {
-    background-color: #34d399;
-    color: #ffffff;
-}
-.nav-links.nav-active {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-/* Cartes des départements */
-.relative.absolute {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.relative.group:hover .absolute {
-  opacity: 1;
-}
-.relative.bg-white {
-  background-color: white;
-  border-radius: 1rem;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-  padding: 1.5rem;
-  height: 100%;
-}
-.relative.bg-white h3 {
-  color: #065f46;
-  margin-top: 1rem;
-}
-.relative.bg-white p {
-  color: #555;
-  margin-top: 0.5rem;
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:.8rem 1.5rem;
+    background:linear-gradient(135deg,#166534,#15803d);
+    box-shadow:0 6px 18px rgba(0,0,0,.15);
+    position:relative;
+    z-index:100;
 }
 
+/* liens */
+
+.nav-links{
+    display:flex;
+    gap:1.5rem;
+}
+
+.nav-links a{
+    font-weight:600;
+    color:white;
+    padding:.45rem .8rem;
+    border-radius:6px;
+    transition:.25s;
+    position:relative;
+}
+
+/* soulignement animé */
+
+.nav-links a::after{
+    content:"";
+    position:absolute;
+    bottom:-3px;
+    left:0;
+    width:0;
+    height:2px;
+    background:#34d399;
+    transition:.3s;
+}
+
+.nav-links a:hover::after{
+    width:100%;
+}
+
+.nav-links a:hover{
+    color:#bbf7d0;
+}
+
+/* =================================
+SECTIONS
+================================= */
+
+section{
+    background:white;
+    border-radius:14px;
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+    padding:1.8rem;
+    margin-bottom:2.5rem;
+    transition:.3s;
+}
+
+/* effet léger */
+
+section:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+}
+
+/* titres */
+
+h2{
+    color:#047857;
+    text-align:center;
+    margin-bottom:1rem;
+}
+
+h3{
+    color:#065f46;
+}
+
+/* texte */
+
+p{
+    color:#4b5563;
+    line-height:1.65;
+}
+
+/* =================================
+PROFILE MEMBRE
+================================= */
+
+.member-profile{
+    display:flex;
+    align-items:center;
+    gap:1.5rem;
+    background:#ffffff;
+    padding:1.2rem;
+    border-radius:12px;
+    border:1px solid #ecfdf5;
+    transition:.3s;
+}
+
+.member-profile:hover{
+    box-shadow:0 12px 30px rgba(0,0,0,.12);
+}
+
+.member-profile img{
+    width:140px;
+    height:140px;
+    object-fit:cover;
+    border-radius:12px;
+    border:3px solid #10b981;
+    box-shadow:0 8px 18px rgba(0,0,0,.12);
+    transition:.3s;
+}
+
+.member-profile img:hover{
+    transform:scale(1.04);
+}
+
+.member-profile div{
+    flex:1;
+}
+
+.member-profile h3{
+    margin:0;
+}
+
+.member-profile p{
+    margin-top:.5rem;
+}
+
+/* =================================
+CARDS DEPARTEMENTS
+================================= */
+
+.relative.bg-white{
+    background:white;
+    border-radius:16px;
+    padding:1.6rem;
+    height:100%;
+    border:1px solid #ecfdf5;
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.relative.bg-white:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 40px rgba(0,0,0,.15);
+}
+
+.relative.bg-white h3{
+    color:#065f46;
+    margin-top:1rem;
+}
+
+.relative.bg-white p{
+    color:#6b7280;
+}
+
+/* overlay animation */
+
+.relative.absolute{
+    opacity:0;
+    transition:.3s;
+}
+
+.relative.group:hover .absolute{
+    opacity:1;
+}
+
+/* =================================
+BURGER
+================================= */
+
+.burger{
+    display:none;
+    flex-direction:column;
+    cursor:pointer;
+    gap:5px;
+}
+
+.burger div{
+    width:26px;
+    height:3px;
+    background:white;
+    border-radius:3px;
+    transition:.3s;
+}
+
+/* animation */
+
+.burger.toggle .line1{
+    transform:rotate(-45deg) translate(-5px,6px);
+}
+
+.burger.toggle .line2{
+    opacity:0;
+}
+
+.burger.toggle .line3{
+    transform:rotate(45deg) translate(-5px,-6px);
+}
+/* =================================
+RESPONSIVE NAVBAR MOBILE COMPLET
+compatible avec responsive.js (.open)
+================================= */
+
+@media(max-width:768px){
+
+/* bouton burger visible */
+
+.burger{
+
+ display:block;
+
+ font-size:26px;
+
+ background:none;
+
+ border:none;
+
+ color:white;
+
+ cursor:pointer;
+
+ z-index:1001;
+
+}
+
+/* menu mobile plein écran */
+
+.nav-links{
+
+ position:fixed;
+
+ top:0;
+ left:0;
+
+ width:100%;
+ height:100vh;
+
+ background:linear-gradient(
+ 160deg,
+ #14532d,
+ #166534,
+ #15803d
+ );
+
+/* organisation verticale */
+
+ display:flex;
+
+ flex-direction:column;
+
+ align-items:center;
+
+ justify-content:flex-start;
+
+/* espace pour laisser visible le header */
+
+ padding-top:95px;
+
+ padding-bottom:40px;
+
+ padding-left:20px;
+
+ padding-right:20px;
+
+/* espacement entre boutons */
+
+ gap:14px;
+
+/* animation */
+
+ transform:translateY(-100%);
+
+ opacity:0;
+
+ transition:.45s ease;
+
+/* permet scroll manuel */
+
+ overflow-y:auto;
+
+ -webkit-overflow-scrolling:touch;
+
+/* passe au-dessus du site */
+
+ z-index:999;
+
+}
+
+/* menu visible quand burger cliqué */
+
+.nav-links.open{
+
+ transform:translateY(0);
+
+ opacity:1;
+
+}
+
+/* structure des items */
+
+.nav-links li{
+
+ width:100%;
+
+ max-width:300px;
+
+}
+
+/* style boutons liens */
+
+.nav-links a{
+
+ display:block;
+
+ width:100%;
+
+ text-align:center;
+
+ padding:12px 14px;
+
+ font-size:1.05rem;
+
+ font-weight:600;
+
+ color:white;
+
+ border-radius:12px;
+
+ letter-spacing:.3px;
+
+/* effet premium */
+
+ background:rgba(255,255,255,.05);
+
+ backdrop-filter:blur(6px);
+
+ border:1px solid rgba(255,255,255,.08);
+
+ transition:.25s;
+
+}
+
+/* hover / interaction */
+
+.nav-links a:hover{
+
+ background:rgba(255,255,255,.12);
+
+ transform:translateY(-2px);
+
+ box-shadow:0 6px 18px rgba(0,0,0,.25);
+
+}
+
+/* petite ligne décorative */
+
+.nav-links a::after{
+
+ content:"";
+
+ display:block;
+
+ width:26px;
+
+ height:2px;
+
+ margin:6px auto 0;
+
+ background:rgba(255,255,255,.35);
+
+ border-radius:2px;
+
+}
+
+/* empêche scroll page derrière menu */
+
+body.menu-open{
+
+ overflow:hidden;
+
+}
+
+/* dark mode compatible */
+
+.dark .nav-links{
+
+ background:linear-gradient(
+ 160deg,
+ #022c22,
+ #064e3b,
+ #065f46
+ );
+
+}
+
+}

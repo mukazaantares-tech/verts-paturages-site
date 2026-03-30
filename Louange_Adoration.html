@@ -6,18 +6,28 @@
   <title>Louange et Adoration - Verts-Pâturages</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="Louange_Adoration.css"/>
+  <link rel="stylesheet" href="Louange_Adoration.css">
+  <link rel="stylesheet" href="darkmode.global.css">
+  <link rel="stylesheet" href="global.responsive.css">
   <link rel="icon" href="Verts-Paturages.png" type="image/png">
   <link rel="apple-touch-icon" href="Verts-Paturages.png">
 </head>
-<body class="bg-gray-100"
+<body class="dark-enabled bg-gray-100"
       data-departement="Louange et adoration" data-sous="Generale">
       
 
   <!-- Navigation -->
-  <header class="bg-green-700 text-white p-4 flex justify-between items-center">
-    <h1 class="text-xl font-bold">Verts-Pâturage</h1>
-    <ul class="flex gap-6">
+  <header class=" navbar bg-green-700 text-white p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">Verts-Pâturages</h1>
+    <!-- bouton mobile -->
+        <button class="burger" id="burger">
+          ☰
+        </button>
+            <!-- bouton dark mode -->
+        <button id="themeToggle" class="theme-toggle">
+            🌙
+        </button>
+    <ul class=" nav-links flex gap-6" id="navlinks">
       <li><a href="Accueil.html" target="_blank" class="hover:text-green-300">Accueil</a></li>
       <li><a href="serviteurs.html" target="_blank" class="hover:text-green-300">Serviteurs</a></li>
       <li><a href="departements.html" target="_blank" class="hover:text-green-300">Départements</a></li>
@@ -28,40 +38,36 @@
 
   <!-- Présentation du président -->
   <main class="p-6">
-    <section class="relative max-w-4xl mx-auto bg-gradient-to-r from-green-50 to-green-100 rounded-lg shadow-md p-6 mb-10">
-      <h2 class="text-center text-green-700 font-semibold">
-        Departement de Louange et Adoration
-      </h2>
-
-      <h3 id="presidentNameDisplay"
-          class="text-xl font-bold text-green-700"></h3>
-
-      <div class="flex flex-col md:flex-row items-center gap-6">
-
-        <img id="presidentPhotoDisplay"
-            class="w-32 h-32 rounded-full object-cover shadow-md border-4 border-green-600 mx-auto mb-4" />
-
-        <div>
-          <p id="presidentDescDisplay"
-            class="mt-2 text-gray-600"></p>
-
-          <blockquote class="mt-4 italic text-green-700 border-l-4 border-green-600 pl-4">
-            “Que tout ce qui respire loue l’Éternel” (Psaume 150:6)
-          </blockquote>
-
-        </div>
-      </div>
-    </section>
+   <section class="relative max-w-4xl mx-auto bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-lg shadow-md p-6 mb-10">
+  <h2 class="text-center text-orange-700 font-semibold">
+    Département de Louange et Adoration
+  </h2>
+  <h3 class="text-xl font-bold text-orange-700 text-center mt-2">
+    Responsable : KALOMBO KAMBOWA STEPHANE
+  </h3>
+  <div class="flex flex-col md:flex-row items-center gap-6 mt-6">
+    <img src="/image/stephane.jpg"
+      alt="Responsable du département"class="w-32 h-32 rounded-full object-cover shadow-md border-4 border-yellow-600 mx-auto mb-4"/>
+    <div>
+      <p class="mt-2 text-gray-600">
+        Le département de Louange et Adoration a pour mission d’organiser les activités de louange et d'adoration au sein de l'église, de former et d'encadrer les membres du sous-département pour une meilleure performance, de collaborer avec les autres départements pour des événements spéciaux, et d'encourager la participation active des membres dans les activités de louange et d'adoration.
+      </p>
+      <blockquote class="mt-4 italic pl-4" style="color:#FFEB3B; border-left:4px solid #FFEB3B;">
+        Louez l'Éternel, car il est bon, car sa miséricorde dure à toujours! (Psaume 136:1)
+      </blockquote>
+    </div>
+  </div>
+</section>
 
   <!-- Attributions -->
     <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
-      <h3 class="text-xl font-bold text-green-700 mb-4">Atribution du departement de louange & Adoration</h3>
+      <h3 class="text-xl font-bold text-green-700 mb-4">Attribution du département de louange & Adoration</h3>
       <ul class="list-disc list-inside text-gray-700">
         <li>Travailler sous la supervision du pasteur pour des orientations</li>
-        <li>Organiser les activites du departements</li>
+        <li>Organiser les activités du département (répétitions, prières, prestations)</li>
         <li>Organiser les formations pour ses membres</li>
-        <li>Concourir a la tenue des cultes</li>
-        <li>Rapporter les besoins et defis au pasteur</li>
+        <li>Concourir à la tenue des cultes par des cantiques</li>
+        <li>Rapporter au pasteur</li>
       </ul>
     </section>
 
@@ -143,10 +149,15 @@
 
   <!-- Footer -->
   <footer class="bg-green-700 text-white text-center p-4 mt-10">
-    <p> 2026 Verts-Pâturage | Tous droits réservés</p>
+    <p> 2026 Verts-Pâturages | Tous droits réservés</p>
   </footer>
- <script src="core.js"></script>
-<script src="Louange_Adoration.js"></script>
-</body>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <!-- SERVICES -->
+  <script src="js/services/supabase.service.js"></script>
+  <script src="js/services/data.service.js"></script>
+  <script src="js/services/auth.service.js"></script>
+  <script src="js/modules/public/global.responsive.js"></script>
+  <script src="js/core/App.js"></script>
 </body>
 </html>

@@ -1,149 +1,145 @@
 const YouthCommentsPublic = {
-    
-    init() {
+
+    async init() {
+
         this.bindSubmit();
-        this.render();
-        this.checkAccess();
+        await this.render();
+
+        this.enableRealtime();
+
     },
-     checkAccess() {
 
-    const user = AuthService.currentUser();
-
-    const formZone =
-        document.getElementById("commentFormZone");
-
-    const blockedMsg =
-        document.getElementById("commentBlocked");
-
-    if (!formZone || !blockedMsg) return;
-
-    // Non connecté
-    if (!user) {
-        formZone.classList.add("hidden");
-        blockedMsg.classList.remove("hidden");
-        return;
-    }
-
-    // Vérifier si membre validé
-    const members =
-        DataService.get("vp_youth_members") || [];
-
-    const isMember =
-        members.some(m =>
-            m.email === user.email &&
-            m.statut === "actif"
-        );
-
-    if (!isMember) {
-        formZone.classList.add("hidden");
-        blockedMsg.classList.remove("hidden");
-        return;
-    }
-
-    // Membre valide
-    formZone.classList.remove("hidden");
-    blockedMsg.classList.add("hidden");
-},
-    
     bindSubmit() {
 
-        const btn = document.getElementById("submitComment");
+        const btn =
+            document.getElementById("submitComment");
+
         if (!btn) return;
 
-        btn.addEventListener("click", () => {
+        btn.addEventListener("click", async () => {
 
-            const auteur =
+            const author =
                 document.getElementById("commentAuthor").value.trim();
 
             const message =
-                document.getElementById("commentaire").value.trim();
+                document.getElementById("newComment").value.trim();
 
-            if (!auteur || !message) {
-                alert("Tous les champs sont obligatoires.");
+            if (!author || !message) {
+                alert("Tous les champs sont obligatoires");
                 return;
             }
 
-            const comments =
-                DataService.get("vp_youth_comments") || [];
+            const { error } =
+                await supabaseClient
+                    .from("youth_comments")
+                    .insert([
+                        {
+                            author,
+                            message,
+                            video: "programme_special",
+                            approved: false
+                        }
+                    ]);
 
-            comments.push({
-                id: Date.now(),
-                auteur,
-                message,
-                date: new Date().toISOString(),
-                statut: "en_attente",
-                likes: 0
-            });
+            if (error) {
+                console.error(error);
+                alert("Erreur envoi commentaire");
+                return;
+            }
 
-            DataService.set("vp_youth_comments", comments);
-
-            alert("Commentaire envoyé pour validation 💜");
+            alert("Commentaire envoyé pour validation");
 
             document.getElementById("commentAuthor").value = "";
-            document.getElementById("commentaire").value = "";
+            document.getElementById("newComment").value = "";
+
         });
+
     },
 
-    render() {
+    enableRealtime() {
+
+        supabaseClient
+        .channel("comments_channel")
+
+        .on(
+            "postgres_changes",
+            {
+                event: "*",
+                schema: "public",
+                table: "youth_comments"
+            },
+
+            () => {
+
+                console.log("Realtime commentaire");
+                this.render();
+
+            }
+        )
+
+        .subscribe();
+
+    },
+
+    async render() {
 
         const container =
             document.getElementById("publicComments");
 
         if (!container) return;
 
-        const comments =
-            DataService.get("vp_youth_comments") || [];
+        const { data: comments } =
+            await supabaseClient
+                .from("youth_comments")
+                .select("*")
+                .eq("approved", true)
+                .order("created_at", { ascending: false });
 
         container.innerHTML = "";
 
-        comments
-            .filter(c => c.statut === "approuve")
-            .forEach(c => {
+        comments.forEach(c => {
 
-                const div =
-                    document.createElement("div");
+            const div = document.createElement("div");
 
-                div.className =
-                    "bg-gray-100 p-4 rounded mb-3";
+            div.className =
+                "bg-gray-100 p-4 rounded mb-3";
 
-                div.innerHTML = `
-                    <strong>${c.auteur}</strong>
-                    <p>${c.message}</p>
-                    <button onclick="YouthCommentsPublic.like(${c.id})"
-                        class="text-sm text-purple-700">
-                        ❤️ ${c.likes}
-                    </button>
-                `;
+            div.innerHTML = `
+                <strong>${c.author}</strong>
+                <p>${c.message}</p>
 
-                container.appendChild(div);
-            });
+                <button
+                    onclick="YouthCommentsPublic.like(${c.id})"
+                    class="text-purple-700 text-sm">
+                    ❤️ ${c.likes}
+                </button>
+            `;
+
+            container.appendChild(div);
+
+        });
+
     },
 
-    like(id) {
+    async like(id) {
 
-        const key = "liked_comment_" + id;
+        const { data } =
+            await supabaseClient
+                .from("youth_comments")
+                .select("likes")
+                .eq("id", id)
+                .single();
 
-        if (localStorage.getItem(key)) {
-            alert("Déjà liké 💜");
-            return;
-        }
+        const likes = data.likes + 1;
 
-        const comments =
-            DataService.get("vp_youth_comments") || [];
-
-        const comment =
-            comments.find(c => c.id === id);
-
-        if (!comment) return;
-
-        comment.likes++;
-
-        DataService.set("vp_youth_comments", comments);
-
-        localStorage.setItem(key, "true");
+        await supabaseClient
+            .from("youth_comments")
+            .update({ likes })
+            .eq("id", id);
 
         this.render();
+
     }
-   
+
 };
 

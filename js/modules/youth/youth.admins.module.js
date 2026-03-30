@@ -1,73 +1,283 @@
 const YouthAdmins = {
 
-    init() {
-        this.render();
-        this.bindAdd();
-    },
+ init(){
 
-    render() {
+  this.checkPermission();
 
-        const container =
-            document.getElementById("adminList");
+  this.bindAdd();
 
-        if (!container) return;
+  this.loadAdmins();
 
-        const admins =
-            DataService.get("vp_admins") || [];
+ },
 
-        const youthAdmins =
-            admins.filter(a =>
-                a.role.includes("youth")
-            );
 
-        container.innerHTML = "";
+/* =============================
+   VERIFICATION ROLE
+============================= */
 
-        youthAdmins.forEach(a => {
+ checkPermission(){
 
-            const div =
-                document.createElement("div");
+  const user =
+  AuthService.currentUser();
 
-            div.className =
-                "bg-white p-3 rounded shadow mb-2";
+  if(!user) return;
 
-            div.textContent =
-                `${a.email} (${a.role})`;
 
-            container.appendChild(div);
-        });
-    },
+  if(
 
-    bindAdd() {
+   user.role !== "youth-super-admin"
+   &&
+   user.role !== "super-admin"
 
-        const btn =
-            document.getElementById("addYouthAdmin");
+  ){
 
-        if (!btn) return;
+   document
+   .getElementById("addYouthAdmin")
+   ?.remove();
 
-        btn.addEventListener("click", () => {
+   document
+   .getElementById("newAdminEmail")
+   ?.setAttribute("disabled", true);
 
-            const email =
-                document.getElementById("newAdminEmail").value.trim();
+   document
+   .getElementById("newAdminRole")
+   ?.setAttribute("disabled", true);
 
-            const role =
-                document.getElementById("newAdminRole").value;
+   console.warn(
+    "Permission refusée"
+   );
 
-            if (!email) return;
+  }
 
-            const admins =
-                DataService.get("vp_admins") || [];
+ },
 
-            admins.push({
-                id: Date.now(),
-                email,
-                password: "1234",
-                role
-            });
 
-            DataService.set("vp_admins", admins);
+/* =============================
+   BIND BUTTON
+============================= */
 
-            this.render();
-        });
-    }
+ bindAdd(){
+
+  document
+  .getElementById("addYouthAdmin")
+  ?.addEventListener("click", () => {
+
+   this.createAdmin();
+
+  });
+
+ },
+
+
+/* =============================
+   CREATION ADMIN
+============================= */
+
+ async createAdmin(){
+
+  const email =
+  document
+  .getElementById("newAdminEmail")
+  ?.value
+  ?.trim();
+
+  const role =
+  document
+  .getElementById("newAdminRole")
+  ?.value;
+
+
+  if(!email){
+
+   alert(
+    "Email requis"
+   );
+
+   return;
+
+  }
+
+
+  const user =
+  AuthService.currentUser();
+
+
+  if(
+
+   user.role !== "youth-super-admin"
+   &&
+   user.role !== "super-admin"
+
+  ){
+
+   alert(
+    "Action non autorisée"
+   );
+
+   return;
+
+  }
+
+
+/* password temporaire automatique */
+
+  const tempPassword =
+
+  Math.random()
+  .toString(36)
+  .slice(-10);
+
+
+/* création compte auth */
+
+  const { error: authError } =
+
+  await supabaseClient
+  .auth
+  .signUp({
+
+   email,
+   password: tempPassword
+
+  });
+
+
+  if(authError){
+
+   alert(
+    authError.message
+   );
+
+   return;
+
+  }
+
+
+/* insertion role */
+
+  const { error: dbError } =
+
+  await supabaseClient
+  .from("admins")
+  .insert({
+
+   email,
+   role
+
+  });
+
+
+  if(dbError){
+
+   alert(
+    dbError.message
+   );
+
+   return;
+
+  }
+
+
+  alert(
+
+   "Administrateur créé.\nUn email lui permettra de définir son mot de passe."
+
+  );
+
+
+/* reset champ */
+
+  document
+  .getElementById("newAdminEmail")
+  .value = "";
+
+
+/* reload liste */
+
+  this.loadAdmins();
+
+ },
+
+
+/* =============================
+   LISTE ADMINS
+============================= */
+
+ async loadAdmins(){
+
+  const container =
+  document
+  .getElementById("adminList");
+
+  if(!container) return;
+
+
+  const { data, error } =
+
+  await supabaseClient
+  .from("admins")
+  .select("*")
+  .like("role","youth%")
+  .order("email");
+
+
+  if(error){
+
+   console.error(
+    error
+   );
+
+   return;
+
+  }
+
+
+  container.innerHTML = "";
+
+
+  if(!data.length){
+
+   container.innerHTML =
+
+   "<p>Aucun administrateur</p>";
+
+   return;
+
+  }
+
+
+  data.forEach(admin => {
+
+   container.innerHTML += `
+
+    <div class="admin-card">
+
+     <div>
+
+      <strong>
+
+       ${admin.email}
+
+      </strong>
+
+      <br>
+
+      <small>
+
+       ${admin.role}
+
+      </small>
+
+     </div>
+
+    </div>
+
+   `;
+
+  });
+
+ }
 
 };
+
+window.YouthAdmins = YouthAdmins;

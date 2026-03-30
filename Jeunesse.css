@@ -1,241 +1,407 @@
 /* =================================
-   VARIABLES JEUNESSE
-================================= */
-:root {
-  --youth-purple: #7e57c2;
-  --youth-pink: #ec407a;
-  --youth-orange: #fb8c00;
-  --youth-green: #2e7d32;
-  --soft-bg: #f8f7fc;
-  --card-bg: #ffffff;
-  --text-dark: #1f2937;
-  --text-soft: #6b7280;
-  --radius: 18px;
-  --transition: 0.3s ease;
+VARIABLES
+================================ */
+
+:root{
+
+ --primary:#7e57c2;
+ --secondary:#ec407a;
+ --accent:#fb8c00;
+
+ --bg:#f8fafc;
+
+ --card-bg:#ffffff;
+
+ --text:#1f2937;
+
+ --text-soft:#6b7280;
+
+ --radius:18px;
+
+ --transition:.28s ease;
+
 }
+
 
 /* =================================
-   BASE
-================================= */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', 'Open Sans', sans-serif;
-  background: var(--soft-bg);
-  color: var(--text-dark);
-  line-height: 1.6;
+BASE
+================================ */
+
+body{
+
+ margin:0;
+
+ font-family:'Segoe UI','Open Sans',sans-serif;
+
+ background:linear-gradient(180deg,#fafafa,#f3f4f6);
+
+ color:var(--text);
+
+ line-height:1.65;
+
 }
 
-html {
-  scroll-behavior: smooth;
-}
 
 /* =================================
-   HERO JEUNESSE (Plus impactant)
-================================= */
-.hero {
-  background: linear-gradient(
-    135deg,
-    var(--youth-purple),
-    var(--youth-pink),
-    var(--youth-orange)
-  );
-  background-size: 300% 300%;
-  animation: gradientMove 10s ease infinite;
-  padding: 5rem 2rem;
-  text-align: center;
-  color: white;
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+HERO PREMIUM
+================================ */
+
+.hero{
+
+ background:
+ linear-gradient(
+ 135deg,
+ var(--primary),
+ var(--secondary),
+ var(--accent)
+ );
+
+ color:white;
+
+ padding:4.5rem 2rem;
+
+ text-align:center;
+
+ border-bottom-left-radius:45px;
+
+ border-bottom-right-radius:45px;
+
+ box-shadow:
+ 0 10px 35px rgba(0,0,0,0.12);
+
+ position:relative;
+
+ overflow:hidden;
+
 }
 
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+
+/* léger effet lumineux */
+
+.hero::after{
+
+ content:"";
+
+ position:absolute;
+
+ width:350px;
+
+ height:350px;
+
+ background:radial-gradient(
+
+  circle,
+
+  rgba(255,255,255,.18),
+
+  transparent
+
+ );
+
+ top:-120px;
+
+ right:-120px;
+
+ border-radius:50%;
+
 }
+
+
+/* titre hero */
 
 .hero h1,
-.hero h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+.hero h2{
+
+ margin-bottom:.6rem;
+
+ letter-spacing:.4px;
+
 }
 
-.hero p {
-  max-width: 700px;
-  margin: 0 auto;
-  opacity: 0.95;
+
+/* texte hero */
+
+.hero p{
+
+ opacity:.92;
+
+ max-width:650px;
+
+ margin:auto;
+
 }
+
 
 /* =================================
-   CARDS MODERNES
-================================= */
-section .bg-white {
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  padding: 2rem;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
+SECTION
+================================ */
+
+section{
+
+ max-width:1100px;
+
+ margin:65px auto;
+
+ padding:42px 26px;
+
 }
 
-section .bg-white::before {
-  content: "";
-  position: absolute;
-  width: 180px;
-  height: 180px;
-  background: rgba(126,87,194,0.06);
-  border-radius: 50%;
-  top: -60px;
-  right: -60px;
+
+/* titre section */
+
+section h2{
+
+ color:var(--primary);
+
+ margin-bottom:22px;
+
+ font-size:1.9rem;
+
+ position:relative;
+
 }
 
-section .bg-white:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 45px rgba(0,0,0,0.1);
+
+/* petite ligne décorative */
+
+section h2::after{
+
+ content:"";
+
+ display:block;
+
+ width:55px;
+
+ height:3px;
+
+ background:
+ linear-gradient(
+ 90deg,
+ var(--secondary),
+ var(--accent)
+ );
+
+ margin-top:8px;
+
+ border-radius:4px;
+
 }
+
 
 /* =================================
-   TIMELINE MODERNE
-================================= */
-.timeline {
-  border-left: 3px solid var(--youth-purple);
-  padding-left: 1.5rem;
+CARDS PREMIUM
+================================ */
+
+.card{
+
+ background:var(--card-bg);
+
+ border-radius:var(--radius);
+
+ padding:2.2rem;
+
+ box-shadow:
+ 0 18px 40px rgba(0,0,0,0.06);
+
+ transition:var(--transition);
+
+ border:1px solid rgba(0,0,0,0.04);
+
+ position:relative;
+
+ overflow:hidden;
+
 }
 
-.timeline .event {
-  position: relative;
-  margin-bottom: 1.5rem;
-  padding-left: 1rem;
+
+/* halo subtil */
+
+.card::before{
+
+ content:"";
+
+ position:absolute;
+
+ width:180px;
+
+ height:180px;
+
+ background:
+ radial-gradient(
+
+  circle,
+
+  rgba(236,64,122,.07),
+
+  transparent
+
+ );
+
+ top:-60px;
+
+ right:-60px;
+
+ border-radius:50%;
+
 }
 
-.timeline .event::before {
-  content: "";
-  position: absolute;
-  left: -1.65rem;
-  top: 5px;
-  width: 14px;
-  height: 14px;
-  background: var(--youth-pink);
-  border-radius: 50%;
-  box-shadow: 0 0 0 4px rgba(236,64,122,0.2);
+
+/* effet hover */
+
+.card:hover{
+
+ transform:translateY(-6px);
+
+ box-shadow:
+ 0 30px 60px rgba(0,0,0,0.12);
+
 }
+
+
+/* texte dans carte */
+
+.card p{
+
+ color:var(--text-soft);
+
+}
+
 
 /* =================================
-   BOUTONS
-================================= */
-#adhesionBtn,
-.youthadminbtn,
-section button {
-  background: linear-gradient(
-    135deg,
-    var(--youth-purple),
-    var(--youth-pink)
-  );
-  color: white;
-  padding: 0.8rem 1.6rem;
-  border-radius: 50px;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
+COMMENTAIRES
+================================ */
+
+#publicComments div{
+
+ background:var(--card-bg);
+
+ padding:16px;
+
+ border-radius:14px;
+
+ margin-bottom:12px;
+
+ box-shadow:
+ 0 6px 18px rgba(0,0,0,0.05);
+
+ border-left:4px solid var(--secondary);
+
+ transition:var(--transition);
+
 }
 
-#adhesionBtn:hover,
-.youthadminbtn:hover,
-section button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+
+/* hover commentaire */
+
+#publicComments div:hover{
+
+ transform:translateX(4px);
+
+ box-shadow:
+ 0 10px 25px rgba(0,0,0,0.1);
+
 }
 
-#adhesionBtn:active,
-section button:active {
-  transform: scale(0.95);
-}
 
 /* =================================
-   TITRES & TEXTES
-================================= */
-section h2 {
-  font-size: 1.9rem;
-  margin-bottom: 1.5rem;
-  color: var(--youth-purple);
-  position: relative;
+FOOTER PREMIUM
+================================ */
+
+footer{
+
+ text-align:center;
+
+ padding:2.3rem;
+
+ background:
+ linear-gradient(
+ 135deg,
+ var(--primary),
+ var(--secondary)
+ );
+
+ color:white;
+
+ margin-top:50px;
+
+ letter-spacing:.3px;
+
+ box-shadow:
+ 0 -8px 25px rgba(0,0,0,0.08);
+
 }
 
-section h2::after {
-  content: "";
-  width: 70px;
-  height: 4px;
-  background: var(--youth-pink);
-  display: block;
-  margin-top: 8px;
-  border-radius: 6px;
-}
-
-h3 {
-  color: var(--youth-purple);
-  margin-top: 1rem;
-}
-
-p {
-  color: var(--text-soft);
-}
-
-ul {
-  padding-left: 1.5rem;
-}
-
-ul li {
-  margin-bottom: 0.6rem;
-}
 
 /* =================================
-   LIENS
-================================= */
-a {
-  color: var(--youth-purple);
-  text-decoration: none;
-  font-weight: 600;
+RESPONSIVE
+================================ */
+
+@media(max-width:768px){
+
+.hero{
+
+ padding:3rem 1.4rem;
+
+ border-bottom-left-radius:30px;
+
+ border-bottom-right-radius:30px;
+
 }
 
-a:hover {
-  color: var(--youth-pink);
+
+section{
+
+ margin:45px auto;
+
+ padding:28px 18px;
+
 }
 
-/* =================================
-   FOOTER HARMONISÉ
-================================= */
-footer {
-  background: linear-gradient(
-    135deg,
-    var(--youth-purple),
-    var(--youth-green)
-  );
-  color: white;
-  text-align: center;
-  padding: 2rem;
-  margin-top: 4rem;
+
+.card{
+
+ padding:1.6rem;
+
 }
 
-/* =================================
-   RESPONSIVE
-================================= */
-@media (max-width: 768px) {
-  .hero {
-    padding: 3.5rem 1.5rem;
-  }
 
-  .hero h1,
-  .hero h2 {
-    font-size: 1.8rem;
-  }
+section h2{
 
-  .timeline {
-    padding-left: 1rem;
-  }
+ font-size:1.55rem;
 
-  .timeline .event::before {
-    left: -1.3rem;
-  }
+}
+
+
+}
+
+
+@media(max-width:420px){
+
+.hero{
+
+ padding:2.4rem 1.2rem;
+
+}
+
+
+section{
+
+ padding:22px 15px;
+
+}
+
+
+.card{
+
+ padding:1.3rem;
+
+}
+
+
+section h2{
+
+ font-size:1.4rem;
+
+}
+
 }

@@ -12,3 +12,122 @@
   background: #7e22ce;
   color: white;
 }
+
+/* =================================
+THEME TOGGLE
+================================ */
+
+.theme-toggle{
+
+ background:rgba(255,255,255,0.15);
+
+ border:none;
+
+ color:white;
+
+ padding:6px 10px;
+
+ border-radius:8px;
+
+ cursor:pointer;
+
+ font-size:1rem;
+
+ margin-right:10px;
+
+}
+
+
+.theme-toggle:hover{
+
+ background:rgba(255,255,255,0.3);
+
+}
+
+
+/* =================================
+DARK MODE VARIABLES
+================================ */
+
+.dark{
+
+ --soft-bg:#0f172a;
+
+ --card-bg:#1e293b;
+
+ --text-dark:#e5e7eb;
+
+ --text-soft:#94a3b8;
+
+ --primary:#22c55e;
+
+ --primary-light:#16a34a;
+
+}
+
+
+/* fond général */
+
+.dark body{
+
+ background:#0f172a;
+
+ color:#e5e7eb;
+
+}
+
+
+/* cartes */
+
+.dark .card,
+.dark .relative.bg-white,
+.dark .event-card,
+.dark .visionnaire-container,
+.dark #verset-content{
+
+ background:#1e293b;
+
+ color:#e5e7eb;
+
+}
+
+
+/* navbar */
+
+.dark .navbar{
+
+ background:linear-gradient(
+ 135deg,
+ #14532d,
+ #166534
+ );
+
+}
+
+
+/* footer */
+
+.dark footer{
+
+ background:linear-gradient(
+ 135deg,
+ #14532d,
+ #166534
+ );
+
+}
+
+
+/* inputs */
+
+.dark input,
+.dark textarea,
+.dark select{
+
+ background:#020617;
+
+ color:white;
+
+ border:1px solid #334155;
+
+}

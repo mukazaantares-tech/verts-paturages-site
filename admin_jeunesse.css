@@ -1,0 +1,423 @@
+body{
+font-family:Arial,Helvetica,sans-serif;
+margin:0;
+background:#f4f6f9;
+}
+
+.admin-layout{
+display:flex;
+height:100vh;
+}
+
+.sidebar{
+width:240px;
+background:#4c1d95;
+color:white;
+padding:20px;
+}
+
+.logo{
+font-size:20px;
+margin-bottom:30px;
+}
+
+.sidebar ul{
+list-style:none;
+padding:0;
+}
+
+.sidebar li{
+padding:12px;
+margin-bottom:10px;
+cursor:pointer;
+border-radius:6px;
+}
+
+.sidebar li:hover{
+background:#6d28d9;
+}
+
+.sidebar li.active{
+background:#7e22ce;
+}
+
+.main-content{
+flex:1;
+padding:40px;
+overflow:auto;
+}
+
+.section{
+display:none;
+}
+
+.section.active{
+display:block;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+margin-bottom:40px;
+}
+
+.stat-card{
+background:white;
+padding:25px;
+border-radius:8px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+text-align:center;
+}
+
+.stat-card h2{
+font-size:28px;
+color:#7e22ce;
+}
+
+.chart-container{
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+}
+
+.form-row{
+display:flex;
+gap:10px;
+margin-bottom:20px;
+}
+
+input,select{
+padding:10px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+button{
+background:#7e22ce;
+color:white;
+border:none;
+padding:10px 16px;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#6d28d9;
+}
+
+#adhesionList div,
+#activityList div,
+#commentsList div,
+#adminList div{
+background:white;
+padding:15px;
+border-radius:8px;
+margin-bottom:10px;
+box-shadow:0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* =================================
+THEME TOGGLE
+================================ */
+
+.theme-toggle{
+
+ background:rgba(255,255,255,0.15);
+
+ border:none;
+
+ color:white;
+
+ padding:6px 10px;
+
+ border-radius:8px;
+
+ cursor:pointer;
+
+ font-size:1rem;
+
+ margin-right:10px;
+
+}
+
+
+.theme-toggle:hover{
+
+ background:rgba(255,255,255,0.3);
+
+}
+
+
+/* =================================
+DARK MODE VARIABLES
+================================ */
+
+.dark{
+
+ --soft-bg:#0f172a;
+
+ --card-bg:#1e293b;
+
+ --text-dark:#e5e7eb;
+
+ --text-soft:#94a3b8;
+
+ --primary:#22c55e;
+
+ --primary-light:#16a34a;
+
+}
+
+
+/* fond général */
+
+.dark body{
+
+ background:#0f172a;
+
+ color:#e5e7eb;
+
+}
+
+
+/* cartes */
+
+.dark .card,
+.dark .relative.bg-white,
+.dark .event-card,
+.dark .visionnaire-container,
+.dark #verset-content{
+
+ background:#1e293b;
+
+ color:#e5e7eb;
+
+}
+
+
+/* navbar */
+
+.dark .navbar{
+
+ background:linear-gradient(
+ 135deg,
+ #14532d,
+ #166534
+ );
+
+}
+
+
+/* footer */
+
+.dark footer{
+
+ background:linear-gradient(
+ 135deg,
+ #14532d,
+ #166534
+ );
+
+}
+
+
+/* inputs */
+
+.dark input,
+.dark textarea,
+.dark select{
+
+ background:#020617;
+
+ color:white;
+
+ border:1px solid #334155;
+
+}
+
+
+/* =================================
+TOPBAR JEUNESSE
+================================ */
+
+.topbar{
+
+ display:flex;
+
+ justify-content:space-between;
+
+ align-items:center;
+
+ padding:15px 25px;
+
+ background:linear-gradient(
+ 135deg,
+ #1b5e20,
+ #2e7d32
+ );
+
+ color:white;
+
+ box-shadow:0 5px 15px rgba(0,0,0,0.08);
+
+ position:sticky;
+
+ top:0;
+
+ z-index:1000;
+
+}
+
+
+.logo-area{
+
+ display:flex;
+
+ align-items:center;
+
+ gap:15px;
+
+}
+
+
+.logo-area h1{
+
+ margin:0;
+
+ font-size:1.4rem;
+
+}
+
+
+.subtitle{
+
+ font-size:0.8rem;
+
+ opacity:0.8;
+
+ display:block;
+
+}
+
+
+.admin-area{
+
+ display:flex;
+
+ align-items:center;
+
+ gap:15px;
+
+ font-size:0.9rem;
+
+}
+
+
+.admin-role{
+
+ background:#10b981;
+
+ padding:4px 10px;
+
+ border-radius:8px;
+
+ font-size:0.75rem;
+
+}
+
+
+.logout-btn{
+
+ background:white;
+
+ color:#1b5e20;
+
+ border:none;
+
+ padding:6px 12px;
+
+ border-radius:8px;
+
+ cursor:pointer;
+
+ font-weight:600;
+
+}
+
+
+.logout-btn:hover{
+
+ background:#10b981;
+
+ color:white;
+
+}
+
+
+/* bouton menu mobile */
+
+.burger-admin{
+
+ background:none;
+
+ border:none;
+
+ font-size:1.5rem;
+
+ color:white;
+
+ cursor:pointer;
+
+ display:none;
+
+}
+
+
+/* layout */
+
+.youth-layout{
+
+ display:flex;
+
+ min-height:100vh;
+
+}
+
+
+/* responsive */
+
+@media(max-width:900px){
+
+ .burger-admin{
+
+  display:block;
+
+ }
+
+
+ .sidebar{
+
+  position:fixed;
+
+  left:-260px;
+
+  top:60px;
+
+  height:100%;
+
+  transition:0.3s;
+
+  z-index:999;
+
+ }
+
+
+ .sidebar.open{
+
+  left:0;
+
+ }
+
+}

@@ -126,14 +126,814 @@
     font-weight: 500;
 }
 
-/* RESPONSIVE */
+/* =================================
+NAVBAR RESPONSIVE CONSEIL
+================================= */
 
-@media (max-width: 768px) {
-    .conseil-title {
-        font-size: 28px;
-    }
+.burger{
 
-    .conseil-description {
-        font-size: 14px;
-    }
+ display:none;
+
+ font-size:1.6rem;
+
+ background:none;
+
+ border:none;
+
+ color:white;
+
+ cursor:pointer;
+
+}
+
+
+/* mobile */
+
+@media(max-width:768px){
+
+ .burger{
+
+  display:block;
+
+ }
+
+
+ .nav-links{
+
+  position:absolute;
+
+  top:65px;
+
+  left:0;
+
+  width:100%;
+
+  background:#1b5e20;
+
+  flex-direction:column;
+
+  gap:0;
+
+  max-height:0;
+
+  overflow:hidden;
+
+  transition:0.3s ease;
+
+ }
+
+
+ .nav-links.open{
+
+  max-height:350px;
+
+ }
+
+
+ .nav-links li{
+
+  padding:14px;
+
+  border-bottom:
+  1px solid rgba(255,255,255,0.1);
+
+ }
+
+}
+
+
+/* =================================
+SECTION CONSEIL
+================================= */
+
+.conseil{
+
+ max-width:1100px;
+
+ margin:3rem auto;
+
+ padding:0 1.5rem;
+
+}
+
+
+/* layout flexible */
+
+.member-profile{
+
+ display:flex;
+
+ gap:25px;
+
+ align-items:center;
+
+ margin-bottom:2rem;
+
+}
+
+
+/* image adaptative */
+
+.member-profile img{
+
+ width:140px;
+
+ border-radius:12px;
+
+ box-shadow:0 10px 20px rgba(0,0,0,0.08);
+
+}
+
+
+/* texte */
+
+.member-profile h3{
+
+ margin:0;
+
+ color:#1b5e20;
+
+}
+
+
+/* tablette */
+
+@media(max-width:900px){
+
+ .member-profile{
+
+  gap:18px;
+
+ }
+
+}
+
+
+/* mobile */
+
+@media(max-width:768px){
+
+ .member-profile{
+
+  flex-direction:column;
+
+  text-align:center;
+
+ }
+
+
+ .member-profile img{
+
+  width:120px;
+
+ }
+
+}
+
+
+/* petit mobile */
+
+@media(max-width:480px){
+
+ .member-profile img{
+
+  width:100px;
+
+ }
+
+}
+
+/* =================================
+THEME TOGGLE
+================================ */
+
+.theme-toggle{
+
+ background:rgba(255,255,255,0.15);
+
+ border:none;
+
+ color:white;
+
+ padding:6px 10px;
+
+ border-radius:8px;
+
+ cursor:pointer;
+
+ font-size:1rem;
+
+ margin-right:10px;
+
+}
+
+
+.theme-toggle:hover{
+
+ background:rgba(255,255,255,0.3);
+
+}
+
+
+/* =================================
+DARK MODE VARIABLES
+================================ */
+
+.dark{
+
+ --soft-bg:#0f172a;
+
+ --card-bg:#1e293b;
+
+ --text-dark:#e5e7eb;
+
+ --text-soft:#94a3b8;
+
+ --primary:#22c55e;
+
+ --primary-light:#16a34a;
+
+}
+
+
+/* fond général */
+
+.dark body{
+
+ background:#0f172a;
+
+ color:#e5e7eb;
+
+}
+
+
+/* cartes */
+
+.dark .card,
+.dark .relative.bg-white,
+.dark .event-card,
+.dark .visionnaire-container,
+.dark #verset-content{
+
+ background:#1e293b;
+
+ color:#e5e7eb;
+
+}
+
+
+/* navbar */
+
+.dark .navbar{
+
+ background:linear-gradient(
+ 135deg,
+ #14532d,
+ #166534
+ );
+
+}
+
+
+/* footer */
+
+.dark footer{
+
+ background:linear-gradient(
+ 135deg,
+ #14532d,
+ #166534
+ );
+
+}
+
+
+/* inputs */
+
+.dark input,
+.dark textarea,
+.dark select{
+
+ background:#020617;
+
+ color:white;
+
+ border:1px solid #334155;
+
+}
+
+/* =================================
+AMELIORATION VISUELLE CONSEIL
+================================ */
+
+/* fond plus doux */
+.conseil-communautaire{
+
+ background:var(--soft-bg);
+
+}
+
+
+/* meilleure cohérence carte */
+
+.conseil-card{
+
+ border-radius:var(--radius);
+
+ border:1px solid rgba(0,0,0,0.06);
+
+ box-shadow:0 15px 35px rgba(0,0,0,0.06);
+
+ transition:var(--transition);
+
+ position:relative;
+
+ overflow:hidden;
+
+}
+
+
+/* effet subtil décoratif */
+
+.conseil-card::before{
+
+ content:"";
+
+ position:absolute;
+
+ width:160px;
+
+ height:160px;
+
+ background:rgba(16,185,129,0.06);
+
+ border-radius:50%;
+
+ top:-60px;
+
+ right:-60px;
+
+}
+
+
+/* hover plus moderne */
+
+.conseil-card:hover{
+
+ transform:translateY(-6px);
+
+ box-shadow:0 20px 40px rgba(0,0,0,0.12);
+
+}
+
+
+/* photo plus élégante */
+
+.conseil-photo{
+
+ border-radius:50%;
+
+ border:4px solid var(--primary);
+
+ box-shadow:0 8px 20px rgba(0,0,0,0.12);
+
+}
+
+
+/* titres cohérents */
+
+.conseil-name{
+
+ color:var(--primary);
+
+ font-weight:600;
+
+}
+
+
+/* badges améliorés */
+
+.status-badge{
+
+ font-size:12px;
+
+ letter-spacing:0.5px;
+
+}
+
+
+/* president */
+
+.status-president{
+
+ background:linear-gradient(
+ 135deg,
+ var(--primary),
+ var(--primary-light)
+ );
+
+}
+
+
+/* membre */
+
+.status-member{
+
+ background:rgba(34,197,94,0.12);
+
+ border:1px solid rgba(34,197,94,0.25);
+
+}
+
+
+/* adresse */
+
+.conseil-address{
+
+ color:var(--primary);
+
+ opacity:0.85;
+
+}
+
+
+/* =================================
+DARK MODE CONSEIL
+================================ */
+
+.dark .conseil-communautaire{
+
+ background:#0f172a;
+
+}
+
+
+.dark .conseil-card{
+
+ background:#1e293b;
+
+ border:1px solid rgba(255,255,255,0.06);
+
+}
+
+
+.dark .conseil-card::before{
+
+ background:rgba(34,197,94,0.06);
+
+}
+
+
+.dark .conseil-role{
+
+ color:#cbd5f5;
+
+}
+
+
+.dark .status-member{
+
+ background:rgba(34,197,94,0.15);
+
+ color:#86efac;
+
+}
+
+
+/* =================================
+RESPONSIVE AMELIORE
+================================ */
+
+@media(max-width:768px){
+
+ .conseil-title{
+
+  font-size:28px;
+
+ }
+
+ .conseil-description{
+
+  font-size:15px;
+
+ }
+
+ .conseil-card{
+
+  padding:25px;
+
+ }
+
+}
+
+
+/* mobile très petit */
+
+@media(max-width:480px){
+
+ .conseil-card{
+
+  padding:20px;
+
+ }
+
+ .conseil-photo{
+
+  width:100px;
+
+  height:100px;
+
+ }
+
+}
+
+/* =================================
+RESPONSIVE TABLET
+================================ */
+
+@media(max-width:900px){
+
+.hero-content h2{
+
+ font-size:2rem;
+
+}
+
+}
+
+
+/* =================================
+RESPONSIVE TELEPHONE
+================================ */
+
+@media(max-width:768px){
+
+/* bouton burger visible */
+
+.burger{
+
+ display:block;
+
+ font-size:1.7rem;
+
+}
+
+
+/* menu mobile plein écran */
+
+.nav-links{
+
+ position:fixed;
+
+ inset:0;
+
+ height:100vh;
+
+ background:
+ linear-gradient(
+ 160deg,
+ #14532d,
+ #166534,
+ #15803d
+ );
+
+ display:flex;
+
+ flex-direction:column;
+
+ align-items:center;
+
+ justify-content:flex-start;
+
+ padding:90px 20px 40px;
+
+ gap:12px;
+
+ transform:translateY(-100%);
+
+ opacity:0;
+
+ transition:.4s ease;
+
+ overflow-y:auto;
+
+ -webkit-overflow-scrolling:touch;
+
+ z-index:999;
+
+}
+
+
+/* menu visible */
+
+.nav-links.open{
+
+ transform:translateY(0);
+
+ opacity:1;
+
+}
+
+
+/* items menu */
+
+.nav-links li{
+
+ width:100%;
+
+ max-width:260px;
+
+ text-align:center;
+
+}
+
+
+/* boutons menu */
+
+.nav-links a{
+
+ display:block;
+
+ width:100%;
+
+ padding:11px;
+
+ border-radius:12px;
+
+ background:rgba(255,255,255,.05);
+
+ border:1px solid rgba(255,255,255,.08);
+
+ font-size:.98rem;
+
+ font-weight:600;
+
+}
+
+
+/* hover */
+
+.nav-links a:hover{
+
+ background:rgba(255,255,255,.12);
+
+}
+
+
+/* HERO plus compact */
+
+.hero{
+
+ padding:2.6rem 1.2rem;
+
+ border-bottom-left-radius:28px;
+
+ border-bottom-right-radius:28px;
+
+}
+
+
+/* titre hero */
+
+.hero-content h2{
+
+ font-size:1.75rem;
+
+}
+
+
+/* texte hero */
+
+.hero-content p{
+
+ font-size:.95rem;
+
+}
+
+
+/* section vision */
+
+.visionnaire-section{
+
+ margin:45px auto;
+
+ padding:0 16px;
+
+}
+
+
+/* carte vision */
+
+.visionnaire-container{
+
+ padding:28px 20px;
+
+ border-radius:16px;
+
+}
+
+
+/* titre vision */
+
+.visionnaire-container h2{
+
+ font-size:1.6rem;
+
+}
+
+
+/* texte vision */
+
+.visionnaire-container p{
+
+ font-size:.95rem;
+
+}
+
+
+/* verset */
+
+#verset-du-jour{
+
+ margin:2.2rem auto;
+
+ padding:0 15px;
+
+}
+
+
+/* carte */
+
+.card,
+#verset-content{
+
+ padding:1.4rem;
+
+ border-radius:16px;
+
+}
+
+
+/* footer */
+
+footer{
+
+ padding:1.6rem;
+
+ margin-top:3rem;
+
+}
+
+}
+
+
+/* =================================
+PETITS TELEPHONES
+================================ */
+
+@media(max-width:420px){
+
+.hero-content h2{
+
+ font-size:1.5rem;
+
+}
+
+
+.visionnaire-container{
+
+ padding:22px 16px;
+
+}
+
+
+.visionnaire-container h2{
+
+ font-size:1.45rem;
+
+}
+
+
+.visionnaire-container p{
+
+ font-size:.92rem;
+
+}
+
+
+.nav-links{
+
+ padding-top:85px;
+
+}
+
+
+.nav-links a{
+
+ font-size:.92rem;
+
+ padding:10px;
+
+}
+
 }

@@ -4,190 +4,161 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sous-Département : Asafa</title>
-
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="Verts-Paturages.png" type="image/png">
+  <link rel="stylesheet" href="global.responsive.css">
+  <link rel="stylesheet" href="darkmode.global.css">
+  <link rel="stylesheet" href="Hassafa.css">
 </head>
 
-<body class="bg-gray-100"
-      data-departement="Louange et adoration"
-      data-sous="Asafa">
+<body class="dark-enabled bg-gray-100"data-departement="Louange et adoration"data-sous="Asafa">
 
 <header class="bg-green-700 text-white p-4 flex justify-between items-center">
-  <h1 class="text-xl font-bold">Verts-Pâturages</h1>
-  <ul class="flex gap-6">
-    <li><a href="Accueil.html" class="hover:text-green-300">Accueil</a></li>
-    <li><a href="Serviteurs.html" class="hover:text-green-300">Serviteurs</a></li>
-    <li><a href="Departements.html" class="hover:text-green-300">Départements</a></li>
-    <li><a href="Louange_Adoration.html" class="hover:text-green-300">louange et adoration</a></li>
-    <li><a href="Jeunesse.html">jeunesse</a></li>
-  </ul>
+  <nav class="navbar" >
+    <h1 class="text-xl font-bold">Verts-Pâturages</h1>
+    <!-- bouton mobile -->
+        <button class="burger" id="burger">
+          ☰
+        </button>
+        <!-- bouton dark mode -->
+    <button id="themeToggle" class="theme-toggle">
+      🌙
+    </button>
+      <ul class="nav-links flex gap-6" id="navlinks">
+        <li><a href="Accueil.html" class="hover:text-green-300" target="_blank" >Accueil</a></li>
+        <li><a href="Serviteurs.html" class="hover:text-green-300" target="_blank" >Serviteurs</a></li>
+          <li><a href="Evenements.html" class="hover:text-green-300" target="_blank">Événements</a></li>
+        <li><a href="Departements.html" class="hover:text-green-300" target="_blank">Départements</a></li>
+        <li><a href="Louange_Adoration.html" class="hover:text-green-300" target="_blank">louange et adoration</a></li>
+        <li><a href="Jeunesse.html" target="_blank">jeunesse</a></li>
+        <li><a href="localisation.html" target="_blank">Localisation</a></li>
+      </ul>
+  </nav>
 </header>
 
 <main class="p-6">
-
   <!-- TITRE -->
-  <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
-    <h2 id="pageTitle"
-        class="text-2xl font-bold text-green-700 mb-4 text-center">
-    </h2>
-
-    <div class="flex flex-col md:flex-row items-center gap-6">
-      <img id="presidentPhotoDisplay"
-           class="w-40 h-40 rounded-full object-cover shadow-md border-4 border-green-600"/>
-
-      <div>
-        <h3 id="presidentNameDisplay"
-            class="text-xl font-semibold text-gray-800"></h3>
-
-        <p id="presidentDescDisplay"
-           class="mt-2 text-gray-600"></p>
-      </div>
-    </div>
-  </section>
-  <!-- Attributions -->
-  <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
-    <h3 class="text-xl font-bold text-green-700 mb-4">Attributions du sous-département Asafa</h3>
-    <ul class="list-disc list-inside text-gray-700">
-      <li>Organiser les activités de louange et d'adoration au sein de l'église</li>
-      <li>Former et encadrer les membres du sous-département pour une meilleure performance</li>
-      <li>Collaborer avec les autres départements pour des événements spéciaux</li>
-      <li>Encourager la participation active des membres dans les activités de louange et d'adoration</li>
-    </ul>
-  </section>
-
-
-  <!-- ACTIVITES -->
-  <section class="max-w-4xl mx-auto bg-green-50 rounded-lg shadow-md p-6 mb-10">
-    <h3 class="text-xl font-bold text-green-700 mb-4">
-      Activités principales
-    </h3>
-
-    <ul id="activitesZone"
-        class="list-disc list-inside text-gray-700">
-    </ul>
-  </section>
-
-
-  <!-- VIDEOS -->
-  <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
-    <h3 class="text-xl font-bold text-green-700 mb-4">
-      Vidéos
-    </h3>
-
-    <div id="videoZone"
-         class="flex flex-col items-center gap-4">
-    </div>
-  </section>
-
-
-  <!-- GALERIE -->
-  <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
-    <h3 class="text-xl font-bold text-green-700 mb-4">
-      Galerie photos
-    </h3>
-
-    <div id="galleryZone"
-         class="grid grid-cols-2 md:grid-cols-3 gap-4">
-    </div>
-  </section>
-
-
-  <!-- ADHESION -->
-  <section class="max-w-4xl mx-auto bg-green-50 rounded-lg shadow-md p-6 mb-10 text-center">
-
-    <button class="adhesionBtn px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
-      Demande d’adhésion
-    </button>
-
-  </section>
-
-</main>
-
-
-  <!-- MODAL FORMULAIRE -->
-  <div id="adhesionModal"
-       class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-
-    <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-4 max-h-screen overflow-y-auto">
-
-      <h3 class="text-xl font-bold text-green-700 mb-4">
-        Formulaire d'adhésion
+<section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
+  <h2 class="text-2xl font-bold text-green-700 mb-4 text-center">
+    Présentation du département Asafa
+  </h2>
+  <div class="flex flex-col md:flex-row items-center gap-6">
+    <img 
+      src="images/president.jpg" alt="Photo de la Présidente" class="w-40 h-40 rounded-full object-cover shadow-md border-4 border-green-600"/>
+    <div>
+      <h3 class="text-xl font-semibold text-gray-800">
+        Maman ...
       </h3>
-
-      <form id="adhesionForm">
-
-        <div class="mb-4">
-          <label class="block text-gray-700 mb-2">Nom</label>
-          <input type="text" name="nom"
-                 class="w-full p-2 border border-gray-300 rounded" required />
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-gray-700 mb-2">Postnom</label>
-          <input type="text" name="postnom"
-                 class="w-full p-2 border border-gray-300 rounded" required />
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-gray-700 mb-2">Prénom</label>
-          <input type="text" name="prenom"
-                 class="w-full p-2 border border-gray-300 rounded" required />
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-gray-700 mb-2">Email</label>
-          <input type="email" name="email"
-                 class="w-full p-2 border border-gray-300 rounded" required />
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-gray-700 mb-2">Sexe</label>
-          <select name="sexe"
-                  class="w-full p-2 border border-gray-300 rounded" required>
-            <option value="">-- Sélectionner --</option>
-            <option value="Homme">Homme</option>
-            <option value="Femme">Femme</option>
-            <option value="Jeune fille">Jeune Fille</option>
-          </select>
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-gray-700 mb-2">Téléphone</label>
-          <input type="tel" name="phone"
-                 class="w-full p-2 border border-gray-300 rounded" required />
-        </div>
-
-        <div class="mb-4">
-          <label class="block text-gray-700 mb-2">Motivation</label>
-          <textarea name="motivation"
-                    rows="4"
-                    class="w-full p-2 border border-gray-300 rounded"
-                    required></textarea>
-        </div>
-
-        <div class="flex justify-between gap-4">
-          <button type="submit"
-                  class="flex-1 px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
-            Soumettre
-          </button>
-
-          <button type="button"
-                  id="closeAdhesionModal"
-                  class="flex-1 px-6 py-2 bg-gray-400 text-white rounded-lg hover:bg-gray-500 transition">
-            Fermer
-          </button>
-        </div>
-      </form>
+      <p class="mt-2 text-gray-600">
+        Maman ... est la présidente du sous-département Asafa, une figure de proue au sein de notre église. Elle possède une passion ardente pour la musique et un cœur dévoué à Dieu.  
+      </p>
     </div>
   </div>
+</section>
+<!-- Équipe du département -->
+<section>
+  <h3 class="text-xl font-bold text-green-700 mb-4">Équipe du département Asafa</h3>
+  <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-6 p-10">
+    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
+      <img src="" alt="">
+      <h3 class="text-xl font-semibold text-purple-700">Président</h3>
+      <p id="youthPresidentName" class="text-gray-600"></p>
+    </div>
+    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
+      <img src="" alt="">
+      <h3 class="text-lg font-semibold text-pink-600">Vice-président Vie spirituelle et Administration</h3>
+      <p class="text-gray-600">Nom</p>
+    </div>
+    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
+      <img src="" alt="">
+      <h3 class="text-lg font-semibold text-pink-600">Vice-président Formation et Communication</h3>
+      <p class="text-gray-600">Nom</p>
+    </div>
+    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
+      <img src="" alt="">
+      <h3 class="text-lg font-semibold text-pink-600">Vice-président Activités et Événementiel</h3>
+      <p class="text-gray-600">Nom</p>
+    </div>
+  </div>
+</section>
+
+  <!-- BOUTON -->
+<button id="adhesionBtn"
+    class="bg-green-600 text-white px-6 py-2 rounded">
+    Demander une adhésion
+</button>
+
+<!-- MODAL -->
+<div id="adhesionModal"
+     class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+
+  <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-4">
+
+    <h3 class="text-xl font-bold text-green-700 mb-4 text-center">
+        Formulaire d’adhésion
+    </h3>
+
+    <!-- FORM -->
+    <form id="adhesionForm"
+          data-table="adhesion_requests"
+          data-source="Asafa">
+
+      <input type="text" name="nom" placeholder="Nom" required>
+      <input type="text" name="postnom" placeholder="Postnom" required>
+      <input type="text" name="prenom" placeholder="Prénom" required>
+
+      <select name="sexe" required>
+        <option value="">Sexe</option>
+        <option value="Homme">Homme</option>
+        <option value="Femme">Femme</option>
+      </select>
+
+      <input type="text" name="adresse_physique" placeholder="Adresse" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <input type="tel" name="telephone" placeholder="Téléphone" required>
+
+      <textarea name="motivation" placeholder="Motivation" required></textarea>
+
+      <div class="flex gap-2 mt-4">
+        <button type="submit"
+            class="bg-green-600 text-white px-4 py-2 rounded">
+            Envoyer
+        </button>
+
+        <button type="button"
+            id="closeAdhesionModal"
+            class="bg-gray-400 text-white px-4 py-2 rounded">
+            Fermer
+        </button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
 </main>
+  <!-- Footer -->
 <footer class="bg-green-700 text-white text-center p-4">
   © 2026 Verts-Pâturages
 </footer>
-<!-- SCRIPTS -->
-<script src="core.js"></script>
-<script src="departementpublic.js"></script>
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<!-- SERVICES -->
+<script src="js/services/supabase.service.js"></script>
+<script src="js/services/data.service.js"></script>
+<script src="js/services/auth.service.js"></script>
+
+<!-- MODULES PUBLIC -->
+<script src="js/modules/public/form.manager.js"></script>
+<script src="js/modules/public/departements.public.module.js"></script>
+<script src="js/modules/public/accueil.module.js"></script>
+<script src="js/modules/public/global.responsive.js"></script>
+
+<!-- APP PRINCIPALE -->
+<script src="js/core/App.js"></script>
+
+
 </body>
 </html>
 

@@ -29,6 +29,125 @@ body {
   color: var(--text-dark);
 }
 
+/* =================================
+THEME TOGGLE
+================================ */
+
+.theme-toggle{
+
+ background:rgba(255,255,255,0.15);
+
+ border:none;
+
+ color:white;
+
+ padding:6px 10px;
+
+ border-radius:8px;
+
+ cursor:pointer;
+
+ font-size:1rem;
+
+ margin-right:10px;
+
+}
+
+
+.theme-toggle:hover{
+
+ background:rgba(255,255,255,0.3);
+
+}
+
+
+/* =================================
+DARK MODE VARIABLES
+================================ */
+
+.dark{
+
+ --soft-bg:#0f172a;
+
+ --card-bg:#1e293b;
+
+ --text-dark:#e5e7eb;
+
+ --text-soft:#94a3b8;
+
+ --primary:#22c55e;
+
+ --primary-light:#16a34a;
+
+}
+
+
+/* fond général */
+
+.dark body{
+
+ background:#0f172a;
+
+ color:#e5e7eb;
+
+}
+
+
+/* cartes */
+
+.dark .card,
+.dark .relative.bg-white,
+.dark .event-card,
+.dark .visionnaire-container,
+.dark #verset-content{
+
+ background:#1e293b;
+
+ color:#e5e7eb;
+
+}
+
+
+/* navbar */
+
+.dark .navbar{
+
+ background:linear-gradient(
+ 135deg,
+ #14532d,
+ #166534
+ );
+
+}
+
+
+/* footer */
+
+.dark footer{
+
+ background:linear-gradient(
+ 135deg,
+ #14532d,
+ #166534
+ );
+
+}
+
+
+/* inputs */
+
+.dark input,
+.dark textarea,
+.dark select{
+
+ background:#020617;
+
+ color:white;
+
+ border:1px solid #334155;
+
+}
+
 /* =========================================
    TOPBAR
 ========================================= */
@@ -89,6 +208,22 @@ body {
   background: var(--sidebar-bg);
   color: white;
   padding-top: 2rem;
+
+  /* AJOUT IMPORTANT */
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+  position: sticky;
+  top: 70px;
+}
+
+/* Scroll propre */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
 }
 
 .sidebar ul {
@@ -119,6 +254,7 @@ body {
 .content {
   flex: 1;
   padding: 2rem;
+  overflow-y: auto;
 }
 
 .section {
@@ -253,6 +389,13 @@ tr:nth-child(even) {
   background: #f9fafb;
 }
 
+.chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  max-height: 350px;
+}
+
 /* =========================================
    SETTINGS CARDS
 ========================================= */
@@ -283,25 +426,328 @@ tr:nth-child(even) {
   box-shadow: var(--shadow-soft);
 }
 
+.adhesion-card{
+padding:15px;
+background:white;
+border-radius:8px;
+margin-bottom:15px;
+box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+.adhesion-text{
+background:#f6f6f6;
+padding:10px;
+border-radius:5px;
+margin-bottom:10px;
+}
+
+.adhesion-actions button{
+margin-right:8px;
+}
+
+/* =================================
+CARTE EVENEMENT ADMIN
+================================= */
+
+.admin-event-card{
+
+ background:white;
+
+ border-radius:18px;
+
+ overflow:hidden;
+
+ margin-bottom:25px;
+
+ box-shadow:0 12px 30px rgba(0,0,0,0.08);
+
+ transition:0.3s ease;
+
+}
+
+
+.admin-event-card:hover{
+
+ transform:translateY(-3px);
+
+ box-shadow:0 18px 40px rgba(0,0,0,0.12);
+
+}
+
+
+/* image */
+
+.admin-event-image{
+
+ width:100%;
+
+ height:220px;
+
+ overflow:hidden;
+
+}
+
+
+.admin-event-image img{
+
+ width:100%;
+
+ height:100%;
+
+ object-fit:cover;
+
+ display:block;
+
+}
+
+
+/* contenu */
+
+.admin-event-content{
+
+ padding:18px;
+
+ display:flex;
+
+ justify-content:space-between;
+
+ align-items:center;
+
+}
+
+
+.admin-event-content h4{
+
+ margin:0;
+
+ color:#1b5e20;
+
+ font-size:1.1rem;
+
+}
+
+
+/* bouton */
+
+.admin-event-content button{
+
+ background:#d32f2f;
+
+ color:white;
+
+ border:none;
+
+ padding:8px 14px;
+
+ border-radius:8px;
+
+ cursor:pointer;
+
+ transition:0.3s;
+
+}
+
+
+.admin-event-content button:hover{
+
+ background:#b71c1c;
+
+}
+
+
+/* responsive */
+
+@media(max-width:768px){
+
+ .admin-event-image{
+
+  height:180px;
+
+ }
+
+ .admin-event-content{
+
+  flex-direction:column;
+
+  gap:10px;
+
+  align-items:flex-start;
+
+ }
+
+}
+
 /* =========================================
-   RESPONSIVE
+   RESPONSIVE ADMIN COMPLET
 ========================================= */
-@media (max-width: 992px) {
-  .layout {
-    flex-direction: column;
+
+/* bouton menu mobile */
+.burger-admin{
+  display:none;
+  background:none;
+  border:none;
+  color:white;
+  font-size:22px;
+  cursor:pointer;
+  padding:6px 10px;
+  border-radius:8px;
+  transition:0.2s;
+}
+
+.burger-admin:hover{
+  background:rgba(255,255,255,0.1);
+}
+
+
+/* amélioration topbar */
+.logo-area{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+
+/* ===============================
+   TABLET
+=============================== */
+
+@media (max-width:1100px){
+
+  .content{
+    padding:1.5rem;
   }
 
-  .sidebar {
-    width: 100%;
-    display: flex;
-    overflow-x: auto;
+  .stats-container{
+    grid-template-columns:
+    repeat(auto-fit,minmax(150px,1fr));
   }
 
-  .sidebar ul {
-    display: flex;
+}
+
+
+/* ===============================
+   MOBILE
+=============================== */
+
+@media (max-width:900px){
+
+  .burger-admin{
+    display:block;
   }
 
-  .sidebar li {
-    white-space: nowrap;
+
+  /* sidebar devient menu flottant */
+  .sidebar{
+
+    position:fixed;
+
+    left:-260px;
+
+    top:70px;
+
+    width:260px;
+
+    height:calc(100vh - 70px);
+
+    z-index:2000;
+
+    transition:0.3s;
+
+    box-shadow:0 15px 40px rgba(0,0,0,0.2);
+
   }
+
+
+  .sidebar.open{
+
+    left:0;
+
+  }
+
+
+  /* contenu prend toute largeur */
+  .layout{
+
+    flex-direction:column;
+
+  }
+
+
+  .content{
+
+    padding:1rem;
+
+  }
+
+
+  /* topbar plus compacte */
+  .topbar{
+
+    padding:12px 15px;
+
+  }
+
+
+  .admin-role{
+
+    display:none;
+
+  }
+
+
+  .admin-name{
+
+    font-size:0.85rem;
+
+  }
+
+
+  /* stats empilées */
+  .stats-container{
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  /* tables scrollables */
+  table{
+
+    display:block;
+
+    overflow-x:auto;
+
+    white-space:nowrap;
+
+  }
+
+}
+
+
+/* ===============================
+   PETIT MOBILE
+=============================== */
+
+@media (max-width:500px){
+
+  .section h2{
+
+    font-size:1.2rem;
+
+  }
+
+  .stat-card p{
+
+    font-size:1.6rem;
+
+  }
+
+  input,
+  textarea,
+  select{
+
+    font-size:0.9rem;
+
+  }
+
 }
