@@ -463,6 +463,69 @@ VERSÉT
  font-style:italic;
 
 }
+/* =================================
+bouton vers la page pastorale
+================================ */
+.page-pastorale-button-container{
+
+ margin-top:20px;
+
+}
+.page-pastorale{
+
+ background:var(--primary);
+
+ color:white;
+
+ border:none;
+
+ padding:12px 25px;
+
+ border-radius:10px;
+
+ font-size:1rem;
+
+ font-weight:600;
+
+ cursor:pointer;
+
+ transition:var(--transition);
+
+}
+.page-pastorale:hover{
+
+ background:var(--primary-light);
+}
+/* animation bouton page pastorale */
+.page-pastorale:hover{
+
+ transform:translateY(-3px);
+
+ box-shadow:0 8px 20px rgba(0,0,0,0.2);
+
+}
+
+/* conseil button */
+.conseil-button-container{
+    margin-top:20px;
+    
+    }
+.conseil-button{
+    background:var(--primary);
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:10px;
+    font-size:1rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:var(--transition);
+}
+.conseil-button:hover{
+    background:var(--primary-light);
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
 
 
 /* =================================
@@ -873,3 +936,4 @@ PETITS TELEPHONES
 }
 
 }
+

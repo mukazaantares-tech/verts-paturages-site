@@ -1,0 +1,892 @@
+/* =================================
+THEME VERTS-PATURAGES
+================================= */
+
+:root{
+
+--primary:#1b5e20;
+--primary-light:#2e7d32;
+--accent:#10b981;
+
+--bg:#f5f7f6;
+--text:#1f2937;
+
+}
+
+
+/* =================================
+STRUCTURE
+================================= */
+
+body{
+
+margin:0;
+
+font-family:'Segoe UI',sans-serif;
+
+background:var(--bg);
+
+color:var(--text);
+
+}
+
+
+.assemblies-title{
+
+text-align:center;
+
+margin-top:60px;
+
+font-size:2rem;
+
+color:var(--primary);
+
+}
+
+
+.assemblies-title::after{
+
+content:"";
+
+display:block;
+
+width:60px;
+
+height:4px;
+
+background:var(--accent);
+
+margin:12px auto;
+
+border-radius:10px;
+
+}
+
+/* =================================
+HEADER PREMIUM VERTS-PATURAGES
+================================= */
+
+header{
+
+position:sticky;
+
+top:0;
+
+z-index:1000;
+
+backdrop-filter:blur(10px);
+
+background:
+
+linear-gradient(
+135deg,
+rgba(27,94,32,0.95),
+rgba(46,125,50,0.95)
+);
+
+box-shadow:
+
+0 10px 30px rgba(0,0,0,0.08);
+
+}
+
+
+/* NAVBAR */
+
+.navbar{
+
+max-width:1200px;
+
+margin:auto;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:14px 20px;
+
+color:white;
+
+}
+
+
+/* LOGO */
+
+.logo{
+
+font-size:1.4rem;
+
+font-weight:700;
+
+letter-spacing:0.5px;
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+}
+
+
+/* petit symbole premium */
+
+.logo::before{
+
+content:"✝";
+
+font-size:1rem;
+
+opacity:0.85;
+
+}
+
+
+/* NAV LINKS */
+
+.nav-links{
+
+display:flex;
+
+gap:28px;
+
+list-style:none;
+
+padding:0;
+
+margin:0;
+
+}
+
+
+.nav-links a{
+
+text-decoration:none;
+
+color:white;
+
+font-weight:500;
+
+font-size:0.95rem;
+
+position:relative;
+
+padding-bottom:4px;
+
+transition:0.25s;
+
+}
+
+
+/* underline animation */
+
+.nav-links a::after{
+
+content:"";
+
+position:absolute;
+
+bottom:0;
+
+left:0;
+
+width:0;
+
+height:2px;
+
+background:#22c55e;
+
+transition:0.3s;
+
+border-radius:4px;
+
+}
+
+
+.nav-links a:hover{
+
+opacity:0.9;
+
+}
+
+
+.nav-links a:hover::after{
+
+width:100%;
+
+}
+
+
+/* BURGER */
+
+.burger{
+
+display:none;
+
+font-size:1.6rem;
+
+background:none;
+
+border:none;
+
+color:white;
+
+cursor:pointer;
+
+}
+
+
+/* DARK TOGGLE */
+
+.theme-toggle{
+
+background:
+
+rgba(255,255,255,0.15);
+
+border:none;
+
+color:white;
+
+padding:6px 10px;
+
+border-radius:20px;
+
+cursor:pointer;
+
+font-size:0.9rem;
+
+transition:0.3s;
+
+}
+
+
+.theme-toggle:hover{
+
+background:
+
+rgba(255,255,255,0.25);
+
+}
+
+
+/* =================================
+HERO PREMIUM
+================================= */
+
+.hero-section{
+
+height:260px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+text-align:center;
+
+color:white;
+
+padding:30px;
+
+background:
+
+linear-gradient(
+rgba(0,0,0,0.45),
+rgba(0,0,0,0.55)
+),
+
+url("images/eglise-cover.jpg")
+
+center/cover no-repeat;
+
+border-bottom-left-radius:40px;
+
+border-bottom-right-radius:40px;
+
+box-shadow:
+
+0 20px 40px rgba(0,0,0,0.15);
+
+}
+
+
+.hero-content{
+
+max-width:750px;
+
+}
+
+
+.hero-content h1{
+
+font-size:2.3rem;
+
+margin-bottom:8px;
+
+font-weight:700;
+
+}
+
+
+.hero-content h3{
+
+font-weight:500;
+
+opacity:0.95;
+
+margin-bottom:10px;
+
+}
+
+
+.hero-content p{
+
+opacity:0.9;
+
+font-size:0.95rem;
+
+}
+
+
+/* =================================
+TITRE SECTION
+================================= */
+
+.assemblies-title{
+
+text-align:center;
+
+margin-top:60px;
+
+font-size:2rem;
+
+color:#1b5e20;
+
+font-weight:700;
+
+}
+
+
+.assemblies-title::after{
+
+content:"";
+
+display:block;
+
+width:60px;
+
+height:4px;
+
+background:#22c55e;
+
+margin:12px auto;
+
+border-radius:20px;
+
+}
+
+
+/* =================================
+FOND PAGE PREMIUM
+================================= */
+
+body{
+
+background:
+
+radial-gradient(
+circle at 10% 20%,
+rgba(34,197,94,0.05),
+transparent 40%
+),
+
+radial-gradient(
+circle at 90% 80%,
+rgba(16,185,129,0.05),
+transparent 40%
+),
+
+#f5f7f6;
+
+}
+
+
+/* =================================
+SECTION INFO
+================================= */
+
+.assemblies-info{
+
+max-width:900px;
+
+margin:70px auto;
+
+padding:35px;
+
+background:white;
+
+border-radius:18px;
+
+box-shadow:
+
+0 15px 35px rgba(0,0,0,0.08);
+
+text-align:center;
+
+}
+
+
+.assemblies-info h3{
+
+color:#1b5e20;
+
+margin-bottom:10px;
+
+}
+
+
+.assemblies-info p{
+
+color:#64748b;
+
+line-height:1.7;
+
+}
+
+
+/* =================================
+FOOTER PREMIUM
+================================= */
+
+footer{
+
+margin-top:70px;
+
+padding:35px 20px;
+
+background:
+
+linear-gradient(
+135deg,
+#1b5e20,
+#2e7d32
+);
+
+color:white;
+
+text-align:center;
+
+font-size:0.9rem;
+
+}
+
+
+/* =================================
+RESPONSIVE
+================================= */
+
+@media(max-width:768px){
+
+.burger{
+
+display:block;
+
+}
+
+
+.nav-links{
+
+position:absolute;
+
+top:60px;
+
+left:0;
+
+width:100%;
+
+background:
+
+linear-gradient(
+135deg,
+#1b5e20,
+#2e7d32
+);
+
+flex-direction:column;
+
+max-height:0;
+
+overflow:hidden;
+
+transition:0.3s;
+
+}
+
+
+.nav-links.open{
+
+max-height:300px;
+
+}
+
+
+.nav-links li{
+
+padding:12px;
+
+border-bottom:
+
+1px solid rgba(255,255,255,0.1);
+
+}
+
+}
+
+
+/* =================================
+DARK MODE PREMIUM
+================================= */
+
+.dark body{
+
+background:
+
+radial-gradient(
+circle at 15% 20%,
+rgba(34,197,94,0.12),
+transparent 40%
+),
+
+#020617;
+
+color:#e5e7eb;
+
+}
+
+
+.dark header{
+
+background:
+
+linear-gradient(
+135deg,
+#14532d,
+#166534
+);
+
+}
+
+
+.dark .assemblies-info{
+
+background:#1e293b;
+
+color:white;
+
+}
+
+
+.dark footer{
+
+background:
+
+linear-gradient(
+135deg,
+#14532d,
+#166534
+);
+
+}
+
+
+/* =================================
+WRAPPER 3D
+================================= */
+
+.wrapper{
+
+height:420px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+perspective:1200px;
+
+margin-top:40px;
+
+}
+
+
+.inner{
+
+position:relative;
+
+width:200px;
+
+height:260px;
+
+transform-style:preserve-3d;
+
+animation:rotation 25s linear infinite;
+
+}
+
+
+/* animation */
+
+@keyframes rotation{
+
+0%{
+
+transform:rotateX(-12deg) rotateY(0deg);
+
+}
+
+100%{
+
+transform:rotateX(-12deg) rotateY(360deg);
+
+}
+
+}
+
+
+/* =================================
+CARDS
+================================= */
+
+.card{
+
+position:absolute;
+
+width:200px;
+
+height:260px;
+
+border-radius:18px;
+
+overflow:hidden;
+
+background:#111;
+
+transform-style:preserve-3d;
+
+display:flex;
+
+align-items:flex-end;
+
+justify-content:center;
+
+border:
+
+1px solid rgba(16,185,129,0.3);
+
+box-shadow:
+
+0 20px 45px rgba(0,0,0,0.2);
+
+transition:0.4s;
+
+}
+
+
+/* position 3D */
+
+.card{
+
+transform:
+
+rotateY(calc(360deg / var(--quantity) * var(--index)))
+translateZ(320px);
+
+}
+
+
+/* hover */
+
+.card:hover{
+
+transform:
+
+rotateY(calc(360deg / var(--quantity) * var(--index)))
+translateZ(340px)
+
+scale(1.05);
+
+}
+
+
+/* =================================
+IMAGE
+================================= */
+
+.card img{
+
+position:absolute;
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;   /* remplit la carte correctement */
+
+object-position:center;
+
+}
+
+
+/* overlay */
+
+.card::after{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+
+linear-gradient(
+180deg,
+rgba(0,0,0,0.1),
+rgba(0,0,0,0.7)
+);
+
+}
+
+
+/* titre */
+
+.card h4{
+
+position:relative;
+
+z-index:2;
+
+color:white;
+
+padding:10px;
+
+font-size:0.95rem;
+
+text-align:center;
+
+width:100%;
+
+background:
+
+linear-gradient(
+transparent,
+rgba(0,0,0,0.85)
+);
+
+}
+
+
+/* =================================
+RESPONSIVE
+================================= */
+
+@media(max-width:768px){
+
+.wrapper{
+
+height:320px;
+
+}
+
+
+.inner{
+
+width:140px;
+height:190px;
+
+}
+
+
+.card{
+
+width:140px;
+height:190px;
+
+transform:
+
+rotateY(calc(360deg / var(--quantity) * var(--index)))
+translateZ(220px);
+
+}
+
+}
+
+
+@media(max-width:480px){
+
+.wrapper{
+
+height:260px;
+
+}
+
+
+.inner{
+
+width:110px;
+height:150px;
+
+}
+
+
+.card{
+
+width:110px;
+height:150px;
+
+transform:
+
+rotateY(calc(360deg / var(--quantity) * var(--index)))
+translateZ(170px);
+
+}
+
+}
+
+
+/* =================================
+DARK MODE
+================================= */
+
+.dark{
+
+background:#020617;
+
+color:white;
+
+}
+
+
+.dark .card{
+
+border:
+
+1px solid rgba(255,255,255,0.08);
+
+box-shadow:
+
+0 25px 60px rgba(0,0,0,0.6);
+
+}
+
+
+.dark .assemblies-title{
+
+color:#22c55e;
+
+}
