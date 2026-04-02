@@ -1271,3 +1271,130 @@ PETITS TELEPHONES
 }
 
 }
+
+/* ===============================
+RESPONSIVE PETITS ECRANS
+=============================== */
+
+@media (max-width:480px){
+
+/* overlay */
+
+#joinModal{
+
+ padding:10px;
+
+ align-items:flex-start;
+
+ overflow-y:auto;
+
+}
+
+/* carte */
+
+#joinModal > div{
+
+ width:100%;
+
+ max-width:100%;
+
+ padding:22px 18px;
+
+ margin-top:25px;
+
+ border-radius:14px;
+
+}
+
+/* titre */
+
+#joinModal h2{
+
+ font-size:1.4rem;
+
+ margin-bottom:18px;
+
+}
+
+/* labels */
+
+#joinForm label{
+
+ font-size:.9rem;
+
+ margin-bottom:4px;
+
+}
+
+/* inputs */
+
+#joinForm input,
+#joinForm select,
+#joinForm textarea{
+
+ font-size:.95rem;
+
+ padding:10px 12px;
+
+ border-radius:8px;
+
+}
+
+/* textarea */
+
+#joinForm textarea{
+
+ min-height:80px;
+
+}
+
+/* boutons */
+
+#joinForm .flex{
+
+ flex-direction:column;
+
+ gap:10px;
+
+ margin-top:10px;
+
+}
+
+/* boutons taille tactile */
+
+#joinForm button{
+
+ width:100%;
+
+ padding:12px;
+
+ font-size:.95rem;
+
+ border-radius:10px;
+
+}
+
+}
+
+
+/* ===============================
+ECRANS TRES PETITS
+=============================== */
+
+@media (max-width:360px){
+
+#joinModal h2{
+
+ font-size:1.25rem;
+
+}
+
+#joinForm input,
+#joinForm select,
+#joinForm textarea{
+
+ font-size:.9rem;
+
+}
+
+}
