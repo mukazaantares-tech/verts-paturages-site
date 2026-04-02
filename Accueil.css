@@ -395,6 +395,327 @@ HERO
 
 }
 
+/* ================================
+MODAL OVERLAY
+================================ */
+
+.modal{
+
+ position:fixed;
+
+ inset:0;
+
+ background:rgba(15,23,42,.55);
+
+ backdrop-filter:blur(6px);
+
+ display:flex;
+
+ align-items:center;
+
+ justify-content:center;
+
+ z-index:9999;
+
+ animation:fadeIn .35s ease;
+
+}
+
+
+/* ================================
+CARTE PREMIUM
+================================ */
+
+.modal-card{
+
+ width:100%;
+
+ max-width:360px;
+
+ padding:35px 28px;
+
+ border-radius:18px;
+
+ background:
+
+ linear-gradient(
+ 145deg,
+ rgba(255,255,255,.95),
+ rgba(255,255,255,.85)
+ );
+
+ backdrop-filter:blur(12px);
+
+ box-shadow:
+
+ 0 25px 60px rgba(0,0,0,.25);
+
+ border:1px solid rgba(255,255,255,.3);
+
+ position:relative;
+
+ animation:slideUp .35s ease;
+
+}
+
+
+/* effet lumineux */
+
+.modal-card::before{
+
+ content:"";
+
+ position:absolute;
+
+ width:180px;
+
+ height:180px;
+
+ background:
+
+ radial-gradient(
+
+  circle,
+
+  rgba(236,72,153,.18),
+
+  transparent
+
+ );
+
+ top:-60px;
+
+ right:-60px;
+
+ border-radius:50%;
+
+}
+
+
+/* ================================
+TITRE
+================================ */
+
+.modal-card h3{
+
+ text-align:center;
+
+ margin-bottom:22px;
+
+ font-size:1.4rem;
+
+ color:#7c3aed;
+
+ letter-spacing:.4px;
+
+}
+
+
+/* ================================
+INPUT PREMIUM
+================================ */
+
+.modal-card input{
+
+ width:100%;
+
+ padding:12px 14px;
+
+ margin-bottom:14px;
+
+ border-radius:12px;
+
+ border:1px solid rgba(0,0,0,.08);
+
+ background:rgba(255,255,255,.85);
+
+ font-size:.95rem;
+
+ transition:.25s;
+
+}
+
+
+/* focus */
+
+.modal-card input:focus{
+
+ outline:none;
+
+ border-color:#a855f7;
+
+ box-shadow:
+
+ 0 0 0 3px rgba(168,85,247,.15);
+
+ background:white;
+
+}
+
+
+/* ================================
+BOUTONS
+================================ */
+
+.modal-card button{
+
+ width:100%;
+
+ padding:12px;
+
+ border:none;
+
+ border-radius:12px;
+
+ font-weight:600;
+
+ cursor:pointer;
+
+ transition:.25s;
+
+}
+
+
+/* bouton connexion */
+
+#submitYouthLogin{
+
+ background:
+
+ linear-gradient(
+ 135deg,
+ #7c3aed,
+ #ec4899
+ );
+
+ color:white;
+
+ margin-bottom:10px;
+
+}
+
+
+/* hover */
+
+#submitYouthLogin:hover{
+
+ transform:translateY(-2px);
+
+ box-shadow:
+
+ 0 12px 25px rgba(124,58,237,.3);
+
+}
+
+
+/* bouton fermer */
+
+#closeYouthModal{
+
+ background:#e5e7eb;
+
+ color:#374151;
+
+}
+
+
+/* hover fermer */
+
+#closeYouthModal:hover{
+
+ background:#d1d5db;
+
+}
+
+
+/* message erreur */
+
+.error-msg{
+
+ font-size:.85rem;
+
+ color:#ef4444;
+
+ margin-bottom:10px;
+
+ text-align:center;
+
+}
+
+
+/* ================================
+ANIMATIONS
+================================ */
+
+@keyframes slideUp{
+
+ from{
+
+  transform:translateY(20px);
+
+  opacity:0;
+
+ }
+
+ to{
+
+  transform:translateY(0);
+
+  opacity:1;
+
+ }
+
+}
+
+
+@keyframes fadeIn{
+
+ from{opacity:0}
+
+ to{opacity:1}
+
+}
+
+
+/* ================================
+DARK MODE
+================================ */
+
+.dark .modal-card{
+
+ background:
+
+ linear-gradient(
+ 145deg,
+ rgba(30,41,59,.95),
+ rgba(30,41,59,.85)
+ );
+
+ color:white;
+
+ border:1px solid rgba(255,255,255,.05);
+
+}
+
+
+.dark .modal-card input{
+
+ background:#020617;
+
+ color:white;
+
+ border:1px solid #334155;
+
+}
+
+
+.dark #closeYouthModal{
+
+ background:#334155;
+
+ color:white;
+
+}
 
 /* =================================
 CARDS
@@ -937,3 +1258,16 @@ PETITS TELEPHONES
 
 }
 
+/* join modal responsive pour petit appareil*/
+
+@media(max-width:400px){
+.modal-card{
+
+ width:90%;
+
+ padding:20px;
+
+
+}
+
+}

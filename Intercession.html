@@ -106,41 +106,34 @@
     </h3>
 
     <!-- FORM -->
+     
     <form id="adhesionForm"
           data-table="adhesion_requests"
           data-source="Intercession">
-
       <input type="text" name="nom" placeholder="Nom" required>
       <input type="text" name="postnom" placeholder="Postnom" required>
       <input type="text" name="prenom" placeholder="Prénom" required>
-
       <select name="sexe" required>
         <option value="">Sexe</option>
         <option value="Homme">Homme</option>
         <option value="Femme">Femme</option>
       </select>
-
       <input type="text" name="adresse_physique" placeholder="Adresse" required>
       <input type="email" name="email" placeholder="Email" required>
       <input type="tel" name="telephone" placeholder="Téléphone" required>
-
       <textarea name="motivation" placeholder="Motivation" required></textarea>
-
       <div class="flex gap-2 mt-4">
         <button type="submit"
             class="bg-green-600 text-white px-4 py-2 rounded">
             Envoyer
         </button>
-
         <button type="button"
             id="closeAdhesionModal"
             class="bg-gray-400 text-white px-4 py-2 rounded">
             Fermer
         </button>
       </div>
-
     </form>
-
   </div>
 </div>
     </section>
