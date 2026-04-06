@@ -180,3 +180,38 @@ const AuthService = {
 };
 
 window.AuthService = AuthService;
+
+/* ===============================
+LISTENER SESSION SUPABASE
+=============================== */
+
+supabaseClient.auth.onAuthStateChange(
+ async (event, session) => {
+
+  if(session?.user){
+
+   const role =
+    await AuthService.fetchRole(
+     session.user.email
+    );
+
+   DataService.set(
+    "vp_current_user",
+    {
+
+     email: session.user.email,
+
+     role: role || "admin"
+
+    }
+   );
+
+   console.log(
+    "Session mise à jour",
+    session.user.email
+   );
+
+  }
+
+ }
+);
