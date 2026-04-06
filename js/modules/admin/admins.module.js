@@ -36,7 +36,11 @@ const AdminsModule = {
             } = await supabaseClient.auth.signUp({
 
                 email: email,
-                password: password
+                password: password,
+
+                Options: {
+                    emailRedirectTo: "https://verts-paturages-site.vercel.app/admin"
+                }
 
             });
 
