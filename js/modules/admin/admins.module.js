@@ -54,13 +54,13 @@ const AdminsModule = {
                 error: dbError
             } = await supabaseClient
                 .from("admins")
-                .insert({
+                .insert([{
 
                     name: name,
                     email: email,
                     role: role
 
-                });
+                }]);
 
             if (dbError)
                 throw dbError;
