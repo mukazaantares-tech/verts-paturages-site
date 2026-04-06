@@ -1,6 +1,7 @@
 /* ======================================================
    ADMINS MODULE
    gestion complete des administrateurs
+   VERSION STABLE
 ====================================================== */
 
 const AdminsModule = {
@@ -26,7 +27,25 @@ const AdminsModule = {
             if (!email || !password || !role)
                 throw new Error("Champs requis manquants");
 
-            console.log("Création admin...");
+
+            /* normalisation données */
+
+            const cleanEmail =
+                email.toLowerCase().trim();
+
+            const cleanRole =
+                role.toLowerCase().trim();
+
+            const cleanName =
+                name?.trim();
+
+
+            console.log(
+                "Création admin :",
+                cleanEmail,
+                cleanRole
+            );
+
 
             /* 1️⃣ création utilisateur Supabase Auth */
 
@@ -35,11 +54,15 @@ const AdminsModule = {
                 error: authError
             } = await supabaseClient.auth.signUp({
 
-                email: email,
+                email: cleanEmail,
+
                 password: password,
 
                 options: {
-                    emailRedirectTo: "https://verts-paturages-site.vercel.app/admin"
+
+                    emailRedirectTo:
+                    "https://verts-paturages-site.vercel.app/admin"
+
                 }
 
             });
@@ -56,9 +79,11 @@ const AdminsModule = {
                 .from("admins")
                 .insert([{
 
-                    name: name,
-                    email: email,
-                    role: role
+                    name: cleanName,
+
+                    email: cleanEmail,
+
+                    role: cleanRole
 
                 }]);
 
@@ -66,7 +91,9 @@ const AdminsModule = {
                 throw dbError;
 
 
-            alert("Administrateur créé");
+            alert(
+                "Administrateur créé avec succès"
+            );
 
             await this.loadAdmins();
 
@@ -133,57 +160,89 @@ const AdminsModule = {
 
         const container =
             document.getElementById("adminList");
+
         if (!container) return;
+
         container.innerHTML = "";
+
         admins.forEach(admin => {
+
             const div =
                 document.createElement("div");
+
             div.className =
                 "admin-item";
+
             div.innerHTML = `
+
                 <div class="admin-card">
+
                     <strong>
                         ${admin.name || "Sans nom"}
                     </strong>
+
                     <p>
                         ${admin.email}
                     </p>
+
                     <span class="role-badge">
                         ${admin.role}
                     </span>
+
                     <button
                         class="delete-admin"
                         data-id="${admin.id}"
                     >
                         Supprimer
                     </button>
+
                 </div>
+
             `;
+
             container.appendChild(div);
+
         });
+
         this.bindDelete();
+
     },
+
     /* ======================================================
        SUPPRESSION ADMIN
     ====================================================== */
 
     bindDelete() {
+
         document
         .querySelectorAll(".delete-admin")
+
         .forEach(btn => {
+
             btn.onclick = async () => {
+
                 const id =
                     btn.dataset.id;
-                if (!confirm("Supprimer cet admin ?"))
-                    return;
+
+                if (!confirm(
+                    "Supprimer cet admin ?"
+                )) return;
+
+
                 await supabaseClient
                     .from("admins")
                     .delete()
                     .eq("id", id);
+
+
                 this.loadAdmins();
+
             };
+
         });
+
     },
+
     /* ======================================================
        FORMULAIRE
     ====================================================== */
@@ -194,28 +253,63 @@ const AdminsModule = {
             document.getElementById(
                 "addAdminForm"
             );
+
         if (!form) return;
+
+
         form.addEventListener(
             "submit",
+
             async e => {
+
                 e.preventDefault();
+
+
                 const name =
-                    document.getElementById("name").value;
+                    document
+                    .getElementById("name")
+                    .value;
+
+
                 const email =
-                    document.getElementById("email").value;
+                    document
+                    .getElementById("email")
+                    .value;
+
+
                 const password =
-                    document.getElementById("password").value;
+                    document
+                    .getElementById("password")
+                    .value;
+
+
                 const role =
-                    document.getElementById("role").value;
+                    document
+                    .getElementById("role")
+                    .value;
+
+
                 await this.createAdmin({
+
                     name,
+
                     email,
+
                     password,
+
                     role
+
                 });
+
+
                 form.reset();
+
             }
+
         );
+
     }
+
 };
+
 window.AdminsModule = AdminsModule;
