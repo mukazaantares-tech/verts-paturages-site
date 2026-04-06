@@ -38,7 +38,7 @@ const AdminsModule = {
                 email: email,
                 password: password,
 
-                Options: {
+                options: {
                     emailRedirectTo: "https://verts-paturages-site.vercel.app/admin"
                 }
 
