@@ -1,88 +1,8 @@
 // ===============================
-// AUTHSERVICE - VERSION FINALE STABLE
-// Compatible avec ton architecture actuelle
+// AUTHSERVICE SIMPLE ET STABLE
 // ===============================
 
 const AuthService = {
-
-    /* ===============================
-       INITIALISATION SESSION
-    =============================== */
-
-    async init() {
-
-        try {
-
-            /* attendre utilisateur confirmé */
-
-            const { data:{ user } } =
-                await supabaseClient.auth.getUser();
-
-            if (!user) {
-
-                console.warn(
-                    "aucune session active"
-                );
-
-                return;
-
-            }
-
-
-            /* récupérer role depuis table admins */
-
-            const role =
-                await this.fetchRole(
-                    user.email
-                );
-
-
-            const currentUser = {
-
-                email:
-                    user.email,
-
-                role:
-                    role || "admin"
-
-            };
-
-
-            DataService.set(
-
-                "vp_current_user",
-
-                currentUser
-
-            );
-
-
-            console.log(
-
-                "Session restaurée :",
-
-                currentUser.email,
-
-                currentUser.role
-
-            );
-
-        }
-
-        catch (err) {
-
-            console.error(
-
-                "Erreur init auth :",
-
-                err
-
-            );
-
-        }
-
-    },
-
 
     /* ===============================
        LOGIN
@@ -92,32 +12,17 @@ const AuthService = {
 
         try {
 
-            const cleanEmail =
-                email.toLowerCase().trim();
-
-
             const { data, error } =
-                await supabaseClient
-                .auth
-                .signInWithPassword({
+                await supabaseClient.auth.signInWithPassword({
 
-                    email:
-                        cleanEmail,
-
+                    email,
                     password
 
                 });
 
-
             if (error) {
 
-                console.error(
-
-                    "Erreur login :",
-
-                    error.message
-
-                );
+                console.error("Erreur login :", error.message);
 
                 return false;
 
@@ -126,41 +31,41 @@ const AuthService = {
 
             /* récupérer role */
 
-            const role =
-                await this.fetchRole(
-                    data.user.email
-                );
+            const { data: adminData } =
+                await supabaseClient
+                    .from("admins")
+                    .select("role")
+                    .eq("email", data.user.email)
+                    .single();
 
 
-            const currentUser = {
+            if (!adminData) {
 
-                email:
-                    data.user.email,
+                console.warn("email non autorisé");
 
-                role:
-                    role || "admin"
+                return false;
+
+            }
+
+
+            const user = {
+
+                email: data.user.email,
+                role: adminData.role
 
             };
 
 
-            DataService.set(
+            localStorage.setItem(
 
                 "vp_current_user",
 
-                currentUser
+                JSON.stringify(user)
 
             );
 
 
-            console.log(
-
-                "Connecté :",
-
-                currentUser.email,
-
-                currentUser.role
-
-            );
+            console.log("connecté :", user);
 
 
             return true;
@@ -169,39 +74,11 @@ const AuthService = {
 
         catch (err) {
 
-            console.error(
-
-                "Erreur login :",
-
-                err
-
-            );
+            console.error(err);
 
             return false;
 
         }
-
-    },
-
-
-    /* ===============================
-       LOGOUT
-    =============================== */
-
-    async logout() {
-
-        await supabaseClient
-        .auth
-        .signOut();
-
-
-        DataService.remove(
-            "vp_current_user"
-        );
-
-
-        window.location.href =
-            "index.html";
 
     },
 
@@ -212,90 +89,27 @@ const AuthService = {
 
     currentUser() {
 
-        return DataService.get(
-            "vp_current_user"
-        );
+        const data =
+            localStorage.getItem("vp_current_user");
+
+        return data
+            ? JSON.parse(data)
+            : null;
 
     },
 
 
     /* ===============================
-       RECUPERATION ROLE
+       LOGOUT
     =============================== */
 
-    async fetchRole(email) {
+    async logout() {
 
-        try {
+        await supabaseClient.auth.signOut();
 
-            const cleanEmail =
-                email
-                .toLowerCase()
-                .trim();
+        localStorage.removeItem("vp_current_user");
 
-
-            const { data, error } =
-                await supabaseClient
-
-                    .from("admins")
-
-                    .select("role")
-
-                    .eq(
-                        "email",
-                        cleanEmail
-                    )
-
-                    .maybeSingle();
-
-
-
-            if (error) {
-
-                console.warn(
-
-                    "Erreur récupération role :",
-
-                    error.message
-
-                );
-
-                return null;
-
-            }
-
-
-            if (!data) {
-
-                console.warn(
-
-                    "Role non trouvé pour :",
-
-                    cleanEmail
-
-                );
-
-                return null;
-
-            }
-
-
-            return data.role;
-
-        }
-
-        catch (err) {
-
-            console.error(
-
-                "Erreur fetchRole :",
-
-                err
-
-            );
-
-            return null;
-
-        }
+        window.location.href = "index.html";
 
     },
 
@@ -306,47 +120,21 @@ const AuthService = {
 
     protect(roles = []) {
 
-        const user =
-            this.currentUser();
+        const user = this.currentUser();
 
 
         if (!user) {
 
-            console.warn(
-                "Utilisateur non connecté"
-            );
-
-
-            window.location.href =
-                "index.html";
-
+            window.location.href = "index.html";
 
             return;
 
         }
 
 
-        if (
+        if (!roles.includes(user.role)) {
 
-            roles.length &&
-
-            !roles.includes(
-                user.role
-            )
-
-        ) {
-
-            console.warn(
-
-                "Accès refusé pour role :",
-
-                user.role
-
-            );
-
-
-            window.location.href =
-                "index.html";
+            window.location.href = "index.html";
 
         }
 
@@ -354,8 +142,4 @@ const AuthService = {
 
 };
 
-
-/* rendre accessible globalement */
-
-window.AuthService =
- AuthService;
+window.AuthService = AuthService;

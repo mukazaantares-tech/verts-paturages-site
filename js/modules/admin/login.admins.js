@@ -10,8 +10,10 @@ document
     const password =
         document.getElementById("adminPassword").value;
 
+
     const success =
         await AuthService.login(email, password);
+
 
     if (success) {
 
