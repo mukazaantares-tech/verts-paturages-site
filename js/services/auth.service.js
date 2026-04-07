@@ -19,7 +19,9 @@ const AuthService = {
             if (!session?.user) return;
 
             const role =
-                await this.fetchRole(session.user.email);
+                await this.fetchRole(
+                    session.user.email
+                );
 
             const user = {
 
@@ -28,17 +30,28 @@ const AuthService = {
 
             };
 
-            DataService.set("vp_current_user", user);
+            DataService.set(
+                "vp_current_user",
+                user
+            );
 
-            console.log("Session restaurée :", user.email);
+            console.log(
+                "Session restaurée :",
+                user.email,
+                user.role
+            );
 
         } catch (err) {
 
-            console.error("Erreur init auth :", err);
+            console.error(
+                "Erreur init auth :",
+                err
+            );
 
         }
 
     },
+
 
     /* ===============================
        LOGIN
@@ -49,7 +62,9 @@ const AuthService = {
         try {
 
             const { data, error } =
-                await supabaseClient.auth.signInWithPassword({
+                await supabaseClient
+                .auth
+                .signInWithPassword({
 
                     email,
                     password
@@ -58,14 +73,20 @@ const AuthService = {
 
             if (error) {
 
-                console.error("Erreur login :", error.message);
+                console.error(
+                    "Erreur login :",
+                    error.message
+                );
 
                 return false;
 
             }
 
+
             const role =
-                await this.fetchRole(data.user.email);
+                await this.fetchRole(
+                    data.user.email
+                );
 
             const user = {
 
@@ -74,15 +95,25 @@ const AuthService = {
 
             };
 
-            DataService.set("vp_current_user", user);
+            DataService.set(
+                "vp_current_user",
+                user
+            );
 
-            console.log("Connecté :", user.email);
+            console.log(
+                "Connecté :",
+                user.email,
+                user.role
+            );
 
             return true;
 
         } catch (err) {
 
-            console.error("Erreur login :", err);
+            console.error(
+                "Erreur login :",
+                err
+            );
 
             return false;
 
@@ -90,19 +121,26 @@ const AuthService = {
 
     },
 
+
     /* ===============================
        LOGOUT
     =============================== */
 
     async logout() {
 
-        await supabaseClient.auth.signOut();
+        await supabaseClient
+        .auth
+        .signOut();
 
-        DataService.remove("vp_current_user");
+        DataService.remove(
+            "vp_current_user"
+        );
 
-        window.location.href = "index.html";
+        window.location.href =
+            "index.html";
 
     },
+
 
     /* ===============================
        UTILISATEUR ACTUEL
@@ -110,9 +148,12 @@ const AuthService = {
 
     currentUser() {
 
-        return DataService.get("vp_current_user");
+        return DataService.get(
+            "vp_current_user"
+        );
 
     },
+
 
     /* ===============================
        RECUPERATION ROLE
@@ -122,26 +163,53 @@ const AuthService = {
 
         try {
 
+            const cleanEmail =
+                email
+                .toLowerCase()
+                .trim();
+
             const { data, error } =
                 await supabaseClient
                     .from("admins")
                     .select("role")
-                    .eq("email", email)
-                    .single();
+                    .eq("email", cleanEmail)
+                    .maybeSingle();
 
-            if (error || !data) {
 
-                console.warn("Role non trouvé pour :", email);
+            if (error) {
+
+                console.warn(
+                    "Erreur role :",
+                    error.message
+                );
 
                 return null;
 
             }
 
+
+            if (!data) {
+
+                console.warn(
+                    "Role non trouvé pour :",
+                    cleanEmail
+                );
+
+                return null;
+
+            }
+
+
             return data.role;
 
-        } catch (err) {
+        }
 
-            console.error("Erreur fetchRole :", err);
+        catch (err) {
+
+            console.error(
+                "Erreur fetchRole :",
+                err
+            );
 
             return null;
 
@@ -149,29 +217,45 @@ const AuthService = {
 
     },
 
+
     /* ===============================
        PROTECTION PAGE
     =============================== */
 
     protect(roles = []) {
 
-        const user = this.currentUser();
+        const user =
+            this.currentUser();
 
         if (!user) {
 
-            console.warn("Utilisateur non connecté");
+            console.warn(
+                "Utilisateur non connecté"
+            );
 
-            window.location.href = "index.html";
+            window.location.href =
+                "index.html";
 
             return;
 
         }
 
-        if (roles.length && !roles.includes(user.role)) {
 
-            console.warn("Accès refusé pour role :", user.role);
+        if (
 
-            window.location.href = "index.html";
+            roles.length &&
+
+            !roles.includes(user.role)
+
+        ) {
+
+            console.warn(
+                "Accès refusé pour role :",
+                user.role
+            );
+
+            window.location.href =
+                "index.html";
 
         }
 
@@ -179,4 +263,6 @@ const AuthService = {
 
 };
 
-window.AuthService = AuthService;
+
+window.AuthService =
+ AuthService;
