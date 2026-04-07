@@ -8,6 +8,27 @@ const AuthService = {
        LOGIN
     =============================== */
 
+    /* ===============================
+   INITIALISATION SIMPLE
+=============================== */
+
+init(){
+
+ const user =
+  this.currentUser();
+
+ if(user){
+
+  console.log(
+   "session trouvée :",
+   user.email,
+   user.role
+  );
+
+ }
+
+},
+
     async login(email, password) {
 
         try {
