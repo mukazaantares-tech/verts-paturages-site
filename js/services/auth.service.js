@@ -133,10 +133,8 @@ init(){
         window.location.href = "index.html";
 
     },
-
 /* ===============================
-   PROTECTION PAGE ADMIN (DEBUG)
-   redirection désactivée temporairement
+   PROTECTION PAGE ADMIN (FINAL)
 =============================== */
 
 protect(roles = []) {
@@ -144,17 +142,15 @@ protect(roles = []) {
  const user =
   this.currentUser();
 
- console.log(
-  "Utilisateur détecté :",
-  user
- );
-
 
  if (!user) {
 
   console.warn(
-   "DEBUG : aucun utilisateur trouvé"
+   "Accès refusé : non connecté"
   );
+
+  window.location.href =
+   "index.html";
 
   return;
 
@@ -167,12 +163,12 @@ protect(roles = []) {
  ) {
 
   console.warn(
-
-   "DEBUG : role non autorisé :",
-
+   "Accès refusé pour role :",
    user.role
-
   );
+
+  window.location.href =
+   "index.html";
 
   return;
 
@@ -180,7 +176,9 @@ protect(roles = []) {
 
 
  console.log(
-  "DEBUG : accès autorisé"
+  "Accès autorisé :",
+  user.email,
+  user.role
  );
 
 }
