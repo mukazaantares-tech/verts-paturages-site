@@ -192,3 +192,79 @@ formatRole(role) {
 };
 
 window.DashboardModule = DashboardModule;
+
+/* =================================
+PROTECTION PAGE ADMIN
+attend que la session soit restaurée
+================================= */
+
+document.addEventListener(
+ "DOMContentLoaded",
+ async () => {
+
+  try{
+
+   await AuthService.init();
+
+   const user =
+    AuthService.currentUser();
+
+   console.log(
+    "Utilisateur connecté :",
+    user
+   );
+
+   if(!user){
+
+    console.warn(
+     "aucun utilisateur"
+    );
+
+    window.location.href =
+     "index.html";
+
+    return;
+
+   }
+
+   /* autoriser admin + super_admin */
+
+   if(
+    ![
+     "admin",
+     "super_admin"
+    ].includes(user.role)
+   ){
+
+    console.warn(
+     "role refusé :",
+     user.role
+    );
+
+    window.location.href =
+     "index.html";
+
+    return;
+
+   }
+
+   /* lancer dashboard */
+
+   DashboardModule.init();
+
+  }
+
+  catch(err){
+
+   console.error(
+    "Erreur auth :",
+    err
+   );
+
+   window.location.href =
+    "index.html";
+
+  }
+
+ }
+);
