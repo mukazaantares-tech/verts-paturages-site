@@ -1,51 +1,82 @@
 // ===============================
-// AUTHSERVICE - SUPABASE VERSION STABLE
+// AUTHSERVICE - VERSION FINALE STABLE
 // Compatible avec ton architecture actuelle
 // ===============================
 
 const AuthService = {
 
     /* ===============================
-       INITIALISATION
+       INITIALISATION SESSION
     =============================== */
 
     async init() {
 
         try {
 
-            const { data: { session } } =
-                await supabaseClient.auth.getSession();
+            /* attendre utilisateur confirmé */
 
-            if (!session?.user) return;
+            const { data:{ user } } =
+                await supabaseClient.auth.getUser();
+
+            if (!user) {
+
+                console.warn(
+                    "aucune session active"
+                );
+
+                return;
+
+            }
+
+
+            /* récupérer role depuis table admins */
 
             const role =
                 await this.fetchRole(
-                    session.user.email
+                    user.email
                 );
 
-            const user = {
 
-                email: session.user.email,
-                role: role || "admin"
+            const currentUser = {
+
+                email:
+                    user.email,
+
+                role:
+                    role || "admin"
 
             };
 
+
             DataService.set(
+
                 "vp_current_user",
-                user
+
+                currentUser
+
             );
+
 
             console.log(
+
                 "Session restaurée :",
-                user.email,
-                user.role
+
+                currentUser.email,
+
+                currentUser.role
+
             );
 
-        } catch (err) {
+        }
+
+        catch (err) {
 
             console.error(
+
                 "Erreur init auth :",
+
                 err
+
             );
 
         }
@@ -61,21 +92,31 @@ const AuthService = {
 
         try {
 
+            const cleanEmail =
+                email.toLowerCase().trim();
+
+
             const { data, error } =
                 await supabaseClient
                 .auth
                 .signInWithPassword({
 
-                    email,
+                    email:
+                        cleanEmail,
+
                     password
 
                 });
 
+
             if (error) {
 
                 console.error(
+
                     "Erreur login :",
+
                     error.message
+
                 );
 
                 return false;
@@ -83,36 +124,57 @@ const AuthService = {
             }
 
 
+            /* récupérer role */
+
             const role =
                 await this.fetchRole(
                     data.user.email
                 );
 
-            const user = {
 
-                email: data.user.email,
-                role: role || "admin"
+            const currentUser = {
+
+                email:
+                    data.user.email,
+
+                role:
+                    role || "admin"
 
             };
 
+
             DataService.set(
+
                 "vp_current_user",
-                user
+
+                currentUser
+
             );
 
+
             console.log(
+
                 "Connecté :",
-                user.email,
-                user.role
+
+                currentUser.email,
+
+                currentUser.role
+
             );
+
 
             return true;
 
-        } catch (err) {
+        }
+
+        catch (err) {
 
             console.error(
+
                 "Erreur login :",
+
                 err
+
             );
 
             return false;
@@ -132,9 +194,11 @@ const AuthService = {
         .auth
         .signOut();
 
+
         DataService.remove(
             "vp_current_user"
         );
+
 
         window.location.href =
             "index.html";
@@ -168,19 +232,31 @@ const AuthService = {
                 .toLowerCase()
                 .trim();
 
+
             const { data, error } =
                 await supabaseClient
+
                     .from("admins")
+
                     .select("role")
-                    .eq("email", cleanEmail)
+
+                    .eq(
+                        "email",
+                        cleanEmail
+                    )
+
                     .maybeSingle();
+
 
 
             if (error) {
 
                 console.warn(
-                    "Erreur role :",
+
+                    "Erreur récupération role :",
+
                     error.message
+
                 );
 
                 return null;
@@ -191,8 +267,11 @@ const AuthService = {
             if (!data) {
 
                 console.warn(
+
                     "Role non trouvé pour :",
+
                     cleanEmail
+
                 );
 
                 return null;
@@ -207,8 +286,11 @@ const AuthService = {
         catch (err) {
 
             console.error(
+
                 "Erreur fetchRole :",
+
                 err
+
             );
 
             return null;
@@ -219,7 +301,7 @@ const AuthService = {
 
 
     /* ===============================
-       PROTECTION PAGE
+       PROTECTION PAGE ADMIN
     =============================== */
 
     protect(roles = []) {
@@ -227,14 +309,17 @@ const AuthService = {
         const user =
             this.currentUser();
 
+
         if (!user) {
 
             console.warn(
                 "Utilisateur non connecté"
             );
 
+
             window.location.href =
                 "index.html";
+
 
             return;
 
@@ -245,14 +330,20 @@ const AuthService = {
 
             roles.length &&
 
-            !roles.includes(user.role)
+            !roles.includes(
+                user.role
+            )
 
         ) {
 
             console.warn(
+
                 "Accès refusé pour role :",
+
                 user.role
+
             );
+
 
             window.location.href =
                 "index.html";
@@ -263,6 +354,8 @@ const AuthService = {
 
 };
 
+
+/* rendre accessible globalement */
 
 window.AuthService =
  AuthService;
