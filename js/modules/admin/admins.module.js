@@ -20,101 +20,117 @@ const AdminsModule = {
        CREATION ADMIN (AUTH + DATABASE)
     ====================================================== */
 
-    async createAdmin({ name, email, password, role }) {
+   async createAdmin({ name, email, password, role }) {
 
-        try {
+    try {
 
-            if (!email || !password || !role)
-                throw new Error("Champs requis manquants");
-
-
-            /* normalisation données */
-
-            const cleanEmail =
-                email.toLowerCase().trim();
-
-            const cleanRole =
-                role.toLowerCase().trim();
-
-            const cleanName =
-                name?.trim();
+        if (!email || !password || !role)
+            throw new Error("Champs requis manquants");
 
 
-            console.log(
-                "Création admin :",
-                cleanEmail,
-                cleanRole
+        /* normalisation */
+
+        const cleanEmail =
+            email.toLowerCase().trim();
+
+        const cleanRole =
+            role.toLowerCase().trim();
+
+        const cleanName =
+            name?.trim();
+
+
+        console.log(
+            "Création admin :",
+            cleanEmail,
+            cleanRole
+        );
+
+
+        /* 1️⃣ création utilisateur AUTH */
+
+        const {
+            data: authData,
+            error: authError
+        } = await supabaseClient.auth.signUp({
+
+            email: cleanEmail,
+
+            password: password,
+
+            options: {
+
+                emailRedirectTo:
+                "https://verts-paturages-site.vercel.app/admin"
+
+            }
+
+        });
+
+        if (authError)
+            throw authError;
+
+
+        /* récupérer user_id Supabase */
+
+        const userId =
+            authData.user?.id;
+
+        if (!userId)
+            throw new Error(
+                "Impossible de récupérer user_id"
             );
 
 
-            /* 1️⃣ création utilisateur Supabase Auth */
+        /* 2️⃣ insertion table admins */
 
-            const {
-                data: authData,
-                error: authError
-            } = await supabaseClient.auth.signUp({
+        const {
+            error: dbError
+        } = await supabaseClient
+            .from("admins")
+            .insert([{
+
+                name: cleanName,
 
                 email: cleanEmail,
 
-                password: password,
+                role: cleanRole,
 
-                options: {
+                user_id: userId
 
-                    emailRedirectTo:
-                    "https://verts-paturages-site.vercel.app/admin"
-
-                }
-
-            });
-
-            if (authError)
-                throw authError;
+            }]);
 
 
-            /* 2️⃣ insertion dans table admins */
-
-            const {
-                error: dbError
-            } = await supabaseClient
-                .from("admins")
-                .insert([{
-
-                    name: cleanName,
-
-                    email: cleanEmail,
-
-                    role: cleanRole
-
-                }]);
-
-            if (dbError)
-                throw dbError;
+        if (dbError)
+            throw dbError;
 
 
-            alert(
-                "Administrateur créé avec succès"
-            );
+        alert(
+            "Administrateur créé avec succès"
+        );
 
-            await this.loadAdmins();
 
-            return true;
+        await this.loadAdmins();
 
-        }
 
-        catch (err) {
+        return true;
 
-            console.error(
-                "Erreur création admin :",
-                err.message
-            );
+    }
 
-            alert(err.message);
+    catch (err) {
 
-            return false;
+        console.error(
+            "Erreur création admin :",
+            err.message
+        );
 
-        }
+        alert(err.message);
 
-    },
+        return false;
+
+    }
+
+},
 
     /* ======================================================
        LECTURE ADMINS
