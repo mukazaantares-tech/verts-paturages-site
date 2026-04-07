@@ -12,12 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const path = window.location.pathname;
 
         if (path.includes("Bureau-pastorale")) {
-            AuthService.protect(["super-admin"]);
+            AuthService.protect([
+                    "admin",
+                "super_admin"]);
         }
 
         if (path.includes("jeunesse-admin")) {
             AuthService.protect([
-                "super-admin"
+                "super_admin"
 
             ]);
         }
@@ -25,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
             AuthService.protect([
             "youth-super-admin",
             "youth-admin",
-            "super-admin"
+            "super_admin"
 
             ]);
 
