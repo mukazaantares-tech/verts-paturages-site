@@ -146,7 +146,7 @@ init(){
 
         if (!user) {
 
-            window.location.href = "index.html";
+            window.location.href = "bureau-pastorale.html";
 
             return;
 
@@ -155,7 +155,7 @@ init(){
 
         if (!roles.includes(user.role)) {
 
-            window.location.href = "index.html";
+            window.location.href = "bureau-pastorale.html";
 
         }
 
