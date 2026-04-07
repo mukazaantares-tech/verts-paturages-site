@@ -134,33 +134,56 @@ init(){
 
     },
 
+/* ===============================
+   PROTECTION PAGE ADMIN (DEBUG)
+   redirection désactivée temporairement
+=============================== */
 
-    /* ===============================
-       PROTECTION PAGE ADMIN
-    =============================== */
+protect(roles = []) {
 
-    protect(roles = []) {
+ const user =
+  this.currentUser();
 
-        const user = this.currentUser();
-
-
-        if (!user) {
-
-            window.location.href = "bureau-pastorale.html";
-
-            return;
-
-        }
+ console.log(
+  "Utilisateur détecté :",
+  user
+ );
 
 
-        if (!roles.includes(user.role)) {
+ if (!user) {
 
-            window.location.href = "bureau-pastorale.html";
+  console.warn(
+   "DEBUG : aucun utilisateur trouvé"
+  );
 
-        }
+  return;
 
-    }
+ }
 
+
+ if (
+  roles.length &&
+  !roles.includes(user.role)
+ ) {
+
+  console.warn(
+
+   "DEBUG : role non autorisé :",
+
+   user.role
+
+  );
+
+  return;
+
+ }
+
+
+ console.log(
+  "DEBUG : accès autorisé"
+ );
+
+}
 };
 
 window.AuthService = AuthService;
