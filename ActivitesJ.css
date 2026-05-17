@@ -1,0 +1,436 @@
+/* =================================
+BASE
+================================= */
+
+body{
+
+ margin:0;
+
+ font-family:'Segoe UI','Open Sans',sans-serif;
+
+ color:var(--text-dark);
+
+}
+
+
+/* =================================
+SECTION ACTIVITES
+================================= */
+
+.activities-container{
+
+ max-width:1100px;
+
+ margin:60px auto;
+
+ padding:0 20px;
+
+}
+
+
+.activities-container h2{
+
+ color:#7e57c2;
+
+ margin-bottom:30px;
+
+}
+
+
+/* =================================
+CARTE ACTIVITE
+================================= */
+
+.activity-card{
+
+ background:white;
+
+ padding:20px;
+
+ border-radius:18px;
+
+ box-shadow:0 10px 30px rgba(0,0,0,0.05);
+
+ transition:0.3s;
+
+}
+
+
+.activity-card:hover{
+
+ transform:translateY(-6px);
+
+}
+
+
+/* IMAGE */
+
+.activity-card img{
+
+ width:100%;
+
+ height:240px;
+
+ object-fit:cover;
+
+ border-radius:14px;
+
+ margin-bottom:15px;
+
+}
+
+
+/* VIDEO */
+
+.activity-card video{
+
+ width:100%;
+
+ border-radius:14px;
+
+}
+
+
+/* =================================
+BOUTONS
+================================= */
+
+button{
+
+ background:
+ linear-gradient(
+ 135deg,
+ #7e57c2,
+ #ec407a
+ );
+
+ color:white;
+
+ border:none;
+
+ padding:10px 18px;
+
+ border-radius:10px;
+
+ cursor:pointer;
+
+ transition:0.3s;
+
+}
+
+
+button:hover{
+
+ transform:translateY(-3px);
+
+}
+
+
+/* =================================
+RESPONSIVE
+================================= */
+
+@media(max-width:768px){
+
+ .activity-card img{
+
+  height:180px;
+
+ }
+
+    .activities-container h2{
+    
+    font-size:1.5rem;
+    
+    }
+}
+/* =================================
+RESPONSIVE TABLET
+================================ */
+
+@media(max-width:900px){
+
+.hero-content h2{
+
+ font-size:2rem;
+
+}
+
+}
+
+
+/* =================================
+RESPONSIVE TELEPHONE
+================================ */
+
+@media(max-width:768px){
+
+/* bouton burger visible */
+
+.burger{
+
+ display:block;
+
+ font-size:1.7rem;
+
+}
+
+
+/* menu mobile plein écran */
+
+.nav-links{
+
+ position:fixed;
+
+ inset:0;
+
+ height:100vh;
+
+ background:
+ linear-gradient(
+ 160deg,
+ #14532d,
+ #166534,
+ #15803d
+ );
+
+ display:flex;
+
+ flex-direction:column;
+
+ align-items:center;
+
+ justify-content:flex-start;
+
+ padding:90px 20px 40px;
+
+ gap:12px;
+
+ transform:translateY(-100%);
+
+ opacity:0;
+
+ transition:.4s ease;
+
+ overflow-y:auto;
+
+ -webkit-overflow-scrolling:touch;
+
+ z-index:999;
+
+}
+
+
+/* menu visible */
+
+.nav-links.open{
+
+ transform:translateY(0);
+
+ opacity:1;
+
+}
+
+
+/* items menu */
+
+.nav-links li{
+
+ width:100%;
+
+ max-width:260px;
+
+ text-align:center;
+
+}
+
+
+/* boutons menu */
+
+.nav-links a{
+
+ display:block;
+
+ width:100%;
+
+ padding:11px;
+
+ border-radius:12px;
+
+ background:rgba(255,255,255,.05);
+
+ border:1px solid rgba(255,255,255,.08);
+
+ font-size:.98rem;
+
+ font-weight:600;
+
+}
+
+
+/* hover */
+
+.nav-links a:hover{
+
+ background:rgba(255,255,255,.12);
+
+}
+
+
+/* HERO plus compact */
+
+.hero{
+
+ padding:2.6rem 1.2rem;
+
+ border-bottom-left-radius:28px;
+
+ border-bottom-right-radius:28px;
+
+}
+
+
+/* titre hero */
+
+.hero-content h2{
+
+ font-size:1.75rem;
+
+}
+
+
+/* texte hero */
+
+.hero-content p{
+
+ font-size:.95rem;
+
+}
+
+
+/* section vision */
+
+.visionnaire-section{
+
+ margin:45px auto;
+
+ padding:0 16px;
+
+}
+
+
+/* carte vision */
+
+.visionnaire-container{
+
+ padding:28px 20px;
+
+ border-radius:16px;
+
+}
+
+
+/* titre vision */
+
+.visionnaire-container h2{
+
+ font-size:1.6rem;
+
+}
+
+
+/* texte vision */
+
+.visionnaire-container p{
+
+ font-size:.95rem;
+
+}
+
+
+/* verset */
+
+#verset-du-jour{
+
+ margin:2.2rem auto;
+
+ padding:0 15px;
+
+}
+
+
+/* carte */
+
+.card,
+#verset-content{
+
+ padding:1.4rem;
+
+ border-radius:16px;
+
+}
+
+
+/* footer */
+
+footer{
+
+ padding:1.6rem;
+
+ margin-top:3rem;
+
+}
+
+}
+
+
+/* =================================
+PETITS TELEPHONES
+================================ */
+
+@media(max-width:420px){
+
+.hero-content h2{
+
+ font-size:1.5rem;
+
+}
+
+
+.visionnaire-container{
+
+ padding:22px 16px;
+
+}
+
+
+.visionnaire-container h2{
+
+ font-size:1.45rem;
+
+}
+
+
+.visionnaire-container p{
+
+ font-size:.92rem;
+
+}
+
+
+.nav-links{
+
+ padding-top:85px;
+
+}
+
+
+.nav-links a{
+
+ font-size:.92rem;
+
+ padding:10px;
+
+}
+
+}

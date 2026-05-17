@@ -1,0 +1,1400 @@
+/* =================================
+VARIABLES GLOBALES
+================================ */
+
+:root{
+
+ --primary:#1b5e20;
+ --primary-light:#2e7d32;
+ --accent:#10b981;
+
+ --bg:#f4f7f6;
+ --card:#ffffff;
+
+ --text:#1f2937;
+ --text-soft:#6b7280;
+
+ --radius:18px;
+ --transition:0.3s ease;
+
+}
+
+
+/* =================================
+DARK MODE
+================================ */
+
+.dark{
+
+ --bg:#0f172a;
+ --card:#1e293b;
+
+ --text:#e5e7eb;
+ --text-soft:#94a3b8;
+
+ --primary:#16a34a;
+ --primary-light:#22c55e;
+
+}
+
+
+/* =================================
+BASE
+================================ */
+
+*{
+ box-sizing:border-box;
+}
+
+body{
+
+ margin:0;
+ font-family:'Segoe UI','Open Sans',sans-serif;
+
+ background:var(--bg);
+ color:var(--text);
+
+ line-height:1.6;
+
+ transition:var(--transition);
+
+}
+
+
+/* =================================
+NAVBAR
+================================ */
+
+.navbar{
+
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+
+ padding:1rem 1.5rem;
+
+ background:linear-gradient(
+ 135deg,
+ var(--primary),
+ var(--primary-light)
+ );
+
+ color:white;
+
+ position:sticky;
+ top:0;
+
+ z-index:1000;
+
+}
+
+
+.logo{
+
+ font-size:1.5rem;
+ font-weight:bold;
+
+}
+
+
+/* menu */
+
+.nav-links{
+
+ list-style:none;
+
+ display:flex;
+
+ gap:1.8rem;
+
+ margin:0;
+
+}
+
+
+.nav-links a{
+
+ color:white;
+
+ text-decoration:none;
+
+ font-weight:600;
+
+ position:relative;
+
+}
+
+
+.nav-links a::after{
+
+ content:"";
+
+ position:absolute;
+
+ bottom:-4px;
+ left:0;
+
+ width:0;
+ height:2px;
+
+ background:#c8e6c9;
+
+ transition:var(--transition);
+
+}
+
+
+.nav-links a:hover::after{
+
+ width:100%;
+
+}
+
+
+/* burger */
+
+.burger{
+
+ display:none;
+
+ background:none;
+ border:none;
+
+ font-size:1.5rem;
+
+ color:white;
+
+ cursor:pointer;
+
+}
+
+
+/* theme button */
+
+.theme-toggle{
+
+ background:rgba(255,255,255,0.15);
+
+ border:none;
+
+ color:white;
+
+ padding:5px 10px;
+
+ border-radius:8px;
+
+ cursor:pointer;
+
+}
+
+/* =================================
+SECTION VISIONNAIRE
+================================ */
+
+.visionnaire-section{
+
+ max-width:900px;
+
+ margin:70px auto;
+
+ padding:0 20px;
+
+ text-align:center;
+
+}
+
+
+/* =================================
+CARTE
+================================ */
+
+.visionnaire-container{
+
+ background:var(--card);
+
+ padding:40px 35px;
+
+ border-radius:18px;
+
+ box-shadow:0 15px 35px rgba(0,0,0,0.07);
+
+ transition:0.3s ease;
+
+ position:relative;
+
+ overflow:hidden;
+
+}
+
+
+/* cercle décoratif */
+
+.visionnaire-container::before{
+
+ content:"";
+
+ position:absolute;
+
+ width:160px;
+
+ height:160px;
+
+ background:rgba(16,185,129,0.08);
+
+ border-radius:50%;
+
+ top:-40px;
+
+ right:-40px;
+
+}
+
+
+/* effet hover */
+
+.visionnaire-container:hover{
+
+ transform:translateY(-5px);
+
+ box-shadow:0 20px 40px rgba(0,0,0,0.12);
+
+}
+
+
+/* =================================
+TITRE
+================================ */
+
+.visionnaire-container h2{
+
+ color:var(--primary);
+
+ margin-bottom:20px;
+
+ font-size:1.9rem;
+
+ position:relative;
+
+}
+
+
+/* petite ligne décorative */
+
+.visionnaire-container h2::after{
+
+ content:"";
+
+ width:70px;
+
+ height:4px;
+
+ background:var(--accent);
+
+ display:block;
+
+ margin:10px auto 0;
+
+ border-radius:10px;
+
+}
+
+
+/* =================================
+TEXTE
+================================ */
+
+.visionnaire-container p{
+
+ color:var(--text-soft);
+
+ line-height:1.8;
+
+ margin-bottom:15px;
+
+ font-size:1.05rem;
+
+}
+
+
+/* =================================
+RESPONSIVE
+================================ */
+
+@media(max-width:768px){
+
+ .visionnaire-container{
+
+  padding:30px 20px;
+
+ }
+
+}
+
+
+@media(max-width:480px){
+
+ .visionnaire-container h2{
+
+  font-size:1.5rem;
+
+ }
+
+ .visionnaire-container p{
+
+  font-size:0.98rem;
+
+ }
+
+}
+
+/* =================================
+HERO
+================================ */
+
+.hero{
+
+ background:linear-gradient(
+ 135deg,
+ var(--primary),
+ var(--accent)
+ );
+
+ color:white;
+
+ padding:4rem 1.5rem;
+
+ text-align:center;
+
+ border-bottom-left-radius:40px;
+ border-bottom-right-radius:40px;
+
+}
+
+
+.hero-content{
+
+ max-width:700px;
+
+ margin:auto;
+
+}
+
+
+.hero-content h2{
+
+ font-size:2.4rem;
+
+ margin-bottom:1rem;
+
+}
+
+
+.hero-content p{
+
+ opacity:0.9;
+
+}
+
+/* ================================
+MODAL OVERLAY
+================================ */
+
+.modal{
+
+ position:fixed;
+
+ inset:0;
+
+ background:rgba(15,23,42,.55);
+
+ backdrop-filter:blur(6px);
+
+ display:flex;
+
+ align-items:center;
+
+ justify-content:center;
+
+ z-index:9999;
+
+ animation:fadeIn .35s ease;
+
+}
+
+
+/* ================================
+CARTE PREMIUM
+================================ */
+
+.modal-card{
+
+ width:100%;
+
+ max-width:360px;
+
+ padding:35px 28px;
+
+ border-radius:18px;
+
+ background:
+
+ linear-gradient(
+ 145deg,
+ rgba(255,255,255,.95),
+ rgba(255,255,255,.85)
+ );
+
+ backdrop-filter:blur(12px);
+
+ box-shadow:
+
+ 0 25px 60px rgba(0,0,0,.25);
+
+ border:1px solid rgba(255,255,255,.3);
+
+ position:relative;
+
+ animation:slideUp .35s ease;
+
+}
+
+
+/* effet lumineux */
+
+.modal-card::before{
+
+ content:"";
+
+ position:absolute;
+
+ width:180px;
+
+ height:180px;
+
+ background:
+
+ radial-gradient(
+
+  circle,
+
+  rgba(236,72,153,.18),
+
+  transparent
+
+ );
+
+ top:-60px;
+
+ right:-60px;
+
+ border-radius:50%;
+
+}
+
+
+/* ================================
+TITRE
+================================ */
+
+.modal-card h3{
+
+ text-align:center;
+
+ margin-bottom:22px;
+
+ font-size:1.4rem;
+
+ color:#7c3aed;
+
+ letter-spacing:.4px;
+
+}
+
+
+/* ================================
+INPUT PREMIUM
+================================ */
+
+.modal-card input{
+
+ width:100%;
+
+ padding:12px 14px;
+
+ margin-bottom:14px;
+
+ border-radius:12px;
+
+ border:1px solid rgba(0,0,0,.08);
+
+ background:rgba(255,255,255,.85);
+
+ font-size:.95rem;
+
+ transition:.25s;
+
+}
+
+
+/* focus */
+
+.modal-card input:focus{
+
+ outline:none;
+
+ border-color:#a855f7;
+
+ box-shadow:
+
+ 0 0 0 3px rgba(168,85,247,.15);
+
+ background:white;
+
+}
+
+
+/* ================================
+BOUTONS
+================================ */
+
+.modal-card button{
+
+ width:100%;
+
+ padding:12px;
+
+ border:none;
+
+ border-radius:12px;
+
+ font-weight:600;
+
+ cursor:pointer;
+
+ transition:.25s;
+
+}
+
+
+/* bouton connexion */
+
+#submitYouthLogin{
+
+ background:
+
+ linear-gradient(
+ 135deg,
+ #7c3aed,
+ #ec4899
+ );
+
+ color:white;
+
+ margin-bottom:10px;
+
+}
+
+
+/* hover */
+
+#submitYouthLogin:hover{
+
+ transform:translateY(-2px);
+
+ box-shadow:
+
+ 0 12px 25px rgba(124,58,237,.3);
+
+}
+
+
+/* bouton fermer */
+
+#closeYouthModal{
+
+ background:#e5e7eb;
+
+ color:#374151;
+
+}
+
+
+/* hover fermer */
+
+#closeYouthModal:hover{
+
+ background:#d1d5db;
+
+}
+
+
+/* message erreur */
+
+.error-msg{
+
+ font-size:.85rem;
+
+ color:#ef4444;
+
+ margin-bottom:10px;
+
+ text-align:center;
+
+}
+
+
+/* ================================
+ANIMATIONS
+================================ */
+
+@keyframes slideUp{
+
+ from{
+
+  transform:translateY(20px);
+
+  opacity:0;
+
+ }
+
+ to{
+
+  transform:translateY(0);
+
+  opacity:1;
+
+ }
+
+}
+
+
+@keyframes fadeIn{
+
+ from{opacity:0}
+
+ to{opacity:1}
+
+}
+
+
+/* ================================
+DARK MODE
+================================ */
+
+.dark .modal-card{
+
+ background:
+
+ linear-gradient(
+ 145deg,
+ rgba(30,41,59,.95),
+ rgba(30,41,59,.85)
+ );
+
+ color:white;
+
+ border:1px solid rgba(255,255,255,.05);
+
+}
+
+
+.dark .modal-card input{
+
+ background:#020617;
+
+ color:white;
+
+ border:1px solid #334155;
+
+}
+
+
+.dark #closeYouthModal{
+
+ background:#334155;
+
+ color:white;
+
+}
+
+/* =================================
+CARDS
+================================ */
+
+.card,
+#verset-content,
+.visionnaire-container{
+
+ background:var(--card);
+
+ padding:2rem;
+
+ border-radius:var(--radius);
+
+ box-shadow:0 10px 25px rgba(0,0,0,0.06);
+
+ transition:var(--transition);
+
+}
+
+
+.card:hover,
+#verset-content:hover,
+.visionnaire-container:hover{
+
+ transform:translateY(-4px);
+
+}
+
+
+/* =================================
+VISIONNAIRE
+================================ */
+
+.visionnaire-section{
+
+ max-width:900px;
+
+ margin:60px auto;
+
+ padding:0 20px;
+
+ text-align:center;
+
+}
+
+
+/* =================================
+VERSÉT
+================================ */
+
+#verset-du-jour{
+
+ max-width:800px;
+
+ margin:3rem auto;
+
+ text-align:center;
+
+}
+
+
+#verseText{
+
+ font-style:italic;
+
+}
+/* =================================
+bouton vers la page pastorale
+================================ */
+.page-pastorale-button-container{
+
+ margin-top:20px;
+
+}
+.page-pastorale{
+
+ background:var(--primary);
+
+ color:white;
+
+ border:none;
+
+ padding:12px 25px;
+
+ border-radius:10px;
+
+ font-size:1rem;
+
+ font-weight:600;
+
+ cursor:pointer;
+
+ transition:var(--transition);
+
+}
+.page-pastorale:hover{
+
+ background:var(--primary-light);
+}
+/* animation bouton page pastorale */
+.page-pastorale:hover{
+
+ transform:translateY(-3px);
+
+ box-shadow:0 8px 20px rgba(0,0,0,0.2);
+
+}
+
+/* conseil button */
+.conseil-button-container{
+    margin-top:20px;
+    
+    }
+.conseil-button{
+    background:var(--primary);
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:10px;
+    font-size:1rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:var(--transition);
+}
+.conseil-button:hover{
+    background:var(--primary-light);
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.2);
+}
+
+
+/* =================================
+MODAL
+================================ */
+
+.modal{
+
+ position:fixed;
+
+ inset:0;
+
+ background:rgba(0,0,0,0.4);
+
+ display:flex;
+
+ align-items:center;
+ justify-content:center;
+
+}
+
+
+.modal-card{
+
+ background:var(--card);
+
+ padding:25px;
+
+ border-radius:14px;
+
+ width:320px;
+
+}
+
+
+.hidden{
+
+ display:none;
+
+}
+
+
+/* =================================
+FOOTER
+================================ */
+
+footer{
+
+ background:linear-gradient(
+ 135deg,
+ var(--primary),
+ var(--primary-light)
+ );
+
+ color:white;
+
+ text-align:center;
+
+ padding:2rem;
+
+ margin-top:4rem;
+
+}
+
+
+/* =================================
+RESPONSIVE
+================================ */
+
+@media(max-width:768px){
+
+ .burger{
+
+  display:block;
+
+ }
+
+ .nav-links{
+
+  position:absolute;
+
+  top:65px;
+  left:0;
+
+  width:100%;
+
+  background:var(--primary);
+
+  flex-direction:column;
+
+  max-height:0;
+
+  overflow:hidden;
+
+  transition:0.3s;
+
+ }
+
+ .nav-links.open{
+
+  max-height:350px;
+
+ }
+
+ .nav-links li{
+
+  padding:1rem;
+
+  text-align:center;
+
+ }
+
+ .hero-content h2{
+
+  font-size:1.8rem;
+
+ }
+
+}
+
+/* =================================
+RESPONSIVE TABLET
+================================ */
+
+@media(max-width:900px){
+
+.hero-content h2{
+
+ font-size:2rem;
+
+}
+
+}
+
+
+/* =================================
+RESPONSIVE TELEPHONE
+================================ */
+
+@media(max-width:768px){
+
+/* bouton burger visible */
+
+.burger{
+
+ display:block;
+
+ font-size:1.7rem;
+
+}
+
+
+/* menu mobile plein écran */
+
+.nav-links{
+
+ position:fixed;
+
+ inset:0;
+
+ height:100vh;
+
+ background:
+ linear-gradient(
+ 160deg,
+ #14532d,
+ #166534,
+ #15803d
+ );
+
+ display:flex;
+
+ flex-direction:column;
+
+ align-items:center;
+
+ justify-content:flex-start;
+
+ padding:90px 20px 40px;
+
+ gap:12px;
+
+ transform:translateY(-100%);
+
+ opacity:0;
+
+ transition:.4s ease;
+
+ overflow-y:auto;
+
+ -webkit-overflow-scrolling:touch;
+
+ z-index:999;
+
+}
+
+
+/* menu visible */
+
+.nav-links.open{
+
+ transform:translateY(0);
+
+ opacity:1;
+
+}
+
+
+/* items menu */
+
+.nav-links li{
+
+ width:100%;
+
+ max-width:260px;
+
+ text-align:center;
+
+}
+
+
+/* boutons menu */
+
+.nav-links a{
+
+ display:block;
+
+ width:100%;
+
+ padding:11px;
+
+ border-radius:12px;
+
+ background:rgba(255,255,255,.05);
+
+ border:1px solid rgba(255,255,255,.08);
+
+ font-size:.98rem;
+
+ font-weight:600;
+
+}
+
+
+/* hover */
+
+.nav-links a:hover{
+
+ background:rgba(255,255,255,.12);
+
+}
+
+
+/* HERO plus compact */
+
+.hero{
+
+ padding:2.6rem 1.2rem;
+
+ border-bottom-left-radius:28px;
+
+ border-bottom-right-radius:28px;
+
+}
+
+
+/* titre hero */
+
+.hero-content h2{
+
+ font-size:1.75rem;
+
+}
+
+
+/* texte hero */
+
+.hero-content p{
+
+ font-size:.95rem;
+
+}
+
+
+/* section vision */
+
+.visionnaire-section{
+
+ margin:45px auto;
+
+ padding:0 16px;
+
+}
+
+
+/* carte vision */
+
+.visionnaire-container{
+
+ padding:28px 20px;
+
+ border-radius:16px;
+
+}
+
+
+/* titre vision */
+
+.visionnaire-container h2{
+
+ font-size:1.6rem;
+
+}
+
+
+/* texte vision */
+
+.visionnaire-container p{
+
+ font-size:.95rem;
+
+}
+
+
+/* verset */
+
+#verset-du-jour{
+
+ margin:2.2rem auto;
+
+ padding:0 15px;
+
+}
+
+
+/* carte */
+
+.card,
+#verset-content{
+
+ padding:1.4rem;
+
+ border-radius:16px;
+
+}
+
+
+/* footer */
+
+footer{
+
+ padding:1.6rem;
+
+ margin-top:3rem;
+
+}
+
+}
+
+
+/* =================================
+PETITS TELEPHONES
+================================ */
+
+@media(max-width:420px){
+
+.hero-content h2{
+
+ font-size:1.5rem;
+
+}
+
+
+.visionnaire-container{
+
+ padding:22px 16px;
+
+}
+
+
+.visionnaire-container h2{
+
+ font-size:1.45rem;
+
+}
+
+
+.visionnaire-container p{
+
+ font-size:.92rem;
+
+}
+
+
+.nav-links{
+
+ padding-top:85px;
+
+}
+
+
+.nav-links a{
+
+ font-size:.92rem;
+
+ padding:10px;
+
+}
+
+}
+
+/* join modal responsive pour petit appareil*/
+
+@media(max-width:400px){
+.modal-card{
+
+ width:90%;
+
+ padding:20px;
+
+
+}
+
+}
+
+/* ===============================
+RESPONSIVE PETITS ECRANS
+=============================== */
+
+@media (max-width:480px){
+
+/* overlay */
+
+#joinModal{
+
+ padding:10px;
+
+ align-items:flex-start;
+
+ overflow-y:auto;
+
+}
+
+/* carte */
+
+#joinModal > div{
+
+ width:100%;
+
+ max-width:100%;
+
+ padding:22px 18px;
+
+ margin-top:25px;
+
+ border-radius:14px;
+
+}
+
+/* titre */
+
+#joinModal h2{
+
+ font-size:1.4rem;
+
+ margin-bottom:18px;
+
+}
+
+/* labels */
+
+#joinForm label{
+
+ font-size:.9rem;
+
+ margin-bottom:4px;
+
+}
+
+/* inputs */
+
+#joinForm input,
+#joinForm select,
+#joinForm textarea{
+
+ font-size:.95rem;
+
+ padding:10px 12px;
+
+ border-radius:8px;
+
+}
+
+/* textarea */
+
+#joinForm textarea{
+
+ min-height:80px;
+
+}
+
+/* boutons */
+
+#joinForm .flex{
+
+ flex-direction:column;
+
+ gap:10px;
+
+ margin-top:10px;
+
+}
+
+/* boutons taille tactile */
+
+#joinForm button{
+
+ width:100%;
+
+ padding:12px;
+
+ font-size:.95rem;
+
+ border-radius:10px;
+
+}
+
+}
+
+
+/* ===============================
+ECRANS TRES PETITS
+=============================== */
+
+@media (max-width:360px){
+
+#joinModal h2{
+
+ font-size:1.25rem;
+
+}
+
+#joinForm input,
+#joinForm select,
+#joinForm textarea{
+
+ font-size:.9rem;
+
+}
+
+}

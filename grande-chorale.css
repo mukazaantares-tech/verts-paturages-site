@@ -1,0 +1,806 @@
+/* =================================
+VARIABLES GLOBALES
+================================ */
+
+:root{
+
+ --primary:#2e7d32;
+ --primary-soft:#4caf50;
+ --primary-light:#c8e6c9;
+
+ --dark:#1e293b;
+ --soft-bg:#f5f5f5;
+
+ --radius:10px;
+ --transition:.25s ease;
+
+}
+
+/* =================================
+BASE
+================================ */
+
+body{
+
+ margin:0;
+
+ font-family:'Open Sans',sans-serif;
+
+ background:linear-gradient(180deg,#f8fafc,#f1f5f9);
+
+ color:#374151;
+
+ line-height:1.6;
+
+}
+
+/* =================================
+NAVBAR
+================================ */
+
+.navbar{
+
+ display:flex;
+
+ justify-content:space-between;
+
+ align-items:center;
+
+ background:linear-gradient(
+ 135deg,
+ #14532d,
+ #166534
+ );
+
+ color:white;
+
+ box-shadow:0 8px 25px rgba(0,0,0,.15);
+
+}
+
+.nav-links{
+
+ list-style:none;
+
+ display:flex;
+
+ gap:1.4rem;
+
+}
+
+.nav-links a{
+
+ text-decoration:none;
+
+ color:white;
+
+ font-weight:600;
+
+ padding:6px 8px;
+
+ border-radius:6px;
+
+ transition:var(--transition);
+
+ position:relative;
+
+}
+
+/* underline animation */
+
+.nav-links a::after{
+
+ content:"";
+
+ position:absolute;
+
+ left:0;
+
+ bottom:-4px;
+
+ width:0;
+
+ height:2px;
+
+ background:#4ade80;
+
+ transition:.3s;
+
+}
+
+.nav-links a:hover::after{
+
+ width:100%;
+
+}
+
+.nav-links a:hover{
+
+ color:#bbf7d0;
+
+}
+
+/* =================================
+SECTIONS
+================================ */
+
+section{
+
+ margin-bottom:2rem;
+
+}
+
+/* cards */
+
+.bg-white,
+.card{
+
+ background:white;
+
+ border-radius:var(--radius);
+
+ box-shadow:0 6px 18px rgba(0,0,0,.08);
+
+ transition:var(--transition);
+
+}
+
+.bg-white:hover,
+.card:hover{
+
+ transform:translateY(-4px);
+
+ box-shadow:0 14px 35px rgba(0,0,0,.15);
+
+}
+
+/* =================================
+BOUTONS
+================================ */
+
+button,
+.button-primary{
+
+ background:var(--primary);
+
+ color:white;
+
+ border:none;
+
+ padding:.65rem 1.3rem;
+
+ border-radius:6px;
+
+ font-weight:600;
+
+ cursor:pointer;
+
+ transition:var(--transition);
+
+}
+
+button:hover,
+.button-primary:hover{
+
+ background:#1b5e20;
+
+ transform:translateY(-2px);
+
+ box-shadow:0 8px 18px rgba(0,0,0,.18);
+
+}
+
+.button-secondary{
+
+ background:var(--primary-light);
+
+ color:#065f46;
+
+}
+
+.button-secondary:hover{
+
+ background:#a5d6a7;
+
+}
+
+/* =================================
+TYPOGRAPHIE
+================================ */
+
+h1,h2,h3,h4,h5,h6{
+
+ color:var(--primary);
+
+ font-weight:700;
+
+}
+
+h1{font-size:2.3rem}
+h2{font-size:1.9rem}
+h3{font-size:1.5rem}
+
+/* =================================
+FORMULAIRES
+================================ */
+
+input,
+textarea,
+select{
+
+ width:100%;
+
+ padding:.65rem;
+
+ border:1px solid #d1d5db;
+
+ border-radius:6px;
+
+ margin-bottom:.9rem;
+
+ transition:.2s;
+
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+
+ outline:none;
+
+ border-color:var(--primary);
+
+ box-shadow:0 0 0 3px rgba(46,125,50,.15);
+
+}
+
+/* =================================
+CARDS IMAGE
+================================ */
+
+.card img{
+
+ width:100%;
+
+ transition:.3s;
+
+}
+
+.card img:hover{
+
+ transform:scale(1.05);
+
+}
+
+/* =================================
+TABLE
+================================ */
+
+table{
+
+ width:100%;
+
+ border-collapse:collapse;
+
+}
+
+th,td{
+
+ padding:.7rem;
+
+ border-bottom:1px solid #e5e7eb;
+
+}
+
+tr:hover{
+
+ background:#f9fafb;
+
+}
+
+/* =================================
+MODAL
+================================ */
+
+.modal{
+
+ position:fixed;
+
+ inset:0;
+
+ background:rgba(0,0,0,.55);
+
+ display:flex;
+
+ justify-content:center;
+
+ align-items:center;
+
+ opacity:0;
+
+ visibility:hidden;
+
+ transition:.3s;
+
+}
+
+.modal.active{
+
+ opacity:1;
+
+ visibility:visible;
+
+}
+
+.modal-content{
+
+ background:white;
+
+ padding:1.7rem;
+
+ border-radius:var(--radius);
+
+ max-width:500px;
+
+ width:90%;
+
+}
+
+/* =================================
+ALERTES
+================================ */
+
+.alert{
+
+ padding:.8rem;
+
+ border-radius:6px;
+
+ font-weight:600;
+
+}
+
+.alert-success{
+
+ background:#d4edda;
+
+ color:#155724;
+
+}
+
+.alert-error{
+
+ background:#f8d7da;
+
+ color:#721c24;
+
+}
+
+/* =================================
+ANIMATIONS
+================================ */
+
+.fade-in{
+
+ animation:fade .6s ease;
+
+}
+
+@keyframes fade{
+
+ from{opacity:0}
+
+ to{opacity:1}
+
+}
+
+.slide-up{
+
+ animation:slide .5s ease;
+
+}
+
+@keyframes slide{
+
+ from{
+
+  transform:translateY(15px);
+
+  opacity:0;
+
+ }
+
+ to{
+
+  transform:translateY(0);
+
+  opacity:1;
+
+ }
+
+}
+
+/* =================================
+DARK MODE
+================================ */
+
+.dark body{
+
+ background:#0f172a;
+
+ color:#e5e7eb;
+
+}
+
+.dark .card,
+.dark .bg-white{
+
+ background:#1e293b;
+
+ color:white;
+
+}
+
+.dark .navbar{
+
+ background:linear-gradient(
+ 135deg,
+ #022c22,
+ #064e3b
+ );
+
+}
+
+.dark input,
+.dark textarea{
+
+ background:#020617;
+
+ border:1px solid #334155;
+
+ color:white;
+
+}
+
+/* =================================
+MENU MOBILE PREMIUM
+================================ */
+
+@media(max-width:768px){
+
+.burger{
+
+ display:block;
+
+ font-size:26px;
+
+ background:none;
+
+ border:none;
+
+ color:white;
+
+ cursor:pointer;
+
+ z-index:1001;
+
+}
+
+.nav-links{
+
+ position:fixed;
+
+ inset:0;
+
+ height:100vh;
+
+ background:linear-gradient(
+ 160deg,
+ #14532d,
+ #166534,
+ #15803d
+ );
+
+ display:flex;
+
+ flex-direction:column;
+
+ align-items:center;
+
+ justify-content:flex-start;
+
+ padding:95px 20px 40px;
+
+ gap:14px;
+
+ transform:translateY(-100%);
+
+ opacity:0;
+
+ transition:.4s ease;
+
+ overflow-y:auto;
+
+ z-index:999;
+
+}
+
+.nav-links.open{
+
+ transform:translateY(0);
+
+ opacity:1;
+
+}
+
+.nav-links li{
+
+ width:100%;
+
+ max-width:280px;
+
+}
+
+.nav-links a{
+
+ display:block;
+
+ padding:11px;
+
+ text-align:center;
+
+ border-radius:12px;
+
+ background:rgba(255,255,255,.05);
+
+ border:1px solid rgba(255,255,255,.08);
+
+ font-size:1rem;
+
+}
+
+.nav-links a:hover{
+
+ background:rgba(255,255,255,.12);
+
+}
+
+body.menu-open{
+
+ overflow:hidden;
+
+}
+
+}
+
+/* =================================
+FORMULAIRE PREMIUM
+================================ */
+
+#adhesionForm{
+
+ display:flex;
+
+ flex-direction:column;
+
+ gap:14px;
+
+}
+
+
+/* champs */
+
+#adhesionForm input,
+#adhesionForm select,
+#adhesionForm textarea{
+
+ width:100%;
+
+ padding:12px 14px;
+
+ border-radius:12px;
+
+ border:1px solid rgba(0,0,0,.08);
+
+ background:#ffffff;
+
+ font-size:.95rem;
+
+ transition:.25s;
+
+ outline:none;
+
+ box-shadow:
+ 0 4px 12px rgba(0,0,0,.03);
+
+}
+
+
+/* focus élégant */
+
+#adhesionForm input:focus,
+#adhesionForm select:focus,
+#adhesionForm textarea:focus{
+
+ border-color:#16a34a;
+
+ box-shadow:
+ 0 0 0 3px rgba(34,197,94,.18);
+
+ background:white;
+
+}
+
+
+/* placeholder */
+
+#adhesionForm input::placeholder,
+#adhesionForm textarea::placeholder{
+
+ color:#94a3b8;
+
+}
+
+
+/* textarea */
+
+#adhesionForm textarea{
+
+ min-height:90px;
+
+ resize:none;
+
+}
+
+
+/* select */
+
+#adhesionForm select{
+
+ cursor:pointer;
+
+}
+
+
+/* zone boutons */
+
+#adhesionForm .flex{
+
+ display:flex;
+
+ gap:10px;
+
+ margin-top:10px;
+
+}
+
+
+/* bouton envoyer */
+
+#adhesionForm button[type="submit"]{
+
+ flex:1;
+
+ background:
+
+ linear-gradient(
+ 135deg,
+ #16a34a,
+ #22c55e
+ );
+
+ color:white;
+
+ padding:11px;
+
+ border:none;
+
+ border-radius:12px;
+
+ font-weight:600;
+
+ cursor:pointer;
+
+ transition:.25s;
+
+}
+
+
+/* hover envoyer */
+
+#adhesionForm button[type="submit"]:hover{
+
+ transform:translateY(-1px);
+
+ box-shadow:
+ 0 10px 22px rgba(34,197,94,.35);
+
+}
+
+
+/* bouton fermer */
+
+#closeAdhesionModal{
+
+ flex:1;
+
+ background:#e5e7eb;
+
+ color:#374151;
+
+ border:none;
+
+ padding:11px;
+
+ border-radius:12px;
+
+ cursor:pointer;
+
+ transition:.25s;
+
+}
+
+
+/* hover fermer */
+
+#closeAdhesionModal:hover{
+
+ background:#d1d5db;
+
+}
+
+
+/* =================================
+RESPONSIVE MOBILE
+================================ */
+
+@media(max-width:480px){
+
+#adhesionForm{
+
+ gap:12px;
+
+}
+
+
+#adhesionForm .flex{
+
+ flex-direction:column;
+
+}
+
+
+}
+
+
+/* =================================
+DARK MODE
+================================ */
+
+.dark #adhesionForm input,
+.dark #adhesionForm textarea,
+.dark #adhesionForm select{
+
+ background:#020617;
+
+ border:1px solid #334155;
+
+ color:white;
+
+}
+
+
+.dark #closeAdhesionModal{
+
+ background:#334155;
+
+ color:white;
+
+}
+
+
+.dark #adhesionForm input::placeholder{
+
+ color:#94a3b8;
+
+}

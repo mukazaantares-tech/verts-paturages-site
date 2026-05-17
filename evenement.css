@@ -1,0 +1,686 @@
+/* =================================
+VARIABLES GLOBALES
+================================= */
+
+:root{
+
+ --primary:#1b5e20;
+
+ --primary-light:#2e7d32;
+
+ --accent:#10b981;
+
+ --soft-bg:#f4f7f6;
+
+ --card-bg:#ffffff;
+
+ --text-dark:#1f2937;
+
+ --text-soft:#6b7280;
+
+ --radius:18px;
+
+ --transition:0.3s ease;
+
+}
+
+body{
+
+ margin:0;
+
+ font-family:'Segoe UI','Open Sans',sans-serif;
+
+ background:var(--soft-bg);
+
+ color:var(--text-dark);
+
+ line-height:1.6;
+
+ min-height:100vh;
+
+ display:flex;
+
+ flex-direction:column;
+
+}
+
+.main{
+    flex: 1;
+}
+
+
+/* =================================
+BASE
+================================= */
+
+*{
+
+ box-sizing:border-box;
+
+ margin:0;
+
+ padding:0;
+
+}
+
+body{
+
+ font-family:'Segoe UI','Open Sans',sans-serif;
+
+ background:var(--soft-bg);
+
+ color:var(--text-dark);
+
+ line-height:1.6;
+
+}
+
+
+/* =================================
+NAVBAR STYLE ACCUEIL
+================================= */
+
+.navbar{
+
+ display:flex;
+
+ justify-content:space-between;
+
+ align-items:center;
+
+ padding:1.2rem 2rem;
+
+ background:linear-gradient(
+
+ 135deg,
+
+ var(--primary),
+
+ var(--primary-light)
+
+ );
+
+ color:white;
+
+ position:sticky;
+
+ top:0;
+
+ z-index:1000;
+
+ box-shadow:0 8px 20px rgba(0,0,0,0.08);
+
+}
+
+
+.logo{
+
+ font-size:1.6rem;
+
+ font-weight:bold;
+
+ letter-spacing:1px;
+
+}
+
+
+/* liens */
+
+.nav-links{
+
+ list-style:none;
+
+ display:flex;
+
+ gap:2rem;
+
+ margin:0;
+
+}
+
+
+.nav-links a{
+
+ text-decoration:none;
+
+ color:white;
+
+ font-weight:600;
+
+ position:relative;
+
+ transition:0.3s;
+
+}
+
+
+/* animation underline */
+
+.nav-links a::after{
+
+ content:"";
+
+ position:absolute;
+
+ width:0;
+
+ height:2px;
+
+ background:#c8e6c9;
+
+ left:0;
+
+ bottom:-4px;
+
+ transition:0.3s ease;
+
+}
+
+
+.nav-links a:hover::after{
+
+ width:100%;
+
+}
+
+
+/* burger */
+
+.burger{
+
+ display:none;
+
+ background:none;
+
+ border:none;
+
+ font-size:1.6rem;
+
+ color:white;
+
+ cursor:pointer;
+
+}
+
+
+/* =================================
+HERO EVENEMENT
+================================= */
+
+.hero-event{
+
+ background:linear-gradient(
+ 135deg,
+ #2e7d32,
+ #10b981
+ );
+
+}
+
+.hero-event h2{
+
+ font-size:2.4rem;
+
+ margin-bottom:8px;
+
+}
+
+.hero-event p{
+
+ opacity:0.9;
+
+}
+
+
+/* =================================
+CONTAINER
+================================= */
+
+.event-container{
+
+ max-width:950px;
+
+ margin:70px auto;
+
+ padding:0 20px;
+
+}
+
+
+/* =================================
+CARTE EVENEMENT
+================================= */
+
+.event-card{
+
+ max-width:900px;
+
+ margin:40px auto;
+
+ background:white;
+
+ border-radius:18px;
+
+ overflow:hidden;
+
+ box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+}
+
+
+.event-card img{
+
+ width:100%;
+
+ height:350px;
+
+ object-fit:cover;
+
+ display:block;
+
+}
+
+
+/* =================================
+IMAGE EVENEMENT
+================================= */
+
+.event-image{
+
+ width:100%;
+
+ height:420px;
+
+ overflow:hidden;
+
+ position:relative;
+
+}
+
+
+.event-image img{
+
+ width:100%;
+
+ height:100%;
+
+ object-fit:cover;
+
+ display:block;
+
+ transition:0.4s ease;
+
+}
+
+
+/* léger zoom au hover */
+
+.event-card:hover img{
+
+ transform:scale(1.03);
+
+}
+
+
+/* overlay léger */
+
+.event-image::after{
+
+ content:"";
+
+ position:absolute;
+
+ inset:0;
+
+ background:linear-gradient(
+
+ rgba(0,0,0,0),
+
+ rgba(0,0,0,0.08)
+
+ );
+
+}
+
+
+/* =================================
+CONTENU EVENEMENT
+================================= */
+
+.event-content{
+
+ padding:30px;
+
+ text-align:center;
+
+}
+
+
+.event-content h3{
+
+ color:var(--primary);
+
+ margin-bottom:10px;
+
+ font-size:1.9rem;
+
+ font-weight:700;
+
+}
+
+
+.event-content p{
+
+ color:var(--text-soft);
+
+ font-size:1.05rem;
+
+ max-width:700px;
+
+ margin:auto;
+
+}
+
+
+/* =================================
+BOUTONS
+================================= */
+
+.event-content button{
+
+ margin-top:20px;
+
+ background:linear-gradient(
+
+ 135deg,
+
+ var(--primary),
+
+ var(--accent)
+
+ );
+
+ color:white;
+
+ border:none;
+
+ padding:12px 22px;
+
+ border-radius:12px;
+
+ cursor:pointer;
+
+ font-weight:600;
+
+ transition:var(--transition);
+
+}
+
+
+.event-content button:hover{
+
+ transform:translateY(-2px);
+
+ box-shadow:0 10px 25px rgba(0,0,0,0.15);
+
+}
+
+
+/* =================================
+MESSAGE AUCUN EVENEMENT
+================================= */
+
+.no-event{
+
+ background:white;
+
+ padding:40px;
+
+ border-radius:var(--radius);
+
+ text-align:center;
+
+ box-shadow:0 10px 25px rgba(0,0,0,0.05);
+
+ color:var(--text-soft);
+
+ font-size:1.1rem;
+
+}
+
+
+/* =================================
+THEME TOGGLE
+================================ */
+
+.theme-toggle{
+
+ background:rgba(255,255,255,0.15);
+
+ border:none;
+
+ color:white;
+
+ padding:6px 10px;
+
+ border-radius:8px;
+
+ cursor:pointer;
+
+ font-size:1rem;
+
+ margin-right:10px;
+
+}
+
+
+.theme-toggle:hover{
+
+ background:rgba(255,255,255,0.3);
+
+}
+
+
+/* =================================
+DARK MODE VARIABLES
+================================ */
+
+.dark{
+
+ --soft-bg:#0f172a;
+
+ --card-bg:#1e293b;
+
+ --text-dark:#e5e7eb;
+
+ --text-soft:#94a3b8;
+
+ --primary:#22c55e;
+
+ --primary-light:#16a34a;
+
+}
+
+
+/* fond général */
+
+.dark body{
+
+ background:#0f172a;
+
+ color:#e5e7eb;
+
+}
+
+
+/* cartes */
+
+.dark .card,
+.dark .relative.bg-white,
+.dark .event-card,
+.dark .visionnaire-container,
+.dark #verset-content{
+
+ background:#1e293b;
+
+ color:#e5e7eb;
+
+}
+
+
+/* navbar */
+
+.dark .navbar{
+
+ background:linear-gradient(
+ 135deg,
+ #14532d,
+ #166534
+ );
+
+}
+
+
+/* footer */
+
+.dark footer{
+
+ background:linear-gradient(
+ 135deg,
+ #14532d,
+ #166534
+ );
+
+}
+
+
+/* inputs */
+
+.dark input,
+.dark textarea,
+.dark select{
+
+ background:#020617;
+
+ color:white;
+
+ border:1px solid #334155;
+
+}
+
+/* =================================
+FOOTER FIXE EN BAS PROPRE
+================================= */
+
+footer{
+
+ background:linear-gradient(
+
+ 135deg,
+
+ var(--primary),
+
+ var(--primary-light)
+
+ );
+
+ color:white;
+
+ text-align:center;
+
+ padding:2rem;
+
+ margin-top:auto;
+
+ border-radius:var(--radius);
+
+ box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+}
+
+
+/* =================================
+RESPONSIVE TABLETTE
+================================= */
+
+@media(max-width:900px){
+
+ .hero-event{
+
+  height:260px;
+
+ }
+
+ .hero-event h2{
+
+  font-size:2rem;
+
+ }
+
+ .event-image{
+
+  height:320px;
+
+ }
+
+}
+
+
+/* =================================
+RESPONSIVE MOBILE
+================================= */
+
+@media(max-width:600px){
+
+ .hero-event{
+
+  height:220px;
+
+ }
+
+ .hero-event h2{
+
+  font-size:1.6rem;
+
+ }
+
+ .event-content{
+
+  padding:22px;
+
+ }
+
+ .event-image{
+
+  height:260px;
+
+ }
+
+}
+
+
+/* =================================
+RESPONSIVE PETIT MOBILE
+================================= */
+
+@media(max-width:400px){
+
+ .hero-event{
+
+  height:180px;
+
+ }
+
+ .event-image{
+
+  height:200px;
+
+ }
+
+ .event-content h3{
+
+  font-size:1.5rem;
+
+ }
+
+}

@@ -1,0 +1,407 @@
+/* =================================
+VARIABLES
+================================ */
+
+:root{
+
+ --primary:#7e57c2;
+ --secondary:#ec407a;
+ --accent:#fb8c00;
+
+ --bg:#f8fafc;
+
+ --card-bg:#ffffff;
+
+ --text:#1f2937;
+
+ --text-soft:#6b7280;
+
+ --radius:18px;
+
+ --transition:.28s ease;
+
+}
+
+
+/* =================================
+BASE
+================================ */
+
+body{
+
+ margin:0;
+
+ font-family:'Segoe UI','Open Sans',sans-serif;
+
+ background:linear-gradient(180deg,#fafafa,#f3f4f6);
+
+ color:var(--text);
+
+ line-height:1.65;
+
+}
+
+
+/* =================================
+HERO PREMIUM
+================================ */
+
+.hero{
+
+ background:
+ linear-gradient(
+ 135deg,
+ var(--primary),
+ var(--secondary),
+ var(--accent)
+ );
+
+ color:white;
+
+ padding:4.5rem 2rem;
+
+ text-align:center;
+
+ border-bottom-left-radius:45px;
+
+ border-bottom-right-radius:45px;
+
+ box-shadow:
+ 0 10px 35px rgba(0,0,0,0.12);
+
+ position:relative;
+
+ overflow:hidden;
+
+}
+
+
+/* léger effet lumineux */
+
+.hero::after{
+
+ content:"";
+
+ position:absolute;
+
+ width:350px;
+
+ height:350px;
+
+ background:radial-gradient(
+
+  circle,
+
+  rgba(255,255,255,.18),
+
+  transparent
+
+ );
+
+ top:-120px;
+
+ right:-120px;
+
+ border-radius:50%;
+
+}
+
+
+/* titre hero */
+
+.hero h1,
+.hero h2{
+
+ margin-bottom:.6rem;
+
+ letter-spacing:.4px;
+
+}
+
+
+/* texte hero */
+
+.hero p{
+
+ opacity:.92;
+
+ max-width:650px;
+
+ margin:auto;
+
+}
+
+
+/* =================================
+SECTION
+================================ */
+
+section{
+
+ max-width:1100px;
+
+ margin:65px auto;
+
+ padding:42px 26px;
+
+}
+
+
+/* titre section */
+
+section h2{
+
+ color:var(--primary);
+
+ margin-bottom:22px;
+
+ font-size:1.9rem;
+
+ position:relative;
+
+}
+
+
+/* petite ligne décorative */
+
+section h2::after{
+
+ content:"";
+
+ display:block;
+
+ width:55px;
+
+ height:3px;
+
+ background:
+ linear-gradient(
+ 90deg,
+ var(--secondary),
+ var(--accent)
+ );
+
+ margin-top:8px;
+
+ border-radius:4px;
+
+}
+
+
+/* =================================
+CARDS PREMIUM
+================================ */
+
+.card{
+
+ background:var(--card-bg);
+
+ border-radius:var(--radius);
+
+ padding:2.2rem;
+
+ box-shadow:
+ 0 18px 40px rgba(0,0,0,0.06);
+
+ transition:var(--transition);
+
+ border:1px solid rgba(0,0,0,0.04);
+
+ position:relative;
+
+ overflow:hidden;
+
+}
+
+
+/* halo subtil */
+
+.card::before{
+
+ content:"";
+
+ position:absolute;
+
+ width:180px;
+
+ height:180px;
+
+ background:
+ radial-gradient(
+
+  circle,
+
+  rgba(236,64,122,.07),
+
+  transparent
+
+ );
+
+ top:-60px;
+
+ right:-60px;
+
+ border-radius:50%;
+
+}
+
+
+/* effet hover */
+
+.card:hover{
+
+ transform:translateY(-6px);
+
+ box-shadow:
+ 0 30px 60px rgba(0,0,0,0.12);
+
+}
+
+
+/* texte dans carte */
+
+.card p{
+
+ color:var(--text-soft);
+
+}
+
+
+/* =================================
+COMMENTAIRES
+================================ */
+
+#publicComments div{
+
+ background:var(--card-bg);
+
+ padding:16px;
+
+ border-radius:14px;
+
+ margin-bottom:12px;
+
+ box-shadow:
+ 0 6px 18px rgba(0,0,0,0.05);
+
+ border-left:4px solid var(--secondary);
+
+ transition:var(--transition);
+
+}
+
+
+/* hover commentaire */
+
+#publicComments div:hover{
+
+ transform:translateX(4px);
+
+ box-shadow:
+ 0 10px 25px rgba(0,0,0,0.1);
+
+}
+
+
+/* =================================
+FOOTER PREMIUM
+================================ */
+
+footer{
+
+ text-align:center;
+
+ padding:2.3rem;
+
+ background:
+ linear-gradient(
+ 135deg,
+ var(--primary),
+ var(--secondary)
+ );
+
+ color:white;
+
+ margin-top:50px;
+
+ letter-spacing:.3px;
+
+ box-shadow:
+ 0 -8px 25px rgba(0,0,0,0.08);
+
+}
+
+
+/* =================================
+RESPONSIVE
+================================ */
+
+@media(max-width:768px){
+
+.hero{
+
+ padding:3rem 1.4rem;
+
+ border-bottom-left-radius:30px;
+
+ border-bottom-right-radius:30px;
+
+}
+
+
+section{
+
+ margin:45px auto;
+
+ padding:28px 18px;
+
+}
+
+
+.card{
+
+ padding:1.6rem;
+
+}
+
+
+section h2{
+
+ font-size:1.55rem;
+
+}
+
+
+}
+
+
+@media(max-width:420px){
+
+.hero{
+
+ padding:2.4rem 1.2rem;
+
+}
+
+
+section{
+
+ padding:22px 15px;
+
+}
+
+
+.card{
+
+ padding:1.3rem;
+
+}
+
+
+section h2{
+
+ font-size:1.4rem;
+
+}
+
+}

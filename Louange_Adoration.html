@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Louange et Adoration - Verts-Pâturages</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="Louange_Adoration.css">
+  <link rel="stylesheet" href="darkmode.global.css">
+  <link rel="stylesheet" href="global.responsive.css">
+  <link rel="icon" href="Verts-Paturages.png" type="image/png">
+  <link rel="apple-touch-icon" href="Verts-Paturages.png">
+</head>
+<body class="dark-enabled bg-gray-100"
+      data-departement="Louange et adoration" data-sous="Generale">
+      
+
+  <!-- Navigation -->
+  <header class=" navbar bg-green-700 text-white p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold">Verts-Pâturages</h1>
+    <!-- bouton mobile -->
+        <button class="burger" id="burger">
+          ☰
+        </button>
+            <!-- bouton dark mode -->
+        <button id="themeToggle" class="theme-toggle">
+            🌙
+        </button>
+    <ul class=" nav-links flex gap-6" id="navlinks">
+      <li><a href="index.html" class="hover:text-green-300">Accueil</a></li>
+      <li><a href="serviteurs.html" class="hover:text-green-300">Serviteurs</a></li>
+      <li><a href="Departements.html" class="hover:text-green-300">Départements</a></li>
+      <li><a href="jeunesse.html" class="hover:text-green-300">Jeunesse</a></li>
+      <li><a href="localisation.html" class="hover:text-green-300">Localisation</a></li>
+    </ul>
+  </header>
+
+  <!-- Présentation du président -->
+  <main class="p-6">
+   <section class="relative max-w-4xl mx-auto bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-lg shadow-md p-6 mb-10">
+  <h2 class="text-center text-orange-700 font-semibold">
+    Département de Louange et Adoration
+  </h2>
+  <h3 class="text-xl font-bold text-orange-700 text-center mt-2">
+    Responsable : KALOMBO KAMBOWA STEPHANE
+  </h3>
+  <div class="flex flex-col md:flex-row items-center gap-6 mt-6">
+    <img src="/image/papa stephane.jpg"
+      alt="Responsable du département"class="w-32 h-32 rounded-full object-cover shadow-md border-4 border-yellow-600 mx-auto mb-4"/>
+    <div>
+      <p class="mt-2 text-gray-600">
+        Le département de Louange et Adoration a pour mission d’organiser les activités de louange et d'adoration au sein de l'église, de former et d'encadrer les membres du sous-département pour une meilleure performance, de collaborer avec les autres départements pour des événements spéciaux, et d'encourager la participation active des membres dans les activités de louange et d'adoration.
+      </p>
+      <blockquote class="mt-4 italic pl-4" style="color:#FFEB3B; border-left:4px solid #FFEB3B;">
+        Louez l'Éternel, car il est bon, car sa miséricorde dure à toujours! (Psaume 136:1)
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+  <!-- Attributions -->
+    <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
+      <h3 class="text-xl font-bold text-green-700 mb-4">Attribution du département de louange & Adoration</h3>
+      <ul class="list-disc list-inside text-gray-700">
+        <li>Travailler sous la supervision du pasteur pour des orientations</li>
+        <li>Organiser les activités du département (répétitions, prières, prestations)</li>
+        <li>Organiser les formations pour ses membres</li>
+        <li>Concourir à la tenue des cultes par des cantiques</li>
+        <li>Rapporter au pasteur</li>
+      </ul>
+    </section>
+
+    <!-- Sous-groupes de Louange -->
+    <section class="mt-10">
+      <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+        
+        <!-- Grande Chorale -->
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-gradient-to-r from-green-400 to-green-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-200"></div>
+          <div class="relative bg-white p-6 rounded-lg shadow-lg h-full">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-500 text-white">
+              <i class="fas fa-users text-xl"></i>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-medium text-gray-900">La Grande Chorale</h3>
+              <p class="mt-2 text-base text-gray-500">
+                Ensemble principal de chant qui anime les cultes dominicaux et les grandes célébrations.
+              </p>
+              <a href="grande-chorale.html"><button class="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Accéder</button></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Canon Vocal -->
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-gradient-to-r from-green-400 to-green-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-200"></div>
+          <div class="relative bg-white p-6 rounded-lg shadow-lg h-full">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-500 text-white">
+              <i class="fas fa-music text-xl"></i>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-medium text-gray-900">Le Canon Vocal</h3>
+              <p class="mt-2 text-base text-gray-500">
+                Groupe vocal spécialisé dans les harmonies et les chants spirituels contemporains.
+              </p>
+              <a href="canon-vocale.html"><button class="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Accéder</button></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mamans Hassafa -->
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-gradient-to-r from-green-400 to-green-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-200"></div>
+          <div class="relative bg-white p-6 rounded-lg shadow-lg h-full">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-500 text-white">
+              <i class="fas fa-female text-xl"></i>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-medium text-gray-900">Asafa</h3>
+              <p class="mt-2 text-base text-gray-500">
+                Groupe de femmes chantant avec ferveur et sagesse, porteurs de louange intergénérationnelle.
+              </p>
+              <a href="Asafa.html"><button class="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Accéder</button></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Glorel -->
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-gradient-to-r from-green-400 to-green-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-200"></div>
+          <div class="relative bg-white p-6 rounded-lg shadow-lg h-full">
+            <div class="flex items-center justify-center h-12 w-12 rounded-md bg-green-500 text-white">
+              <i class="fas fa-music text-xl"></i>
+            </div>
+            <div class="mt-4">
+              <h3 class="text-lg font-medium text-gray-900">GLOREL</h3>
+              <p class="mt-2 text-base text-gray-500">
+                Ajoute une forme nouvelle de louange à l'Éternel.
+              </p>
+              <a href="Glorel.html"><button class="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Accéder</button></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-green-700 text-white text-center p-4 mt-10">
+    <p> 2026 Verts-Pâturages | Tous droits réservés</p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+  <!-- SERVICES -->
+  <script src="js/services/supabase.service.js"></script>
+  <script src="js/services/data.service.js"></script>
+  <script src="js/services/auth.service.js"></script>
+  <script src="js/modules/public/global.responsive.js"></script>
+  <script src="js/core/App.js"></script>
+</body>
+</html>
