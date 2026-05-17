@@ -82,58 +82,154 @@ const VersesModule = {
 
     async render() {
 
-        const container =
-            document.getElementById("verseList");
+    const container =
+        document.getElementById("verseList");
 
-        if (!container) return;
+    if (!container) return;
 
-        const { data, error } =
-            await supabaseClient
-                .from("verses")
-                .select("*")
-                .order("created_at", { ascending: false })
-                .limit(7);
+    const { data, error } =
+        await supabaseClient
+            .from("verses")
+            .select("*")
+            .order("created_at", { ascending: false })
+            .limit(7);
 
-        if (error) {
-            console.error(error);
-            return;
-        }
+    if (error) {
+        console.error(error);
+        return;
+    }
 
-        container.innerHTML = "";
+    container.innerHTML = "";
 
-        if (!data.length) {
-            container.innerHTML = "Aucun verset disponible";
-            return;
-        }
+    /* =================================
+       AUCUN VERSET => ALEATOIRE
+    ================================= */
 
-        data.forEach(v => {
+    if (!data || data.length === 0) {
 
-            const div = document.createElement("div");
+        const randomVerses = [
 
-            div.className = "adhesion-card";
+            {
+                reference: "Jean 3:16",
+                texte: "Car Dieu a tant aimé le monde..."
+            },
 
-            div.innerHTML = `
-                <strong>${v.reference}</strong>
-                <p>${v.texte}</p>
+            {
+                reference: "Philippiens 4:13",
+                texte: "Je puis tout par celui qui me fortifie."
+            },
 
-                <div style="margin-top:10px;">
-                    ❤️ ${v.likes}
+            {
+                reference: "Psaume 23:1",
+                texte: "L'Éternel est mon berger."
+            },
 
-                    <button onclick="VersesModule.like(${v.id})"
-                        style="margin-left:10px;">
-                        👍
-                    </button>
+            {
+                reference: "Josué 1:9",
+                texte: "Fortifie-toi et prends courage."
+            }
 
-                    <button onclick="VersesModule.delete(${v.id})"
-                        style="margin-left:10px;background:red;color:white;">
-                        ❌
-                    </button>
-                </div>
-            `;
+        ];
 
-            container.appendChild(div);
-        });
-    },
+        const verse =
+            randomVerses[
+                Math.floor(Math.random() * randomVerses.length)
+            ];
+
+        container.innerHTML = `
+            <div class="adhesion-card weekly-verse">
+
+                <h3>✨ Verset du moment</h3>
+
+                <strong>${verse.reference}</strong>
+
+                <p>${verse.texte}</p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+    /* =================================
+       VERSET DE LA SEMAINE
+    ================================= */
+
+    // 🔥 calcul semaine actuelle
+    const now = new Date();
+
+    const start =
+        new Date(now.getFullYear(), 0, 1);
+
+    const week =
+        Math.ceil(
+            (((now - start) / 86400000) + start.getDay() + 1) / 7
+        );
+
+    // 🔥 choisir un verset selon semaine
+    const weeklyIndex =
+        week % data.length;
+
+    const weeklyVerse =
+        data[weeklyIndex];
+
+    // 🔥 afficher verset semaine
+    const weeklyDiv =
+        document.createElement("div");
+
+    weeklyDiv.className =
+        "adhesion-card weekly-verse";
+
+    weeklyDiv.innerHTML = `
+        <h3>✨ Verset de la semaine</h3>
+
+        <strong>${weeklyVerse.reference}</strong>
+
+        <p>${weeklyVerse.texte}</p>
+
+        <div style="margin-top:10px;">
+            ❤️ ${weeklyVerse.likes}
+        </div>
+    `;
+
+    container.appendChild(weeklyDiv);
+
+    /* =================================
+       AUTRES VERSETS
+    ================================= */
+
+    data.forEach(v => {
+
+        const div =
+            document.createElement("div");
+
+        div.className = "adhesion-card";
+
+        div.innerHTML = `
+            <strong>${v.reference}</strong>
+
+            <p>${v.texte}</p>
+
+            <div style="margin-top:10px;">
+
+                ❤️ ${v.likes}
+
+                <button onclick="VersesModule.like(${v.id})"
+                    style="margin-left:10px;">
+                    👍
+                </button>
+
+                <button onclick="VersesModule.delete(${v.id})"
+                    style="margin-left:10px;background:red;color:white;">
+                    ❌
+                </button>
+
+            </div>
+        `;
+
+        container.appendChild(div);
+    });
+},
 
     /* ===============================
        LIKE
