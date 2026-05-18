@@ -17,15 +17,33 @@ const VersesPublic = {
             await supabaseClient
                 .from("verses")
                 .select("*")
-                .order("created_at", { ascending: false })
-                .limit(1);
+                .order("created_at", { ascending: true })
+                .limit(7);
 
-        if (error || !data.length) {
+        if (error) {
             console.error(error);
             return;
         }
 
-        const verse = data[0];
+        if (!data || data.length === 0) {
+            console.error("Aucun verset disponible");
+            return;
+        }
+
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const firstVerseDate = new Date(data[0].created_at);
+        const firstDay = new Date(firstVerseDate.getFullYear(), firstVerseDate.getMonth(), firstVerseDate.getDate());
+        const dayOffset = Math.floor((today - firstDay) / 86400000);
+
+        let dailyIndex;
+        if (dayOffset >= 0 && dayOffset < data.length) {
+            dailyIndex = dayOffset;
+        } else {
+            dailyIndex = Math.floor(Math.random() * data.length);
+        }
+
+        const verse = data[dailyIndex];
         this.currentVerse = verse;
 
         document.getElementById("verseText").textContent =
