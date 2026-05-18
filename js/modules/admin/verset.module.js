@@ -89,7 +89,7 @@ const VersesModule = {
         const { data, error } = await supabaseClient
             .from("verses")
             .select("*")
-            .order("created_at", { ascending: false })
+            .order("created_at", { ascending: true })
             .limit(7);
 
         if (error) {
@@ -122,26 +122,40 @@ const VersesModule = {
             return;
         }
 
-        // Verset de la semaine (choix déterministe selon la semaine de l'année)
+        // Verset du jour :
+        // - data[0] est le premier verset publié
+        // - chaque jour suivant affiche le verset publié suivant
+        // - si on dépasse le nombre de versets publiés, on choisit un verset aléatoire parmi ceux déjà publiés
         const now = new Date();
-        const start = new Date(now.getFullYear(), 0, 1);
-        const week = Math.ceil((((now - start) / 86400000) + start.getDay() + 1) / 7);
-        const weeklyIndex = week % data.length;
-        const weeklyVerse = data[weeklyIndex];
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const firstVerseDate = new Date(data[0].created_at);
+        const firstDay = new Date(firstVerseDate.getFullYear(), firstVerseDate.getMonth(), firstVerseDate.getDate());
+        const dayOffset = Math.floor((today - firstDay) / 86400000);
 
-        const weeklyDiv = document.createElement("div");
-        weeklyDiv.className = "adhesion-card weekly-verse";
-        weeklyDiv.innerHTML = `
-            <h3>✨ Verset de la semaine</h3>
-            <strong>${weeklyVerse.reference}</strong>
-            <p>${weeklyVerse.texte}</p>
-            <div style="margin-top:10px;">❤️ ${weeklyVerse.likes}</div>
+        let dailyIndex;
+        if (dayOffset >= 0 && dayOffset < data.length) {
+            dailyIndex = dayOffset;
+        } else {
+            dailyIndex = Math.floor(Math.random() * data.length);
+        }
+
+        const dailyVerse = data[dailyIndex];
+
+        const dailyDiv = document.createElement("div");
+        dailyDiv.className = "adhesion-card weekly-verse";
+        dailyDiv.innerHTML = `
+            <h3>✨ Verset du jour</h3>
+            <strong>${dailyVerse.reference}</strong>
+            <p>${dailyVerse.texte}</p>
+            <div style="margin-top:10px;">❤️ ${dailyVerse.likes}</div>
         `;
 
-        container.appendChild(weeklyDiv);
+        container.appendChild(dailyDiv);
 
-        // Autres versets
-        data.forEach(v => {
+        // Autres versets dans l'ordre de publication
+        data.forEach((v, index) => {
+            if (index === dailyIndex) return;
+
             const div = document.createElement("div");
             div.className = "adhesion-card";
             div.innerHTML = `
