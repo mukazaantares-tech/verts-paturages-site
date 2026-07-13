@@ -1,181 +1,104 @@
 const AccueilModule = {
+  init() {
+    this.initJoinModal();
 
-init(){
+    this.initYouthLoginModal();
+  },
 
- this.initJoinModal();
-
- this.initYouthLoginModal();
-
-},
-
-
-
-/* =============================
+  /* =============================
    MODAL ADHESION
 ============================= */
 
-initJoinModal(){
+  initJoinModal() {
+    const joinBtn = document.getElementById("joinBtn");
 
- const joinBtn =
- document.getElementById("joinBtn");
+    const joinModal = document.getElementById("joinModal");
 
- const joinModal =
- document.getElementById("joinModal");
+    const closeModal = document.getElementById("closeModal");
 
- const closeModal =
- document.getElementById("closeModal");
+    if (!joinBtn || !joinModal) return;
 
+    joinBtn.addEventListener("click", () => {
+      joinModal.classList.remove("hidden");
+    });
 
- if(!joinBtn || !joinModal) return;
+    closeModal?.addEventListener("click", () => {
+      joinModal.classList.add("hidden");
+    });
+  },
 
-
- joinBtn.addEventListener("click", () => {
-
-  joinModal.classList.remove("hidden");
-
- });
-
-
- closeModal?.addEventListener("click", () => {
-
-  joinModal.classList.add("hidden");
-
- });
-
-},
-
-
-
-/* =============================
+  /* =============================
    MODAL LOGIN JEUNESSE
 ============================= */
 
-initYouthLoginModal(){
+  initYouthLoginModal() {
+    const openBtn = document.getElementById("youthLoginBtn");
 
- const openBtn =
- document.getElementById("youthLoginBtn");
+    const modal = document.getElementById("youthLoginModal");
 
- const modal =
- document.getElementById("youthLoginModal");
+    const closeBtn = document.getElementById("closeYouthModal");
 
- const closeBtn =
- document.getElementById("closeYouthModal");
+    const submitBtn = document.getElementById("submitYouthLogin");
 
- const submitBtn =
- document.getElementById("submitYouthLogin");
+    if (!openBtn || !modal) return;
 
+    /* ouvrir */
 
- if(!openBtn || !modal) return;
+    openBtn.addEventListener("click", () => {
+      modal.classList.remove("hidden");
+    });
 
+    /* fermer */
 
+    closeBtn?.addEventListener("click", () => {
+      modal.classList.add("hidden");
+    });
 
-/* ouvrir */
+    /* login */
 
- openBtn.addEventListener("click", () => {
+    submitBtn?.addEventListener(
+      "click",
 
-  modal.classList.remove("hidden");
+      async () => {
+        const email = document.getElementById("youthEmail")?.value;
 
- });
+        const password = document.getElementById("youthPassword")?.value;
 
+        if (!email || !password) {
+          document.getElementById("youthLoginError").textContent =
+            "Veuillez remplir tous les champs";
 
+          return;
+        }
 
-/* fermer */
+        const user = await AuthService.login(email, password);
 
- closeBtn?.addEventListener("click", () => {
+        if (!user) {
+          document.getElementById("youthLoginError").textContent =
+            "Email ou mot de passe incorrect";
 
-  modal.classList.add("hidden");
+          return;
+        }
 
- });
+        const allowedRoles = [
+          "youth-admin",
 
+          "youth-super-admin",
 
+          "super_admin",
+        ];
 
-/* login */
+        if (!allowedRoles.includes(user.role)) {
+          document.getElementById("youthLoginError").textContent =
+            "Accès refusé";
 
- submitBtn?.addEventListener("click",
+          return;
+        }
 
- async () => {
+        modal.classList.add("hidden");
 
-  const email =
-  document
-  .getElementById("youthEmail")
-  ?.value;
-
-  const password =
-  document
-  .getElementById("youthPassword")
-  ?.value;
-
-
-
-  if(!email || !password){
-
-   document
-   .getElementById("youthLoginError")
-   .textContent =
-   "Veuillez remplir tous les champs";
-
-   return;
-
-  }
-
-
-
-  const success =
-  await AuthService.login(
-   email,
-   password
-  );
-
-
-
-  if(!success){
-
-   document
-   .getElementById("youthLoginError")
-   .textContent =
-   "Email ou mot de passe incorrect";
-
-   return;
-
-  }
-
-
-
-  const user =
-  AuthService.currentUser();
-
-
-
-  if(
-
-   user.role !== "youth-admin"
-   &&
-   user.role !== "youth-super-admin"
-   &&
-   user.role !== "super-admin"
-
-  ){
-
-   document
-   .getElementById("youthLoginError")
-   .textContent =
-   "Accès refusé";
-
-   return;
-
-  }
-
-
-
-  modal.classList.add("hidden");
-
-
-
-  window.location.href =
-  "Jeunesse-admin.html";
-
- });
-
-}
-
-}
+        window.location.href = "jeunesse-admin.html";
+      },
+    );
+  },
+};

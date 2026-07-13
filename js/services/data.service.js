@@ -3,160 +3,116 @@
 // ===============================
 
 const DataService = {
-
-    /* ===============================
+  /* ===============================
        LIRE DONNEES
     =============================== */
 
-    get(key) {
+  get(key) {
+    try {
+      const data = localStorage.getItem(key);
 
-        try {
+      if (!data) return null;
 
-            const data = localStorage.getItem(key);
+      return JSON.parse(data);
+    } catch (error) {
+      console.error("Erreur DataService.get :", error);
 
-            if (!data) return null;
+      return null;
+    }
+  },
 
-            return JSON.parse(data);
-
-        } catch (error) {
-
-            console.error("Erreur DataService.get :", error);
-
-            return null;
-
-        }
-
-    },
-
-    /* ===============================
+  /* ===============================
        ENREGISTRER DONNEES
     =============================== */
 
-    set(key, value) {
+  set(key, value) {
+    try {
+      const json = JSON.stringify(value);
 
-        try {
+      localStorage.setItem(key, json);
+    } catch (error) {
+      console.error("Erreur DataService.set :", error);
+    }
+  },
 
-            const json = JSON.stringify(value);
-
-            localStorage.setItem(key, json);
-
-        } catch (error) {
-
-            console.error("Erreur DataService.set :", error);
-
-        }
-
-    },
-
-    /* ===============================
+  /* ===============================
        SUPPRIMER
     =============================== */
 
-    remove(key) {
+  remove(key) {
+    try {
+      localStorage.removeItem(key);
+    } catch (error) {
+      console.error("Erreur DataService.remove :", error);
+    }
+  },
 
-        try {
-
-            localStorage.removeItem(key);
-
-        } catch (error) {
-
-            console.error("Erreur DataService.remove :", error);
-
-        }
-
-    },
-
-    /* ===============================
+  /* ===============================
        AJOUTER DANS UN TABLEAU
     =============================== */
 
-    push(key, value) {
+  push(key, value) {
+    try {
+      const list = this.get(key) || [];
 
-        try {
+      list.push(value);
 
-            const list = this.get(key) || [];
+      this.set(key, list);
+    } catch (error) {
+      console.error("Erreur DataService.push :", error);
+    }
+  },
 
-            list.push(value);
-
-            this.set(key, list);
-
-        } catch (error) {
-
-            console.error("Erreur DataService.push :", error);
-
-        }
-
-    },
-
-    /* ===============================
+  /* ===============================
        METTRE A JOUR
     =============================== */
 
-    update(key, id, newData) {
+  update(key, id, newData) {
+    try {
+      const list = this.get(key) || [];
 
-        try {
+      const index = list.findIndex((i) => i.id === id);
 
-            const list = this.get(key) || [];
+      if (index === -1) return;
 
-            const index = list.findIndex(i => i.id === id);
+      list[index] = {
+        ...list[index],
+        ...newData,
+      };
 
-            if (index === -1) return;
+      this.set(key, list);
+    } catch (error) {
+      console.error("Erreur DataService.update :", error);
+    }
+  },
 
-            list[index] = {
-                ...list[index],
-                ...newData
-            };
-
-            this.set(key, list);
-
-        } catch (error) {
-
-            console.error("Erreur DataService.update :", error);
-
-        }
-
-    },
-
-    /* ===============================
+  /* ===============================
        SUPPRIMER PAR ID
     =============================== */
 
-    delete(key, id) {
+  delete(key, id) {
+    try {
+      const list = this.get(key) || [];
 
-        try {
+      const filtered = list.filter((i) => i.id !== id);
 
-            const list = this.get(key) || [];
+      this.set(key, filtered);
+    } catch (error) {
+      console.error("Erreur DataService.delete :", error);
+    }
+  },
 
-            const filtered = list.filter(i => i.id !== id);
-
-            this.set(key, filtered);
-
-        } catch (error) {
-
-            console.error("Erreur DataService.delete :", error);
-
-        }
-
-    },
-
-    /* ===============================
+  /* ===============================
        RESET SYSTEME
     =============================== */
 
-    reset() {
+  reset() {
+    try {
+      localStorage.clear();
 
-        try {
-
-            localStorage.clear();
-
-            console.warn("Système réinitialisé");
-
-        } catch (error) {
-
-            console.error("Erreur DataService.reset :", error);
-
-        }
-
+      console.warn("Système réinitialisé");
+    } catch (error) {
+      console.error("Erreur DataService.reset :", error);
     }
-
+  },
 };

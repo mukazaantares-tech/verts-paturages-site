@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   console.log("App chargé 🚀");
 
   /* ===============================
@@ -6,17 +6,21 @@ document.addEventListener("DOMContentLoaded", () => {
     =============================== */
 
   if (typeof AuthService !== "undefined") {
-    AuthService.init();
+    await AuthService.init();
 
     const path = window.location.pathname;
 
     if (path.includes("Bureau-pastorale")) {
-      AuthService.protect(["admin", "super_admin"]);
+      await AuthService.protect(["admin", "super_admin"]);
     }
 
     console.log(window.location.pathname);
     if (path.includes("jeunesse-admin")) {
-      AuthService.protect(["youth-super-admin", "youth-admin", "super_admin"]);
+      await AuthService.protect([
+        "youth-super-admin",
+        "youth-admin",
+        "super_admin",
+      ]);
     }
   }
 

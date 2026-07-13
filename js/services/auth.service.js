@@ -3,185 +3,131 @@
 // ===============================
 
 const AuthService = {
-
-    /* ===============================
+  /* ===============================
        LOGIN
     =============================== */
 
-    /* ===============================
+  /* ===============================
    INITIALISATION SIMPLE
 =============================== */
 
-init(){
+  async init() {
+    const user = await this.currentUser();
 
- const user =
-  this.currentUser();
+    if (user) {
+      console.log("session trouvée :", user.email, user.role);
+    }
+  },
 
- if(user){
+  async login(email, password) {
+    try {
+      const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-  console.log(
-   "session trouvée :",
-   user.email,
-   user.role
-  );
+      if (error) {
+        console.error("Erreur login :", error.message);
 
- }
+        return false;
+      }
 
-},
+      /* récupérer role */
 
-    async login(email, password) {
+      const { data: adminData } = await supabaseClient
+        .from("admins")
+        .select("role")
+        .eq("email", data.user.email)
+        .single();
 
-        try {
+      if (!adminData) {
+        console.warn("email non autorisé");
 
-            const { data, error } =
-                await supabaseClient.auth.signInWithPassword({
+        return false;
+      }
 
-                    email,
-                    password
+      const user = {
+        email: data.user.email,
+        role: adminData.role,
+      };
 
-                });
+      console.log("connecté :", user);
 
-            if (error) {
+      return {
+        email: data.user.email,
+        role: adminData.role,
+      };
+    } catch (err) {
+      console.error(err);
 
-                console.error("Erreur login :", error.message);
+      return false;
+    }
+  },
 
-                return false;
-
-            }
-
-
-            /* récupérer role */
-
-            const { data: adminData } =
-                await supabaseClient
-                    .from("admins")
-                    .select("role")
-                    .eq("email", data.user.email)
-                    .single();
-
-
-            if (!adminData) {
-
-                console.warn("email non autorisé");
-
-                return false;
-
-            }
-
-
-            const user = {
-
-                email: data.user.email,
-                role: adminData.role
-
-            };
-
-
-            localStorage.setItem(
-
-                "vp_current_user",
-
-                JSON.stringify(user)
-
-            );
-
-
-            console.log("connecté :", user);
-
-
-            return true;
-
-        }
-
-        catch (err) {
-
-            console.error(err);
-
-            return false;
-
-        }
-
-    },
-
-
-    /* ===============================
+  /* ===============================
        UTILISATEUR ACTUEL
     =============================== */
 
-    currentUser() {
+  async currentUser() {
+    const {
+      data: { user },
+    } = await supabaseClient.auth.getUser();
 
-        const data =
-            localStorage.getItem("vp_current_user");
+    if (!user) return null;
 
-        return data
-            ? JSON.parse(data)
-            : null;
+    const { data: admin } = await supabaseClient
+      .from("admins")
+      .select("*")
+      .eq("email", user.email)
+      .single();
 
-    },
+    if (!admin) return null;
 
+    return {
+      id: user.id,
 
-    /* ===============================
+      email: user.email,
+
+      role: admin.role,
+
+      nom: admin.nom,
+    };
+  },
+
+  /* ===============================
        LOGOUT
     =============================== */
 
-    async logout() {
+  async logout() {
+    await supabaseClient.auth.signOut();
 
-        await supabaseClient.auth.signOut();
-
-        localStorage.removeItem("vp_current_user");
-
-        window.location.href = "index.html";
-
-    },
-/* ===============================
+    window.location.href = "index.html";
+  },
+  /* ===============================
    PROTECTION PAGE ADMIN (FINAL)
 =============================== */
 
-protect(roles = []) {
+  async protect(roles = []) {
+    const user = await this.currentUser();
 
- const user =
-  this.currentUser();
+    if (!user) {
+      console.warn("Accès refusé : non connecté");
 
+      window.location.href = "index.html";
 
- if (!user) {
+      return;
+    }
 
-  console.warn(
-   "Accès refusé : non connecté"
-  );
+    if (roles.length && !roles.includes(user.role)) {
+      console.warn("Accès refusé pour role :", user.role);
 
-  window.location.href =
-   "index.html";
+      window.location.href = "index.html";
 
-  return;
+      return;
+    }
 
- }
-
-
- if (
-  roles.length &&
-  !roles.includes(user.role)
- ) {
-
-  console.warn(
-   "Accès refusé pour role :",
-   user.role
-  );
-
-  window.location.href =
-   "index.html";
-
-  return;
-
- }
-
-
- console.log(
-  "Accès autorisé :",
-  user.email,
-  user.role
- );
-
-}
+    console.log("Accès autorisé :", user.email, user.role);
+  },
 };
 
 window.AuthService = AuthService;
