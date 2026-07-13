@@ -80,7 +80,7 @@ const AccueilModule = {
 
           return;
         }
-
+        console.log("ROLE RECU =", user.role);
         const allowedRoles = [
           "youth-admin",
 
@@ -88,6 +88,9 @@ const AccueilModule = {
 
           "super_admin",
         ];
+
+        console.log("AUTORISÉS =", allowedRoles);
+        console.log("RESULTAT =", allowedRoles.includes(user.role));
 
         if (!allowedRoles.includes(user.role)) {
           document.getElementById("youthLoginError").textContent =
