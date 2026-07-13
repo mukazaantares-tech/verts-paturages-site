@@ -59,6 +59,7 @@ const AuthService = {
       };
 
       console.log("connecté :", user);
+      console.log("ROLE EXACT =", JSON.stringify(user.role));
 
       return {
         email: data.user.email,
