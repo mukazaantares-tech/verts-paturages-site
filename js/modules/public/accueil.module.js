@@ -84,7 +84,7 @@ const AccueilModule = {
         const allowedRoles = [
           "youth-admin",
 
-          "youth super-admin",
+          "youth super_admin",
 
           "super_admin",
         ];

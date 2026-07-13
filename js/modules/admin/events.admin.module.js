@@ -1,220 +1,147 @@
 const EventsModule = {
+  init() {
+    console.log("EventsModule chargé");
 
- init(){
+    this.bindSave();
 
-  console.log("EventsModule chargé");
+    this.loadEvents();
+  },
 
-  this.bindSave();
+  bindSave() {
+    document.getElementById("saveEvent")?.addEventListener("click", () => {
+      this.createEvent();
+    });
+  },
 
-  this.loadEvents();
-
- },
-
-
- bindSave(){
-
-  document
-  .getElementById("saveEvent")
-  ?.addEventListener("click", () => {
-
-   this.createEvent();
-
-  });
-
- },
-
-
- async createEvent(){
-
-  /* =========================
+  async createEvent() {
+    /* =========================
      VERIFICATION ROLE
   ========================= */
 
-  const user =
-   DataService.get("vp_current_user");
+    const user = await AuthService.currentUser();
 
-  if(!user){
+    if (!user) {
+      alert("Veuillez vous connecter");
+      return;
+    }
 
-   alert("Veuillez vous connecter");
+    if (user.role !== "super_admin") {
+      alert("Seul le super administrateur peut publier un événement");
 
-   return;
+      return;
+    }
 
-  }
-
-
-  if(user.role !== "super-admin"){
-
-   alert(
-    "Seul le super administrateur peut publier un événement"
-   );
-
-   return;
-
-  }
-
-
-  /* =========================
+    /* =========================
      RECUPERATION DONNEES
   ========================= */
 
-  const title =
-   document.getElementById("eventTitle").value;
+    const title = document.getElementById("eventTitle").value;
 
-  const description =
-   document.getElementById("eventDesc").value;
+    const description = document.getElementById("eventDesc").value;
 
-  const file =
-   document.getElementById("eventImage").files[0];
+    const file = document.getElementById("eventImage").files[0];
 
+    if (!title) {
+      alert("Titre requis");
 
-  if(!title){
+      return;
+    }
 
-   alert("Titre requis");
+    if (!file) {
+      alert("Image requise");
 
-   return;
+      return;
+    }
 
-  }
-
-
-  if(!file){
-
-   alert("Image requise");
-
-   return;
-
-  }
-
-
-  try{
-
-   /* =========================
+    try {
+      /* =========================
       UPLOAD IMAGE
    ========================= */
 
-   const fileName =
-    Date.now()+"_"+file.name;
+      const fileName = Date.now() + "_" + file.name;
 
+      const { error: uploadError } = await supabaseClient.storage
+        .from("events")
+        .upload(fileName, file);
 
-   const { error:uploadError } =
-    await supabaseClient
-     .storage
-     .from("events")
-     .upload(fileName,file);
+      if (uploadError) {
+        console.error(uploadError);
 
+        alert("Erreur upload image");
 
-   if(uploadError){
+        return;
+      }
 
-    console.error(uploadError);
-
-    alert("Erreur upload image");
-
-    return;
-
-   }
-
-
-   /* =========================
+      /* =========================
       URL IMAGE
    ========================= */
 
-   const { data:urlData } =
-    supabaseClient
-     .storage
-     .from("events")
-     .getPublicUrl(fileName);
+      const { data: urlData } = supabaseClient.storage
+        .from("events")
+        .getPublicUrl(fileName);
 
-
-   /* =========================
+      /* =========================
       INSERT DB
    ========================= */
 
-   const { error:insertError } =
-    await supabaseClient
-     .from("events")
-     .insert({
+      const { error: insertError } = await supabaseClient
+        .from("events")
+        .insert({
+          title,
+          description,
+          image_url: urlData.publicUrl,
+        });
 
-      title,
-      description,
-      image_url:
-       urlData.publicUrl
+      if (insertError) {
+        console.error(insertError);
 
-     });
+        alert(insertError.message);
 
+        return;
+      }
 
-   if(insertError){
+      alert("Événement publié avec succès");
 
-    console.error(insertError);
+      this.loadEvents();
 
-    alert(insertError.message);
+      /* reset form */
 
-    return;
+      document.getElementById("eventTitle").value = "";
 
-   }
+      document.getElementById("eventDesc").value = "";
 
+      document.getElementById("eventImage").value = "";
+    } catch (err) {
+      console.error(err);
 
-   alert("Événement publié avec succès");
+      alert("Erreur lors de la publication");
+    }
+  },
 
+  async loadEvents() {
+    const container = document.getElementById("eventAdminList");
 
-   this.loadEvents();
+    const { data } = await supabaseClient
+      .from("events")
+      .select("*")
+      .order("created_at", { ascending: false });
 
+    container.innerHTML = "";
 
-   /* reset form */
-
-   document.getElementById("eventTitle").value = "";
-
-   document.getElementById("eventDesc").value = "";
-
-   document.getElementById("eventImage").value = "";
-
-
-  }
-
-  catch(err){
-
-   console.error(err);
-
-   alert("Erreur lors de la publication");
-
-  }
-
- },
-
-
-async loadEvents(){
-
- const container =
- document.getElementById("eventAdminList");
-
- const { data } =
- await supabaseClient
- .from("events")
- .select("*")
- .order("created_at",{ ascending:false });
-
-
- container.innerHTML = "";
-
-
- if(!data || data.length === 0){
-
-  container.innerHTML = `
+    if (!data || data.length === 0) {
+      container.innerHTML = `
    <p>Aucun événement</p>
   `;
 
-  return;
+      return;
+    }
 
- }
+    data.forEach((event) => {
+      // sécurité image
+      const image =
+        event?.image_url || "https://via.placeholder.com/600x400?text=Image";
 
-
- data.forEach(event => {
-
-  // sécurité image
-  const image =
-   event?.image_url ||
-   "https://via.placeholder.com/600x400?text=Image";
-
-
-  container.innerHTML += `
+      container.innerHTML += `
 
   <div class="admin-event-card">
 
@@ -242,38 +169,22 @@ async loadEvents(){
   </div>
 
   `;
+    });
+  },
 
- });
+  async deleteEvent(id) {
+    const user = await AuthService.currentUser();
 
-},
+    if (user.role !== "super_admin") {
+      alert("Seul le super administrateur peut supprimer");
 
- async deleteEvent(id){
+      return;
+    }
 
-  const user =
-   DataService.get("vp_current_user");
+    await supabaseClient.from("events").delete().eq("id", id);
 
-  if(user.role !== "super-admin"){
-
-   alert(
-    "Seul le super administrateur peut supprimer"
-   );
-
-   return;
-
-  }
-
-
-  await supabaseClient
-   .from("events")
-   .delete()
-   .eq("id",id);
-
-
-  this.loadEvents();
-
- }
-
+    this.loadEvents();
+  },
 };
-
 
 window.EventsModule = EventsModule;

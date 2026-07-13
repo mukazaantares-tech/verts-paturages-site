@@ -15,7 +15,7 @@ const DashboardModule = {
    TOPBAR
 =============================== */
 
-  initTopbar() {
+  async initTopbar() {
     const user = await AuthService.currentUser();
     if (!user) return;
     const roleEl = document.getElementById("adminRole");
@@ -135,4 +135,3 @@ const DashboardModule = {
 };
 
 window.DashboardModule = DashboardModule;
-
