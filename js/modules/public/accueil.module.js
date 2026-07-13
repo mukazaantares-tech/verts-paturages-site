@@ -72,6 +72,7 @@ const AccueilModule = {
         }
 
         const user = await AuthService.login(email, password);
+        console.log("Utilisateur connecté :", user);
 
         if (!user) {
           document.getElementById("youthLoginError").textContent =

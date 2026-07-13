@@ -39,9 +39,16 @@ const AuthService = {
         .select("role")
         .eq("email", data.user.email)
         .single();
+      console.log("Utilisateur connecté :", data.user.email);
+      console.log("Rôle trouvé :", adminData);
 
       if (!adminData) {
         console.warn("email non autorisé");
+
+        console.log("Objet retourné :", {
+          email: data.user.email,
+          role: adminData.role,
+        });
 
         return false;
       }
