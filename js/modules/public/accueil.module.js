@@ -84,7 +84,7 @@ const AccueilModule = {
         const allowedRoles = [
           "youth-admin",
 
-          "youth-super-admin",
+          "youth super-admin",
 
           "super_admin",
         ];
@@ -98,7 +98,7 @@ const AccueilModule = {
 
         modal.classList.add("hidden");
 
-        window.location.href = "jeunesse-admin.html";
+        window.location.href = "Jeunesse-admin.html";
       },
     );
   },

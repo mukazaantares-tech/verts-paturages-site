@@ -14,10 +14,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       await AuthService.protect(["admin", "super_admin"]);
     }
 
-    if (path.includes("jeunesse-admin")) {
+    if (path.includes("Jeunesse-admin")) {
       await AuthService.protect([
         "youth-admin",
-        "youth-super-admin",
+        "youth super-admin",
         "super_admin",
       ]);
     }
