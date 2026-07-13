@@ -80,14 +80,12 @@ const AccueilModule = {
 
           return;
         }
-        console.log("ROLE RECU =", user.role);
-        const allowedRoles = [
-          "youth-admin",
+        console.log("ROLE RECU =", JSON.stringify(user.role));
+        console.log("LONGUEUR =", user.role.length);
 
-          "youth super_admin",
-
-          "super_admin",
-        ];
+        allowedRoles.forEach((role) => {
+          console.log(JSON.stringify(role), role.length, role === user.role);
+        });
 
         console.log("AUTORISÉS =", allowedRoles);
         console.log("RESULTAT =", allowedRoles.includes(user.role));
