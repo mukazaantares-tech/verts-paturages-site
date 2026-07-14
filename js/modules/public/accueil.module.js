@@ -80,6 +80,11 @@ const AccueilModule = {
 
           return;
         }
+        const allowedRoles = [
+          "youth-admin",
+          "youth super-admin",
+          "super_admin",
+        ];
         console.log("ROLE RECU =", JSON.stringify(user.role));
         console.log("LONGUEUR =", user.role.length);
 
