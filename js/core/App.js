@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (typeof YouthDashboard !== "undefined") YouthDashboard.init();
 
-  if (typeof YouthActivites !== "undefined") YouthActivites.init();
+  if (typeof YouthActivities !== "undefined") YouthActivities.init();
 
   if (typeof YouthAdmins !== "undefined") YouthAdmins.init();
 

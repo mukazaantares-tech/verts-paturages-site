@@ -1,5 +1,6 @@
 const YouthActivities = {
   async init() {
+    console.log("YouthActivities.init()");
     await this.render();
     this.resetForm();
     this.bindAdd();
@@ -320,11 +321,16 @@ const YouthActivities = {
   },
 
   bindAdd() {
+    console.log("bindAdd() lancé");
+
     const btn = document.getElementById("addActivity");
+
+    console.log(btn);
 
     if (!btn) return;
 
     btn.addEventListener("click", async () => {
+      console.log("bouton enregistré chargé");
       const title = document.getElementById("activityTitle").value.trim();
 
       const category = document.getElementById("activityCategory").value;
