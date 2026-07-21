@@ -149,27 +149,109 @@
           <h2 class="text-2xl font-bold mb-6">Gestion Activités</h2>
 
           <div class="flex gap-2 mb-4">
-            <input
-              id="activityTitle"
-              class="flex-1 p-2 border rounded"
-              placeholder="Titre activité"
-            />
+            <div class="bg-white rounded-lg shadow p-6 space-y-5">
+              <h3 class="text-xl font-bold text-purple-700">
+                Nouvelle activité
+              </h3>
 
-            <input
-              id="activityDesc"
-              class="flex-1 p-2 border rounded"
-              placeholder="Description"
-            />
+              <input
+                id="activityTitle"
+                type="text"
+                placeholder="Titre de l'activité"
+                class="w-full border rounded p-3"
+              />
 
-            <button
-              id="addActivity"
-              class="bg-pink-600 text-white px-4 rounded"
-            >
-              Ajouter
-            </button>
+              <select id="activityCategory" class="w-full border rounded p-3">
+                <option value="">Choisir une catégorie</option>
+
+                <option>Camp Biblique</option>
+
+                <option>Veillée</option>
+
+                <option>Concert</option>
+
+                <option>Sport</option>
+
+                <option>Formation</option>
+
+                <option>Sortie</option>
+
+                <option>Evangélisation</option>
+
+                <option>Réunion</option>
+              </select>
+
+              <div class="grid grid-cols-2 gap-4">
+                <input
+                  id="activityDate"
+                  type="date"
+                  class="border rounded p-3"
+                />
+
+                <input
+                  id="activityTime"
+                  type="time"
+                  class="border rounded p-3"
+                />
+              </div>
+
+              <input
+                id="activityLocation"
+                type="text"
+                placeholder="Lieu"
+                class="w-full border rounded p-3"
+              />
+
+              <textarea
+                id="activityDesc"
+                rows="5"
+                placeholder="Description"
+                class="w-full border rounded p-3"
+              ></textarea>
+
+              <label class="block">
+                Image principale
+
+                <input id="activityImage" type="file" accept="image/*" />
+              </label>
+
+              <label class="block">
+                Vidéo
+
+                <input id="activityVideo" type="file" accept="video/*" />
+              </label>
+
+              <select id="activityStatus" class="w-full border rounded p-3">
+                <option value="draft">Brouillon</option>
+
+                <option value="published">Publié</option>
+
+                <option value="archived">Archivé</option>
+              </select>
+
+              <button
+                id="addActivity"
+                class="bg-purple-700 text-white px-6 py-3 rounded"
+              >
+                Enregistrer l'activité
+              </button>
+            </div>
           </div>
 
-          <div id="activityList"></div>
+          <!-- ================= LISTE DES ACTIVITÉS ================= -->
+
+          <div class="mt-10">
+            <h3 class="text-xl font-bold text-purple-700 mb-4">
+              Activités enregistrées
+            </h3>
+
+            <div
+              id="activityList"
+              class="grid grid-cols-1 lg:grid-cols-2 gap-6"
+            >
+              <!-- Les cartes seront générées automatiquement -->
+            </div>
+          </div>
         </section>
 
         <!-- ================= DEMANDES ================= -->
@@ -246,6 +328,63 @@
           <div id="adminList"></div>
         </section>
       </main>
+    </div>
+
+    <!-- ==========================================
+     MODAL DETAILS ACTIVITE
+========================================== -->
+
+    <div
+      id="activityModal"
+      class="fixed inset-0 bg-black/70 hidden flex items-center justify-center z-50"
+    >
+      <div
+        class="bg-white rounded-xl w-11/12 max-w-4xl overflow-hidden shadow-2xl"
+      >
+        <div class="flex justify-between items-center p-5 border-b">
+          <h2 id="modalActivityTitle" class="text-2xl font-bold">Activité</h2>
+
+          <button id="closeActivityModal" class="text-2xl">✖</button>
+        </div>
+
+        <div class="p-6">
+          <img
+            id="modalActivityImage"
+            class="w-full h-72 object-cover rounded-lg mb-5"
+          />
+
+          <div id="modalActivityVideo" class="mb-5"></div>
+
+          <p id="modalActivityDescription" class="mb-5 text-gray-700"></p>
+
+          <div class="grid grid-cols-2 gap-4">
+            <p>
+              <strong>Catégorie :</strong>
+              <span id="modalCategory"></span>
+            </p>
+
+            <p>
+              <strong>Date :</strong>
+              <span id="modalDate"></span>
+            </p>
+
+            <p>
+              <strong>Heure :</strong>
+              <span id="modalTime"></span>
+            </p>
+
+            <p>
+              <strong>Lieu :</strong>
+              <span id="modalLocation"></span>
+            </p>
+
+            <p>
+              <strong>Statut :</strong>
+              <span id="modalStatus"></span>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- SUPABASE -->
