@@ -4,6 +4,8 @@ const YouthActivities = {
     this.resetForm();
     this.bindAdd();
     this.bindViewModal();
+    this.bindSearch();
+    this.bindFilter();
 
     const closeBtn = document.getElementById("closeActivityModal");
 
@@ -97,9 +99,29 @@ const YouthActivities = {
       return;
     }
 
-    console.log(data);
+    editingActivityId = id;
 
-    alert("Le modal de modification sera créé à l'étape suivante.");
+    document.getElementById("activityTitle").value = data.title || "";
+
+    document.getElementById("activityCategory").value = data.category || "";
+
+    document.getElementById("activityDate").value = data.activity_date || "";
+
+    document.getElementById("activityTime").value = data.activity_time || "";
+
+    document.getElementById("activityLocation").value = data.location || "";
+
+    document.getElementById("activityDesc").value = data.description || "";
+
+    document.getElementById("activityStatus").value = data.status || "draft";
+
+    document.getElementById("addActivity").textContent =
+      "Mettre à jour l'activité";
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   },
 
   async delete(id) {
@@ -128,10 +150,24 @@ const YouthActivities = {
 
     if (!container) return;
 
-    const { data: activities, error } = await supabaseClient
+    let query = supabaseClient
       .from("youth_activities")
       .select("*")
       .order("created_at", { ascending: false });
+
+    const search = document.getElementById("activitySearch")?.value.trim();
+
+    const filter = document.getElementById("activityFilter")?.value;
+
+    if (search) {
+      query = query.ilike("title", `%${search}%`);
+    }
+
+    if (filter) {
+      query = query.eq("status", filter);
+    }
+
+    const { data: activities, error } = await query;
 
     if (error) {
       console.error(error);
@@ -373,42 +409,72 @@ const YouthActivities = {
           .getPublicUrl(videoName).data.publicUrl;
       }
 
-      /* INSERT DATABASE */
-      const { error } = await supabaseClient.from("youth_activities").insert([
-        {
-          title,
+      /* ===========================
+   ENREGISTREMENT ACTIVITÉ
+=========================== */
 
-          description,
+      const saveButton = document.getElementById("addActivity");
 
-          category,
+      try {
+        saveButton.disabled = true;
+        saveButton.textContent = "Enregistrement...";
 
-          activity_date: activityDate,
+        const { error } = await supabaseClient.from("youth_activities").insert([
+          {
+            title,
+            description,
+            category,
+            activity_date: activityDate,
+            activity_time: activityTime,
+            location,
+            image_url,
+            video_url,
+            status,
+            created_by: user.id,
+          },
+        ]);
 
-          activity_time: activityTime,
+        if (error) throw error;
 
-          location,
+        alert("Activité enregistrée avec succès.");
 
-          image_url,
+        await this.render();
 
-          video_url,
+        this.resetForm();
 
-          status,
+        document.getElementById("activityModal")?.classList.add("hidden");
+      } catch (err) {
+        console.error(err);
 
-          created_by: user.id,
-        },
-      ]);
-
-      if (error) {
-        console.error(error);
-
-        alert(error.message);
-
-        return;
+        alert("Erreur : " + err.message);
+      } finally {
+        saveButton.disabled = false;
+        saveButton.textContent = "Enregistrer l'activité";
       }
+    });
+  },
 
-      alert("Activité enregistrée avec succès");
-      await this.render();
-      this.resetForm();
+  /* ===========================
+   recherche
+=========================== */
+
+  bindSearch() {
+    const input = document.getElementById("activitySearch");
+
+    input?.addEventListener("keyup", () => {
+      this.render();
+    });
+  },
+
+  /* ===========================
+   filtre
+=========================== */
+
+  bindFilter() {
+    const filter = document.getElementById("activityFilter");
+
+    filter?.addEventListener("change", () => {
+      this.render();
     });
   },
 
