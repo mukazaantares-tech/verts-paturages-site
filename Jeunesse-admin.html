@@ -330,59 +330,63 @@
       </main>
     </div>
 
-    <!-- ==========================================
-     MODAL DETAILS ACTIVITE
+    <!-- =========================================
+     MODAL VISUALISATION ACTIVITÉ
 ========================================== -->
 
     <div
-      id="activityModal"
-      class="fixed inset-0 bg-black/70 hidden flex items-center justify-center z-50"
+      id="viewActivityModal"
+      class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50"
     >
-      <div
-        class="bg-white rounded-xl w-11/12 max-w-4xl overflow-hidden shadow-2xl"
-      >
+      <div class="bg-white rounded-xl w-11/12 max-w-4xl overflow-hidden">
         <div class="flex justify-between items-center p-5 border-b">
-          <h2 id="modalActivityTitle" class="text-2xl font-bold">Activité</h2>
+          <h2 class="text-2xl font-bold text-purple-700">
+            Détails de l'activité
+          </h2>
 
-          <button id="closeActivityModal" class="text-2xl">✖</button>
+          <button id="closeViewActivity" class="text-3xl">×</button>
         </div>
 
+        <img id="viewActivityImage" class="w-full h-72 object-cover" />
+
         <div class="p-6">
-          <img
-            id="modalActivityImage"
-            class="w-full h-72 object-cover rounded-lg mb-5"
-          />
+          <h3 id="viewActivityTitle" class="text-3xl font-bold mb-4"></h3>
 
-          <div id="modalActivityVideo" class="mb-5"></div>
-
-          <p id="modalActivityDescription" class="mb-5 text-gray-700"></p>
+          <p id="viewActivityDescription" class="mb-6 text-gray-700"></p>
 
           <div class="grid grid-cols-2 gap-4">
-            <p>
-              <strong>Catégorie :</strong>
-              <span id="modalCategory"></span>
-            </p>
+            <div>
+              <strong>Catégorie</strong>
 
-            <p>
-              <strong>Date :</strong>
-              <span id="modalDate"></span>
-            </p>
+              <p id="viewActivityCategory"></p>
+            </div>
 
-            <p>
-              <strong>Heure :</strong>
-              <span id="modalTime"></span>
-            </p>
+            <div>
+              <strong>Date</strong>
 
-            <p>
-              <strong>Lieu :</strong>
-              <span id="modalLocation"></span>
-            </p>
+              <p id="viewActivityDate"></p>
+            </div>
 
-            <p>
-              <strong>Statut :</strong>
-              <span id="modalStatus"></span>
-            </p>
+            <div>
+              <strong>Heure</strong>
+
+              <p id="viewActivityTime"></p>
+            </div>
+
+            <div>
+              <strong>Lieu</strong>
+
+              <p id="viewActivityLocation"></p>
+            </div>
+
+            <div>
+              <strong>Statut</strong>
+
+              <p id="viewActivityStatus"></p>
+            </div>
           </div>
+
+          <div id="viewVideoZone" class="mt-6"></div>
         </div>
       </div>
     </div>

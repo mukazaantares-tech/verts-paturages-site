@@ -3,6 +3,7 @@ const YouthActivities = {
     await this.render();
     this.resetForm();
     this.bindAdd();
+    this.bindViewModal();
 
     const closeBtn = document.getElementById("closeActivityModal");
 
@@ -20,11 +21,11 @@ const YouthActivities = {
 
     if (error) {
       console.error(error);
-
       return;
     }
 
-    document.getElementById("modalActivityTitle").textContent = data.title;
+    document.getElementById("modalActivityTitle").textContent =
+      data.title || "";
 
     document.getElementById("modalActivityDescription").textContent =
       data.description || "";
@@ -39,42 +40,87 @@ const YouthActivities = {
 
     document.getElementById("modalLocation").textContent = data.location || "-";
 
-    document.getElementById("modalStatus").textContent = data.status;
+    document.getElementById("modalStatus").textContent = data.status || "-";
+
+    /* =====================
+       IMAGE
+    ===================== */
 
     const img = document.getElementById("modalActivityImage");
 
     if (data.image_url) {
       img.src = data.image_url;
-
-      img.style.display = "block";
+      img.classList.remove("hidden");
     } else {
-      img.style.display = "none";
+      img.src = "Verts-Paturages.png";
+      img.classList.remove("hidden");
     }
+
+    /* =====================
+       VIDEO
+    ===================== */
 
     const video = document.getElementById("modalActivityVideo");
 
+    video.innerHTML = "";
+
     if (data.video_url) {
       video.innerHTML = `
-
             <video
                 controls
                 class="w-full rounded-lg">
 
                 <source
-                    src="${data.video_url}">
+                    src="${data.video_url}"
+                    type="video/mp4">
 
             </video>
-
         `;
-    } else {
-      video.innerHTML = "";
     }
+
+    /* =====================
+       OUVERTURE MODAL
+    ===================== */
 
     document.getElementById("activityModal").classList.remove("hidden");
   },
 
   async edit(id) {
-    console.log("Modifier :", id);
+    const { data, error } = await supabaseClient
+      .from("youth_activities")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    console.log(data);
+
+    alert("Le modal de modification sera créé à l'étape suivante.");
+  },
+
+  async delete(id) {
+    if (!confirm("Supprimer cette activité ?")) {
+      return;
+    }
+
+    const { error } = await supabaseClient
+      .from("youth_activities")
+      .delete()
+      .eq("id", id);
+
+    if (error) {
+      console.error(error);
+      alert("Erreur lors de la suppression.");
+      return;
+    }
+
+    alert("Activité supprimée.");
+
+    await this.render();
   },
 
   async render() {
@@ -94,93 +140,144 @@ const YouthActivities = {
 
     container.innerHTML = "";
 
+    if (!activities || activities.length === 0) {
+      container.innerHTML = `
+            <div class="bg-white rounded-lg shadow p-8 text-center text-gray-500">
+                Aucune activité enregistrée.
+            </div>
+        `;
+
+      return;
+    }
+
     activities.forEach((a) => {
       const card = document.createElement("div");
 
       card.className =
-        "activity-card bg-white rounded-lg shadow-md overflow-hidden mb-6";
+        "activity-card bg-white rounded-xl shadow-lg overflow-hidden mb-8";
 
       card.innerHTML = `
 
+        <!-- IMAGE -->
         ${
           a.image_url
-            ? `<img
-                src="${a.image_url}"
-                class="w-full h-56 object-cover">`
-            : `<div class="w-full h-56 bg-gray-200 flex items-center justify-center">
-
-                <span>Aucune image</span>
-
-            </div>`
+            ? `
+                <img
+                    src="${a.image_url}"
+                    alt="${a.title}"
+                    class="w-full h-64 object-cover">
+              `
+            : `
+                <div class="w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500">
+                    Aucune image
+                </div>
+              `
         }
 
-        <div class="p-5">
+        <div class="p-6">
 
-            <h3 class="text-xl font-bold mb-3">
+            <!-- TITRE -->
+            <div class="flex justify-between items-center mb-4">
 
-                ${a.title}
+                <h3 class="text-2xl font-bold text-purple-700">
+                    ${a.title}
+                </h3>
 
-            </h3>
-
-            <p class="text-gray-600 mb-4">
-
-                ${a.description ?? ""}
-
-            </p>
-
-            <div class="grid grid-cols-2 gap-3 text-sm">
-
-                <p><strong>📂 Catégorie :</strong> ${a.category ?? "-"}</p>
-
-                <p><strong>📅 Date :</strong> ${a.activity_date ?? "-"}</p>
-
-                <p><strong>🕒 Heure :</strong> ${a.activity_time ?? "-"}</p>
-
-                <p><strong>📍 Lieu :</strong> ${a.location ?? "-"}</p>
-
-            </div>
-
-            <div class="mt-4">
-
-                <span class="px-3 py-1 rounded bg-green-100 text-green-700">
-
+                <span class="
+                    px-3 py-1 rounded-full text-sm font-semibold
+                    ${
+                      a.status === "published"
+                        ? "bg-green-100 text-green-700"
+                        : a.status === "draft"
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-red-100 text-red-700"
+                    }
+                ">
                     ${a.status}
-
                 </span>
 
             </div>
 
-            <div class="flex gap-3 mt-6">
+            <!-- DESCRIPTION -->
+            <p class="text-gray-600 mb-6">
+                ${a.description ?? ""}
+            </p>
+
+            <!-- INFOS -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mb-6">
+
+                <div>
+                    <strong>📂 Catégorie</strong><br>
+                    ${a.category || "-"}
+                </div>
+
+                <div>
+                    <strong>📅 Date</strong><br>
+                    ${a.activity_date || "-"}
+                </div>
+
+                <div>
+                    <strong>🕒 Heure</strong><br>
+                    ${a.activity_time || "-"}
+                </div>
+
+                <div>
+                    <strong>📍 Lieu</strong><br>
+                    ${a.location || "-"}
+                </div>
+
+            </div>
+
+            <!-- VIDEO -->
+            ${
+              a.video_url
+                ? `
+                <div class="mb-6">
+
+                    <video
+                        controls
+                        class="w-full rounded-lg">
+
+                        <source src="${a.video_url}">
+
+                    </video>
+
+                </div>
+                `
+                : ""
+            }
+
+            <!-- ACTIONS -->
+            <div class="flex flex-wrap gap-3">
 
                 <button
-                    class="bg-blue-600 text-white px-4 py-2 rounded"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg"
                     onclick="YouthActivities.view('${a.id}')">
 
-                    Voir
+                    👁 Voir
 
                 </button>
 
                 <button
-                    class="bg-yellow-500 text-white px-4 py-2 rounded"
+                    class="bg-yellow-500 hover:bg-yellow-600 text-white px-5 py-2 rounded-lg"
                     onclick="YouthActivities.edit('${a.id}')">
 
-                    Modifier
+                    ✏ Modifier
 
                 </button>
 
                 <button
-                    class="bg-red-600 text-white px-4 py-2 rounded"
+                    class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg"
                     onclick="YouthActivities.delete('${a.id}')">
 
-                    Supprimer
+                    🗑 Supprimer
 
                 </button>
 
             </div>
 
         </div>
-
-    `;
+        `;
 
       container.appendChild(card);
     });
@@ -315,6 +412,16 @@ const YouthActivities = {
     });
   },
 
+  bindViewModal() {
+    const modal = document.getElementById("viewActivityModal");
+
+    const close = document.getElementById("closeViewActivity");
+
+    close?.addEventListener("click", () => {
+      modal.classList.add("hidden");
+    });
+  },
+
   resetForm() {
     const fields = [
       "activityTitle",
@@ -344,26 +451,29 @@ const YouthActivities = {
 ================================ */
 
   async delete(id) {
-    const confirmation = confirm(
-      "Voulez-vous vraiment supprimer cette activité ?",
-    );
+    if (!confirm("Supprimer cette activité ?")) return;
 
-    if (!confirmation) return;
-
-    const { error } = await supabaseClient
+    const { data } = await supabaseClient
       .from("youth_activities")
-      .delete()
-      .eq("id", id);
+      .select("*")
+      .eq("id", id)
+      .single();
 
-    if (error) {
-      console.error(error);
+    if (data) {
+      if (data.image_url) {
+        const imageName = data.image_url.split("/").pop();
 
-      alert("Erreur lors de la suppression.");
+        await supabaseClient.storage.from("youth-images").remove([imageName]);
+      }
 
-      return;
+      if (data.video_url) {
+        const videoName = data.video_url.split("/").pop();
+
+        await supabaseClient.storage.from("youth-videos").remove([videoName]);
+      }
     }
 
-    alert("Activité supprimée.");
+    await supabaseClient.from("youth_activities").delete().eq("id", id);
 
     await this.render();
   },
