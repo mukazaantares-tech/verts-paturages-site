@@ -10,7 +10,7 @@ const YouthActivitiesPublic = {
 
     if (!container) return;
 
-    const { data: activities, error } = await supabaseClient
+    const { data, error } = await supabaseClient
       .from("youth_activities")
       .select("*")
       .eq("status", "published")
@@ -24,76 +24,97 @@ const YouthActivitiesPublic = {
 
     container.innerHTML = "";
 
-    if (!activities || activities.length === 0) {
-      container.innerHTML = `
-                <div class="col-span-full text-center py-10">
-                    <h3 class="text-xl font-semibold text-gray-500">
-                        Aucune activité disponible.
-                    </h3>
-                </div>
-            `;
-
-      return;
+    if (!data.length) {
+      return this.showEmpty(container);
     }
 
-    activities.forEach((activity) => {
-      const card = document.createElement("div");
-
-      card.className =
-        "bg-white rounded-xl shadow-lg overflow-hidden transition hover:shadow-2xl";
-
-      card.innerHTML = `
-
-                ${
-                  activity.image_url
-                    ? `
-                    <img
-                        src="${activity.image_url}"
-                        class="w-full h-56 object-cover">
-                    `
-                    : `
-                    <div class="w-full h-56 bg-gray-200 flex items-center justify-center">
-                        <span>Aucune image</span>
-                    </div>
-                    `
-                }
-
-                <div class="p-5">
-
-                    <h3 class="text-xl font-bold mb-2">
-                        ${activity.title}
-                    </h3>
-
-                    <p class="text-gray-600 mb-4">
-                        ${(activity.description ?? "").substring(0, 120)}...
-                    </p>
-
-                    <div class="space-y-2 text-sm">
-
-                        <p>📂 ${activity.category ?? "-"}</p>
-
-                        <p>📅 ${activity.activity_date ?? "-"}</p>
-
-                        <p>🕒 ${activity.activity_time ?? "-"}</p>
-
-                        <p>📍 ${activity.location ?? "-"}</p>
-
-                    </div>
-
-                    <button
-                        class="mt-5 w-full bg-purple-700 text-white py-2 rounded"
-                        onclick="YouthActivitiesPublic.view('${activity.id}')">
-
-                        Voir les détails
-
-                    </button>
-
-                </div>
-
-            `;
-
-      container.appendChild(card);
+    data.forEach((activity) => {
+      container.appendChild(this.createCard(activity));
     });
+  },
+
+  createCard(activity) {
+    const card = document.createElement("article");
+
+    card.className =
+      "bg-white rounded-xl shadow-lg overflow-hidden transition hover:shadow-2xl";
+
+    card.innerHTML = `
+
+        ${
+          activity.image_url
+            ? `
+            <img
+                src="${activity.image_url}"
+                class="w-full h-56 object-cover">
+            `
+            : `
+            <div class="w-full h-56 bg-gray-200 flex items-center justify-center">
+                <span>Aucune image</span>
+            </div>
+            `
+        }
+
+        <div class="p-5">
+
+            <h3 class="text-xl font-bold mb-2">
+
+                ${activity.title}
+
+            </h3>
+
+            <p class="text-gray-600 mb-4">
+
+                ${this.truncate(activity.description)}
+
+            </p>
+
+            <div class="space-y-2 text-sm">
+
+                <p>📂 ${activity.category ?? "-"}</p>
+
+                <p>📅 ${this.formatDate(activity.activity_date)}</p>
+
+                <p>🕒 ${activity.activity_time ?? "-"}</p>
+
+                <p>📍 ${activity.location ?? "-"}</p>
+
+            </div>
+
+            <button
+
+                class="mt-5 w-full bg-purple-700 text-white py-2 rounded"
+
+                onclick="YouthActivitiesPublic.view('${activity.id}')">
+
+                Voir les détails
+
+            </button>
+
+        </div>
+
+    `;
+
+    return card;
+  },
+
+  formatDate(date) {
+    if (!date) return "-";
+
+    return new Date(date).toLocaleDateString("fr-FR", {
+      day: "numeric",
+
+      month: "long",
+
+      year: "numeric",
+    });
+  },
+  truncate(text, size = 120) {
+    if (!text) return "";
+
+    if (text.length <= size) return text;
+
+    return text.substring(0, size) + "...";
   },
 
   async view(id) {
@@ -109,58 +130,90 @@ const YouthActivitiesPublic = {
       return;
     }
 
-    document.getElementById("modalActivityTitle").textContent = data.title;
+    this.openModal(data);
+  },
+
+  openModal(activity) {
+    document.getElementById("modalActivityTitle").textContent = activity.title;
 
     document.getElementById("modalActivityDescription").textContent =
-      data.description ?? "";
+      activity.description || "";
 
-    document.getElementById("modalCategory").textContent = data.category ?? "-";
+    document.getElementById("modalCategory").textContent =
+      activity.category || "-";
 
-    document.getElementById("modalDate").textContent =
-      data.activity_date ?? "-";
+    document.getElementById("modalDate").textContent = this.formatDate(
+      activity.activity_date,
+    );
 
     document.getElementById("modalTime").textContent =
-      data.activity_time ?? "-";
+      activity.activity_time || "-";
 
-    document.getElementById("modalLocation").textContent = data.location ?? "-";
+    document.getElementById("modalLocation").textContent =
+      activity.location || "-";
 
-    document.getElementById("modalStatus").textContent = data.status;
+    document.getElementById("modalStatus").textContent = activity.status;
 
-    const image = document.getElementById("modalActivityImage");
+    this.loadImage(activity.image_url);
 
-    if (data.image_url) {
-      image.src = data.image_url;
+    this.loadVideo(activity.video_url);
 
-      image.classList.remove("hidden");
-    } else {
-      image.classList.add("hidden");
-    }
-
-    const video = document.getElementById("modalActivityVideo");
-
-    if (data.video_url) {
-      video.innerHTML = `
-                <video controls class="w-full rounded-lg mt-4">
-                    <source src="${data.video_url}">
-                </video>
-            `;
-    } else {
-      video.innerHTML = "";
+    if (typeof YouthCommentsPublic !== "undefined") {
+      YouthCommentsPublic.setActivity(activity.id);
     }
 
     document.getElementById("activityModal").classList.remove("hidden");
+  },
 
-    YouthCommentsPublic.setActivity(id);
+  loadImage(url) {
+    const img = document.getElementById("modalActivityImage");
+
+    if (!img) return;
+
+    if (url) {
+      img.src = url;
+
+      img.classList.remove("hidden");
+    } else {
+      img.classList.add("hidden");
+    }
+  },
+
+  loadVideo(url) {
+    const videoContainer = document.getElementById("modalActivityVideo");
+
+    if (!videoContainer) return;
+
+    if (!url) {
+      videoContainer.innerHTML = "";
+
+      return;
+    }
+
+    videoContainer.innerHTML = `
+
+        <video
+            controls
+            class="w-full rounded-lg mt-4">
+
+            <source
+                src="${url}"
+                type="video/mp4">
+
+        </video>
+
+    `;
+  },
+  closeModal() {
+    document.getElementById("activityModal").classList.add("hidden");
   },
 
   bindModal() {
-    const close = document.getElementById("closeActivityModal");
+    document.getElementById("closeActivityModal")?.addEventListener(
+      "click",
 
-    if (!close) return;
-
-    close.addEventListener("click", () => {
-      document.getElementById("activityModal").classList.add("hidden");
-    });
+      () => this.closeModal(),
+    );
   },
 };
 
