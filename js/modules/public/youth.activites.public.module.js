@@ -38,7 +38,7 @@ const YouthActivitiesPublic = {
       return this.showEmpty(container);
     }
 
-    data.forEach((activity) => {
+    activities.forEach((activity) => {
       container.appendChild(this.createCard(activity));
     });
   },
