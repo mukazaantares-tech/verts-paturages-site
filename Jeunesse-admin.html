@@ -313,8 +313,68 @@
 
         <!-- ================= COMMENTAIRES ================= -->
         <section id="comments" class="section hidden">
-          <h2 class="text-2xl font-bold mb-6">Modération Commentaires</h2>
-          <div id="adminCommentList"></div>
+          <h2 class="text-2xl font-bold mb-6">Modération des commentaires</h2>
+
+          <!-- Statistiques -->
+          <div class="grid md:grid-cols-3 gap-5 mb-8">
+            <div class="bg-yellow-100 rounded-xl p-5 shadow">
+              <h3 class="text-lg font-bold text-yellow-700">En attente</h3>
+
+              <p id="pendingCount" class="text-4xl font-bold mt-2">0</p>
+            </div>
+
+            <div class="bg-green-100 rounded-xl p-5 shadow">
+              <h3 class="text-lg font-bold text-green-700">Approuvés</h3>
+
+              <p id="approvedCount" class="text-4xl font-bold mt-2">0</p>
+            </div>
+
+            <div class="bg-red-100 rounded-xl p-5 shadow">
+              <h3 class="text-lg font-bold text-red-700">Refusés</h3>
+
+              <p id="rejectedCount" class="text-4xl font-bold mt-2">0</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-3 mb-6">
+            <button
+              class="comment-filter bg-purple-700 text-white px-4 py-2 rounded"
+              data-filter="all"
+            >
+              Tous
+            </button>
+
+            <button
+              class="comment-filter bg-yellow-500 text-white px-4 py-2 rounded"
+              data-filter="pending"
+            >
+              En attente
+            </button>
+
+            <button
+              class="comment-filter bg-green-600 text-white px-4 py-2 rounded"
+              data-filter="approved"
+            >
+              Approuvés
+            </button>
+
+            <button
+              class="comment-filter bg-red-600 text-white px-4 py-2 rounded"
+              data-filter="rejected"
+            >
+              Refusés
+            </button>
+          </div>
+
+          <!-- Liste -->
+          <div class="mb-6">
+            <input
+              id="commentSearch"
+              type="text"
+              placeholder="Rechercher un auteur, une activité ou un commentaire..."
+              class="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-purple-600"
+            />
+          </div>
+          <div id="commentsList" class="space-y-6"></div>
         </section>
 
         <!-- ================= ADMINS ================= -->

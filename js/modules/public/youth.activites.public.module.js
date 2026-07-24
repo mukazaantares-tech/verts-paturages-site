@@ -10,11 +10,21 @@ const YouthActivitiesPublic = {
 
     if (!container) return;
 
-    const { data, error } = await supabaseClient
+    const { data: activities, error } = await supabaseClient
       .from("youth_activities")
-      .select("*")
+      .select(
+        `
+        *,
+        youth_comments(count)
+    `,
+      )
       .eq("status", "published")
       .order("activity_date", { ascending: true });
+
+    if (error) {
+      console.error(error);
+      return;
+    }
 
     if (error) {
       console.error(error);
@@ -34,6 +44,7 @@ const YouthActivitiesPublic = {
   },
 
   createCard(activity) {
+    const commentsCount = activity.youth_comments?.[0]?.count ?? 0;
     const card = document.createElement("article");
 
     card.className =
@@ -78,6 +89,11 @@ const YouthActivitiesPublic = {
                 <p>🕒 ${activity.activity_time ?? "-"}</p>
 
                 <p>📍 ${activity.location ?? "-"}</p>
+
+            </div>
+            <div class="mt-3 text-sm text-gray-500">
+
+                💬 ${commentsCount} commentaire${commentsCount > 1 ? "s" : ""}
 
             </div>
 
@@ -131,8 +147,11 @@ const YouthActivitiesPublic = {
     }
 
     this.openModal(data);
-  },
 
+    if (typeof YouthCommentsPublic !== "undefined") {
+      YouthCommentsPublic.setActivity(id);
+    }
+  },
   openModal(activity) {
     document.getElementById("modalActivityTitle").textContent = activity.title;
 
@@ -214,6 +233,22 @@ const YouthActivitiesPublic = {
 
       () => this.closeModal(),
     );
+  },
+  bindModal() {
+    const close = document.getElementById("closeActivityModal");
+
+    if (close) {
+      close.addEventListener("click", () => {
+        this.closeModal();
+      });
+    }
+    const modal = document.getElementById("activityModal");
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        this.closeModal();
+      }
+    });
   },
 };
 
