@@ -31,13 +31,14 @@ const YouthCommentsAdmin = {
 
       return;
     }
+    console.log("Commentaires récupérés :", comments);
 
     container.innerHTML = "";
     let filteredComments = comments ?? [];
     if (this.currentSearch !== "") {
       filteredComments = filteredComments.filter((comment) => {
         return (
-          comment.author?.toLowerCase().includes(this.currentSearch) ||
+          comment.authors_name?.toLowerCase().includes(this.currentSearch) ||
           comment.message?.toLowerCase().includes(this.currentSearch) ||
           comment.youth_activities?.title
             ?.toLowerCase()
@@ -46,7 +47,7 @@ const YouthCommentsAdmin = {
       });
     }
     if (this.currentFilter !== "all") {
-      filteredComments = comments.filter(
+      filteredComments = filteredComments.filter(
         (comment) => comment.status === this.currentFilter,
       );
     }
@@ -60,6 +61,7 @@ const YouthCommentsAdmin = {
     });
 
     this.updateStats(comments);
+    console.log("Commentaires filtrés :", filteredComments);
   },
   bindSearch() {
     const input = document.getElementById("commentSearch");
@@ -85,7 +87,7 @@ const YouthCommentsAdmin = {
 
                 <h3 class="font-bold">
 
-                    ${comment.author}
+                    ${comment.authors_name}
 
                 </h3>
 

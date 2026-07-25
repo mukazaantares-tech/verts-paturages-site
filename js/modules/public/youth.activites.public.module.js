@@ -25,16 +25,9 @@ const YouthActivitiesPublic = {
       console.error(error);
       return;
     }
-
-    if (error) {
-      console.error(error);
-
-      return;
-    }
-
     container.innerHTML = "";
 
-    if (!data.length) {
+    if (!activities || activities.length === 0) {
       return this.showEmpty(container);
     }
 
@@ -134,7 +127,7 @@ const YouthActivitiesPublic = {
   },
 
   async view(id) {
-    const { data, error } = await supabaseClient
+    const { data: activity, error } = await supabaseClient
       .from("youth_activities")
       .select("*")
       .eq("id", id)
@@ -146,11 +139,7 @@ const YouthActivitiesPublic = {
       return;
     }
 
-    this.openModal(data);
-
-    if (typeof YouthCommentsPublic !== "undefined") {
-      YouthCommentsPublic.setActivity(id);
-    }
+    this.openModal(activity);
   },
   openModal(activity) {
     document.getElementById("modalActivityTitle").textContent = activity.title;
@@ -228,21 +217,19 @@ const YouthActivitiesPublic = {
   },
 
   bindModal() {
-    document.getElementById("closeActivityModal")?.addEventListener(
-      "click",
+    const modal = document.getElementById("activityModal");
+    const closeBtn = document.getElementById("closeActivityModal");
 
-      () => this.closeModal(),
-    );
-  },
-  bindModal() {
-    const close = document.getElementById("closeActivityModal");
+    if (!modal) {
+      console.warn("Modal activityModal introuvable.");
+      return;
+    }
 
-    if (close) {
-      close.addEventListener("click", () => {
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => {
         this.closeModal();
       });
     }
-    const modal = document.getElementById("activityModal");
 
     modal.addEventListener("click", (e) => {
       if (e.target === modal) {

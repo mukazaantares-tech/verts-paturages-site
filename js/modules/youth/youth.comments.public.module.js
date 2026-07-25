@@ -30,7 +30,7 @@ const YouthCommentsPublic = {
         {
           activity_id: this.currentActivityId,
 
-          author,
+          author_name: author,
 
           message,
 
@@ -111,7 +111,7 @@ const YouthCommentsPublic = {
       div.className = "bg-gray-100 p-4 rounded mb-3";
 
       div.innerHTML = `
-                <strong>${c.author}</strong>
+                <strong>${c.author_name}</strong>
                 <p>${c.message}</p>
 
                 <button
