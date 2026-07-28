@@ -1,257 +1,543 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Verts-Pâturages - Jeunesse</title>
-  <link rel="stylesheet" href="Jeunesse.css">
-  <link rel="stylesheet" href="global.responsive.css">
-  <link rel="stylesheet" href="darkmode.global.css">
-  <!-- Tailwind + FontAwesome -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="icon" href="Verts-Paturages.png" type="image/png">
-  <link rel="apple-touch-icon" href="Verts-Paturages.png">
-</head>
-<body class="dark-enabled">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Verts-Pâturages - Jeunesse</title>
+    <link rel="stylesheet" href="Jeunesse.css" />
+    <link rel="stylesheet" href="global.responsive.css" />
+    <link rel="stylesheet" href="darkmode.global.css" />
+    <!-- Tailwind + FontAwesome -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="icon" href="Verts-Paturages.png" type="image/png" />
+    <link rel="apple-touch-icon" href="Verts-Paturages.png" />
+  </head>
+  <body class="dark-enabled">
     <header>
-    <nav class="navbar bg-green-700 text-white p-4 flex justify-between items-center">
-      <h1 class="logo text-xl font-bold">Verts-Pâturages</h1>
+      <nav
+        class="navbar bg-green-700 text-white p-4 flex justify-between items-center"
+      >
+        <h1 class="logo text-xl font-bold">Verts-Pâturages</h1>
         <!-- bouton mobile -->
-            <button class="burger" id="burger">
-              ☰
-            </button>
-                <!-- bouton dark mode -->
-            <button id="themeToggle" class="theme-toggle">
-                🌙
-            </button>
-      <ul class="nav-links flex gap-6" id="navlinks">
-        <li><a href="index.html" class="hover:text-green-300">Accueil</a></li>
-        <li><a href="Serviteurs.html" class="hover:text-green-300">Serviteurs</a></li>
-        <li><a href="Departements.html" class="hover:text-green-300">Départements</a></li>
-        <li><a href="Jeunesse.html" class="hover:text-green-300">Jeunesse</a></li>
-        <li><a href="localisation.html" class="hover:text-green-300">Localisation</a></li>
-      </ul>
-    </nav>
-  </header>
-  <main class="p-0">
-  <!-- Hero section -->
-  <section class="hero bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white text-center py-20">
-    <h1 id="youthTitle" class="text-5xl font-extrabold mb-4"></h1>
-    <p id="youthSlogan" class="text-lg mb-6"></p>
-    <a href="ActivitesJ.html"><button class="px-6 py-3 bg-white text-purple-700 font-bold rounded-lg hover:bg-gray-200 transition">
-      Découvrir nos activités
-    </button></a>
-  </section>
+        <button class="burger" id="burger">☰</button>
+        <!-- bouton dark mode -->
+        <button id="themeToggle" class="theme-toggle">🌙</button>
+        <ul class="nav-links flex gap-6" id="navlinks">
+          <li><a href="index.html" class="hover:text-green-300">Accueil</a></li>
+          <li>
+            <a href="Serviteurs.html" class="hover:text-green-300"
+              >Serviteurs</a
+            >
+          </li>
+          <li>
+            <a href="Departements.html" class="hover:text-green-300"
+              >Départements</a
+            >
+          </li>
+          <li>
+            <a href="Jeunesse.html" class="hover:text-green-300">Jeunesse</a>
+          </li>
+          <li>
+            <a href="localisation.html" class="hover:text-green-300"
+              >Localisation</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="p-0">
+      <!-- Hero section -->
+      <section class="hero relative overflow-hidden text-white">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/50"></div>
 
-  <!-- Attributions -->
-    <section class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
-      <h3 class="text-xl font-bold text-green-700 mb-4">Attributions du departement de la Jeunesse</h3>
-      <ul class="list-disc list-inside text-gray-700">
-        <li>Travailler sous la supervision du Pasteur pour des orientations</li>
-        <li>Organiser des activites pour l'epanouissement des jeunes du departement</li>
-        <li>Sensibilisation, Mobilisation des Jeunes</li>
-        <li>Rapporter au pasteur</li>
-      </ul>
-    </section>
+        <div class="section-container relative z-10">
+          <div class="max-w-5xl mx-auto text-center py-32 px-6">
+            <span class="uppercase tracking-[5px] text-yellow-300 font-semibold">
+              Département de la Jeunesse
+            </span>
 
-  <!-- Président + Vice-présidents -->
-  <section class="max-w-6xl mx-auto grid md:grid-cols-4 gap-6 p-10">
-    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
-      <img src="/image/tonton yann.jpg">
-      <h3 class="text-xl font-semibold text-green-700">Président</h3>
-      <p id="youthPresidentName" class="text-gray-600"></p>
-    </div>
-    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
-      <img src="/image/frere ruphin.jpg" alt="Photo de Ruphin" class="w-32 h-32 rounded-full mx-auto mb-4"/>
-      <h3 class="text-lg font-semibold text-pink-600">Vice-président vie spirituelle et Administration</h3>
-      <p class="text-gray-600">vice president Ruphin</p>
-    </div>
-    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
-      <h3 class="text-lg font-semibold text-pink-600">Vice-président evangelisation</h3>
-      <p class="text-gray-600">Nom</p>
-    </div>
-    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
-      <h3 class="text-lg font-semibold text-pink-600">Vice-président corps de serviteur</h3>
-      <p class="text-gray-600">Nom</p>
-    </div>
-  </section>
+            <h1
+              id="youthTitle"
+              class="text-5xl md:text-7xl font-extrabold mt-4 mb-6"
+            ></h1>
 
-  <!-- Secrétaire + Trésorier -->
-  <section class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 p-10">
-    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
-      <h3 class="text-lg font-semibold text-orange-600">Secrétaire</h3>
-      <p class="text-gray-600">Nom</p>
-    </div>
-    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:scale-105 transition">
-      <h3 class="text-lg font-semibold text-orange-600">Trésorier</h3>
-      <p class="text-gray-600">Nom</p>
-    </div>
-  </section>
+            <p
+              id="youthSlogan"
+              class="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto"
+            ></p>
 
-  <!-- Mini-départements -->
-  <section class="bg-gray-100 py-10">
-    <h2 class="text-2xl font-bold text-center text-purple-700 mb-8">Nos Groupes Internes</h2>
-    <div id="youthGroups" class="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto"></div>
-  </section>
+            <a href="ActivitesJ.html">
+              <button
+                class="mt-10 px-8 py-4 rounded-full bg-yellow-400 hover:bg-yellow-300 text-black font-bold transition"
+              >
+                Découvrir nos activités
+              </button>
+            </a>
+          </div>
+        </div>
+      </section>
 
-  <!-- Timeline activités -->
-  <section class="bg-gray-50 py-10">
-    <h2 class="text-2xl font-bold text-center text-purple-700 mb-8">Nos Activités</h2>
-    <div id="youthActivities" class="timeline max-w-4xl mx-auto"></div>
-  </section>
+      <!-- mots du président -->
+      <section class="bg-gray-50 py-20">
+        <div class="section-container">
+          <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <img src="/image/tonton yann.jpg" class="rounded-2xl shadow-xl" />
+            </div>
 
-  <!-- Condition + Adhésion -->
-  <section class="text-center py-10">
-    <p class="text-gray-700 mb-4">
-      <strong>Condition :</strong> Pour adhérer à la Jeunesse, il faut être né de nouveau et avoir accepté Jésus-Christ comme Seigneur et Sauveur.
-    </p>
-    <button id="adhesionBtn"
-      class="px-6 py-3 bg-purple-700 text-white rounded-lg hover:bg-purple-800">Demande d’adhésion
-    </button>
-  </section>
+            <div>
+              <h2 class="text-4xl font-bold text-green-700 mb-6">
+                Mot du Président
+              </h2>
 
+              <p class="text-gray-700 leading-8">
+                Bienvenue dans la Jeunesse des Verts-Pâturages. Notre désir est de
+                voir chaque jeune grandir dans sa relation avec Jésus-Christ,
+                développer ses talents, vivre dans la communion fraternelle et
+                devenir un véritable ambassadeur de Christ.
+              </p>
 
-   <!-- Modal Formulaire d'adhésion -->
-<div id="adhesionModal"
-class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+              <h4 class="mt-8 text-xl font-bold">Président</h4>
 
-  <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-4 max-h-screen overflow-y-auto">
+              <p id="youthPresidentName"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- verset du departement -->
+      <section class="bg-white py-20">
+        <div class="section-container">
+          <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-green-700 mb-8">
+              Verset du département de la Jeunesse
+            </h2>
 
-    <h3 class="text-xl font-bold text-purple-700 mb-6">
-      Formulaire d'adhésion à la Jeunesse
-    </h3>
+            <blockquote class="italic text-2xl text-gray-700 leading-relaxed">
+              « Que personne ne méprise ta jeunesse, mais sois un modèle pour les
+              croyants, en parole, en conduite, en amour, en foi et en pureté. »
+            </blockquote>
 
-    <form id="adhesionForm" data-table="adhesions_requests" data-source="Jeunesse">
+            <p class="mt-6 font-bold text-purple-700">1 Timothée 4:12</p>
+          </div>
+        </div>
+      </section>
 
-      <!-- NOM -->
-      <div class="mb-4">
-        <label class="block text-gray-700 mb-2">
-          Nom complet
-        </label>
+      <!-- Attributions_0 -->
+      <!-- Nos attributions -->
+      <section class="py-20 bg-white">
+        <div class="section-container">
+          <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14">
+              <span class="text-green-700 uppercase tracking-[4px] font-semibold">
+                Notre mission
+              </span>
 
-        <input
-          type="text"
-          id="adhesionNom"
-          class="w-full p-2 border border-gray-300 rounded"
-          placeholder="Votre nom"
-          required>
+              <h2 class="text-4xl font-extrabold mt-3 text-gray-800">
+                Les attributions de la Jeunesse
+              </h2>
+
+              <p class="text-gray-600 mt-4 max-w-3xl mx-auto">
+                Le département de la Jeunesse œuvre pour accompagner les jeunes
+                dans leur croissance spirituelle, leur engagement au sein de
+                l'Église et leur participation active à la mission de Christ.
+              </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Carte -->
+            <div
+              class="bg-gray-50 rounded-2xl p-8 shadow hover:-translate-y-2 hover:shadow-xl transition"
+            >
+              <div class="text-5xl mb-5">⛪</div>
+
+              <h3 class="text-xl font-bold text-green-700 mb-3">Supervision</h3>
+
+              <p class="text-gray-600">
+                Travailler sous la supervision du Pasteur pour recevoir les
+                orientations nécessaires à la bonne marche du département.
+              </p>
+            </div>
+
+            <!-- Carte -->
+            <div
+              class="bg-gray-50 rounded-2xl p-8 shadow hover:-translate-y-2 hover:shadow-xl transition"
+            >
+              <div class="text-5xl mb-5">🎯</div>
+
+              <h3 class="text-xl font-bold text-purple-700 mb-3">
+                Organisation
+              </h3>
+
+              <p class="text-gray-600">
+                Organiser des activités spirituelles, éducatives, culturelles et
+                sociales favorisant l'épanouissement des jeunes.
+              </p>
+            </div>
+
+            <!-- Carte -->
+            <div
+              class="bg-gray-50 rounded-2xl p-8 shadow hover:-translate-y-2 hover:shadow-xl transition"
+            >
+              <div class="text-5xl mb-5">📢</div>
+
+              <h3 class="text-xl font-bold text-orange-600 mb-3">
+                Mobilisation
+              </h3>
+
+              <p class="text-gray-600">
+                Sensibiliser, motiver et mobiliser les jeunes afin de les
+                impliquer pleinement dans la vie de l'Église.
+              </p>
+            </div>
+
+            <!-- Carte -->
+            <div
+              class="bg-gray-50 rounded-2xl p-8 shadow hover:-translate-y-2 hover:shadow-xl transition"
+            >
+              <div class="text-5xl mb-5">📋</div>
+
+              <h3 class="text-xl font-bold text-blue-600 mb-3">Suivi</h3>
+
+              <p class="text-gray-600">
+                Rapporter régulièrement les activités et les résultats au
+                Pasteur responsable.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Attributions_1 -->
+      <section
+        class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6 mb-10"
+      >
+        <div class="section-container">
+          <h3 class="text-xl font-bold text-green-700 mb-4">
+            Attributions du departement de la Jeunesse
+          </h3>
+          <ul class="list-disc list-inside text-gray-700">
+            <li>
+              Travailler sous la supervision du Pasteur pour des orientations
+            </li>
+            <li>
+              Organiser des activites pour l'epanouissement des jeunes du
+              departement
+            </li>
+            <li>Sensibilisation, Mobilisation des Jeunes</li>
+            <li>Rapporter au pasteur</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Nos Valeurs -->
+      <section
+        class="py-20 bg-gradient-to-r from-green-700 to-purple-700 text-white"
+      >
+      <div class="section-container"> 
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-14">
+            <h2 class="text-4xl font-bold">Nos Valeurs</h2>
+
+            <p class="mt-4 opacity-90">
+              Les principes qui guident notre engagement.
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white/10 backdrop-blur rounded-2xl p-8 text-center">
+              <div class="text-5xl">❤️</div>
+
+              <h3 class="mt-4 text-2xl font-bold">Amour</h3>
+            </div>
+
+            <div class="bg-white/10 rounded-2xl p-8 text-center">
+              <div class="text-5xl">📖</div>
+
+              <h3 class="mt-4 text-2xl font-bold">Parole</h3>
+            </div>
+
+            <div class="bg-white/10 rounded-2xl p-8 text-center">
+              <div class="text-5xl">🙏</div>
+
+              <h3 class="mt-4 text-2xl font-bold">Prière</h3>
+            </div>
+
+            <div class="bg-white/10 rounded-2xl p-8 text-center">
+              <div class="text-5xl">🤝</div>
+
+              <h3 class="mt-4 text-2xl font-bold">Fraternité</h3>
+            </div>
+
+            <div class="bg-white/10 rounded-2xl p-8 text-center">
+              <div class="text-5xl">🌍</div>
+
+              <h3 class="mt-4 text-2xl font-bold">Mission</h3>
+            </div>
+
+            <div class="bg-white/10 rounded-2xl p-8 text-center">
+              <div class="text-5xl">⭐</div>
+
+              <h3 class="mt-4 text-2xl font-bold">Excellence</h3>
+            </div>
+          </div>
+        </div>
+        </div>
+      </section>
+      <!-- Pourquoi rejoindre la Jeunesse -->
+      <section class="py-24 bg-white">
+        <div class="section-container">
+          <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+              <!-- Texte -->
+              <div>
+                <span
+                class="uppercase tracking-[4px] text-purple-700 font-semibold"
+              >
+                Rejoins-nous
+              </span>
+
+              <h2
+                class="text-4xl md:text-5xl font-extrabold text-gray-800 mt-4 mb-8"
+              >
+                Pourquoi rejoindre la Jeunesse ?
+              </h2>
+
+              <p class="text-gray-600 leading-8 mb-10">
+                La Jeunesse des Verts-Pâturages est un espace où chaque jeune
+                peut grandir dans sa foi, développer ses talents et construire
+                des relations fraternelles solides, tout en servant Dieu avec
+                passion et engagement.
+              </p>
+
+              <div class="space-y-6">
+                <div class="flex items-start gap-4">
+                  <div class="text-3xl">🙏</div>
+
+                  <div>
+                    <h3 class="font-bold text-lg text-gray-800">
+                      Grandir spirituellement
+                    </h3>
+
+                    <p class="text-gray-600">
+                      Approfondis ta relation avec Dieu grâce aux enseignements,
+                      aux temps de prière et à la communion fraternelle.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                  <div class="text-3xl">🌟</div>
+
+                  <div>
+                    <h3 class="font-bold text-lg text-gray-800">
+                      Développer tes talents
+                    </h3>
+
+                    <p class="text-gray-600">
+                      Découvre tes dons et mets-les au service de Dieu dans
+                      différents domaines de la vie de l'Église.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                  <div class="text-3xl">🤝</div>
+
+                  <div>
+                    <h3 class="font-bold text-lg text-gray-800">
+                      Vivre la fraternité
+                    </h3>
+
+                    <p class="text-gray-600">
+                      Fais partie d'une famille spirituelle où règnent l'amour,
+                      l'entraide et le respect.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                  <div class="text-3xl">🌍</div>
+
+                  <div>
+                    <h3 class="font-bold text-lg text-gray-800">
+                      Servir la communauté
+                    </h3>
+
+                    <p class="text-gray-600">
+                      Participe aux projets d'évangélisation, de solidarité et
+                      aux différentes activités du département.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Image -->
+            <div>
+              <img
+                src="/image/jeunesse.jpg"
+                alt="Jeunesse des Verts-Pâturages"
+                class="rounded-3xl shadow-2xl w-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Condition + Adhésion -->
+      <section class="text-center py-10">
+        <div class="section-container">
+          <p class="text-gray-700 mb-4">
+            <strong>Condition :</strong> Pour adhérer à la Jeunesse, il faut
+            être né de nouveau et avoir accepté Jésus-Christ comme Seigneur et
+            Sauveur.
+          </p>
+          <button
+            id="adhesionBtn"
+            class="px-6 py-3 bg-purple-700 text-white rounded-lg hover:bg-purple-800"
+          >
+            Demande d’adhésion
+          </button>
+        </div>
+      </section>
+
+      <!-- Modal Formulaire d'adhésion -->
+      <div
+        id="adhesionModal"
+        class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50"
+      >
+        <div
+          class="bg-white rounded-lg shadow-lg p-8 w-full max-w-md mx-4 max-h-screen overflow-y-auto"
+        >
+          <h3 class="text-xl font-bold text-purple-700 mb-6">
+            Formulaire d'adhésion à la Jeunesse
+          </h3>
+
+          <form
+            id="adhesionForm"
+            data-table="adhesions_requests"
+            data-source="Jeunesse"
+          >
+            <!-- NOM -->
+            <div class="mb-4">
+              <label class="block text-gray-700 mb-2"> Nom complet </label>
+
+              <input
+                type="text"
+                id="adhesionNom"
+                class="w-full p-2 border border-gray-300 rounded"
+                placeholder="Votre nom"
+                required
+              />
+            </div>
+
+            <!-- EMAIL -->
+            <div class="mb-4">
+              <label class="block text-gray-700 mb-2"> Email </label>
+
+              <input
+                type="email"
+                id="adhesionEmail"
+                class="w-full p-2 border border-gray-300 rounded"
+                placeholder="exemple@email.com"
+                required
+              />
+            </div>
+
+            <!-- SEXE -->
+            <div class="mb-4">
+              <label class="block text-gray-700 mb-2"> Sexe </label>
+
+              <select
+                id="adhesionSexe"
+                class="w-full p-2 border border-gray-300 rounded"
+                required
+              >
+                <option value="">-- Sélectionner --</option>
+                <option value="Homme">Homme</option>
+                <option value="Femme">Femme</option>
+              </select>
+            </div>
+
+            <!-- TELEPHONE -->
+            <div class="mb-4">
+              <label class="block text-gray-700 mb-2">
+                Numéro de téléphone
+              </label>
+
+              <input
+                type="tel"
+                id="adhesionTelephone"
+                class="w-full p-2 border border-gray-300 rounded"
+                placeholder="+243..."
+                required
+              />
+            </div>
+
+            <!-- MOTIVATION -->
+            <div class="mb-6">
+              <label class="block text-gray-700 mb-2"> Motivation </label>
+
+              <textarea
+                id="adhesionMotivation"
+                rows="4"
+                class="w-full p-2 border border-gray-300 rounded"
+                placeholder="Pourquoi veux-tu rejoindre la jeunesse ?"
+                required
+              ></textarea>
+            </div>
+
+            <!-- BOUTONS -->
+            <div class="flex gap-4">
+              <button
+                type="submit"
+                class="flex-1 bg-purple-700 text-white py-2 rounded hover:bg-purple-800 transition"
+              >
+                Soumettre
+              </button>
+
+              <button
+                type="button"
+                id="closeAdhesionModal"
+                class="flex-1 bg-gray-400 text-white py-2 rounded hover:bg-gray-500 transition"
+              >
+                Fermer
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
+    </main>
+    <footer class="bg-green-700 text-white text-center p-4">
+      &copy; 2024 Verts-Pâturages. Tous droits réservés.
+    </footer>
 
-      <!-- EMAIL -->
-      <div class="mb-4">
-        <label class="block text-gray-700 mb-2">
-          Email
-        </label>
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-        <input
-          type="email"
-          id="adhesionEmail"
-          class="w-full p-2 border border-gray-300 rounded"
-          placeholder="exemple@email.com"
-          required>
-      </div>
+    <!-- SERVICES -->
+    <script src="js/services/supabase.service.js"></script>
+    <script src="js/services/data.service.js"></script>
+    <script src="js/services/auth.service.js"></script>
 
-      <!-- SEXE -->
-      <div class="mb-4">
-        <label class="block text-gray-700 mb-2">
-          Sexe
-        </label>
+    <!-- MODULES PUBLIC -->
+    <script src="js/modules/public/form.manager.js"></script>
+    <script src="js/modules/public/departements.public.module.js"></script>
+    <script src="js/modules/public/accueil.module.js"></script>
+    <script src="js/modules/public/global.responsive.js"></script>
 
-        <select
-          id="adhesionSexe"
-          class="w-full p-2 border border-gray-300 rounded"
-          required>
+    <!-- MODULES JEUNESSE -->
+    <script src="js/modules/youth/youth.dashboard.module.js"></script>
+    <script src="js/modules/youth/youth.activites.module.js"></script>
+    <script src="js/modules/youth/youth.adhesions.module.js"></script>
+    <script src="js/modules/public/youth.public.module.js"></script>
 
-          <option value="">-- Sélectionner --</option>
-          <option value="Homme">Homme</option>
-          <option value="Femme">Femme</option>
-
-        </select>
-      </div>
-
-      <!-- TELEPHONE -->
-      <div class="mb-4">
-        <label class="block text-gray-700 mb-2">
-          Numéro de téléphone
-        </label>
-
-        <input
-          type="tel"
-          id="adhesionTelephone"
-          class="w-full p-2 border border-gray-300 rounded"
-          placeholder="+243..."
-          required>
-      </div>
-
-      <!-- MOTIVATION -->
-      <div class="mb-6">
-        <label class="block text-gray-700 mb-2">
-          Motivation
-        </label>
-
-        <textarea
-          id="adhesionMotivation"
-          rows="4"
-          class="w-full p-2 border border-gray-300 rounded"
-          placeholder="Pourquoi veux-tu rejoindre la jeunesse ?"
-          required></textarea>
-      </div>
-
-      <!-- BOUTONS -->
-      <div class="flex gap-4">
-
-        <button
-          type="submit"
-          class="flex-1 bg-purple-700 text-white py-2 rounded hover:bg-purple-800 transition">
-          Soumettre
-        </button>
-
-        <button
-          type="button"
-          id="closeAdhesionModal"
-          class="flex-1 bg-gray-400 text-white py-2 rounded hover:bg-gray-500 transition">
-          Fermer
-        </button>
-
-      </div>
-
-    </form>
-
-  </div>
-
-</div>
-</main>
-  <footer class="bg-green-700 text-white text-center p-4">
-    &copy; 2024 Verts-Pâturages. Tous droits réservés.
-  </footer>
-  <!-- Modal Login Jeunesse -->
-
-
-
-<!-- SUPABASE -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-
-<!-- SERVICES -->
-<script src="js/services/supabase.service.js"></script>
-<script src="js/services/data.service.js"></script>
-<script src="js/services/auth.service.js"></script>
-
-<!-- MODULES PUBLIC -->
-<script src="js/modules/public/form.manager.js"></script>
-<script src="js/modules/public/departements.public.module.js"></script>
-<script src="js/modules/public/accueil.module.js"></script>
-<script src="js/modules/public/global.responsive.js"></script>
-
-<!-- MODULES JEUNESSE -->
-<script src="js/modules/youth/youth.dashboard.module.js"></script>
-<script src="js/modules/youth/youth.activites.module.js"></script>
-<script src="js/modules/youth/youth.adhesions.module.js"></script>
-<script src="js/modules/public/youth.public.module.js"></script>
-
-<!-- APP PRINCIPALE -->
-<script src="js/core/App.js"></script>
-
-</body>
+    <!-- APP PRINCIPALE -->
+    <script src="js/core/App.js"></script>
+  </body>
 </html>
