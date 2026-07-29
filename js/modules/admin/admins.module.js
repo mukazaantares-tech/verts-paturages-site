@@ -5,191 +5,123 @@
 ====================================================== */
 
 const AdminsModule = {
+  async init() {
+    console.log("AdminsModule chargé");
 
-    async init() {
+    this.bindForm();
 
-        console.log("AdminsModule chargé");
+    await this.loadAdmins();
+  },
 
-        this.bindForm();
-
-        await this.loadAdmins();
-
-    },
-
-    /* ======================================================
+  /* ======================================================
        CREATION ADMIN (AUTH + DATABASE)
     ====================================================== */
 
-   async createAdmin({ name, email, password, role }) {
-
+  async createAdmin({ name, email, password, role }) {
     try {
+      if (!email || !password || !role)
+        throw new Error("Champs requis manquants");
 
-        if (!email || !password || !role)
-            throw new Error("Champs requis manquants");
+      /* normalisation */
 
+      const cleanEmail = email.toLowerCase().trim();
 
-        /* normalisation */
+      const cleanRole = role.toLowerCase().trim();
 
-        const cleanEmail =
-            email.toLowerCase().trim();
+      const cleanName = name?.trim();
 
-        const cleanRole =
-            role.toLowerCase().trim();
+      console.log("Création admin :", cleanEmail, cleanRole);
 
-        const cleanName =
-            name?.trim();
+      /* 1️⃣ création utilisateur AUTH */
 
+      const { data: authData, error: authError } =
+        await supabaseClient.auth.signUp({
+          email: cleanEmail,
 
-        console.log(
-            "Création admin :",
-            cleanEmail,
-            cleanRole
-        );
+          password: password,
 
-
-        /* 1️⃣ création utilisateur AUTH */
-
-        const {
-            data: authData,
-            error: authError
-        } = await supabaseClient.auth.signUp({
-
-            email: cleanEmail,
-
-            password: password,
-
-            options: {
-
-                emailRedirectTo:
-                "https://verts-paturages-site.vercel.app/admin"
-
-            }
-
+          options: {
+            emailRedirectTo:
+              "https://verts-paturages-site.vercel.app/index.html",
+          },
         });
 
-        if (authError)
-            throw authError;
+      if (authError) throw authError;
 
+      /* récupérer user_id Supabase */
 
-        /* récupérer user_id Supabase */
+      const userId = authData.user?.id;
 
-        const userId =
-            authData.user?.id;
+      if (!userId) throw new Error("Impossible de récupérer user_id");
 
-        if (!userId)
-            throw new Error(
-                "Impossible de récupérer user_id"
-            );
+      /* 2️⃣ insertion table admins */
 
+      const { error: dbError } = await supabaseClient.from("admins").insert([
+        {
+          name: cleanName,
 
-        /* 2️⃣ insertion table admins */
+          email: cleanEmail,
 
-        const {
-            error: dbError
-        } = await supabaseClient
-            .from("admins")
-            .insert([{
+          role: cleanRole,
 
-                name: cleanName,
+          user_id: userId,
+        },
+      ]);
 
-                email: cleanEmail,
+      if (dbError) throw dbError;
 
-                role: cleanRole,
+      alert("Administrateur créé avec succès");
 
-                user_id: userId
+      await this.loadAdmins();
 
-            }]);
+      return true;
+    } catch (err) {
+      console.error("Erreur création admin :", err.message);
 
+      alert(err.message);
 
-        if (dbError)
-            throw dbError;
-
-
-        alert(
-            "Administrateur créé avec succès"
-        );
-
-
-        await this.loadAdmins();
-
-
-        return true;
-
+      return false;
     }
+  },
 
-    catch (err) {
-
-        console.error(
-            "Erreur création admin :",
-            err.message
-        );
-
-        alert(err.message);
-
-        return false;
-
-    }
-
-},
-
-    /* ======================================================
+  /* ======================================================
        LECTURE ADMINS
     ====================================================== */
 
-    async loadAdmins() {
+  async loadAdmins() {
+    try {
+      const { data, error } = await supabaseClient
+        .from("admins")
+        .select("*")
+        .order("created_at", {
+          ascending: false,
+        });
 
-        try {
+      if (error) throw error;
 
-            const {
-                data,
-                error
-            } = await supabaseClient
-                .from("admins")
-                .select("*")
-                .order("created_at", {
-                    ascending: false
-                });
+      this.renderAdmins(data);
+    } catch (err) {
+      console.error("Erreur chargement admins", err);
+    }
+  },
 
-            if (error)
-                throw error;
-
-            this.renderAdmins(data);
-
-        }
-
-        catch (err) {
-
-            console.error(
-                "Erreur chargement admins",
-                err
-            );
-
-        }
-
-    },
-
-    /* ======================================================
+  /* ======================================================
        AFFICHAGE LISTE ADMINS
     ====================================================== */
 
-    renderAdmins(admins = []) {
+  renderAdmins(admins = []) {
+    const container = document.getElementById("adminList");
 
-        const container =
-            document.getElementById("adminList");
+    if (!container) return;
 
-        if (!container) return;
+    container.innerHTML = "";
 
-        container.innerHTML = "";
+    admins.forEach((admin) => {
+      const div = document.createElement("div");
 
-        admins.forEach(admin => {
+      div.className = "admin-item";
 
-            const div =
-                document.createElement("div");
-
-            div.className =
-                "admin-item";
-
-            div.innerHTML = `
+      div.innerHTML = `
 
                 <div class="admin-card">
 
@@ -216,116 +148,70 @@ const AdminsModule = {
 
             `;
 
-            container.appendChild(div);
+      container.appendChild(div);
+    });
 
-        });
+    this.bindDelete();
+  },
 
-        this.bindDelete();
-
-    },
-
-    /* ======================================================
+  /* ======================================================
        SUPPRESSION ADMIN
     ====================================================== */
 
-    bindDelete() {
+  bindDelete() {
+    document
+      .querySelectorAll(".delete-admin")
 
-        document
-        .querySelectorAll(".delete-admin")
+      .forEach((btn) => {
+        btn.onclick = async () => {
+          const id = btn.dataset.id;
 
-        .forEach(btn => {
+          if (!confirm("Supprimer cet admin ?")) return;
 
-            btn.onclick = async () => {
+          await supabaseClient.from("admins").delete().eq("id", id);
 
-                const id =
-                    btn.dataset.id;
+          this.loadAdmins();
+        };
+      });
+  },
 
-                if (!confirm(
-                    "Supprimer cet admin ?"
-                )) return;
-
-
-                await supabaseClient
-                    .from("admins")
-                    .delete()
-                    .eq("id", id);
-
-
-                this.loadAdmins();
-
-            };
-
-        });
-
-    },
-
-    /* ======================================================
+  /* ======================================================
        FORMULAIRE
     ====================================================== */
 
-    bindForm() {
+  bindForm() {
+    const form = document.getElementById("addAdminForm");
 
-        const form =
-            document.getElementById(
-                "addAdminForm"
-            );
+    if (!form) return;
 
-        if (!form) return;
+    form.addEventListener(
+      "submit",
 
+      async (e) => {
+        e.preventDefault();
 
-        form.addEventListener(
-            "submit",
+        const name = document.getElementById("name").value;
 
-            async e => {
+        const email = document.getElementById("email").value;
 
-                e.preventDefault();
+        const password = document.getElementById("password").value;
 
+        const role = document.getElementById("role").value;
 
-                const name =
-                    document
-                    .getElementById("name")
-                    .value;
+        await this.createAdmin({
+          name,
 
+          email,
 
-                const email =
-                    document
-                    .getElementById("email")
-                    .value;
+          password,
 
+          role,
+        });
 
-                const password =
-                    document
-                    .getElementById("password")
-                    .value;
-
-
-                const role =
-                    document
-                    .getElementById("role")
-                    .value;
-
-
-                await this.createAdmin({
-
-                    name,
-
-                    email,
-
-                    password,
-
-                    role
-
-                });
-
-
-                form.reset();
-
-            }
-
-        );
-
-    }
-
+        form.reset();
+      },
+    );
+  },
 };
 
 window.AdminsModule = AdminsModule;
