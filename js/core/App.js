@@ -21,6 +21,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         "super_admin",
       ]);
     }
+    const logoutBtn = document.getElementById("logoutYouth");
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", () => {
+        AuthService.logout();
+      });
+    }
   }
 
   /* ===============================

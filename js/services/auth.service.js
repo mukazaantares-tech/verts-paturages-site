@@ -107,9 +107,27 @@ const AuthService = {
     =============================== */
 
   async logout() {
-    await supabaseClient.auth.signOut();
+    try {
+      const confirmation = confirm("Voulez-vous vraiment vous déconnecter ?");
 
-    window.location.href = "index.html";
+      if (!confirmation) return;
+
+      // Déconnexion Supabase
+      await supabaseClient.auth.signOut();
+
+      // Nettoyage des données locales
+      localStorage.removeItem("vp_current_user");
+      sessionStorage.clear();
+
+      console.log("Déconnexion réussie.");
+
+      // Retour à l'accueil
+      window.location.href = "index.html";
+    } catch (error) {
+      console.error("Erreur lors de la déconnexion :", error);
+
+      alert("Impossible de se déconnecter.");
+    }
   },
   /* ===============================
    PROTECTION PAGE ADMIN (FINAL)
