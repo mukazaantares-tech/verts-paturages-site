@@ -10,36 +10,52 @@
     <link rel="stylesheet" href="global.responsive.css" />
     <link rel="icon" href="Verts-Paturages.png" type="image/png" />
     <link rel="apple-touch-icon" href="Verts-Paturages.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
   </head>
   <body class="dark-enabled bg-gray-100">
     <header
       class="navbar flex items-center justify-between bg-white shadow px-8 py-4 border-b"
     >
-      <!-- Logo / Nom -->
+      <!-- Bouton Hamburger -->
+      <button
+        id="sidebarToggle"
+        class="sidebar-toggle"
+        aria-label="Ouvrir le menu"
+      >
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <!-- Logo -->
       <div class="flex items-center gap-4">
         <div
           class="w-10 h-10 bg-purple-700 rounded-full flex items-center justify-center text-white font-bold"
         >
           J
         </div>
+
         <div>
           <h1 class="text-xl font-bold text-purple-700">JAEL Admin</h1>
+
           <p class="text-sm text-gray-500">Administration Jeunesse</p>
         </div>
       </div>
 
-      <!-- Infos utilisateur -->
+      <!-- Utilisateur -->
+
       <div class="flex items-center gap-6">
         <div class="text-right">
           <p id="youthAdminName" class="font-semibold text-gray-800"></p>
+
           <p id="youthAdminRole" class="text-sm text-purple-600"></p>
         </div>
 
-        <button
-          id="logoutYouth"
-          class="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800 transition"
-        >
-          Déconnexion
+        <button id="logoutYouth" class="logout-btn">
+          <i class="fa-solid fa-right-from-bracket"></i>
+
+          <span>Déconnexion</span>
         </button>
       </div>
     </header>
@@ -47,7 +63,13 @@
     <div class="flex min-h-screen">
       <!-- SIDEBAR -->
       <aside class="w-64 bg-purple-800 text-white p-6">
-        <h2 class="text-2xl font-bold mb-6">JAEL Admin</h2>
+        <div class="sidebar-header">
+          <h2 class="text-2xl font-bold">JAEL Admin</h2>
+
+          <button id="sidebarClose">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
         <!-- bouton dark mode -->
         <button id="themeToggle" class="theme-toggle">🌙</button>
         <ul class="space-y-3 sidebar">
@@ -496,11 +518,13 @@
     <script src="js/modules/public/youth.activites.public.module.js"></script>
 
     <script src="js/modules/public/departements.public.module.js"></script>
+    <script src="js/modules/global/sidebar.mobile.js"></script>
 
     <!-- RESPONSIVE -->
     <script src="js/modules/public/global.responsive.js"></script>
 
     <!-- APP -->
     <script src="js/core/App.js"></script>
+    <div id="sidebarOverlay" class="sidebar-overlay"></div>
   </body>
 </html>

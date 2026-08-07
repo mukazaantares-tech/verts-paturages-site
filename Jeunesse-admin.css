@@ -1,5 +1,9 @@
-.y-section { display: none; }
-.y-section.active { display: block; }
+.y-section {
+  display: none;
+}
+.y-section.active {
+  display: block;
+}
 
 .y-tab {
   padding: 8px 14px;
@@ -17,65 +21,53 @@
 THEME TOGGLE
 ================================ */
 
-.theme-toggle{
+.theme-toggle {
+  background: rgba(255, 255, 255, 0.15);
 
- background:rgba(255,255,255,0.15);
+  border: none;
 
- border:none;
+  color: white;
 
- color:white;
+  padding: 6px 10px;
 
- padding:6px 10px;
+  border-radius: 8px;
 
- border-radius:8px;
+  cursor: pointer;
 
- cursor:pointer;
+  font-size: 1rem;
 
- font-size:1rem;
-
- margin-right:10px;
-
+  margin-right: 10px;
 }
 
-
-.theme-toggle:hover{
-
- background:rgba(255,255,255,0.3);
-
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
-
 
 /* =================================
 DARK MODE VARIABLES
 ================================ */
 
-.dark{
+.dark {
+  --soft-bg: #0f172a;
 
- --soft-bg:#0f172a;
+  --card-bg: #1e293b;
 
- --card-bg:#1e293b;
+  --text-dark: #e5e7eb;
 
- --text-dark:#e5e7eb;
+  --text-soft: #94a3b8;
 
- --text-soft:#94a3b8;
+  --primary: #22c55e;
 
- --primary:#22c55e;
-
- --primary-light:#16a34a;
-
+  --primary-light: #16a34a;
 }
-
 
 /* fond général */
 
-.dark body{
+.dark body {
+  background: #0f172a;
 
- background:#0f172a;
-
- color:#e5e7eb;
-
+  color: #e5e7eb;
 }
-
 
 /* cartes */
 
@@ -83,51 +75,470 @@ DARK MODE VARIABLES
 .dark .relative.bg-white,
 .dark .event-card,
 .dark .visionnaire-container,
-.dark #verset-content{
+.dark #verset-content {
+  background: #1e293b;
 
- background:#1e293b;
-
- color:#e5e7eb;
-
+  color: #e5e7eb;
 }
-
 
 /* navbar */
 
-.dark .navbar{
-
- background:linear-gradient(
- 135deg,
- #14532d,
- #166534
- );
-
+.dark .navbar {
+  background: linear-gradient(135deg, #14532d, #166534);
 }
-
 
 /* footer */
 
-.dark footer{
-
- background:linear-gradient(
- 135deg,
- #14532d,
- #166534
- );
-
+.dark footer {
+  background: linear-gradient(135deg, #14532d, #166534);
 }
-
 
 /* inputs */
 
 .dark input,
 .dark textarea,
-.dark select{
+.dark select {
+  background: #020617;
 
- background:#020617;
+  color: white;
 
- color:white;
+  border: 1px solid #334155;
+}
+/* ==========================================================
+   RESPONSIVE - JAEL ADMIN
+   ========================================================== */
 
- border:1px solid #334155;
+/* ---------- GRANDES TABLETTES ---------- */
 
+@media (max-width: 1200px) {
+  main {
+    padding: 2rem;
+  }
+
+  aside {
+    width: 230px;
+  }
+}
+
+/* ---------- TABLETTES ---------- */
+
+@media (max-width: 992px) {
+  .navbar {
+    padding: 1rem 1.5rem;
+  }
+
+  .navbar h1 {
+    font-size: 1.1rem;
+  }
+
+  .navbar p {
+    font-size: 0.85rem;
+  }
+
+  aside {
+    width: 210px;
+    padding: 1.2rem;
+  }
+
+  main {
+    padding: 1.5rem;
+  }
+
+  #dashboard .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  #comments .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------- TELEPHONES ---------- */
+
+@media (max-width: 768px) {
+  /* =====================
+       STRUCTURE
+    ====================== */
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .navbar {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 1rem;
+
+    padding: 1rem;
+  }
+
+  .navbar > div:last-child {
+    width: 100%;
+
+    justify-content: space-between;
+  }
+
+  .navbar button {
+    width: auto;
+  }
+
+  /* =====================
+       LAYOUT
+    ====================== */
+
+  body > .flex {
+    flex-direction: column;
+  }
+
+  aside {
+    width: 100%;
+
+    padding: 1rem 1.2rem;
+  }
+
+  aside h2 {
+    font-size: 1.4rem;
+  }
+
+  main {
+    padding: 1rem;
+  }
+
+  section {
+    padding: 0;
+  }
+
+  /* =====================
+       DASHBOARD
+    ====================== */
+
+  #dashboard .grid {
+    grid-template-columns: 1fr;
+
+    gap: 1rem;
+  }
+
+  #dashboard canvas {
+    width: 100% !important;
+
+    height: auto !important;
+  }
+
+  /* =====================
+       TITRES
+    ====================== */
+
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  h3 {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* ==========================================================
+   SIDEBAR RESPONSIVE
+========================================================== */
+
+:root {
+  --sidebar-width: 260px;
+}
+
+/* ======== Desktop ======== */
+
+aside {
+  transition:
+    transform 0.35s ease,
+    width 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+/* ======== Mobile ======== */
+
+@media (max-width: 768px) {
+  aside {
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    bottom: 0;
+
+    width: var(--sidebar-width);
+
+    height: 100vh;
+
+    z-index: 1200;
+
+    overflow-y: auto;
+
+    transform: translateX(-105%);
+
+    box-shadow: 6px 0 25px rgba(0, 0, 0, 0.25);
+  }
+
+  aside.open {
+    transform: translateX(0);
+  }
+
+  main {
+    width: 100%;
+
+    margin-left: 0;
+  }
+}
+
+/* Scroll */
+
+aside::-webkit-scrollbar {
+  width: 6px;
+}
+
+aside::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+
+  border-radius: 20px;
+}
+/* ==========================================================
+OVERLAY
+========================================================== */
+
+.sidebar-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transition: 0.3s;
+
+  z-index: 1100;
+}
+
+.sidebar-overlay.active {
+  opacity: 1;
+
+  visibility: visible;
+}
+
+/* ==========================================================
+MENU
+========================================================== */
+
+.sidebar li {
+  transition: 0.25s;
+
+  border-radius: 10px;
+
+  padding: 0.8rem 1rem;
+}
+
+.sidebar li:hover {
+  background: rgba(255, 255, 255, 0.12);
+
+  transform: translateX(4px);
+}
+
+.sidebar li.active {
+  background: #ffffff;
+
+  color: #6b21a8;
+
+  font-weight: 600;
+}
+/*==================================================
+SIDEBAR MOBILE
+==================================================*/
+
+.sidebar-toggle {
+  display: none;
+
+  width: 45px;
+
+  height: 45px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #6b21a8;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 1.4rem;
+
+  transition: 0.25s;
+}
+
+.sidebar-toggle:hover {
+  background: #581c87;
+}
+
+.sidebar-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transition: 0.3s;
+
+  z-index: 900;
+}
+
+.sidebar-overlay.active {
+  opacity: 1;
+
+  visibility: visible;
+}
+
+@media (max-width: 768px) {
+  .sidebar-toggle {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+  }
+
+  aside {
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    bottom: 0;
+
+    width: 270px;
+
+    z-index: 1000;
+
+    transform: translateX(-110%);
+
+    transition: 0.35s ease;
+
+    overflow-y: auto;
+
+    box-shadow: 8px 0 30px rgba(0, 0, 0, 0.25);
+  }
+
+  aside.open {
+    transform: translateX(0);
+  }
+
+  body.menu-open {
+    overflow: hidden;
+  }
+
+  .navbar {
+    padding: 1rem;
+
+    gap: 1rem;
+  }
+}
+/*==========================================
+SIDEBAR HEADER
+==========================================*/
+
+.sidebar-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 2rem;
+}
+
+#sidebarClose {
+  display: none;
+
+  border: none;
+
+  background: none;
+
+  color: white;
+
+  font-size: 1.5rem;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+#sidebarClose:hover {
+  transform: rotate(90deg);
+
+  color: #fde047;
+}
+
+@media (max-width: 768px) {
+  #sidebarClose {
+    display: block;
+  }
+}
+/*==========================================
+LOGOUT BUTTON
+==========================================*/
+
+.logout-btn {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.6rem;
+
+  padding: 0.75rem 1.2rem;
+
+  border: none;
+
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #9333ea, #6b21a8);
+
+  color: white;
+
+  font-weight: 600;
+
+  transition: 0.3s;
+
+  box-shadow: 0 10px 20px rgba(107, 33, 168, 0.25);
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 15px 30px rgba(107, 33, 168, 0.35);
+
+  background: linear-gradient(135deg, #a855f7, #7e22ce);
+}
+
+.logout-btn:active {
+  transform: scale(0.96);
+}
+
+.logout-btn i {
+  transition: 0.3s;
+}
+
+.logout-btn:hover i {
+  transform: translateX(4px);
 }
