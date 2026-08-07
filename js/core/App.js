@@ -23,9 +23,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     const logoutBtn = document.getElementById("logoutYouth");
 
+    console.log("Bouton trouvé :", logoutBtn);
+
     if (logoutBtn) {
-      logoutBtn.addEventListener("click", () => {
-        AuthService.logout();
+      logoutBtn.addEventListener("click", async () => {
+        console.log("Déconnexion demandée");
+
+        await AuthService.logout();
       });
     }
   }
