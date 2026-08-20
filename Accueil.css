@@ -1244,6 +1244,9 @@ ECRANS TRES PETITS
 .social-link.whatsapp:hover {
   background: #25d366;
 }
+.social-link.tiktok:hover {
+  background: #080f0f;
+}
 
 /* Barre inférieure */
 
